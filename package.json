@@ -1,7 +1,7 @@
 {
   "name": "@jujb233/myui",
   "private": false,
-  "version": "0.19.1-1",
+  "version": "0.19.2-1_pre1",
   "type": "module",
   "description": "一个使用Taildwind CSS的现代React UI组件库",
   "keywords": [
@@ -23,7 +23,7 @@
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -39,7 +39,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -p tsconfig.build.json && vite build",
+    "build": "vite build && tsc -p tsconfig.build.json",
     "build:types": "tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "preview": "vite preview",

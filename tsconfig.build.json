@@ -7,10 +7,17 @@
         "declaration": true,
         "declarationDir": "./dist",
         "emitDeclarationOnly": true,
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node"
     },
+    "include": [
+        "src/**/*"
+    ],
     "exclude": [
         "src/main.tsx",
+        "src/Demo.tsx",
         "index.html"
     ]
 }
