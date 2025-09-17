@@ -1,0 +1,16 @@
+{
+    "extends": "./tsconfig.app.json",
+    "compilerOptions": {
+        "noEmit": false,
+        "allowImportingTsExtensions": false,
+        "verbatimModuleSyntax": false,
+        "declaration": true,
+        "declarationDir": "./dist",
+        "emitDeclarationOnly": true,
+        "outDir": "./dist"
+    },
+    "exclude": [
+        "src/main.tsx",
+        "index.html"
+    ]
+}
