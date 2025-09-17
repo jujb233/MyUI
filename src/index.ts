@@ -6,4 +6,4 @@ export type { MyButtonProps } from './Components/MyUI/MyButton'
 
 // 版本信息
 
-export const version = '0.19.2-1.pre1'
+export const version = '0.1.19.3.pre0'
