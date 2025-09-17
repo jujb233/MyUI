@@ -14,6 +14,28 @@ npm login
 npm view @jujb233/myui
 ```
 
+### 2.1. 生成类型声明文件（TypeScript 类型）
+确保 `tsconfig.json` 包含如下配置：
+```json
+{
+  "compilerOptions": {
+    "declaration": true,
+    "declarationDir": "./dist/types",
+    "emitDeclarationOnly": false,
+    // ...其他配置
+  }
+}
+```
+构建后会在 `dist/types` 目录下生成 `.d.ts` 文件。
+
+在 `package.json` 中添加：
+```json
+{
+  "types": "dist/types/index.d.ts"
+}
+```
+这样用户在项目中引用你的包时会自动获得类型提示。
+
 ### 3. 构建项目
 ```bash
 npm run build
