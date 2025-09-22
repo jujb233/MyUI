@@ -2,3 +2,4 @@
 export * from './colorThemes'
 export * from './sizeConfig'
 export * from './styleConstants'
+export * from './presets'

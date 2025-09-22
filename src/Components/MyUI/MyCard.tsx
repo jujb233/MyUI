@@ -8,6 +8,7 @@ import {
     type CardColorThemeName,
     type CardSizeName
 } from "../../Configs"
+import { resolveCardColorTheme, type CardUnifiedTheme } from "../../Configs/presets"
 
 /**
  * MyCard 组件的属性类型定义
@@ -29,6 +30,8 @@ export type MyCardProps = {
     tags?: React.ReactNode[]
     /** 卡片样式类型 */
     variant?: CardColorThemeName
+    /** 颜色：预设名(blue/indigo/...)或十六进制，如 #1e90ff */
+    color?: string
     /** 卡片尺寸 */
     size?: CardSizeName
     /** 是否启用玻璃态效果 */
@@ -57,7 +60,7 @@ export type MyCardProps = {
  * 获取卡片基础样式
  */
 const getCardBaseStyle = (
-    theme: CardColorTheme,
+    theme: CardUnifiedTheme | CardColorTheme,
     glassMorphism: boolean,
     bordered: boolean,
     shadow: boolean
@@ -86,7 +89,7 @@ const getCardBaseStyle = (
  */
 const handleMouseOver = (
     event: React.MouseEvent<HTMLDivElement>,
-    theme: CardColorTheme,
+    theme: CardUnifiedTheme | CardColorTheme,
     glassMorphism: boolean,
     hoverable: boolean,
     clickable: boolean
@@ -111,7 +114,7 @@ const handleMouseOver = (
  */
 const handleMouseOut = (
     event: React.MouseEvent<HTMLDivElement>,
-    theme: CardColorTheme,
+    theme: CardUnifiedTheme | CardColorTheme,
     glassMorphism: boolean,
     hoverable: boolean,
     clickable: boolean,
@@ -200,6 +203,7 @@ function MyCard({
     actions,
     tags,
     variant = "white",
+    color,
     size = "medium",
     glassMorphism = true,
     clickable = false,
@@ -213,7 +217,9 @@ function MyCard({
     children
 }: MyCardProps) {
     // 获取当前主题和尺寸配置
-    const theme = CARD_COLOR_THEMES[variant]
+    const theme = (color
+        ? resolveCardColorTheme(color).theme
+        : (CARD_COLOR_THEMES[variant] as unknown as CardUnifiedTheme))
     const sizeConfig = CARD_SIZE_CONFIG[size]
 
     // 计算卡片样式

@@ -10,10 +10,13 @@
 - 🚫 禁用状态
 
 ## 基础用法
-```tsx
+## 组件特性
+- 🎨 新增 color 颜色属性（预设与十六进制），并兼容 theme
+- 🎨 主题色支持：primary、secondary、danger、normal
 import { MyPanel } from '@jujb233/myui'
 
 <MyPanel theme="primary" size="large" glassMorphism>
+| color          | string                                    | 颜色预设名或十六进制 |
   <h2>标题</h2>
   <p>内容区域，可放任意 React 节点。</p>
 </MyPanel>
@@ -22,6 +25,15 @@ import { MyPanel } from '@jujb233/myui'
 ## 属性说明
 | 属性           | 类型                                      | 说明                 |
 |----------------|-------------------------------------------|----------------------|
+
+## 使用 color（颜色预设/十六进制）
+```tsx
+// 使用预设名
+<MyPanel color="violet" size="medium">主题 violet</MyPanel>
+
+// 使用十六进制
+<MyPanel color="#10b981" glassMorphism>自定义绿色</MyPanel>
+```
 | theme          | 'primary' \| 'secondary' \| 'danger' \| 'normal' | 主题色类型           |
 | size           | 'small' \| 'medium' \| 'large'            | 尺寸类型             |
 | glassMorphism  | boolean                                   | 是否启用玻璃态效果   |

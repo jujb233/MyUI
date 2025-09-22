@@ -1,6 +1,7 @@
 import React from "react"
 import clsx from "clsx"
 import { COLOR_THEMES, SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS, type ColorTheme } from "../../Configs"
+import { resolveColorTheme, type UnifiedTheme } from "../../Configs/presets"
 
 /**
  * MyButton 组件的属性类型定义
@@ -12,6 +13,8 @@ export type MyButtonProps = {
     styleType?: "primary" | "secondary" | "danger" | "normal" | "link"
     /** 按钮尺寸 */
     size?: "small" | "medium" | "large"
+    /** 颜色：预设名(blue/indigo/...)或十六进制，如 #1e90ff */
+    color?: string
     /** 是否禁用 */
     disabled?: boolean
     /** 点击事件处理函数 */
@@ -40,7 +43,7 @@ export type SizeType = MyButtonProps["size"]
  * @returns 按钮的基础样式对象
  */
 const getButtonBaseStyle = (
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean,
     styleType: StyleType
@@ -94,7 +97,7 @@ const getButtonBaseStyle = (
  * @returns 文本颜色值
  */
 const getTextColor = (
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean
 ): string => {
@@ -113,7 +116,7 @@ const getTextColor = (
  */
 const handleMouseOver = (
     event: React.MouseEvent<HTMLButtonElement>,
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean,
     styleType: StyleType
@@ -154,7 +157,7 @@ const handleMouseOver = (
  */
 const handleMouseOut = (
     event: React.MouseEvent<HTMLButtonElement>,
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean,
     styleType: StyleType
@@ -195,14 +198,16 @@ function MyButton({
     htmlType = "button",
     styleType = "normal",
     size = "medium",
+    color,
     disabled = false,
     onClick,
     children,
     className = "",
     glassMorphism = true
 }: MyButtonProps) {
-    // 获取当前主题配置
-    const theme = COLOR_THEMES[styleType || "normal"]
+    // 颜色优先：如果传入 color 则从预设/hex 解析，否则回退旧的 styleType 对应主题
+    const parsed = resolveColorTheme(color)
+    const theme = color ? parsed.theme : (COLOR_THEMES[styleType || "normal"] as unknown as UnifiedTheme)
     const sizeStyle = SIZE_CONFIG[size || "medium"]
 
     // 计算按钮样式

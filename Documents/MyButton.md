@@ -4,6 +4,7 @@
 
 ## 特性
 
+- 🎨 新增 color 颜色属性（预设与十六进制），并兼容 styleType
 - 🎨 支持5种样式类型：primary、secondary、danger、normal、link
 - 📏 三种尺寸配置：small、medium、large
 - 🌟 可切换的玻璃态效果
@@ -16,6 +17,7 @@
 | 属性 | 类型 | 默认值 | 描述 |
 |------|------|--------|------|
 | `styleType` | `'primary' \| 'secondary' \| 'danger' \| 'normal' \| 'link'` | `'normal'` | 按钮样式类型 |
+| `color` | `string` | - | 颜色，可为预设名(blue/indigo/...)或十六进制(`#1e90ff`) |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 按钮尺寸 |
 | `htmlType` | `'button' \| 'submit' \| 'reset'` | `'button'` | HTML 按钮类型 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
@@ -36,6 +38,21 @@ function App() {
     </MyButton>
   )
 }
+```
+
+## 使用 color（颜色预设/十六进制）
+
+```tsx
+// 使用预设名（blue / indigo / cyan / teal / emerald / green / lime / amber / orange / red / rose / pink / violet / purple / slate / gray / neutral / white）
+<MyButton color="indigo">Indigo 预设</MyButton>
+
+// 使用十六进制色值
+<MyButton color="#1e90ff">Hex 颜色</MyButton>
+
+// 与玻璃态结合
+<MyButton color="emerald" glassMorphism>
+  玻璃态 Emerald
+</MyButton>
 ```
 
 ## 样式类型

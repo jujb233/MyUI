@@ -8,6 +8,7 @@
 - 🔄 多种布局方向（垂直、水平）
 - 📍 灵活的图片位置（顶部、左侧、右侧、背景）
 - 🎨 四种样式主题（white、gray、primary、secondary）
+ - 🎨 新增 color 颜色属性（预设与十六进制），并兼容 variant
 - 📏 三种尺寸配置（small、medium、large）
 - ⚡ 丰富的交互效果（悬停、点击）
 - 🌟 可切换的玻璃态效果
@@ -25,6 +26,7 @@
 | `actions` | `ReactNode` | - | 操作按钮 |
 | `tags` | `ReactNode[]` | - | 标签数组 |
 | `variant` | `'white' \| 'gray' \| 'primary' \| 'secondary'` | `'white'` | 卡片样式主题 |
+| `color` | `string` | - | 颜色预设名或十六进制 |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 卡片尺寸 |
 | `glassMorphism` | `boolean` | `true` | 是否启用玻璃态效果 |
 | `clickable` | `boolean` | `false` | 是否可点击 |
@@ -50,6 +52,19 @@ function App() {
     />
   )
 }
+```
+
+## 使用 color（颜色预设/十六进制）
+
+```tsx
+// 预设名
+<MyCard title="预设主题" content="Violet 预设" color="violet" />
+
+// 十六进制
+<MyCard title="Hex 主题" content="#f97316 渐变" color="#f97316" />
+
+// 结合玻璃态
+<MyCard title="玻璃态" content="Emerald 预设" color="emerald" glassMorphism />
 ```
 
 ## 样式主题

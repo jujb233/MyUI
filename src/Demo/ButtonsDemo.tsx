@@ -21,7 +21,7 @@ function ButtonsDemo() {
 
             <div className="relative z-20 min-h-screen p-4 md:p-8">
                 <header className="text-center mb-12">
-                    <MyPanel theme="primary" size="large" glassMorphism className="mx-auto max-w-4xl">
+                    <MyPanel color="indigo" size="large" glassMorphism className="mx-auto max-w-4xl">
                         <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                             MyButton 按钮组件演示
                         </h1>
@@ -31,8 +31,8 @@ function ButtonsDemo() {
 
                 <main className="max-w-7xl mx-auto space-y-16">
                     <section>
-                        <MyPanel theme="normal" size="large" glassMorphism className="p-0">
-                            <MyPanel theme="primary" size="medium" glassMorphism className="mb-8">
+                        <MyPanel color="slate" size="large" glassMorphism className="p-0">
+                            <MyPanel color="violet" size="medium" glassMorphism className="mb-8">
                                 <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="text-4xl">🔘</span>
                                     核心特性展示
@@ -51,20 +51,20 @@ function ButtonsDemo() {
                                     </MyPanel>
                                     <div className="space-y-4">
                                         <div className="flex flex-wrap gap-3">
-                                            <MyButton styleType="primary">Primary</MyButton>
-                                            <MyButton styleType="secondary">Secondary</MyButton>
-                                            <MyButton styleType="danger">Danger</MyButton>
+                                            <MyButton color="indigo">Indigo</MyButton>
+                                            <MyButton color="cyan">Cyan</MyButton>
+                                            <MyButton color="rose">Rose</MyButton>
                                         </div>
                                         <div className="flex flex-wrap gap-3">
-                                            <MyButton styleType="normal">Normal</MyButton>
+                                            <MyButton color="slate">Slate</MyButton>
                                             <MyButton styleType="link">Link Style</MyButton>
-                                            <MyButton styleType="primary" disabled>Disabled</MyButton>
+                                            <MyButton color="indigo" disabled>Disabled</MyButton>
                                         </div>
                                     </div>
                                 </MyPanel>
 
-                                <MyPanel theme="secondary" size="medium" glassMorphism={false}>
-                                    <MyPanel theme="secondary" size="small" glassMorphism={false} className="mb-4">
+                                <MyPanel color="cyan" size="medium" glassMorphism={false}>
+                                    <MyPanel color="cyan" size="small" glassMorphism={false} className="mb-4">
                                         <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                             <span className="text-3xl">🎨</span>
                                             传统材质样式
@@ -73,21 +73,21 @@ function ButtonsDemo() {
                                     </MyPanel>
                                     <div className="space-y-4">
                                         <div className="flex flex-wrap gap-3">
-                                            <MyButton styleType="primary" glassMorphism={false}>Primary</MyButton>
-                                            <MyButton styleType="secondary" glassMorphism={false}>Secondary</MyButton>
-                                            <MyButton styleType="danger" glassMorphism={false}>Danger</MyButton>
+                                            <MyButton color="#1e90ff" glassMorphism={false}>Hex Blue</MyButton>
+                                            <MyButton color="teal" glassMorphism={false}>Teal</MyButton>
+                                            <MyButton color="orange" glassMorphism={false}>Orange</MyButton>
                                         </div>
                                         <div className="flex flex-wrap gap-3">
-                                            <MyButton styleType="normal" glassMorphism={false}>Normal</MyButton>
+                                            <MyButton color="gray" glassMorphism={false}>Gray</MyButton>
                                             <MyButton styleType="link" glassMorphism={false}>Link Style</MyButton>
-                                            <MyButton styleType="primary" glassMorphism={false} disabled>Disabled</MyButton>
+                                            <MyButton color="#1e90ff" glassMorphism={false} disabled>Disabled</MyButton>
                                         </div>
                                     </div>
                                 </MyPanel>
                             </div>
 
-                            <MyPanel theme="danger" size="large" glassMorphism className="mb-8">
-                                <MyPanel theme="danger" size="small" glassMorphism className="mb-6">
+                            <MyPanel color="rose" size="large" glassMorphism className="mb-8">
+                                <MyPanel color="rose" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">📏</span>
                                         尺寸变化演示
@@ -97,24 +97,24 @@ function ButtonsDemo() {
                                     <div>
                                         <h4 className="text-lg font-semibold text-white mb-4">🌟 玻璃材质 + 不同尺寸</h4>
                                         <div className="flex flex-wrap gap-4 items-center">
-                                            <MyButton size="small" styleType="primary">小按钮</MyButton>
-                                            <MyButton size="medium" styleType="secondary">中按钮</MyButton>
-                                            <MyButton size="large" styleType="danger">大按钮</MyButton>
+                                            <MyButton size="small" color="indigo">小按钮</MyButton>
+                                            <MyButton size="medium" color="cyan">中按钮</MyButton>
+                                            <MyButton size="large" color="rose">大按钮</MyButton>
                                         </div>
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-semibold text-white mb-4">🎨 传统材质 + 不同尺寸</h4>
                                         <div className="flex flex-wrap gap-4 items-center">
-                                            <MyButton size="small" styleType="primary" glassMorphism={false}>小按钮</MyButton>
-                                            <MyButton size="medium" styleType="secondary" glassMorphism={false}>中按钮</MyButton>
-                                            <MyButton size="large" styleType="danger" glassMorphism={false}>大按钮</MyButton>
+                                            <MyButton size="small" color="#1e90ff" glassMorphism={false}>小按钮</MyButton>
+                                            <MyButton size="medium" color="teal" glassMorphism={false}>中按钮</MyButton>
+                                            <MyButton size="large" color="orange" glassMorphism={false}>大按钮</MyButton>
                                         </div>
                                     </div>
                                 </div>
                             </MyPanel>
 
-                            <MyPanel theme="secondary" size="large" glassMorphism className="mb-8">
-                                <MyPanel theme="primary" size="small" glassMorphism className="mb-6">
+                            <MyPanel color="cyan" size="large" glassMorphism className="mb-8">
+                                <MyPanel color="indigo" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">🔗</span>
                                         链接按钮样式
@@ -148,8 +148,8 @@ function ButtonsDemo() {
                                 </div>
                             </MyPanel>
 
-                            <MyPanel theme="normal" size="large" glassMorphism>
-                                <MyPanel theme="danger" size="small" glassMorphism className="mb-6">
+                            <MyPanel color="slate" size="large" glassMorphism>
+                                <MyPanel color="rose" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">⚡</span>
                                         交互功能演示
@@ -159,22 +159,22 @@ function ButtonsDemo() {
                                     <div>
                                         <h4 className="text-white mb-4 text-center">🎯 事件处理</h4>
                                         <div className="space-y-3">
-                                            <MyButton styleType="primary" size="large" onClick={() => alert('🌟 玻璃水晶按钮被点击!')} className="w-full">🌟 点击弹窗</MyButton>
-                                            <MyButton styleType="secondary" glassMorphism={false} onClick={() => console.log('📝 传统材质按钮输出到控制台')} className="w-full">📝 控制台输出</MyButton>
+                                            <MyButton color="indigo" size="large" onClick={() => alert('🌟 玻璃水晶按钮被点击!')} className="w-full">🌟 点击弹窗</MyButton>
+                                            <MyButton color="teal" glassMorphism={false} onClick={() => console.log('📝 传统材质按钮输出到控制台')} className="w-full">📝 控制台输出</MyButton>
                                         </div>
                                     </div>
                                     <div>
                                         <h4 className="text-white mb-4 text-center">📋 表单按钮</h4>
                                         <div className="space-y-3">
-                                            <MyButton styleType="primary" htmlType="submit" size="large" className="w-full">✅ 提交表单</MyButton>
-                                            <MyButton styleType="normal" htmlType="reset" className="w-full">🔄 重置表单</MyButton>
+                                            <MyButton color="indigo" htmlType="submit" size="large" className="w-full">✅ 提交表单</MyButton>
+                                            <MyButton color="slate" htmlType="reset" className="w-full">🔄 重置表单</MyButton>
                                         </div>
                                     </div>
                                     <div>
                                         <h4 className="text-white mb-4 text-center">🚫 禁用状态</h4>
                                         <div className="space-y-3">
-                                            <MyButton styleType="primary" disabled className="w-full">🌟 禁用 - 玻璃材质</MyButton>
-                                            <MyButton styleType="danger" disabled glassMorphism={false} className="w-full">🎨 禁用 - 传统材质</MyButton>
+                                            <MyButton color="indigo" disabled className="w-full">🌟 禁用 - 玻璃材质</MyButton>
+                                            <MyButton color="orange" disabled glassMorphism={false} className="w-full">🎨 禁用 - 传统材质</MyButton>
                                         </div>
                                     </div>
                                 </div>

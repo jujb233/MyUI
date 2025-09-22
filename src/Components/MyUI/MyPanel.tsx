@@ -1,10 +1,13 @@
 import React from "react"
 import clsx from "clsx"
 import { COLOR_THEMES, SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS, type ColorTheme } from "../../Configs"
+import { resolveColorTheme, type UnifiedTheme } from "../../Configs/presets"
 
 export type MyPanelProps = {
     /** 主题类型 */
     theme?: "primary" | "secondary" | "danger" | "normal" | "white"
+    /** 颜色：预设名(blue/indigo/...)或十六进制，如 #1e90ff */
+    color?: string
     /** 尺寸类型 */
     size?: "small" | "medium" | "large"
     /** 是否启用玻璃态 */
@@ -20,7 +23,7 @@ export type MyPanelProps = {
 }
 
 const getPanelBaseStyle = (
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean,
     shadow: boolean
@@ -48,7 +51,7 @@ const getPanelBaseStyle = (
 }
 
 const getTextColor = (
-    theme: ColorTheme,
+    theme: UnifiedTheme | ColorTheme,
     glassMorphism: boolean,
     disabled: boolean
 ): string => {
@@ -59,6 +62,7 @@ const getTextColor = (
 
 function MyPanel({
     theme = "normal",
+    color,
     size = "medium",
     glassMorphism = true,
     shadow = true,
@@ -67,7 +71,9 @@ function MyPanel({
     disabled = false
 }: MyPanelProps) {
     // 只允许 COLOR_THEMES 支持的 theme
-    const themeObj = COLOR_THEMES[theme as keyof typeof COLOR_THEMES] || COLOR_THEMES.normal
+    const themeObj = color
+        ? (resolveColorTheme(color).theme as unknown as ColorTheme)
+        : (COLOR_THEMES[theme as keyof typeof COLOR_THEMES] || COLOR_THEMES.normal)
     const sizeStyle = SIZE_CONFIG[size]
     const baseStyle = getPanelBaseStyle(themeObj, glassMorphism, disabled, shadow)
     const textColor = getTextColor(themeObj, glassMorphism, disabled)

@@ -1,22 +1,21 @@
-import React from "react"
 import MyPanel from "../Components/MyUI/MyPanel"
 
 export default function PanelsDemo() {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-8">
-            <MyPanel theme="primary" size="large" glassMorphism>
+            <MyPanel color="indigo" size="large" glassMorphism>
                 <h2 className="text-xl font-bold mb-2">主面板</h2>
                 <p>这是一个带玻璃态和主色主题的大面板。</p>
             </MyPanel>
-            <MyPanel theme="secondary" size="medium">
+            <MyPanel color="cyan" size="medium">
                 <h2 className="text-lg font-semibold mb-2">次面板</h2>
                 <p>次级内容区域，适合分区展示。</p>
             </MyPanel>
-            <MyPanel theme="danger" size="small" shadow={false}>
+            <MyPanel color="rose" size="small" shadow={false}>
                 <span className="font-bold">警告面板</span>
                 <p className="text-sm">无阴影，适合提示类内容。</p>
             </MyPanel>
-            <MyPanel theme="normal" size="medium" disabled>
+            <MyPanel color="slate" size="medium" disabled>
                 <h2 className="text-lg">禁用面板</h2>
                 <p>不可交互，仅做内容展示。</p>
             </MyPanel>
