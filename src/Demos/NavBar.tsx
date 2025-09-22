@@ -1,39 +1,42 @@
-import React from 'react';
+import MyButton from "../Components/MyUI/MyButton";
 
 type NavBarProps = {
     onSelectContent: (content: "buttons" | "cards" | "panels") => void;
+    currentContent: "buttons" | "cards" | "panels";
 };
 
-const NavBar: React.FC<NavBarProps> = ({ onSelectContent }) => {
+const NavBar = ({ onSelectContent, currentContent }: NavBarProps) => {
     return (
-        <nav className="bg-white shadow-md">
+        <nav className="bg-white/30 backdrop-blur-md shadow-md sticky top-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     <div className="flex-shrink-0">
-                        <span className="font-bold text-xl text-gray-800">MyUI Demos</span>
+                        <span className="font-bold text-xl text-gray-800">MyUI 组件演示</span>
                     </div>
                     <div className="hidden md:block">
-                        <div className="ml-10 flex items-baseline space-x-4">
-                            <button onClick={() => onSelectContent("buttons")} className="nav-link">Buttons</button>
-                            <button onClick={() => onSelectContent("cards")} className="nav-link">Cards</button>
-                            <button onClick={() => onSelectContent("panels")} className="nav-link">Panels</button>
+                        <div className="ml-10 flex items-baseline space-x-2">
+                            <MyButton
+                                variant={currentContent === 'buttons' ? 'primary' : 'normal'}
+                                onClick={() => onSelectContent("buttons")}
+                            >
+                                按钮 (Buttons)
+                            </MyButton>
+                            <MyButton
+                                variant={currentContent === 'cards' ? 'primary' : 'normal'}
+                                onClick={() => onSelectContent("cards")}
+                            >
+                                卡片 (Cards)
+                            </MyButton>
+                            <MyButton
+                                variant={currentContent === 'panels' ? 'primary' : 'normal'}
+                                onClick={() => onSelectContent("panels")}
+                            >
+                                面板 (Panels)
+                            </MyButton>
                         </div>
                     </div>
                 </div>
             </div>
-            <style>{`
-                .nav-link {
-                    padding: 0.5rem 1rem;
-                    border-radius: 0.375rem;
-                    font-weight: 500;
-                    color: #4b5563;
-                    transition: background-color 0.2s, color 0.2s;
-                }
-                .nav-link:hover {
-                    background-color: #f3f4f6;
-                    color: #1f2937;
-                }
-            `}</style>
         </nav>
     );
 };

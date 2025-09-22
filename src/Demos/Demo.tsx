@@ -23,9 +23,9 @@ const Demo = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <NavBar onSelectContent={setActiveContent} />
-            <main className="p-4 md:p-8">
+        <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+            <NavBar onSelectContent={setActiveContent} currentContent={activeContent} />
+            <main>
                 {renderContent()}
             </main>
         </div>
