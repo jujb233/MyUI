@@ -1,190 +1,47 @@
-import { MyButton } from '../index'
-import NavBar from './NavBar'
-import MyPanel from "../Components/MyUI/MyPanel"
+import MyButton from "../Components/MyUI/MyButton";
+import { COLOR_PRESET_NAMES, VARIANTS } from "../styles";
 
-function ButtonsDemo() {
+const ButtonsDemo = () => {
     return (
-        <div className="min-h-screen relative overflow-hidden">
-            <div
-                className="fixed inset-0 z-0"
-                style={{
-                    backgroundImage: 'url(/1757785339517.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundAttachment: 'fixed'
-                }}
-            />
-            <div className="fixed inset-0 z-10 bg-gradient-to-br from-purple-900/20 via-blue-800/20 to-cyan-700/20" />
+        <div className="p-8 space-y-8">
+            <h2 className="text-2xl font-bold">Button Variants</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {VARIANTS.map((variant) => (
+                    <MyButton key={variant} variant={variant} size="large">
+                        {variant.charAt(0).toUpperCase() + variant.slice(1)}
+                    </MyButton>
+                ))}
+            </div>
 
-            <NavBar />
+            <h2 className="text-2xl font-bold">Button Colors</h2>
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-4">
+                {COLOR_PRESET_NAMES.map((color) => (
+                    <MyButton key={color} color={color}>
+                        {color}
+                    </MyButton>
+                ))}
+            </div>
 
-            <div className="relative z-20 min-h-screen p-4 md:p-8">
-                <header className="text-center mb-12">
-                    <MyPanel variant="primary" color="indigo" size="large" glassMorphism className="mx-auto max-w-4xl">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                            MyButton 按钮组件演示
-                        </h1>
-                        <p className="text-xl text-white/90 drop-shadow-lg">功能丰富的按钮组件，支持多种样式和交互效果</p>
-                    </MyPanel>
-                </header>
+            <h2 className="text-2xl font-bold">Button Sizes</h2>
+            <div className="flex items-center gap-4">
+                <MyButton size="small" color="blue">Small</MyButton>
+                <MyButton size="medium" color="green">Medium</MyButton>
+                <MyButton size="large" color="red">Large</MyButton>
+            </div>
 
-                <main className="max-w-7xl mx-auto space-y-16">
-                    <section>
-                        <MyPanel variant="normal" color="slate" size="large" glassMorphism className="p-0">
-                            <MyPanel variant="primary" color="violet" size="medium" glassMorphism className="mb-8">
-                                <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
-                                    <span className="text-4xl">🔘</span>
-                                    核心特性展示
-                                </h2>
-                                <p className="text-white/80">玻璃水晶与传统材质两套风格</p>
-                            </MyPanel>
+            <h2 className="text-2xl font-bold">Glass Effect</h2>
+            <div className="flex items-center gap-4">
+                <MyButton glass color="purple">Glass On</MyButton>
+                <MyButton glass={false} color="purple">Glass Off</MyButton>
+            </div>
 
-                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                                <MyPanel variant="primary" color="indigo" size="medium" glassMorphism>
-                                    <MyPanel variant="primary" color="indigo" size="small" glassMorphism className="mb-4">
-                                        <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                            <span className="text-3xl">🌟</span>
-                                            玻璃水晶材质 (默认)
-                                        </h3>
-                                        <p className="text-white/80">毛玻璃效果，华丽渐变背景</p>
-                                    </MyPanel>
-                                    <div className="space-y-4">
-                                        <div className="flex flex-wrap gap-3">
-                                            <MyButton variant="primary" color="indigo">Indigo</MyButton>
-                                            <MyButton variant="primary" color="cyan">Cyan</MyButton>
-                                            <MyButton variant="danger" color="rose">Rose</MyButton>
-                                        </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            <MyButton variant="normal" color="slate">Slate</MyButton>
-                                            <MyButton variant="link" color="blue">Link Style</MyButton>
-                                            <MyButton variant="primary" color="indigo" disabled>Disabled</MyButton>
-                                        </div>
-                                    </div>
-                                </MyPanel>
-
-                                <MyPanel variant="secondary" color="cyanBlue" size="medium" glassMorphism={false}>
-                                    <MyPanel variant="secondary" color="cyanBlue" size="small" glassMorphism={false} className="mb-4">
-                                        <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                            <span className="text-3xl">🎨</span>
-                                            传统材质样式
-                                        </h3>
-                                        <p className="text-white/80">经典扁平设计，纯色背景</p>
-                                    </MyPanel>
-                                    <div className="space-y-4">
-                                        <div className="flex flex-wrap gap-3">
-                                            <MyButton variant="primary" color="blue" glassMorphism={false}>Hex Blue</MyButton>
-                                            <MyButton variant="primary" color="teal" glassMorphism={false}>Teal</MyButton>
-                                            <MyButton variant="primary" color="orange" glassMorphism={false}>Orange</MyButton>
-                                        </div>
-                                        <div className="flex flex-wrap gap-3">
-                                            <MyButton variant="normal" color="gray" glassMorphism={false}>Gray</MyButton>
-                                            <MyButton variant="link" color="blue" glassMorphism={false}>Link Style</MyButton>
-                                            <MyButton variant="primary" color="blue" glassMorphism={false} disabled>Disabled</MyButton>
-                                        </div>
-                                    </div>
-                                </MyPanel>
-                            </div>
-
-                            <MyPanel variant="danger" color="rose" size="large" glassMorphism className="mb-8">
-                                <MyPanel variant="danger" color="rose" size="small" glassMorphism className="mb-6">
-                                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                        <span className="text-3xl">📏</span>
-                                        尺寸变化演示
-                                    </h3>
-                                </MyPanel>
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                    <div>
-                                        <h4 className="text-lg font-semibold text-white mb-4">🌟 玻璃材质 + 不同尺寸</h4>
-                                        <div className="flex flex-wrap gap-4 items-center">
-                                            <MyButton size="small" variant="primary" color="indigo">小按钮</MyButton>
-                                            <MyButton size="medium" variant="primary" color="cyan">中按钮</MyButton>
-                                            <MyButton size="large" variant="danger" color="rose">大按钮</MyButton>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-lg font-semibold text-white mb-4">🎨 传统材质 + 不同尺寸</h4>
-                                        <div className="flex flex-wrap gap-4 items-center">
-                                            <MyButton size="small" variant="primary" color="blue" glassMorphism={false}>小按钮</MyButton>
-                                            <MyButton size="medium" variant="primary" color="teal" glassMorphism={false}>中按钮</MyButton>
-                                            <MyButton size="large" variant="primary" color="orange" glassMorphism={false}>大按钮</MyButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </MyPanel>
-
-                            <MyPanel variant="secondary" color="cyanBlue" size="large" glassMorphism className="mb-8">
-                                <MyPanel variant="primary" color="indigo" size="small" glassMorphism className="mb-6">
-                                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                        <span className="text-3xl">🔗</span>
-                                        链接按钮样式
-                                    </h3>
-                                </MyPanel>
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    <div className="text-center">
-                                        <h4 className="text-white mb-4">不同尺寸</h4>
-                                        <div className="space-y-3">
-                                            <div><MyButton variant="link" color="blue" size="small">🔗 小型链接</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" size="medium">🌐 普通链接</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" size="large">📄 大型链接</MyButton></div>
-                                        </div>
-                                    </div>
-                                    <div className="text-center">
-                                        <h4 className="text-white mb-4">材质对比</h4>
-                                        <div className="space-y-3">
-                                            <div><MyButton variant="link" color="blue">🌟 玻璃材质</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" glassMorphism={false}>📝 传统材质</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" disabled>❌ 禁用状态</MyButton></div>
-                                        </div>
-                                    </div>
-                                    <div className="text-center">
-                                        <h4 className="text-white mb-4">交互演示</h4>
-                                        <div className="space-y-3">
-                                            <div><MyButton variant="link" color="blue" onClick={() => alert('链接点击!')}>📱 点击测试</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" onClick={() => window.open('https://github.com', '_blank')}>🔗 外部链接</MyButton></div>
-                                            <div><MyButton variant="link" color="blue" onClick={() => console.log('控制台输出')}>📝 控制台</MyButton></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </MyPanel>
-
-                            <MyPanel variant="normal" color="slate" size="large" glassMorphism>
-                                <MyPanel variant="danger" color="rose" size="small" glassMorphism className="mb-6">
-                                    <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
-                                        <span className="text-3xl">⚡</span>
-                                        交互功能演示
-                                    </h3>
-                                </MyPanel>
-                                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div>
-                                        <h4 className="text-white mb-4 text-center">🎯 事件处理</h4>
-                                        <div className="space-y-3">
-                                            <MyButton variant="primary" color="indigo" size="large" onClick={() => alert('🌟 玻璃水晶按钮被点击!')} className="w-full">🌟 点击弹窗</MyButton>
-                                            <MyButton variant="primary" color="teal" glassMorphism={false} onClick={() => console.log('📝 传统材质按钮输出到控制台')} className="w-full">📝 控制台输出</MyButton>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white mb-4 text-center">📋 表单按钮</h4>
-                                        <div className="space-y-3">
-                                            <MyButton variant="primary" color="indigo" htmlType="submit" size="large" className="w-full">✅ 提交表单</MyButton>
-                                            <MyButton variant="normal" color="slate" htmlType="reset" className="w-full">🔄 重置表单</MyButton>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <h4 className="text-white mb-4 text-center">🚫 禁用状态</h4>
-                                        <div className="space-y-3">
-                                            <MyButton variant="primary" color="indigo" disabled className="w-full">🌟 禁用 - 玻璃材质</MyButton>
-                                            <MyButton variant="primary" color="orange" disabled glassMorphism={false} className="w-full">🎨 禁用 - 传统材质</MyButton>
-                                        </div>
-                                    </div>
-                                </div>
-                            </MyPanel>
-                        </MyPanel>
-                    </section>
-                </main>
+            <h2 className="text-2xl font-bold">Disabled State</h2>
+            <div className="flex items-center gap-4">
+                <MyButton disabled>Disabled</MyButton>
+                <MyButton disabled glass>Disabled Glass</MyButton>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default ButtonsDemo
+export default ButtonsDemo;

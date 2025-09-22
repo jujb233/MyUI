@@ -1,26 +1,41 @@
-import { NavLink } from 'react-router-dom'
-import { MyButton } from '../index'
+import React from 'react';
 
-function NavBar() {
+type NavBarProps = {
+    onSelectContent: (content: "buttons" | "cards" | "panels") => void;
+};
+
+const NavBar: React.FC<NavBarProps> = ({ onSelectContent }) => {
     return (
-        <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-30 w-[calc(100%-1.5rem)] md:w-auto">
-            <div className="mx-auto flex items-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-2 backdrop-blur-md shadow-lg">
-                <div className="mr-2 hidden md:block select-none text-white/90 font-semibold">MyUI 导航</div>
-                <NavLink to="/" end className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
-                    <MyButton size="small" variant="link" color="blue">🏠 首页</MyButton>
-                </NavLink>
-                <NavLink to="/cards" className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
-                    <MyButton size="small" variant="link" color="blue">🎴 卡片演示</MyButton>
-                </NavLink>
-                <NavLink to="/buttons" className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
-                    <MyButton size="small" variant="link" color="blue">🔘 按钮演示</MyButton>
-                </NavLink>
-                <NavLink to="/panels" className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
-                    <MyButton size="small" variant="link" color="blue">📋 面板演示</MyButton>
-                </NavLink>
+        <nav className="bg-white shadow-md">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+                    <div className="flex-shrink-0">
+                        <span className="font-bold text-xl text-gray-800">MyUI Demos</span>
+                    </div>
+                    <div className="hidden md:block">
+                        <div className="ml-10 flex items-baseline space-x-4">
+                            <button onClick={() => onSelectContent("buttons")} className="nav-link">Buttons</button>
+                            <button onClick={() => onSelectContent("cards")} className="nav-link">Cards</button>
+                            <button onClick={() => onSelectContent("panels")} className="nav-link">Panels</button>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <style>{`
+                .nav-link {
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.375rem;
+                    font-weight: 500;
+                    color: #4b5563;
+                    transition: background-color 0.2s, color 0.2s;
+                }
+                .nav-link:hover {
+                    background-color: #f3f4f6;
+                    color: #1f2937;
+                }
+            `}</style>
         </nav>
-    )
-}
+    );
+};
 
-export default NavBar
+export default NavBar;

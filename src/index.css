@@ -1,1 +1,114 @@
-@import "tailwindcss";
+/* General Resets and Base Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #f8fafc;
+    /* Light gray background */
+    color: #1f2937;
+}
+
+/* Component Base Styles */
+.my-button,
+.my-card,
+.my-panel {
+    transition: all 0.25s ease-out;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Button Specific Styles */
+.my-button {
+    border-radius: 0.75rem;
+    /* rounded-xl */
+    font-weight: 600;
+    letter-spacing: 0.025em;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.my-button:hover:not(.disabled-state) {
+    background: var(--bg-hover);
+    transform: scale(1.02);
+}
+
+.my-button:active:not(.disabled-state) {
+    transform: scale(0.98);
+}
+
+.my-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--focus-ring);
+}
+
+/* Link Variant */
+.my-button.link-style {
+    border-color: var(--glass-border);
+    /* Using glass border for a subtle look */
+    box-shadow: var(--shadow-sm);
+}
+
+.my-button.link-style:hover:not(.disabled-state) {
+    text-decoration: underline;
+    transform: translateY(-1px);
+}
+
+/* Card Specific Styles */
+.my-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.my-card.hoverable:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+    font-weight: 700;
+    color: var(--text);
+}
+
+.card-content {
+    color: var(--text);
+    opacity: 0.85;
+}
+
+.card-footer {
+    margin-top: auto;
+    padding: 0.75rem 1.5rem;
+    border-top: 1px solid var(--border);
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Panel Specific Styles */
+.my-panel {
+    background: var(--bg);
+    color: var(--text);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+/* Glassmorphism Effect */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-effect:hover:not(.disabled-state) {
+    background: var(--glass-bg-hover);
+}
+
+/* Disabled State */
+.disabled-state {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
