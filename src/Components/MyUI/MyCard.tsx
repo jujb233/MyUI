@@ -1,14 +1,7 @@
 import React from "react"
 import clsx from "clsx"
-import {
-    CARD_COLOR_THEMES,
-    CARD_SIZE_CONFIG,
-    SHADOW_EFFECTS,
-    type CardColorTheme,
-    type CardColorThemeName,
-    type CardSizeName
-} from "../../Configs"
-import { resolveCardColorTheme, type CardUnifiedTheme } from "../../Configs/presets"
+import { CARD_SIZE_CONFIG, SHADOW_EFFECTS, type CardSizeName } from "../../Configs"
+import { resolveUnifiedCardThemeByToken, type CardUnifiedTheme } from "../../Configs/presets"
 
 /**
  * MyCard 组件的属性类型定义
@@ -28,10 +21,8 @@ export type MyCardProps = {
     actions?: React.ReactNode
     /** 标签内容 */
     tags?: React.ReactNode[]
-    /** 卡片样式类型 */
-    variant?: CardColorThemeName
-    /** 颜色：预设名(blue/indigo/...)或十六进制，如 #1e90ff */
-    color?: string
+    /** 统一主题令牌，如：primary.indigo / normal.white */
+    theme?: string
     /** 卡片尺寸 */
     size?: CardSizeName
     /** 是否启用玻璃态效果 */
@@ -60,7 +51,7 @@ export type MyCardProps = {
  * 获取卡片基础样式
  */
 const getCardBaseStyle = (
-    theme: CardUnifiedTheme | CardColorTheme,
+    theme: CardUnifiedTheme,
     glassMorphism: boolean,
     bordered: boolean,
     shadow: boolean
@@ -89,7 +80,7 @@ const getCardBaseStyle = (
  */
 const handleMouseOver = (
     event: React.MouseEvent<HTMLDivElement>,
-    theme: CardUnifiedTheme | CardColorTheme,
+    theme: CardUnifiedTheme,
     glassMorphism: boolean,
     hoverable: boolean,
     clickable: boolean
@@ -114,7 +105,7 @@ const handleMouseOver = (
  */
 const handleMouseOut = (
     event: React.MouseEvent<HTMLDivElement>,
-    theme: CardUnifiedTheme | CardColorTheme,
+    theme: CardUnifiedTheme,
     glassMorphism: boolean,
     hoverable: boolean,
     clickable: boolean,
@@ -202,8 +193,7 @@ function MyCard({
     footer,
     actions,
     tags,
-    variant = "white",
-    color,
+    theme: themeToken = "normal.white",
     size = "medium",
     glassMorphism = true,
     clickable = false,
@@ -217,9 +207,7 @@ function MyCard({
     children
 }: MyCardProps) {
     // 获取当前主题和尺寸配置
-    const theme = (color
-        ? resolveCardColorTheme(color).theme
-        : (CARD_COLOR_THEMES[variant] as unknown as CardUnifiedTheme))
+    const theme = resolveUnifiedCardThemeByToken(themeToken).theme
     const sizeConfig = CARD_SIZE_CONFIG[size]
 
     // 计算卡片样式

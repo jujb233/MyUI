@@ -1,7 +1,8 @@
 import React from "react"
 import clsx from "clsx"
-import { COLOR_THEMES, SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS, type ColorTheme } from "../../Configs"
-import { resolveColorTheme, type UnifiedTheme } from "../../Configs/presets"
+import { SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS } from "../../Configs"
+import { resolveUnifiedThemeByToken, type UnifiedTheme, type VariantName } from "../../Configs/presets"
+import { alphaFromHex } from "../../Configs/presets"
 
 /**
  * MyButton 组件的属性类型定义
@@ -9,12 +10,10 @@ import { resolveColorTheme, type UnifiedTheme } from "../../Configs/presets"
 export type MyButtonProps = {
     /** HTML 按钮类型 */
     htmlType?: "button" | "submit" | "reset"
-    /** 按钮样式类型 */
-    styleType?: "primary" | "secondary" | "danger" | "normal" | "link"
+    /** 统一主题令牌，如：primary.indigo / link.blue */
+    theme?: string
     /** 按钮尺寸 */
     size?: "small" | "medium" | "large"
-    /** 颜色：预设名(blue/indigo/...)或十六进制，如 #1e90ff */
-    color?: string
     /** 是否禁用 */
     disabled?: boolean
     /** 点击事件处理函数 */
@@ -30,7 +29,7 @@ export type MyButtonProps = {
 /**
  * 按钮样式类型
  */
-export type StyleType = MyButtonProps["styleType"]
+export type StyleType = VariantName
 export type SizeType = MyButtonProps["size"]
 
 
@@ -43,10 +42,11 @@ export type SizeType = MyButtonProps["size"]
  * @returns 按钮的基础样式对象
  */
 const getButtonBaseStyle = (
-    theme: UnifiedTheme | ColorTheme,
+    theme: UnifiedTheme,
     glassMorphism: boolean,
     disabled: boolean,
-    styleType: StyleType
+    styleType: StyleType,
+    accent: string
 ) => {
     if (disabled) {
         return {
@@ -62,14 +62,14 @@ const getButtonBaseStyle = (
             return {
                 background: theme.glass,
                 backdropFilter: "blur(8px)",
-                border: "1px solid rgba(37, 99, 235, 0.3)",
-                boxShadow: "0 2px 8px rgba(37, 99, 235, 0.1)",
+                border: `1px solid ${alphaFromHex(accent, 0.3)}`,
+                boxShadow: `0 2px 8px ${alphaFromHex(accent, 0.1)}`,
             }
         }
         return {
             background: theme.bg,
-            boxShadow: "0 1px 3px rgba(37, 99, 235, 0.1)",
-            border: "1px solid rgba(37, 99, 235, 0.2)",
+            boxShadow: `0 1px 3px ${alphaFromHex(accent, 0.1)}`,
+            border: `1px solid ${alphaFromHex(accent, 0.2)}`,
         }
     }
 
@@ -97,7 +97,7 @@ const getButtonBaseStyle = (
  * @returns 文本颜色值
  */
 const getTextColor = (
-    theme: UnifiedTheme | ColorTheme,
+    theme: UnifiedTheme,
     glassMorphism: boolean,
     disabled: boolean
 ): string => {
@@ -116,10 +116,11 @@ const getTextColor = (
  */
 const handleMouseOver = (
     event: React.MouseEvent<HTMLButtonElement>,
-    theme: UnifiedTheme | ColorTheme,
+    theme: UnifiedTheme,
     glassMorphism: boolean,
     disabled: boolean,
-    styleType: StyleType
+    styleType: StyleType,
+    accent: string
 ) => {
     if (disabled) return
 
@@ -129,11 +130,11 @@ const handleMouseOver = (
         target.style.background = theme.hover
         target.style.transform = "translateY(-1px)"
         target.style.textDecoration = "underline"
-        target.style.borderColor = "rgba(37, 99, 235, 0.4)"
+        target.style.borderColor = alphaFromHex(accent, 0.4)
         if (glassMorphism) {
-            target.style.boxShadow = "0 4px 12px rgba(37, 99, 235, 0.15)"
+            target.style.boxShadow = `0 4px 12px ${alphaFromHex(accent, 0.15)}`
         } else {
-            target.style.boxShadow = "0 2px 6px rgba(37, 99, 235, 0.15)"
+            target.style.boxShadow = `0 2px 6px ${alphaFromHex(accent, 0.15)}`
         }
         return
     }
@@ -157,10 +158,11 @@ const handleMouseOver = (
  */
 const handleMouseOut = (
     event: React.MouseEvent<HTMLButtonElement>,
-    theme: UnifiedTheme | ColorTheme,
+    theme: UnifiedTheme,
     glassMorphism: boolean,
     disabled: boolean,
-    styleType: StyleType
+    styleType: StyleType,
+    accent: string
 ) => {
     if (disabled) return
 
@@ -169,12 +171,12 @@ const handleMouseOut = (
     if (styleType === "link") {
         if (glassMorphism) {
             target.style.background = theme.glass
-            target.style.boxShadow = "0 2px 8px rgba(37, 99, 235, 0.1)"
-            target.style.borderColor = "rgba(37, 99, 235, 0.3)"
+            target.style.boxShadow = `0 2px 8px ${alphaFromHex(accent, 0.1)}`
+            target.style.borderColor = alphaFromHex(accent, 0.3)
         } else {
             target.style.background = theme.bg
-            target.style.boxShadow = "0 1px 3px rgba(37, 99, 235, 0.1)"
-            target.style.borderColor = "rgba(37, 99, 235, 0.2)"
+            target.style.boxShadow = `0 1px 3px ${alphaFromHex(accent, 0.1)}`
+            target.style.borderColor = alphaFromHex(accent, 0.2)
         }
         target.style.transform = "translateY(0)"
         target.style.textDecoration = "none"
@@ -196,22 +198,22 @@ const handleMouseOut = (
  */
 function MyButton({
     htmlType = "button",
-    styleType = "normal",
+    theme: themeToken = "normal.gray",
     size = "medium",
-    color,
     disabled = false,
     onClick,
     children,
     className = "",
     glassMorphism = true
 }: MyButtonProps) {
-    // 颜色优先：如果传入 color 则从预设/hex 解析，否则回退旧的 styleType 对应主题
-    const parsed = resolveColorTheme(color)
-    const theme = color ? parsed.theme : (COLOR_THEMES[styleType || "normal"] as unknown as UnifiedTheme)
+    const resolved = resolveUnifiedThemeByToken(themeToken)
+    const theme = resolved.theme
+    const styleType: StyleType = resolved.variant
+    const accent = resolved.accent
     const sizeStyle = SIZE_CONFIG[size || "medium"]
 
     // 计算按钮样式
-    const baseStyle = getButtonBaseStyle(theme, glassMorphism, disabled, styleType)
+    const baseStyle = getButtonBaseStyle(theme, glassMorphism, disabled, styleType, accent)
     const textColor = getTextColor(theme, glassMorphism, disabled)
 
     return (
@@ -243,8 +245,8 @@ function MyButton({
                 fontWeight: "600",
                 letterSpacing: "0.025em",
             }}
-            onMouseOver={(e) => handleMouseOver(e, theme, glassMorphism, disabled, styleType)}
-            onMouseOut={(e) => handleMouseOut(e, theme, glassMorphism, disabled, styleType)}
+            onMouseOver={(e) => handleMouseOver(e, theme, glassMorphism, disabled, styleType, accent)}
+            onMouseOut={(e) => handleMouseOut(e, theme, glassMorphism, disabled, styleType, accent)}
         >
             {children}
         </button>
