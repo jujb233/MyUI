@@ -1,5 +1,6 @@
 import { MyButton } from '../index'
 import NavBar from './NavBar'
+import MyPanel from "../Components/MyUI/MyPanel"
 
 function ButtonsDemo() {
     return (
@@ -20,34 +21,34 @@ function ButtonsDemo() {
 
             <div className="relative z-20 min-h-screen p-4 md:p-8">
                 <header className="text-center mb-12">
-                    <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 mx-auto max-w-4xl border border-white/20">
+                    <MyPanel theme="primary" size="large" glassMorphism className="mx-auto max-w-4xl">
                         <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                             MyButton 按钮组件演示
                         </h1>
                         <p className="text-xl text-white/90 drop-shadow-lg">功能丰富的按钮组件，支持多种样式和交互效果</p>
-                    </div>
+                    </MyPanel>
                 </header>
 
                 <main className="max-w-7xl mx-auto space-y-16">
                     <section>
-                        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                            <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl p-4 mb-8">
+                        <MyPanel theme="normal" size="large" glassMorphism className="p-0">
+                            <MyPanel theme="primary" size="medium" glassMorphism className="mb-8">
                                 <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="text-4xl">🔘</span>
                                     核心特性展示
                                 </h2>
                                 <p className="text-white/80">玻璃水晶与传统材质两套风格</p>
-                            </div>
+                            </MyPanel>
 
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-                                <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
-                                    <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-xl p-4 mb-4">
+                                <MyPanel theme="primary" size="medium" glassMorphism>
+                                    <MyPanel theme="primary" size="small" glassMorphism className="mb-4">
                                         <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                             <span className="text-3xl">🌟</span>
                                             玻璃水晶材质 (默认)
                                         </h3>
                                         <p className="text-white/80">毛玻璃效果，华丽渐变背景</p>
-                                    </div>
+                                    </MyPanel>
                                     <div className="space-y-4">
                                         <div className="flex flex-wrap gap-3">
                                             <MyButton styleType="primary">Primary</MyButton>
@@ -60,16 +61,16 @@ function ButtonsDemo() {
                                             <MyButton styleType="primary" disabled>Disabled</MyButton>
                                         </div>
                                     </div>
-                                </div>
+                                </MyPanel>
 
-                                <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10">
-                                    <div className="bg-gradient-to-r from-green-600/20 to-teal-600/20 rounded-xl p-4 mb-4">
+                                <MyPanel theme="secondary" size="medium" glassMorphism={false}>
+                                    <MyPanel theme="secondary" size="small" glassMorphism={false} className="mb-4">
                                         <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                             <span className="text-3xl">🎨</span>
                                             传统材质样式
                                         </h3>
                                         <p className="text-white/80">经典扁平设计，纯色背景</p>
-                                    </div>
+                                    </MyPanel>
                                     <div className="space-y-4">
                                         <div className="flex flex-wrap gap-3">
                                             <MyButton styleType="primary" glassMorphism={false}>Primary</MyButton>
@@ -82,16 +83,16 @@ function ButtonsDemo() {
                                             <MyButton styleType="primary" glassMorphism={false} disabled>Disabled</MyButton>
                                         </div>
                                     </div>
-                                </div>
+                                </MyPanel>
                             </div>
 
-                            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 mb-8">
-                                <div className="bg-gradient-to-r from-orange-600/20 to-red-600/20 rounded-xl p-4 mb-6">
+                            <MyPanel theme="danger" size="large" glassMorphism className="mb-8">
+                                <MyPanel theme="danger" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">📏</span>
                                         尺寸变化演示
                                     </h3>
-                                </div>
+                                </MyPanel>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div>
                                         <h4 className="text-lg font-semibold text-white mb-4">🌟 玻璃材质 + 不同尺寸</h4>
@@ -110,15 +111,15 @@ function ButtonsDemo() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </MyPanel>
 
-                            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 mb-8">
-                                <div className="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 rounded-xl p-4 mb-6">
+                            <MyPanel theme="secondary" size="large" glassMorphism className="mb-8">
+                                <MyPanel theme="primary" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">🔗</span>
                                         链接按钮样式
                                     </h3>
-                                </div>
+                                </MyPanel>
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                     <div className="text-center">
                                         <h4 className="text-white mb-4">不同尺寸</h4>
@@ -145,15 +146,15 @@ function ButtonsDemo() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </MyPanel>
 
-                            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
-                                <div className="bg-gradient-to-r from-pink-600/20 to-rose-600/20 rounded-xl p-4 mb-6">
+                            <MyPanel theme="normal" size="large" glassMorphism>
+                                <MyPanel theme="danger" size="small" glassMorphism className="mb-6">
                                     <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-2">
                                         <span className="text-3xl">⚡</span>
                                         交互功能演示
                                     </h3>
-                                </div>
+                                </MyPanel>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                                     <div>
                                         <h4 className="text-white mb-4 text-center">🎯 事件处理</h4>
@@ -177,8 +178,8 @@ function ButtonsDemo() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            </MyPanel>
+                        </MyPanel>
                     </section>
                 </main>
             </div>

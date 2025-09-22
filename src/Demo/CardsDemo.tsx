@@ -1,5 +1,6 @@
 import { MyButton, MyCard } from '../index'
 import NavBar from './NavBar'
+import MyPanel from "../Components/MyUI/MyPanel"
 
 function CardsDemo() {
     return (
@@ -20,17 +21,17 @@ function CardsDemo() {
 
             <div className="relative z-20 min-h-screen p-4 md:p-8">
                 <header className="text-center mb-12">
-                    <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 mx-auto max-w-4xl border border-white/20">
+                    <MyPanel theme="primary" size="large" glassMorphism className="mx-auto max-w-4xl">
                         <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                             MyCard 卡片组件演示
                         </h1>
                         <p className="text-xl text-white/90 drop-shadow-lg">现代化的卡片设计，支持多种布局和交互效果</p>
-                    </div>
+                    </MyPanel>
                 </header>
 
                 <main className="max-w-7xl mx-auto space-y-16">
                     <section>
-                        <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10">
+                        <MyPanel theme="normal" size="large" glassMorphism className="p-0">
                             <div className="bg-gradient-to-r from-emerald-600/20 to-teal-600/20 rounded-xl p-4 mb-8">
                                 <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="text-4xl">🎴</span>
@@ -135,7 +136,7 @@ function CardsDemo() {
                                     </MyCard>
                                 </div>
                             </div>
-                        </div>
+                        </MyPanel>
                     </section>
                 </main>
             </div>

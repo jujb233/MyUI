@@ -30,6 +30,7 @@ function Demo() {
                         <div className="mt-6 flex justify-center gap-4">
                             <MyButton styleType="primary" size="large" onClick={() => navigate('/cards')}>🎴 查看卡片演示</MyButton>
                             <MyButton styleType="secondary" size="large" onClick={() => navigate('/buttons')}>🔘 查看按钮演示</MyButton>
+                            <MyButton styleType="normal" size="large" onClick={() => navigate('/panels')}>📋 查看面板演示</MyButton>
                         </div>
                     </div>
                 </header>
@@ -43,6 +44,7 @@ function Demo() {
                         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4">
                             <MyButton styleType="primary" size="large" onClick={() => navigate('/cards')}>🎴 前往卡片演示</MyButton>
                             <MyButton styleType="secondary" size="large" onClick={() => navigate('/buttons')}>🔘 前往按钮演示</MyButton>
+                            <MyButton styleType="normal" size="large" onClick={() => navigate('/panels')}>📋 前往面板演示</MyButton>
                         </div>
                     </section>
                 </main>

@@ -15,6 +15,9 @@ function NavBar() {
                 <NavLink to="/buttons" className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
                     <MyButton size="small" styleType="link">🔘 按钮演示</MyButton>
                 </NavLink>
+                <NavLink to="/panels" className={({ isActive }) => isActive ? 'opacity-100' : 'opacity-80 hover:opacity-100'}>
+                    <MyButton size="small" styleType="link">📋 面板演示</MyButton>
+                </NavLink>
             </div>
         </nav>
     )
