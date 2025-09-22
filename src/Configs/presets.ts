@@ -164,8 +164,12 @@ export const resolveCardColorTheme = (input?: string): { theme: CardUnifiedTheme
 // ---- 统一 token 解析（variant.color）----
 
 export type VariantName = 'primary' | 'secondary' | 'danger' | 'normal' | 'link'
+export const VARIANTS: readonly VariantName[] = ['primary', 'secondary', 'danger', 'normal', 'link'] as const
 
-const DEFAULT_VARIANT_PRESET: Record<VariantName, ColorPresetName> = {
+// 主题 Token：形如 "primary.indigo"，提供编辑器自动提示
+export type ThemeToken = `${VariantName}.${ColorPresetName}`
+
+export const DEFAULT_VARIANT_PRESET: Record<VariantName, ColorPresetName> = {
     primary: 'indigo',
     secondary: 'cyanBlue',
     danger: 'danger',
@@ -173,18 +177,23 @@ const DEFAULT_VARIANT_PRESET: Record<VariantName, ColorPresetName> = {
     link: 'blue',
 }
 
-const splitToken = (token?: string): { variant: VariantName; colorKey: ColorPresetName } => {
+export const COLORS: readonly ColorPresetName[] = Object.keys(COLOR_PRESET_STOPS) as ColorPresetName[]
+export const getDefaultColorForVariant = (variant: VariantName): ColorPresetName => DEFAULT_VARIANT_PRESET[variant]
+
+const splitToken = (token?: ThemeToken): { variant: VariantName; colorKey: ColorPresetName } => {
     const safe = (token || '').trim()
     if (!safe) return { variant: 'normal', colorKey: DEFAULT_VARIANT_PRESET.normal }
-    const [v, c] = safe.split('.')
-    const variant = (['primary', 'secondary', 'danger', 'normal', 'link'].includes(v) ? v : 'normal') as VariantName
+    const [v, c] = safe.split('.') as [VariantName | string, ColorPresetName | string]
+    const variant = (['primary', 'secondary', 'danger', 'normal', 'link'].includes(v)
+        ? (v as VariantName)
+        : 'normal')
     const colorKey = (c && c in COLOR_PRESET_STOPS
         ? (c as ColorPresetName)
         : DEFAULT_VARIANT_PRESET[variant])
     return { variant, colorKey }
 }
 
-export const resolveUnifiedThemeByToken = (token?: string): {
+export const resolveUnifiedThemeByToken = (token?: ThemeToken): {
     variant: VariantName
     colorKey: ColorPresetName
     theme: UnifiedTheme
@@ -195,13 +204,26 @@ export const resolveUnifiedThemeByToken = (token?: string): {
     return { variant, colorKey, theme: COLOR_PRESETS[colorKey], accent: from }
 }
 
-export const resolveUnifiedCardThemeByToken = (token?: string): {
+export const resolveUnifiedCardThemeByToken = (token?: ThemeToken): {
     variant: VariantName
     colorKey: ColorPresetName
     theme: CardUnifiedTheme
     accent: string
 } => {
     const { variant, colorKey } = splitToken(token)
+    const { from } = COLOR_PRESET_STOPS[colorKey]
+    return { variant, colorKey, theme: CARD_COLOR_PRESETS[colorKey], accent: from }
+}
+
+// ---- 新的拆分参数解析器（推荐 API）----
+export const resolveUnifiedTheme = (variant: VariantName = 'normal', color?: ColorPresetName) => {
+    const colorKey = color ?? DEFAULT_VARIANT_PRESET[variant]
+    const { from } = COLOR_PRESET_STOPS[colorKey]
+    return { variant, colorKey, theme: COLOR_PRESETS[colorKey], accent: from }
+}
+
+export const resolveUnifiedCardTheme = (variant: VariantName = 'normal', color?: ColorPresetName) => {
+    const colorKey = color ?? DEFAULT_VARIANT_PRESET[variant]
     const { from } = COLOR_PRESET_STOPS[colorKey]
     return { variant, colorKey, theme: CARD_COLOR_PRESETS[colorKey], accent: from }
 }

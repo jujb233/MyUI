@@ -1,11 +1,13 @@
 import React from "react"
 import clsx from "clsx"
 import { SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS } from "../../Configs"
-import { resolveUnifiedThemeByToken, type UnifiedTheme } from "../../Configs/presets"
+import { resolveUnifiedTheme, type UnifiedTheme, type VariantName, type ColorPresetName } from "../../Configs"
 
 export type MyPanelProps = {
-    /** 统一主题令牌，如：primary.indigo / normal.gray */
-    theme?: string
+    /** 主题风格 */
+    variant?: VariantName
+    /** 主题颜色（可选） */
+    color?: ColorPresetName
     /** 尺寸类型 */
     size?: "small" | "medium" | "large"
     /** 是否启用玻璃态 */
@@ -59,7 +61,8 @@ const getTextColor = (
 }
 
 function MyPanel({
-    theme: themeToken = "normal.gray",
+    variant = "normal",
+    color,
     size = "medium",
     glassMorphism = true,
     shadow = true,
@@ -67,7 +70,7 @@ function MyPanel({
     children,
     disabled = false
 }: MyPanelProps) {
-    const resolved = resolveUnifiedThemeByToken(themeToken)
+    const resolved = resolveUnifiedTheme(variant, color)
     const themeObj = resolved.theme
     const sizeStyle = SIZE_CONFIG[size]
     const baseStyle = getPanelBaseStyle(themeObj, glassMorphism, disabled, shadow)

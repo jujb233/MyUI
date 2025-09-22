@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Demo from './Demo/Demo'
-import ButtonsDemo from './Demo/ButtonsDemo'
-import CardsDemo from './Demo/CardsDemo'
-import PanelsDemo from './Demo/PanelsDemo'
+import Demo from './Demos/Demo'
+import ButtonsDemo from './Demos/ButtonsDemo'
+import CardsDemo from './Demos/CardsDemo'
+import PanelsDemo from './Demos/PanelsDemo'
 
 function App() {
     return (

@@ -1,7 +1,7 @@
 import React from "react"
 import clsx from "clsx"
 import { CARD_SIZE_CONFIG, SHADOW_EFFECTS, type CardSizeName } from "../../Configs"
-import { resolveUnifiedCardThemeByToken, type CardUnifiedTheme } from "../../Configs/presets"
+import { resolveUnifiedCardTheme, type CardUnifiedTheme, type VariantName, type ColorPresetName } from "../../Configs"
 
 /**
  * MyCard 组件的属性类型定义
@@ -21,8 +21,10 @@ export type MyCardProps = {
     actions?: React.ReactNode
     /** 标签内容 */
     tags?: React.ReactNode[]
-    /** 统一主题令牌，如：primary.indigo / normal.white */
-    theme?: string
+    /** 主题风格 */
+    variant?: VariantName
+    /** 主题颜色（可选） */
+    color?: ColorPresetName
     /** 卡片尺寸 */
     size?: CardSizeName
     /** 是否启用玻璃态效果 */
@@ -193,7 +195,8 @@ function MyCard({
     footer,
     actions,
     tags,
-    theme: themeToken = "normal.white",
+    variant = "normal",
+    color,
     size = "medium",
     glassMorphism = true,
     clickable = false,
@@ -207,7 +210,7 @@ function MyCard({
     children
 }: MyCardProps) {
     // 获取当前主题和尺寸配置
-    const theme = resolveUnifiedCardThemeByToken(themeToken).theme
+    const theme = resolveUnifiedCardTheme(variant, color).theme
     const sizeConfig = CARD_SIZE_CONFIG[size]
 
     // 计算卡片样式

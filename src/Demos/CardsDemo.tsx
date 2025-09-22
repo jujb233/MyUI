@@ -21,7 +21,7 @@ function CardsDemo() {
 
             <div className="relative z-20 min-h-screen p-4 md:p-8">
                 <header className="text-center mb-12">
-                    <MyPanel theme="primary.indigo" size="large" glassMorphism className="mx-auto max-w-4xl">
+                    <MyPanel variant="primary" color="indigo" size="large" glassMorphism className="mx-auto max-w-4xl">
                         <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                             MyCard 卡片组件演示
                         </h1>
@@ -31,7 +31,7 @@ function CardsDemo() {
 
                 <main className="max-w-7xl mx-auto space-y-16">
                     <section>
-                        <MyPanel theme="normal.slate" size="large" glassMorphism className="p-0">
+                        <MyPanel variant="normal" color="slate" size="large" glassMorphism className="p-0">
                             <div className="bg-gradient-to-r from-emerald-600/20 to-teal-600/20 rounded-xl p-4 mb-8">
                                 <h2 className="text-3xl font-bold text-white mb-2 flex items-center gap-2">
                                     <span className="text-4xl">🎴</span>
@@ -44,12 +44,13 @@ function CardsDemo() {
                                 <MyCard
                                     title="基础卡片"
                                     content="这是一个基础的卡片组件，展示了标题和内容的基本布局。"
-                                    theme="normal.white"
+                                    variant="normal"
+                                    color="white"
                                     size="medium"
                                     actions={
                                         <div className="flex gap-2">
-                                            <MyButton size="small" theme="primary.indigo">操作</MyButton>
-                                            <MyButton size="small" theme="secondary.cyanBlue">详情</MyButton>
+                                            <MyButton size="small" variant="primary" color="indigo">操作</MyButton>
+                                            <MyButton size="small" variant="secondary" color="cyanBlue">详情</MyButton>
                                         </div>
                                     }
                                 />
@@ -59,16 +60,18 @@ function CardsDemo() {
                                     content="这个卡片包含了顶部图片，适合展示产品或文章预览。"
                                     image="/1757785339517.png"
                                     imageAlt="示例图片"
-                                    theme="primary.indigo"
+                                    variant="primary"
+                                    color="indigo"
                                     size="medium"
                                     tags={["新功能", "推荐"]}
-                                    actions={<MyButton size="small" theme="primary.indigo">查看更多</MyButton>}
+                                    actions={<MyButton size="small" variant="primary" color="indigo">查看更多</MyButton>}
                                 />
 
                                 <MyCard
                                     title="点击卡片"
                                     content="这个卡片支持点击事件，整个卡片都是可交互的。"
-                                    theme="secondary.cyanBlue"
+                                    variant="secondary"
+                                    color="cyanBlue"
                                     clickable
                                     onClick={() => alert('卡片被点击了！')}
                                     footer={<div className="text-sm text-gray-600">点击整个卡片试试</div>}
@@ -89,16 +92,17 @@ function CardsDemo() {
                                         image="/1757785339517.png"
                                         imageAlt="功能演示"
                                         imagePosition="top"
-                                        theme="primary.indigo"
+                                        variant="primary"
+                                        color="indigo"
                                         size="large"
                                         glassMorphism={true}
                                         hoverable={true}
                                         tags={["热门", "推荐", "新品"]}
                                         actions={
                                             <div className="flex gap-2">
-                                                <MyButton theme="primary.indigo">立即购买</MyButton>
-                                                <MyButton theme="secondary.cyanBlue">加入购物车</MyButton>
-                                                <MyButton theme="link.blue">收藏</MyButton>
+                                                <MyButton variant="primary" color="indigo">立即购买</MyButton>
+                                                <MyButton variant="secondary" color="cyanBlue">加入购物车</MyButton>
+                                                <MyButton variant="link" color="blue">收藏</MyButton>
                                             </div>
                                         }
                                         footer={
@@ -109,7 +113,7 @@ function CardsDemo() {
                                         }
                                     />
 
-                                    <MyCard title="自定义内容卡片" theme="normal.white" size="large" glassMorphism={true}>
+                                    <MyCard title="自定义内容卡片" variant="normal" color="white" size="large" glassMorphism={true}>
                                         <div className="space-y-4">
                                             <div className="flex items-center gap-3">
                                                 <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
@@ -129,8 +133,8 @@ function CardsDemo() {
                                                 </ul>
                                             </div>
                                             <div className="flex gap-2 pt-4">
-                                                <MyButton size="small" theme="primary.indigo">编辑资料</MyButton>
-                                                <MyButton size="small" theme="secondary.cyanBlue">查看详情</MyButton>
+                                                <MyButton size="small" variant="primary" color="indigo">编辑资料</MyButton>
+                                                <MyButton size="small" variant="secondary" color="cyanBlue">查看详情</MyButton>
                                             </div>
                                         </div>
                                     </MyCard>

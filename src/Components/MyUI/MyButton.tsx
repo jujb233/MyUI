@@ -1,7 +1,7 @@
 import React from "react"
 import clsx from "clsx"
 import { SIZE_CONFIG, DEFAULT_STYLES, SHADOW_EFFECTS } from "../../Configs"
-import { resolveUnifiedThemeByToken, type UnifiedTheme, type VariantName } from "../../Configs/presets"
+import { resolveUnifiedTheme, type UnifiedTheme, type VariantName, type ColorPresetName } from "../../Configs"
 import { alphaFromHex } from "../../Configs/presets"
 
 /**
@@ -10,8 +10,10 @@ import { alphaFromHex } from "../../Configs/presets"
 export type MyButtonProps = {
     /** HTML 按钮类型 */
     htmlType?: "button" | "submit" | "reset"
-    /** 统一主题令牌，如：primary.indigo / link.blue */
-    theme?: string
+    /** 主题风格 */
+    variant?: VariantName
+    /** 主题颜色（可选） */
+    color?: ColorPresetName
     /** 按钮尺寸 */
     size?: "small" | "medium" | "large"
     /** 是否禁用 */
@@ -198,7 +200,8 @@ const handleMouseOut = (
  */
 function MyButton({
     htmlType = "button",
-    theme: themeToken = "normal.gray",
+    variant = "normal",
+    color,
     size = "medium",
     disabled = false,
     onClick,
@@ -206,7 +209,7 @@ function MyButton({
     className = "",
     glassMorphism = true
 }: MyButtonProps) {
-    const resolved = resolveUnifiedThemeByToken(themeToken)
+    const resolved = resolveUnifiedTheme(variant, color)
     const theme = resolved.theme
     const styleType: StyleType = resolved.variant
     const accent = resolved.accent

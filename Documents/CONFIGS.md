@@ -69,18 +69,20 @@ import { SIZE_CONFIG } from '@/Configs/sizeConfig'
 - `COLOR_PRESET_STOPS`：语义色系起止色（如 `indigo`、`blue`、`gray` 等）
 - `COLOR_PRESETS` / `CARD_COLOR_PRESETS`：基于预设生成的主题集合
 - `buildTheme(from, to)` / `buildCardTheme(from, to)`：用起止色构建主题
-- `resolveColorTheme(input?)` / `resolveCardColorTheme(input?)`：将预设名或十六进制色值解析为主题
+- `resolveColorTheme(input?)` / `resolveCardColorTheme(input?)`：将预设名或十六进制色值解析为主题（底层工具）
+- `resolveUnifiedTheme(variant?, color?)` / `resolveUnifiedCardTheme(variant?, color?)`：基于拆分参数获取统一主题（组件推荐）
+- 常量导出：`VARIANTS`（可用变体），`COLORS`（可用颜色键），`DEFAULT_VARIANT_PRESET`（变体默认色）
 - 工具函数：`isHexColor`、`hexToRgb`、`rgbToHex`、`adjustHex`、`alphaFromHex`、`yiqTextColor`
 
 示例：
 
 ```typescript
-// 通过预设名解析（按钮）
-const { theme, accent } = resolveColorTheme('indigo')
+// 组件推荐：传入变体/颜色键
+const { theme, accent } = resolveUnifiedTheme('primary', 'indigo')
 // theme.bg / theme.hover / theme.text / theme.glass / theme.glassHover
 // accent 为主色（可用于边框或强调）
 
-// 使用十六进制直接生成主题（卡片）
+// 旧：使用十六进制直接生成主题（底层工具）
 const { theme: cardTheme } = resolveCardColorTheme('#4f46e5')
 
 // 应用到组件样式（示意）

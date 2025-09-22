@@ -28,9 +28,9 @@ function Demo() {
                         </h1>
                         <p className="text-xl text-white/90 drop-shadow-lg">现代化的 React UI 组件 - 玻璃水晶材质设计</p>
                         <div className="mt-6 flex justify-center gap-4">
-                            <MyButton theme="primary.indigo" size="large" onClick={() => navigate('/cards')}>🎴 查看卡片演示</MyButton>
-                            <MyButton theme="secondary.cyanBlue" size="large" onClick={() => navigate('/buttons')}>🔘 查看按钮演示</MyButton>
-                            <MyButton theme="normal.gray" size="large" onClick={() => navigate('/panels')}>📋 查看面板演示</MyButton>
+                            <MyButton variant="primary" color="indigo" size="large" onClick={() => navigate('/cards')}>🎴 查看卡片演示</MyButton>
+                            <MyButton variant="secondary" color="cyanBlue" size="large" onClick={() => navigate('/buttons')}>🔘 查看按钮演示</MyButton>
+                            <MyButton variant="normal" color="gray" size="large" onClick={() => navigate('/panels')}>📋 查看面板演示</MyButton>
                         </div>
                     </div>
                 </header>
@@ -42,9 +42,9 @@ function Demo() {
                             <p className="text-white/80">选择一个组件进入对应的演示页面。</p>
                         </div>
                         <div className="flex flex-col md:flex-row items-stretch md:items-center justify-center gap-4">
-                            <MyButton theme="primary.indigo" size="large" onClick={() => navigate('/cards')}>🎴 前往卡片演示</MyButton>
-                            <MyButton theme="secondary.cyanBlue" size="large" onClick={() => navigate('/buttons')}>🔘 前往按钮演示</MyButton>
-                            <MyButton theme="normal.gray" size="large" onClick={() => navigate('/panels')}>📋 前往面板演示</MyButton>
+                            <MyButton variant="primary" color="indigo" size="large" onClick={() => navigate('/cards')}>🎴 前往卡片演示</MyButton>
+                            <MyButton variant="secondary" color="cyanBlue" size="large" onClick={() => navigate('/buttons')}>🔘 前往按钮演示</MyButton>
+                            <MyButton variant="normal" color="gray" size="large" onClick={() => navigate('/panels')}>📋 前往面板演示</MyButton>
                         </div>
                     </section>
                 </main>

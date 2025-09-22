@@ -7,8 +7,7 @@
 - 🎴 完整的内容区域支持（标题、内容、图片、标签）
 - 🔄 多种布局方向（垂直、水平）
 - 📍 灵活的图片位置（顶部、左侧、右侧、背景）
-- 🎨 四种样式主题（white、gray、primary、secondary）
- - 🎨 新增 color 颜色属性（预设与十六进制），并兼容 variant
+- 🎨 主题拆分：`variant`（风格）+ `color`（颜色键），统一来自配置
 - 📏 三种尺寸配置（small、medium、large）
 - ⚡ 丰富的交互效果（悬停、点击）
 - 🌟 可切换的玻璃态效果
@@ -25,8 +24,8 @@
 | `footer` | `ReactNode` | - | 页脚内容 |
 | `actions` | `ReactNode` | - | 操作按钮 |
 | `tags` | `ReactNode[]` | - | 标签数组 |
-| `variant` | `'white' \| 'gray' \| 'primary' \| 'secondary'` | `'white'` | 卡片样式主题 |
-| `color` | `string` | - | 颜色预设名或十六进制 |
+| `variant` | `'primary' \| 'secondary' \| 'danger' \| 'normal'` | `'normal'` | 卡片风格 |
+| `color` | `ColorPresetName` | 依据 `DEFAULT_VARIANT_PRESET[variant]` | 颜色键（来自 COLORS） |
 | `size` | `'small' \| 'medium' \| 'large'` | `'medium'` | 卡片尺寸 |
 | `glassMorphism` | `boolean` | `true` | 是否启用玻璃态效果 |
 | `clickable` | `boolean` | `false` | 是否可点击 |
@@ -54,18 +53,7 @@ function App() {
 }
 ```
 
-## 使用 color（颜色预设/十六进制）
-
-```tsx
-// 预设名
-<MyCard title="预设主题" content="Violet 预设" color="violet" />
-
-// 十六进制
-<MyCard title="Hex 主题" content="#f97316 渐变" color="#f97316" />
-
-// 结合玻璃态
-<MyCard title="玻璃态" content="Emerald 预设" color="emerald" glassMorphism />
-```
+相关导出：`VARIANTS`, `COLORS`, `DEFAULT_VARIANT_PRESET`, `resolveUnifiedCardTheme`
 
 ## 样式主题
 
@@ -74,7 +62,8 @@ function App() {
 <MyCard
   title="白色主题"
   content="干净简洁的白色背景"
-  variant="white"
+  variant="normal"
+  color="white"
 />
 ```
 
@@ -83,7 +72,8 @@ function App() {
 <MyCard
   title="灰色主题"
   content="中性色调的灰色背景"
-  variant="gray"
+  variant="normal"
+  color="gray"
 />
 ```
 
@@ -93,6 +83,7 @@ function App() {
   title="主色主题"
   content="品牌主色彩背景"
   variant="primary"
+  color="indigo"
 />
 ```
 
@@ -102,6 +93,7 @@ function App() {
   title="次色主题"
   content="辅助色彩背景"
   variant="secondary"
+  color="cyanBlue"
 />
 ```
 
@@ -215,8 +207,8 @@ import { MyButton } from '@jujb233/myui'
   content="包含操作按钮的卡片"
   actions={
     <div className="flex gap-2">
-      <MyButton styleType="primary">主要操作</MyButton>
-      <MyButton styleType="secondary">次要操作</MyButton>
+      <MyButton variant="primary" color="indigo">主要操作</MyButton>
+      <MyButton variant="secondary" color="cyanBlue">次要操作</MyButton>
     </div>
   }
 />
