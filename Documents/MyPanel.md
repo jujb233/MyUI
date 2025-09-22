@@ -14,14 +14,21 @@
 | `glass`   | `boolean`                          | `true`     | 是否启用玻璃拟态效果                      |
 | `shadow`  | `ShadowName`                       | `'md'`     | 面板阴影等级                              |
 | `children`| `React.ReactNode`                  | -          | 面板内容                                  |
+| `title`   | `string`                           | -          | 面板标题，会以 h2 标签显示在内容顶部      |
+| `backgroundImage` | `string`                     | -          | 背景图片的 URL                            |
 
 ## 用法示例
 
 ```tsx
 import { MyPanel } from './MyUI';
 
-<MyPanel variant="primary" size="large">
-  <h2>面板标题</h2>
+// 带有背景图片和标题的面板
+<MyPanel 
+  variant="primary" 
+  size="large"
+  title="探索新世界"
+  backgroundImage="/path/to/your/image.png"
+>
   <p>面板中的内容。</p>
 </MyPanel>
 ```

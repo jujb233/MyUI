@@ -49,6 +49,14 @@ export type MyPanelProps = {
      * @default false
      */
     disabled?: boolean;
+    /**
+     * 面板标题
+     */
+    title?: string;
+    /**
+     * 背景图片 URL
+     */
+    backgroundImage?: string;
 };
 
 /**
@@ -65,6 +73,8 @@ function MyPanel({
     className = "",
     children,
     disabled = false,
+    title,
+    backgroundImage,
 }: MyPanelProps) {
     // 1. 解析主题
     const theme = resolveTheme({ variant, color });
@@ -76,6 +86,7 @@ function MyPanel({
     const panelStyle: React.CSSProperties = {
         ...theme,
         boxShadow: glass ? GLASS_SHADOWS.md : SHADOWS[shadow],
+        backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
     };
 
     return (
@@ -83,6 +94,7 @@ function MyPanel({
             className={clsx(
                 "my-panel", // 基础类名
                 "rounded-2xl transition-all duration-200 ease-out relative overflow-hidden",
+                backgroundImage && "bg-cover bg-center",
                 sizeStyle.padding,
                 sizeStyle.fontSize,
                 {
@@ -93,6 +105,7 @@ function MyPanel({
             )}
             style={panelStyle}
         >
+            {title && <h2 className={clsx("text-2xl font-bold mb-4", className)}>{title}</h2>}
             {children}
         </div>
     );

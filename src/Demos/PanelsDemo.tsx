@@ -28,6 +28,21 @@ const PanelsDemo = () => {
                 <h3 className="font-bold text-md mb-2">禁用状态面板</h3>
                 <p>此面板处于禁用状态 (`disabled`)，所有交互都将被禁止。可以看到整个面板呈现半透明状态，鼠标指针变为“不可用”样式。</p>
             </MyPanel>
+
+            <MyPanel
+                size="large"
+                shadow="xl"
+                backgroundImage="/demo.png"
+                title="背景图片与标题"
+                color="white"
+                className="text-white"
+            >
+                <p className="font-bold">
+                    这是一个带有背景图片和标题的面板。
+                    `backgroundImage` 属性设置背景图，`title` 属性在顶部添加一个大标题。
+                    为了让文字更清晰，我们将文字颜色设置为了白色。
+                </p>
+            </MyPanel>
         </div>
     );
 };
