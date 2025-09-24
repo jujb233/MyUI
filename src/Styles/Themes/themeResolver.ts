@@ -1,7 +1,7 @@
 import { DEFAULT_VARIANT_COLOR, type VariantName } from "../colorThemes";
 import { type ColorPresetName, PRESET_CARD_THEMES, PRESET_THEMES } from "./colorPresets";
 import { buildCardTheme, buildTheme, type ComponentTheme } from "./themeBuilder";
-import { adjustHex, isHexColor } from "../utils/colorUtils";
+import { adjustHex, isHexColor } from "../Utils/colorUtils";
 
 export type ThemeResolverParams = {
     variant?: VariantName;

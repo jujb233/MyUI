@@ -9,7 +9,7 @@ import {
     type ColorPresetName,
     type SizeName,
     type ShadowName,
-} from "../../styles";
+} from "../../Styles";
 
 /**
  * MyPanel 组件的属性
@@ -92,15 +92,21 @@ function MyPanel({
     return (
         <div
             className={clsx(
-                "my-panel", // 基础类名
-                "rounded-2xl transition-all duration-200 ease-out relative overflow-hidden",
-                backgroundImage && "bg-cover bg-center",
+                // 结构与尺寸
+                "relative overflow-hidden rounded-2xl",
                 sizeStyle.padding,
                 sizeStyle.fontSize,
-                {
-                    "glass-effect": glass,
-                    "disabled-state opacity-60 cursor-not-allowed": disabled,
-                },
+                // 视觉
+                "transition-all duration-300 ease-out",
+                "bg-[var(--bg)] text-[var(--text)]",
+                // 交互
+                !disabled && "hover:shadow-lg",
+                // 玻璃态
+                glass && "backdrop-blur-md",
+                // 背景图片
+                backgroundImage && "bg-cover bg-center",
+                // 禁用态
+                disabled && "opacity-60 cursor-not-allowed",
                 className
             )}
             style={panelStyle}

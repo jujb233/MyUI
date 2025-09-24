@@ -1,4 +1,4 @@
-import type { COLOR_PRESET_STOPS } from "./themes/colorPresets";
+import type { COLOR_PRESET_STOPS } from "./Themes/colorPresets";
 
 /**
  * 定义组件的不同视觉变体

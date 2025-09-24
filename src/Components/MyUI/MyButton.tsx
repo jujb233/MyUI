@@ -9,7 +9,7 @@ import {
     type VariantName,
     type ColorPresetName,
     type SizeName,
-} from "../../styles";
+} from "../../Styles";
 
 /**
  * MyButton 组件的属性
@@ -96,15 +96,24 @@ function MyButton({
             disabled={disabled}
             onClick={onClick}
             className={clsx(
-                "my-button", // 基础类名
+                // 基础结构: 尺寸 & 布局
                 sizeStyle.padding,
                 sizeStyle.fontSize,
                 sizeStyle.minWidth,
-                {
-                    "glass-effect": glass && !disabled,
-                    "link-style": variant === "link",
-                    "disabled-state": disabled,
-                },
+                // 视觉与交互
+                "inline-flex items-center justify-center select-none relative overflow-hidden",
+                "rounded-xl font-semibold tracking-wide border border-transparent",
+                "transition-all duration-200 ease-out will-change-transform",
+                // 状态 & 交互动画 (禁用时不缩放)
+                "hover:scale-[1.02] active:scale-95 disabled:hover:scale-100 disabled:active:scale-100",
+                // 光标 & 禁用态
+                "disabled:opacity-60 disabled:cursor-not-allowed",
+                // 焦点环
+                "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+                // 玻璃态
+                glass && !disabled && "backdrop-blur-md border",
+                // link 变体的细化
+                variant === "link" && "underline-offset-4 hover:-translate-y-0.5 shadow-sm",
                 className
             )}
             style={buttonStyle}

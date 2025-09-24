@@ -1,4 +1,4 @@
-import { adjustHex, alphaFromHex, yiqTextColor } from "../utils/colorUtils";
+import { adjustHex, alphaFromHex, yiqTextColor } from "../Utils/colorUtils";
 
 /**
  * 定义主题对象的结构

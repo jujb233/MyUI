@@ -9,7 +9,7 @@ import {
     type ColorPresetName,
     type CardSizeName,
     type ShadowName,
-} from "../../styles";
+} from "../../Styles";
 
 /**
  * MyCard 组件的属性
@@ -176,16 +176,21 @@ function MyCard({
     return (
         <div
             className={clsx(
-                "my-card", // 基础类名
+                // 布局方向
+                isHorizontal ? "flex" : "flex flex-col",
+                imagePosition === "right" && isHorizontal && "flex-row-reverse",
+                // 尺寸 & 圆角
                 sizeConfig.borderRadius,
                 sizeConfig.minHeight,
-                {
-                    "flex": isHorizontal,
-                    "flex-col": !isHorizontal,
-                    "flex-row-reverse": imagePosition === "right" && isHorizontal,
-                    "glass-effect": glass,
-                    "hoverable": hoverable || clickable,
-                },
+                // 基础外观
+                "relative overflow-hidden transition-all duration-300 ease-out",
+                "bg-[var(--bg)] text-[var(--text)] border border-[var(--border)]",
+                // 阴影与悬停
+                (hoverable || clickable) && "hover:-translate-y-1 hover:scale-[1.01]",
+                (hoverable || clickable) && "hover:shadow-xl",
+                clickable && "cursor-pointer",
+                // 玻璃态
+                glass && "backdrop-blur-md",
                 className
             )}
             style={cardStyle}
@@ -217,10 +222,10 @@ function MyCard({
                 <div className={sizeConfig.spacing}>
                     {tags && tags.length > 0 && <CardTags tags={tags} />}
                     {title && (
-                        <h3 className={clsx("card-title", sizeConfig.titleSize)}>{title}</h3>
+                        <h3 className={clsx("font-bold text-[var(--text)]", sizeConfig.titleSize)}>{title}</h3>
                     )}
                     {content && !children && (
-                        <div className={clsx("card-content", sizeConfig.contentSize)}>
+                        <div className={clsx("text-[var(--text)]/85", sizeConfig.contentSize)}>
                             {content}
                         </div>
                     )}

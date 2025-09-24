@@ -1,6 +1,6 @@
 import MyButton from "../Components/MyUI/MyButton";
 import MyPanel from "../Components/MyUI/MyPanel";
-import { VARIANTS } from "../styles";
+import { VARIANTS } from "../Styles";
 
 const ButtonsDemo = () => {
     return (
