@@ -1,37 +1,37 @@
-# MyUI - 现代化 React 组件库
 
-本项目是一个小型、现代化的 React UI 组件库，采用 TypeScript 和 Vite 构建，专注于简洁、可主题化和玻璃拟态风格设计。
+# MyUI 组件库教程
 
-## 核心理念
+> 本文档帮助你快速上手 MyUI，了解核心组件、配置方法与演示流程。
 
--   **解耦与高内聚**：组件逻辑与样式逻辑彻底分离，所有主题相关内容集中在 `src/styles` 目录。
--   **可主题化**：所有组件通过 CSS 变量实现主题定制，支持自定义和扩展。
--   **现代美学**：内置玻璃拟态、平滑过渡和精心设计的阴影效果。
--   **低耦合**：组件不再负责复杂样式计算。
--   **高内聚**：所有样式与主题逻辑集中在 `src/styles`。
--   **可读性提升**：组件文件更简洁，专注结构与逻辑。
--   **易维护**：主题或样式变更只需修改 `src/styles`，无需动组件。
--   **易扩展**：新增组件只需复用统一主题系统即可。
+## 快速开始
 
-## 组件列表
+1. 安装依赖：
+	```bash
+	npm install @jujb233/myui
+	```
+2. 引入组件：
+	```tsx
+	import { MyButton, MyCard, MyPanel } from 'myui';
+	```
+3. 查看演示：
+	```bash
+	npm run dev
+	```
 
--   **[`MyButton`](./COMPONENTS.md#mybutton)**：多功能按钮组件，支持多种主题和尺寸。
--   **[`MyCard`](./COMPONENTS.md#mycard)**：灵活的卡片组件，支持图片、操作区和复杂布局。
--   **[`MyPanel`](./COMPONENTS.md#mypanel)**：通用内容容器，继承统一主题系统。
+## 目录结构
 
-详细介绍请参见 [组件总览](./COMPONENTS.md)。
+- [COMPONENTS.md](./COMPONENTS.md)：组件总览与跳转
+- [CONFIGS.md](./CONFIGS.md)：配置教程与示例
+- [DEMOS.md](./DEMOS.md)：演示入口与体验流程
+- [MyButton.md](./MyButton.md)：按钮组件教程
+- [MyCard.md](./MyCard.md)：卡片组件教程
+- [MyPanel.md](./MyPanel.md)：面板组件教程
 
-## 样式系统
+## 推荐阅读顺序
+1. `README.md`（本页）
+2. `COMPONENTS.md` 了解所有组件
+3. 选择具体组件文档学习用法
+4. `CONFIGS.md` 深入配置
+5. `DEMOS.md` 体验实际效果
 
-所有样式和主题相关内容均集中在 `src/styles` 目录。详细说明请参见 [样式与主题系统文档](./CONFIGS.md)。
-
-## 演示
-
-要查看组件实际效果，请运行开发服务器：
-
-```bash
-npm install
-npm run dev
-```
-
-浏览器访问后可体验所有组件和功能演示。
+如需帮助，欢迎查阅各组件文档或联系维护者。

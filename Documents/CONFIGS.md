@@ -1,56 +1,52 @@
-# 样式与主题系统
 
-本系统已重构，结构更清晰、易扩展、易维护。所有样式相关文件均位于 `src/styles` 目录。
+# 配置教程
 
-## 关键概念
+本页介绍如何全局和局部配置 MyUI 主题与样式，快速实现自定义视觉效果。
 
-### 1. CSS 变量
+## 快速配置
 
-核心采用 CSS 变量（Custom Properties），组件通过预设变量实现样式，而非直接在 React 中写内联样式。
+### 1. 全局主题配置
 
--   `--bg`：背景色/渐变
--   `--bg-hover`：悬停时背景
--   `--text`：文字颜色
--   `--border`：边框颜色
--   `--focus-ring`：聚焦描边色
--   `--glass-bg`：玻璃拟态背景
--   `--glass-bg-hover`：玻璃拟态悬停背景
--   `--glass-border`：玻璃拟态边框
-
-### 2. 主题解析（`resolveTheme`）
-
-`src/styles/themes/themeResolver.ts` 中的 `resolveTheme` 是主题解析核心。传入参数（如 `variant`、`color`、`isCard`），返回包含 CSS 变量的主题对象。
-
-### 3. 颜色预设
-
-所有颜色预设定义在 `src/styles/themes/colorPresets.ts`，包括渐变起止色，由 `themeBuilder.ts` 构建主题对象。
-
-### 4. 结构分离
-
--   **`utils/`**：纯工具函数，如 `colorUtils.ts` 负责颜色处理。
--   **`themes/`**：主题相关逻辑。
-    -   `colorPresets.ts`：原始颜色值。
-    -   `themeBuilder.ts`：主题构建函数。
-    -   `themeResolver.ts`：组件获取主题的入口。
--   **`index.ts`**：样式模块的公共 API，只导出组件所需内容。
-
-## 使用方法
-
-组件中只需调用 `resolveTheme`，将结果展开到 `style` 属性：
-
-```tsx
-import { resolveTheme } from '../../styles';
-
-const theme = resolveTheme({ variant, color });
-
-return <div style={{ ...theme }} />;
-```
-
-组件 CSS（如 `index.css`）使用这些变量：
+在入口文件（如 `App.tsx`）设置 CSS 变量，实现全局主题：
 
 ```css
-.my-component {
-  background: var(--bg);
-  color: var(--text);
+:root {
+  --bg: #f8fafc;
+  --text: #222;
+  --glass-bg: rgba(255,255,255,0.6);
 }
 ```
+
+### 2. 组件级主题配置
+
+每个组件可通过 `variant`、`color` 属性快速切换主题：
+
+```tsx
+<MyButton variant="primary" color="#00bfae" />
+<MyCard variant="glass" color="gradient-blue" />
+```
+
+### 3. 高级主题解析
+
+使用 `resolveTheme` 动态生成主题对象：
+
+```tsx
+import { resolveTheme } from 'myui/styles';
+const theme = resolveTheme({ variant: 'primary', color: 'teal' });
+<div style={{ ...theme }}>内容</div>
+```
+
+## 常用配置示例
+
+- 预设色：`color="primary"`、`color="danger"`
+- 渐变色：`color="gradient-blue"`
+- 玻璃拟态：`variant="glass"`
+- 阴影：`shadow="lg"`
+
+## 进阶技巧
+
+- 通过 `src/styles/themes/colorPresets.ts` 添加自定义色。
+- 修改 `src/styles/themes/themeBuilder.ts` 扩展主题逻辑。
+- 结合 CSS 变量与 React props 实现多层次主题。
+
+更多高级配置请参考源码或 DEMOS.md。
