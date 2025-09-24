@@ -78,7 +78,7 @@ function MyPanel({
     // 1. 尺寸样式
     const sizeStyle = SIZE_CONFIG[size];
     // 2. 主题与投影
-    const { style: themedStyle } = useComponentTheme({ variant, color, glass, shadow, elevationKind: 'panel' });
+    const { style: themedStyle } = useComponentTheme({ variant, color, glass, shadow, elevationKind: 'panel', isCard: glass });
     // 3. 内联样式
     const panelStyle: React.CSSProperties = {
         ...themedStyle,
@@ -94,7 +94,9 @@ function MyPanel({
                 sizeStyle.fontSize,
                 // 视觉
                 "transition-all duration-300 ease-out",
-                "[background:var(--bg)] hover:[background:var(--bg-hover)] text-[var(--text)]",
+                glass
+                    ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] text-[var(--text)]"
+                    : "[background:var(--bg)] hover:[background:var(--bg-hover)] text-[var(--text)]",
                 // 交互
                 !disabled && buildInteractionClasses({ kind: 'panel', enabled: true }),
                 // 玻璃态

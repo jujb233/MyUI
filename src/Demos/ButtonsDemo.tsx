@@ -67,7 +67,7 @@ const ButtonsDemo = () => {
                 <p className="text-gray-300 mb-6">
                     统一的交互系统为按钮提供一致的 <code>hover</code> / <code>active</code> 缩放动画。通过 <code>glass</code> 与 <code>shadow</code> 组合可以展示不同的深度层次。
                 </p>
-                <MyPanel glass className="p-6 rounded-lg space-y-6">
+                <MyPanel className="p-6 rounded-lg space-y-6">
                     <div>
                         <h3 className="font-semibold mb-3">实体阴影 (glass={'{false}'})</h3>
                         <div className="flex flex-wrap gap-4">

@@ -186,7 +186,10 @@ function MyCard({
                 sizeConfig.borderRadius,
                 sizeConfig.minHeight,
                 'relative overflow-hidden transition-all duration-300 ease-out',
-                '[background:var(--bg)] hover:[background:var(--bg-hover)] text-[var(--text)] border border-[var(--border)]',
+                glass
+                    ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]'
+                    : '[background:var(--bg)] hover:[background:var(--bg-hover)]',
+                'text-[var(--text)] border border-[var(--border)]',
                 (hoverable || clickable) && buildInteractionClasses({ kind: 'card', enabled: true }),
                 clickable && 'cursor-pointer',
                 glass && 'backdrop-blur-md',
