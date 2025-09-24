@@ -2,9 +2,8 @@ import React from "react";
 import clsx from "clsx";
 import {
     CARD_SIZE_CONFIG,
-    SHADOWS,
-    GLASS_SHADOWS,
-    resolveTheme,
+    useComponentTheme,
+    buildInteractionClasses,
     type VariantName,
     type ColorPresetName,
     type CardSizeName,
@@ -88,6 +87,15 @@ export type MyCardProps = {
     children?: React.ReactNode;
 };
 
+// 子组件拆分：提升可维护性与测试性
+const CardContainer: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...rest }) => (
+    <div className={clsx(className)} {...rest} />
+);
+
+const CardBody: React.FC<{ className?: string; children?: React.ReactNode }> = ({ className, children }) => (
+    <div className={clsx(className)}>{children}</div>
+);
+
 const CardImage: React.FC<{
     src: string;
     alt: string;
@@ -157,45 +165,36 @@ function MyCard({
     hoverable = true,
     children,
 }: MyCardProps) {
-    // 1. 解析主题
-    const theme = resolveTheme({ variant, color, isCard: true });
-
-    // 2. 获取尺寸配置
+    // 1. 尺寸配置
     const sizeConfig = CARD_SIZE_CONFIG[size];
-
-    // 3. 计算卡片样式
+    // 2. 主题（card 模式）与投影
+    const { style: themedStyle, theme } = useComponentTheme({ variant, color, glass, shadow, isCard: true, elevationKind: 'card' });
+    // 3. 内联样式
     const cardStyle: React.CSSProperties = {
-        ...theme,
-        boxShadow: glass ? GLASS_SHADOWS.md : SHADOWS[shadow],
-        border: bordered ? `1px solid ${theme["--border"]}` : "none",
+        ...themedStyle,
+        border: bordered ? `1px solid ${theme["--border"]}` : 'none',
     };
 
     const hasImage = image && image.trim() !== "";
     const isHorizontal = direction === "horizontal" && hasImage && imagePosition !== "top";
 
     return (
-        <div
+        <CardContainer
             className={clsx(
-                // 布局方向
-                isHorizontal ? "flex" : "flex flex-col",
-                imagePosition === "right" && isHorizontal && "flex-row-reverse",
-                // 尺寸 & 圆角
+                isHorizontal ? 'flex' : 'flex flex-col',
+                imagePosition === 'right' && isHorizontal && 'flex-row-reverse',
                 sizeConfig.borderRadius,
                 sizeConfig.minHeight,
-                // 基础外观
-                "relative overflow-hidden transition-all duration-300 ease-out",
-                "bg-[var(--bg)] text-[var(--text)] border border-[var(--border)]",
-                // 阴影与悬停
-                (hoverable || clickable) && "hover:-translate-y-1 hover:scale-[1.01]",
-                (hoverable || clickable) && "hover:shadow-xl",
-                clickable && "cursor-pointer",
-                // 玻璃态
-                glass && "backdrop-blur-md",
+                'relative overflow-hidden transition-all duration-300 ease-out',
+                'bg-[var(--bg)] text-[var(--text)] border border-[var(--border)]',
+                (hoverable || clickable) && buildInteractionClasses({ kind: 'card', enabled: true }),
+                clickable && 'cursor-pointer',
+                glass && 'backdrop-blur-md',
                 className
             )}
             style={cardStyle}
             onClick={onClick}
-            role={clickable ? "button" : undefined}
+            role={clickable ? 'button' : undefined}
             tabIndex={clickable ? 0 : undefined}
         >
             {hasImage && imagePosition === "background" && (
@@ -212,34 +211,31 @@ function MyCard({
                 </div>
             )}
 
-            <div
+            <CardBody
                 className={clsx(
-                    "card-content-area",
+                    'card-content-area',
                     sizeConfig.padding,
-                    { "flex-1": isHorizontal, "relative z-10": imagePosition === "background" }
+                    sizeConfig.spacing,
+                    { 'flex-1': isHorizontal, 'relative z-10': imagePosition === 'background' }
                 )}
             >
-                <div className={sizeConfig.spacing}>
-                    {tags && tags.length > 0 && <CardTags tags={tags} />}
-                    {title && (
-                        <h3 className={clsx("font-bold text-[var(--text)]", sizeConfig.titleSize)}>{title}</h3>
-                    )}
-                    {content && !children && (
-                        <div className={clsx("text-[var(--text)]/85", sizeConfig.contentSize)}>
-                            {content}
-                        </div>
-                    )}
-                    {children && <div className="mt-3">{children}</div>}
-                    {actions && <div className="flex gap-2 mt-4">{actions}</div>}
-                </div>
-            </div>
+                {tags && tags.length > 0 && <CardTags tags={tags} />}
+                {title && (
+                    <h3 className={clsx('font-bold text-[var(--text)]', sizeConfig.titleSize)}>{title}</h3>
+                )}
+                {content && !children && (
+                    <div className={clsx('text-[var(--text)]/85', sizeConfig.contentSize)}>{content}</div>
+                )}
+                {children && <div className="mt-3">{children}</div>}
+                {actions && <div className="flex gap-2 mt-4">{actions}</div>}
+            </CardBody>
 
             {footer && (
                 <div className={clsx("card-footer", sizeConfig.borderRadius.replace('rounded-', 'rounded-b-'))}>
                     {footer}
                 </div>
             )}
-        </div>
+        </CardContainer>
     );
 }
 

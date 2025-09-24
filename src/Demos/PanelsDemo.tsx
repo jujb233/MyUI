@@ -56,6 +56,32 @@ const PanelsDemo = () => {
                     </div>
                 </section>
 
+                {/* 交互 & Elevation 对比 */}
+                <section className="mt-12">
+                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">交互与投影 (Elevation)</h2>
+                    <p className="text-gray-600 dark:text-gray-300 mb-6">
+                        面板在不同投影与玻璃态下的层次差异。玻璃态更柔和，实体投影更强调浮起感。
+                    </p>
+                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {(['sm', 'md', 'lg'] as const).map(sh => (
+                            <MyPanel key={sh} shadow={sh} glass={false} color="gray" size="small">
+                                <h4 className="font-semibold mb-1">实体 shadow={sh}</h4>
+                                <p className="text-sm opacity-80">glass=false</p>
+                            </MyPanel>
+                        ))}
+                        {(['sm', 'md', 'lg'] as const).map(sh => (
+                            <MyPanel key={`g-${sh}`} shadow={sh} glass color="gray" size="small">
+                                <h4 className="font-semibold mb-1">玻璃 {sh}</h4>
+                                <p className="text-sm opacity-80">glass=true</p>
+                            </MyPanel>
+                        ))}
+                        <MyPanel size="small" color="#6366f1">
+                            <h4 className="font-semibold mb-1">自定义 Hex</h4>
+                            <p className="text-sm opacity-80">color="#6366f1"</p>
+                        </MyPanel>
+                    </div>
+                </section>
+
                 {/* 场景四: 视觉叙事与装饰 */}
                 <section className="mt-12">
                     <h2 className="text-3xl font-bold mb-4 border-l-4 border-purple-500 pl-4">场景四：视觉叙事与装饰</h2>

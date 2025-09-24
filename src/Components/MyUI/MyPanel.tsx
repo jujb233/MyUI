@@ -2,9 +2,8 @@ import React from "react";
 import clsx from "clsx";
 import {
     SIZE_CONFIG,
-    SHADOWS,
-    GLASS_SHADOWS,
-    resolveTheme,
+    useComponentTheme,
+    buildInteractionClasses,
     type VariantName,
     type ColorPresetName,
     type SizeName,
@@ -76,16 +75,13 @@ function MyPanel({
     title,
     backgroundImage,
 }: MyPanelProps) {
-    // 1. 解析主题
-    const theme = resolveTheme({ variant, color });
-
-    // 2. 获取尺寸样式
+    // 1. 尺寸样式
     const sizeStyle = SIZE_CONFIG[size];
-
-    // 3. 计算内联样式
+    // 2. 主题与投影
+    const { style: themedStyle } = useComponentTheme({ variant, color, glass, shadow, elevationKind: 'panel' });
+    // 3. 内联样式
     const panelStyle: React.CSSProperties = {
-        ...theme,
-        boxShadow: glass ? GLASS_SHADOWS.md : SHADOWS[shadow],
+        ...themedStyle,
         backgroundImage: backgroundImage ? `url(${backgroundImage})` : undefined,
     };
 
@@ -100,7 +96,7 @@ function MyPanel({
                 "transition-all duration-300 ease-out",
                 "bg-[var(--bg)] text-[var(--text)]",
                 // 交互
-                !disabled && "hover:shadow-lg",
+                !disabled && buildInteractionClasses({ kind: 'panel', enabled: true }),
                 // 玻璃态
                 glass && "backdrop-blur-md",
                 // 背景图片

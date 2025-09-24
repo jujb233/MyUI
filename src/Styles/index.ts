@@ -16,3 +16,13 @@ export { DEFAULT_STYLES, SHADOWS, GLASS_SHADOWS } from './styleConstants';
 // 可用的颜色和变体 (用于文档或 Storybook)
 export { COLOR_PRESET_NAMES } from './Themes/colorPresets';
 export { VARIANTS, DEFAULT_VARIANT_COLOR } from './colorThemes';
+
+// 变体行为配置
+export { VARIANT_BEHAVIORS, type VariantBehavior } from './variantBehaviors';
+
+// Hooks
+export { useComponentTheme } from './hooks';
+
+// Elevation & Interaction
+export { resolveElevation } from './elevation';
+export { buildInteractionClasses } from './interactionBehaviors';

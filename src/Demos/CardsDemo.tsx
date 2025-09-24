@@ -8,7 +8,7 @@ const CardsDemo = () => {
             backgroundImage="/demo.png"
             className="p-4 md:p-8 min-h-screen rounded-none"
         >
-            <MyPanel color="zinc" className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
+            <MyPanel color="gray" className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
                 <header className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold tracking-tight mb-2 text-white">MyCard 组件</h1>
                     <p className="text-lg text-gray-300">探索 MyCard 组件的多种用途和灵活性。</p>
@@ -99,6 +99,21 @@ const CardsDemo = () => {
                                 className="w-80"
                             />
                         </div>
+                    </MyPanel>
+                </section>
+
+                {/* Elevation 与玻璃态对比 */}
+                <section className="mb-12">
+                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">投影与玻璃态对比</h2>
+                    <p className="text-gray-300 mb-6">不同 <code>shadow</code> 等级与 <code>glass</code> 组合在卡片组件上的表现：</p>
+                    <MyPanel glass className="p-6 rounded-lg grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {(['sm', 'md', 'lg'] as const).map(sh => (
+                            <MyCard key={sh} title={`shadow=${sh}`} content="实体投影" shadow={sh} glass={false} />
+                        ))}
+                        {(['sm', 'md', 'lg'] as const).map(sh => (
+                            <MyCard key={`g-${sh}`} title={`glass + ${sh}`} content="玻璃态" shadow={sh} glass />
+                        ))}
+                        <MyCard title="Hex 主题" content="#6366f1 自定义色" color="#6366f1" />
                     </MyPanel>
                 </section>
 

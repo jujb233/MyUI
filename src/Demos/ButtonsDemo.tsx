@@ -4,11 +4,8 @@ import { VARIANTS } from "../Styles";
 
 const ButtonsDemo = () => {
     return (
-        <MyPanel
-            backgroundImage="/demo.png"
-            className="p-4 md:p-8 min-h-screen rounded-none"
-        >
-            <MyPanel color="zinc" className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
+        <MyPanel backgroundImage="/demo.png" className="p-4 md:p-8 min-h-screen rounded-none">
+            <MyPanel color="gray" className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
                 <header className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold tracking-tight mb-2 text-white">MyButton 组件</h1>
                     <p className="text-lg text-gray-300">全面的按钮集合，满足您在不同场景下的需求。</p>
@@ -63,6 +60,43 @@ const ButtonsDemo = () => {
                     </section>
                 </div>
 
+
+                {/* 交互与 Elevation */}
+                <section className="mb-12">
+                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">交互与投影 (Elevation)</h2>
+                    <p className="text-gray-300 mb-6">
+                        统一的交互系统为按钮提供一致的 <code>hover</code> / <code>active</code> 缩放动画。通过 <code>glass</code> 与 <code>shadow</code> 组合可以展示不同的深度层次。
+                    </p>
+                    <MyPanel glass className="p-6 rounded-lg space-y-6">
+                        <div>
+                            <h3 className="font-semibold mb-3">实体阴影 (glass={'{false}'})</h3>
+                            <div className="flex flex-wrap gap-4">
+                                {(['sm', 'md', 'lg', 'xl'] as const).map(s => (
+                                    <MyButton key={s} shadow={s} glass={false} variant="primary" color="blue">
+                                        shadow={s}
+                                    </MyButton>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold mb-3">玻璃态默认投影</h3>
+                            <div className="flex flex-wrap gap-4">
+                                {(['primary', 'secondary', 'danger'] as const).map(v => (
+                                    <MyButton key={v} variant={v} glass>
+                                        {v}
+                                    </MyButton>
+                                ))}
+                            </div>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold mb-3">Link 变体交互</h3>
+                            <div className="flex gap-4">
+                                <MyButton variant="link" color="blue">普通 Link</MyButton>
+                                <MyButton variant="link" color="#6366f1">自定义 Hex</MyButton>
+                            </div>
+                        </div>
+                    </MyPanel>
+                </section>
 
                 {/* 特殊状态: 玻璃拟态与禁用 */}
                 <section>

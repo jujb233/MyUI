@@ -4,8 +4,9 @@ import {
     SIZE_CONFIG,
     DEFAULT_STYLES,
     SHADOWS,
-    GLASS_SHADOWS,
-    resolveTheme,
+    VARIANT_BEHAVIORS,
+    useComponentTheme,
+    buildInteractionClasses,
     type VariantName,
     type ColorPresetName,
     type SizeName,
@@ -73,22 +74,22 @@ function MyButton({
     glass = true,
     shadow = "sm",
 }: MyButtonProps) {
-    // 1. 解析主题
-    const theme = resolveTheme({ variant, color });
-
-    // 2. 获取尺寸样式
+    // 1. 获取尺寸样式
     const sizeStyle = SIZE_CONFIG[size];
+    // 2. 主题与投影
+    const { style: themedStyle } = useComponentTheme({ variant, color, glass, shadow, disabled, elevationKind: 'button' });
 
-    // 3. 计算内联样式
+    // 3. 合并禁用态覆盖（特定于按钮）
     const buttonStyle: React.CSSProperties = {
-        ...theme, // 应用主题变量
-        boxShadow: glass ? GLASS_SHADOWS.md : SHADOWS[shadow],
+        ...themedStyle,
         ...(disabled && {
             background: DEFAULT_STYLES.disabled.background,
             color: DEFAULT_STYLES.disabled.color,
-            boxShadow: SHADOWS.none,
         }),
     };
+
+    // 4. 变体行为额外类
+    const variantBehavior = VARIANT_BEHAVIORS[variant]?.button?.classes;
 
     return (
         <button
@@ -104,16 +105,16 @@ function MyButton({
                 "inline-flex items-center justify-center select-none relative overflow-hidden",
                 "rounded-xl font-semibold tracking-wide border border-transparent",
                 "transition-all duration-200 ease-out will-change-transform",
-                // 状态 & 交互动画 (禁用时不缩放)
-                "hover:scale-[1.02] active:scale-95 disabled:hover:scale-100 disabled:active:scale-100",
+                // 统一交互行为
+                buildInteractionClasses({ kind: 'button', enabled: !disabled }),
                 // 光标 & 禁用态
                 "disabled:opacity-60 disabled:cursor-not-allowed",
                 // 焦点环
                 "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
                 // 玻璃态
                 glass && !disabled && "backdrop-blur-md border",
-                // link 变体的细化
-                variant === "link" && "underline-offset-4 hover:-translate-y-0.5 shadow-sm",
+                // 变体行为注入
+                variantBehavior,
                 className
             )}
             style={buttonStyle}
