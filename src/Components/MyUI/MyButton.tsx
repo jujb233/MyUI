@@ -105,6 +105,11 @@ function MyButton({
                 "inline-flex items-center justify-center select-none relative overflow-hidden",
                 "rounded-xl font-semibold tracking-wide border border-transparent",
                 "transition-all duration-200 ease-out will-change-transform",
+                // 主题颜色 (使用自定义属性驱动的渐变/颜色)
+                glass
+                    ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
+                    : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
+                'text-[var(--text)]',
                 // 统一交互行为
                 buildInteractionClasses({ kind: 'button', enabled: !disabled }),
                 // 光标 & 禁用态

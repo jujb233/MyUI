@@ -94,7 +94,7 @@ function MyPanel({
                 sizeStyle.fontSize,
                 // 视觉
                 "transition-all duration-300 ease-out",
-                "bg-[var(--bg)] text-[var(--text)]",
+                "[background:var(--bg)] hover:[background:var(--bg-hover)] text-[var(--text)]",
                 // 交互
                 !disabled && buildInteractionClasses({ kind: 'panel', enabled: true }),
                 // 玻璃态
