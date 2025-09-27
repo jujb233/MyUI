@@ -19,11 +19,13 @@
 
 ### 2. 组件级主题配置
 
-每个组件可通过 `variant`、`color` 属性快速切换主题：
+每个组件可通过 `variant`（强度）与 `color`（色调）快速组合主题：
 
 ```tsx
-<MyButton variant="primary" color="#00bfae" />
-<MyCard variant="glass" color="gradient-blue" />
+// 强烈的蓝色按钮（主要操作）
+<MyButton variant="solid" color="blue" />
+// 柔和的蓝色卡片（容器/背景）
+<MyCard variant="soft" color="blue" />
 ```
 
 ### 3. 高级主题解析
@@ -32,21 +34,21 @@
 
 ```tsx
 import { resolveTheme } from 'myui/styles';
-const theme = resolveTheme({ variant: 'primary', color: 'teal' });
+const theme = resolveTheme({ variant: 'solid', color: 'teal' });
 <div style={{ ...theme }}>内容</div>
 ```
 
 ## 常用配置示例
 
-- 预设色：`color="primary"`、`color="danger"`
-- 渐变色：`color="gradient-blue"`
-- 玻璃拟态：`variant="glass"`
+- 预设色：`color="blue"`、`color="red"`
+- 十六进制：`color="#6366f1"`
+- 玻璃拟态：`glass={true}`
 - 阴影：`shadow="lg"`
 
 ## 进阶技巧
 
-- 通过 `src/styles/themes/colorPresets.ts` 添加自定义色。
-- 修改 `src/styles/themes/themeBuilder.ts` 扩展主题逻辑。
+- 通过 `src/Styles/Themes/colorPresets.ts` 添加自定义色。
+- 修改 `src/Styles/Themes/themeBuilder.ts` 扩展主题逻辑（可用 `buildThemeByIntensity`）。
 - 结合 CSS 变量与 React props 实现多层次主题。
 
 更多高级配置请参考源码或 DEMOS.md。

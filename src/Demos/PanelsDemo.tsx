@@ -1,5 +1,5 @@
-import MyPanel from "../Components/MyUI/MyPanel";
-import MyButton from "../Components/MyUI/MyButton";
+import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
+import MyButton from "../Components/MyUI/MyButton/MyButton";
 
 const PanelsDemo = () => {
     return (
@@ -29,10 +29,10 @@ const PanelsDemo = () => {
                 <section className="mt-12">
                     <h2 className="text-3xl font-bold mb-4 border-l-4 border-green-500 pl-4">场景二：突出重要信息</h2>
                     <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        使用 <code>variant="primary"</code> 和 <code>color</code> 属性，可以将面板变成一个醒目的行动号召 (Call to Action) 区域或重要通知。
+                        使用 <code>variant="solid"</code> 和 <code>color</code> 属性，可以将面板变成一个醒目的行动号召 (Call to Action) 区域或重要通知。
                     </p>
                     <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel variant="primary" size="large" color="blue">
+                        <MyPanel variant="solid" size="large" color="blue">
                             <h3 className="font-bold text-xl mb-2">升级到高级版</h3>
                             <p>解锁所有高级功能，享受无限制的创作体验。</p>
                             <div className="mt-4">

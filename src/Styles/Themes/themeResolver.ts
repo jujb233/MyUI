@@ -1,6 +1,6 @@
-import { DEFAULT_VARIANT_COLOR, type VariantName } from "../colorThemes";
+import { DEFAULT_BASE_COLOR, type VariantName } from "../colorThemes";
 import { type ColorPresetName, PRESET_CARD_THEMES, PRESET_THEMES } from "./colorPresets";
-import { buildCardTheme, buildTheme, type ComponentTheme } from "./themeBuilder";
+import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
 import { adjustHex, isHexColor } from "../Utils/colorUtils";
 
 export type ThemeResolverParams = {
@@ -21,29 +21,23 @@ export type ThemeResolverParams = {
  * @returns `ComponentTheme` 对象
  */
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { variant = 'normal', color, isCard = false } = params;
+    const { variant = 'solid', color, isCard = false } = params;
     const presetThemes = isCard ? PRESET_CARD_THEMES : PRESET_THEMES;
 
-    let themeColor: ColorPresetName | string | undefined = color;
+    let themeColor: ColorPresetName | string | undefined = color ?? DEFAULT_BASE_COLOR;
 
-    // 如果没有 color，则根据 variant 查找默认 color
-    if (!themeColor) {
-        themeColor = DEFAULT_VARIANT_COLOR[variant];
+    // 1) 预设名称：返回嵌套结构的对应强度
+    if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
+        return presetThemes[themeColor as ColorPresetName][variant];
     }
 
-    // 检查 themeColor 是否为预设名称
-    if (themeColor && themeColor in presetThemes) {
-        return presetThemes[themeColor as ColorPresetName];
-    }
-
-    // 检查 themeColor 是否为十六进制颜色
+    // 2) 十六进制颜色：按强度构建
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
         const from = themeColor;
         const to = adjustHex(themeColor, -12);
-        return isCard ? buildCardTheme(from, to) : buildTheme(from, to);
+        return buildThemeByIntensity(from, to, variant, { isCard });
     }
 
-    // 兜底方案：返回 normal 变体的默认主题
-    const fallbackColor = DEFAULT_VARIANT_COLOR['normal'];
-    return presetThemes[fallbackColor];
+    // 3) 兜底：默认基色 + 指定强度
+    return presetThemes[DEFAULT_BASE_COLOR][variant];
 };

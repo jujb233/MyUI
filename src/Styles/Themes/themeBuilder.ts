@@ -25,6 +25,8 @@ export interface ComponentTheme {
 
 const gradient = (from: string, to: string) => `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
 
+export type IntensityVariant = 'solid' | 'soft' | 'subtle' | 'text';
+
 /**
  * 从一对颜色构建组件主题
  * @param from - 渐变起始色
@@ -61,4 +63,82 @@ export const buildCardTheme = (from: string, to: string, text?: string): Compone
         '--bg-hover': gradient(adjustHex(from, 75), adjustHex(to, 85)),
         '--border': alphaFromHex(from, 0.3),
     };
+};
+
+/**
+ * 基于“强度变体”从基色构建主题。
+ * 变体=强度，颜色=色调。
+ */
+export const buildThemeByIntensity = (
+    from: string,
+    to: string,
+    variant: IntensityVariant,
+    opts?: { isCard?: boolean }
+): ComponentTheme => {
+    const isCard = opts?.isCard ?? false;
+
+    const make = (bg: { from: string; to: string }, cfg: { text?: string; border?: string; focusA?: number; glassA?: { base: number; hover: number; border: number } }): ComponentTheme => {
+        const textColor = cfg.text ?? yiqTextColor(bg.to);
+        const focusRing = alphaFromHex(to, cfg.focusA ?? 0.5);
+
+        const base: ComponentTheme = {
+            '--bg': gradient(bg.from, bg.to),
+            '--bg-hover': gradient(adjustHex(bg.from, -6), adjustHex(bg.to, -6)),
+            '--text': textColor,
+            '--border': cfg.border ?? 'transparent',
+            '--focus-ring': focusRing,
+            '--glass-bg': gradient(alphaFromHex(from, cfg.glassA?.base ?? 0.15), alphaFromHex(to, cfg.glassA?.base ?? 0.15)),
+            '--glass-bg-hover': gradient(alphaFromHex(from, cfg.glassA?.hover ?? 0.25), alphaFromHex(to, cfg.glassA?.hover ?? 0.25)),
+            '--glass-border': alphaFromHex(from, cfg.glassA?.border ?? 0.2),
+        };
+
+        if (isCard) {
+            return {
+                ...base,
+                '--bg': gradient(adjustHex(bg.from, 80), adjustHex(bg.to, 90)),
+                '--bg-hover': gradient(adjustHex(bg.from, 75), adjustHex(bg.to, 85)),
+                '--border': cfg.border ?? alphaFromHex(from, 0.3),
+            };
+        }
+
+        return base;
+    };
+
+    switch (variant) {
+        case 'solid':
+            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } });
+        case 'soft':
+            return make(
+                { from: alphaFromHex(from, 0.2), to: alphaFromHex(to, 0.2) },
+                {
+                    text: to, // 采用基色作为文本色，营造中等对比
+                    border: alphaFromHex(from, 0.3),
+                    focusA: 0.35,
+                    glassA: { base: 0.12, hover: 0.18, border: 0.18 },
+                }
+            );
+        case 'subtle':
+            return make(
+                { from: alphaFromHex(from, 0.08), to: alphaFromHex(to, 0.08) },
+                {
+                    text: '#1f2937', // 低对比背景，采用中性深文本
+                    border: alphaFromHex(from, 0.22),
+                    focusA: 0.25,
+                    glassA: { base: 0.08, hover: 0.12, border: 0.12 },
+                }
+            );
+        case 'text':
+            return {
+                '--bg': 'transparent',
+                '--bg-hover': alphaFromHex(to, 0.06), // 轻微悬停反馈
+                '--text': to,
+                '--border': 'transparent',
+                '--focus-ring': alphaFromHex(to, 0.4),
+                '--glass-bg': 'transparent',
+                '--glass-bg-hover': alphaFromHex(to, 0.06),
+                '--glass-border': 'transparent',
+            };
+        default:
+            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } });
+    }
 };

@@ -18,17 +18,14 @@ export interface VariantBehavior {
 }
 
 export const VARIANT_BEHAVIORS: Record<VariantName, VariantBehavior> = {
-    primary: {},
-    secondary: {},
-    danger: {},
-    normal: {},
-    link: {
+    solid: {},
+    soft: {},
+    subtle: {},
+    text: {
         button: {
             classes: [
-                // 下划线交互 + 轻微浮动阴影
                 'underline underline-offset-4',
                 'hover:-translate-y-0.5 shadow-sm',
-                // 链接型按钮通常不需要过度缩放
                 'hover:scale-100 active:scale-100'
             ].join(' '),
         },

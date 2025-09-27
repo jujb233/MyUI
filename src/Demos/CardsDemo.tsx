@@ -1,6 +1,6 @@
 import MyCard from "../Components/MyUI/MyCard";
-import MyButton from "../Components/MyUI/MyButton";
-import MyPanel from "../Components/MyUI/MyPanel";
+import MyButton from "../Components/MyUI/MyButton/MyButton";
+import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
 
 const CardsDemo = () => {
     return (
@@ -32,8 +32,8 @@ const CardsDemo = () => {
                             <MyCard.Content>前端开发者，热衷于构建美观且实用的用户界面。</MyCard.Content>
                             <MyCard.Footer>
                                 <div className="flex justify-end space-x-2">
-                                    <MyButton size="small" variant="link" color="blue">查看主页</MyButton>
-                                    <MyButton size="small" variant="primary">关注</MyButton>
+                                    <MyButton size="small" variant="text" color="blue">查看主页</MyButton>
+                                    <MyButton size="small" variant="solid">关注</MyButton>
                                 </div>
                             </MyCard.Footer>
                         </MyCard>
@@ -54,7 +54,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>构建下一代UI组件库</MyCard.Header>
                                 <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="link" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                             <MyCard>
@@ -63,7 +63,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>设计系统中的色彩哲学</MyCard.Header>
                                 <MyCard.Content>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="link" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                             <MyCard>
@@ -72,7 +72,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>前端性能优化实战</MyCard.Header>
                                 <MyCard.Content>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="link" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                         </div>

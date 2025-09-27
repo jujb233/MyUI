@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import type { MyButtonProps } from "../MyButton";
+import type { MyButtonProps } from "./MyButton";
 
 export type ButtonContextType = Omit<MyButtonProps, "children" | "className" | "onClick">;
 

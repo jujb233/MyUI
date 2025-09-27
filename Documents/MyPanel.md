@@ -2,7 +2,7 @@
 
 # MyPanel 教程
 
-`MyPanel` 是一个通用内容容器组件，适合分组、布局和展示任意内容，支持玻璃拟态、背景图、标题、底部扩展等。推荐结合 PanelHeader、PanelContent、PanelFooter 进行内容扩展。
+`MyPanel` 是一个通用内容容器组件，适合分组、布局和展示任意内容，支持玻璃材质、背景图、标题、底部扩展等。推荐结合 PanelHeader、PanelContent、PanelFooter 进行内容扩展。
 
 ## 快速开始
 
@@ -18,10 +18,10 @@ import { MyPanel, PanelHeader, PanelContent, PanelFooter } from 'myui';
 
 | 属性             | 类型                                 | 默认值      | 说明                   |
 |------------------|--------------------------------------|-------------|------------------------|
-| variant          | 'normal' | 'primary' | 'danger' 等    | 'normal'    | 面板风格               |
+| variant          | 'solid' | 'soft' | 'subtle' | 'text' | 'solid'    | 面板强度变体           |
 | color            | 预设色名或自定义色                   | 依赖 variant| 主题/自定义颜色        |
 | size             | 'small' | 'medium' | 'large'         | 'medium'    | 面板尺寸（内边距）     |
-| glass            | boolean                              | true        | 是否启用玻璃拟态效果   |
+| glass            | boolean                              | true        | 是否启用玻璃材质效果   |
 | shadow           | 'sm' | 'md' | 'lg' 等                | 'md'        | 面板阴影               |
 | disabled         | boolean                              | false       | 是否禁用               |
 | title            | string                               | -           | 标题（顶部显示）       |
@@ -35,7 +35,7 @@ import { MyPanel, PanelHeader, PanelContent, PanelFooter } from 'myui';
 ```tsx
 // 带背景图和标题的大面板，底部扩展
 <MyPanel 
-  variant="primary" 
+  variant="solid" 
   size="large"
   title="探索新世界"
   backgroundImage="/demo.png"

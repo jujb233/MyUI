@@ -27,3 +27,5 @@
 每个演示页面均有丰富示例和代码片段，适合边看边学。
 
 如需自定义演示，可修改 `src/Demos` 下相关文件。
+
+注意：示例使用新 API（variant 为强度：solid/soft/subtle/text；color 为色调或 HEX）。

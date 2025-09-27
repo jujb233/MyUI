@@ -9,7 +9,7 @@
 ```tsx
 import { MyCard, MyButton } from 'myui';
 
-<MyCard variant="primary" size="medium" glass>
+<MyCard variant="soft" color="blue" size="medium" glass>
   <MyCard.Image src="/demo.png" alt="示例图片" />
   <MyCard.Header>示例卡片</MyCard.Header>
   <MyCard.Content>这是一段内容。</MyCard.Content>
@@ -35,10 +35,10 @@ MyCard 支持以下核心属性：
 
 | 属性           | 类型                                 | 默认值      | 说明                   |
 |----------------|--------------------------------------|-------------|------------------------|
-| variant        | 主题名（如 'primary'）               | 'normal'    | 卡片风格               |
-| color          | 预设色名或自定义色                   | 依赖 variant| 主题/自定义颜色        |
+| variant        | 'solid' | 'soft' | 'subtle' | 'text' | 'soft'     | 强度变体               |
+| color          | 预设色名或十六进制                  | 'blue'      | 色调（与变体解耦）     |
 | size           | 'small' | 'medium' | 'large'         | 'medium'    | 卡片尺寸               |
-| glass          | boolean                              | true        | 是否启用玻璃拟态效果   |
+| glass          | boolean                              | true        | 是否启用玻璃材质效果   |
 | clickable      | boolean                              | false       | 是否可点击             |
 | shadow         | 阴影等级（如 'md'）                  | 'md'        | 卡片阴影               |
 | bordered       | boolean                              | true        | 是否显示边框           |

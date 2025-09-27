@@ -20,7 +20,7 @@ export type UseMyCardProps = {
 
 export function useMyCard(props: UseMyCardProps) {
     const {
-        variant = "normal",
+        variant = "solid",
         color,
         size = "medium",
         glass = true,

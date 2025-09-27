@@ -1,4 +1,5 @@
-import { buildCardTheme, buildTheme, type ComponentTheme } from "./themeBuilder";
+import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
+import { VARIANTS, type VariantName } from "../colorThemes";
 
 /**
  * 定义颜色预设的渐变起止点
@@ -32,17 +33,34 @@ export type ColorPresetName = keyof typeof COLOR_PRESET_STOPS;
 export const COLOR_PRESET_NAMES = Object.keys(COLOR_PRESET_STOPS) as ColorPresetName[];
 
 /**
- * 从预设的起止点构建标准组件主题
+ * 嵌套预设：每个颜色拥有四种强度变体的完整主题。
+ * PRESET_THEMES[color][variant]
  */
-export const PRESET_THEMES: Record<ColorPresetName, ComponentTheme> =
+export const PRESET_THEMES: Record<ColorPresetName, Record<VariantName, ComponentTheme>> =
     Object.fromEntries(
-        Object.entries(COLOR_PRESET_STOPS).map(([k, v]) => [k, buildTheme(v.from, v.to)])
-    ) as Record<ColorPresetName, ComponentTheme>;
+        Object.entries(COLOR_PRESET_STOPS).map(([color, stop]) => [
+            color,
+            Object.fromEntries(
+                (Array.from(VARIANTS) as VariantName[]).map((v) => [
+                    v,
+                    buildThemeByIntensity(stop.from, stop.to, v),
+                ])
+            ) as Record<VariantName, ComponentTheme>,
+        ])
+    ) as Record<ColorPresetName, Record<VariantName, ComponentTheme>>;
 
 /**
- * 从预设的起止点构建卡片专用主题
+ * 卡片专用主题，按强度构建更柔和的风格。
  */
-export const PRESET_CARD_THEMES: Record<ColorPresetName, ComponentTheme> =
+export const PRESET_CARD_THEMES: Record<ColorPresetName, Record<VariantName, ComponentTheme>> =
     Object.fromEntries(
-        Object.entries(COLOR_PRESET_STOPS).map(([k, v]) => [k, buildCardTheme(v.from, v.to)])
-    ) as Record<ColorPresetName, ComponentTheme>;
+        Object.entries(COLOR_PRESET_STOPS).map(([color, stop]) => [
+            color,
+            Object.fromEntries(
+                (Array.from(VARIANTS) as VariantName[]).map((v) => [
+                    v,
+                    buildThemeByIntensity(stop.from, stop.to, v, { isCard: true }),
+                ])
+            ) as Record<VariantName, ComponentTheme>,
+        ])
+    ) as Record<ColorPresetName, Record<VariantName, ComponentTheme>>;

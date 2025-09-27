@@ -13,7 +13,7 @@ export type UseComponentStyleProps = {
 
 export function useComponentStyle(props: UseComponentStyleProps) {
     const {
-        variant = "normal",
+        variant = "solid",
         color,
         glass = true,
         bordered = true,

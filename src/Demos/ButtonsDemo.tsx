@@ -1,5 +1,5 @@
-import MyButton from "../Components/MyUI/MyButton";
-import MyPanel from "../Components/MyUI/MyPanel";
+import MyButton from "../Components/MyUI/MyButton/MyButton";
+import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
 import { VARIANTS } from "../Styles";
 
 const ButtonsDemo = () => {
@@ -39,10 +39,10 @@ const ButtonsDemo = () => {
                         使用 <code>color</code> 属性为按钮赋予不同的情感和语义。
                     </p>
                     <MyPanel glass className="p-6 rounded-lg flex flex-wrap justify-center gap-6">
-                        <MyButton color="green" variant="primary">保存成功</MyButton>
-                        <MyButton color="red" variant="primary">删除警告</MyButton>
-                        <MyButton color="amber" variant="primary">操作确认</MyButton>
-                        <MyButton color="blue" variant="primary">常规操作</MyButton>
+                        <MyButton color="green" variant="solid">保存成功</MyButton>
+                        <MyButton color="red" variant="solid">删除警告</MyButton>
+                        <MyButton color="amber" variant="solid">操作确认</MyButton>
+                        <MyButton color="blue" variant="solid">常规操作</MyButton>
                     </MyPanel>
                 </section>
 
@@ -72,7 +72,7 @@ const ButtonsDemo = () => {
                         <h3 className="font-semibold mb-3">实体阴影 (glass={'{false}'})</h3>
                         <div className="flex flex-wrap gap-4">
                             {(['sm', 'md', 'lg', 'xl'] as const).map(s => (
-                                <MyButton key={s} shadow={s} glass={false} variant="primary" color="blue">
+                                <MyButton key={s} shadow={s} glass={false} variant="solid" color="blue">
                                     shadow={s}
                                 </MyButton>
                             ))}
@@ -81,7 +81,7 @@ const ButtonsDemo = () => {
                     <div>
                         <h3 className="font-semibold mb-3">玻璃态默认投影</h3>
                         <div className="flex flex-wrap gap-4">
-                            {(['primary', 'secondary', 'danger'] as const).map(v => (
+                            {(['solid', 'soft', 'subtle'] as const).map(v => (
                                 <MyButton key={v} variant={v} glass>
                                     {v}
                                 </MyButton>
@@ -89,10 +89,10 @@ const ButtonsDemo = () => {
                         </div>
                     </div>
                     <div>
-                        <h3 className="font-semibold mb-3">Link 变体交互</h3>
+                        <h3 className="font-semibold mb-3">Text 变体交互</h3>
                         <div className="flex gap-4">
-                            <MyButton variant="link" color="blue">普通 Link</MyButton>
-                            <MyButton variant="link" color="#6366f1">自定义 Hex</MyButton>
+                            <MyButton variant="text" color="blue">普通 Text</MyButton>
+                            <MyButton variant="text" color="#6366f1">自定义 Hex</MyButton>
                         </div>
                     </div>
                 </MyPanel>
