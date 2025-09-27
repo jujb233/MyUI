@@ -49,18 +49,3 @@ export const PRESET_THEMES: Record<ColorPresetName, Record<VariantName, Componen
         ])
     ) as Record<ColorPresetName, Record<VariantName, ComponentTheme>>;
 
-/**
- * 卡片专用主题，按强度构建更柔和的风格。
- */
-export const PRESET_CARD_THEMES: Record<ColorPresetName, Record<VariantName, ComponentTheme>> =
-    Object.fromEntries(
-        Object.entries(COLOR_PRESET_STOPS).map(([color, stop]) => [
-            color,
-            Object.fromEntries(
-                (Array.from(VARIANTS) as VariantName[]).map((v) => [
-                    v,
-                    buildThemeByIntensity(stop.from, stop.to, v, { isCard: true }),
-                ])
-            ) as Record<VariantName, ComponentTheme>,
-        ])
-    ) as Record<ColorPresetName, Record<VariantName, ComponentTheme>>;

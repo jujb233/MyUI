@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useComponentTheme, type VariantName, type ColorPresetName, type ShadowName } from "../Styles";
+import type { ElevationKind } from "../Styles";
 
 /**
  * @description `useComponentStyle` 的属性
@@ -33,12 +34,7 @@ export type UseComponentStyleProps = {
      * @description 海拔效果类型
      * @default "card"
      */
-    elevationKind?: any;
-    /**
-     * @description 是否为卡片组件
-     * @default false
-     */
-    isCard?: boolean;
+    elevationKind?: ElevationKind;
 };
 
 /**
@@ -54,7 +50,6 @@ export function useComponentStyle(props: UseComponentStyleProps) {
         bordered = true,
         shadow = "md",
         elevationKind = "card",
-        isCard = false,
     } = props;
 
     const { style: themedStyle, theme } = useComponentTheme({
@@ -62,7 +57,6 @@ export function useComponentStyle(props: UseComponentStyleProps) {
         color,
         glass,
         shadow,
-        isCard,
         elevationKind,
     });
 

@@ -1,12 +1,11 @@
 import { DEFAULT_BASE_COLOR, type VariantName } from "../colorThemes";
-import { type ColorPresetName, PRESET_CARD_THEMES, PRESET_THEMES } from "./colorPresets";
+import { type ColorPresetName, PRESET_THEMES } from "./colorPresets";
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
 import { adjustHex, isHexColor } from "../Utils/colorUtils";
 
 export type ThemeResolverParams = {
     variant?: VariantName;
     color?: ColorPresetName | string; // 允许自定义十六进制颜色
-    isCard?: boolean;
 };
 
 /**
@@ -21,8 +20,8 @@ export type ThemeResolverParams = {
  * @returns `ComponentTheme` 对象
  */
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { variant = 'solid', color, isCard = false } = params;
-    const presetThemes = isCard ? PRESET_CARD_THEMES : PRESET_THEMES;
+    const { variant = 'solid', color } = params;
+    const presetThemes = PRESET_THEMES;
 
     let themeColor: ColorPresetName | string | undefined = color ?? DEFAULT_BASE_COLOR;
 
@@ -35,7 +34,7 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
         const from = themeColor;
         const to = adjustHex(themeColor, -12);
-        return buildThemeByIntensity(from, to, variant, { isCard });
+        return buildThemeByIntensity(from, to, variant);
     }
 
     // 3) 兜底：默认基色 + 指定强度

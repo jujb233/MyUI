@@ -20,9 +20,11 @@ export { VARIANTS, DEFAULT_BASE_COLOR } from './colorThemes';
 // 变体行为配置
 export { VARIANT_BEHAVIORS, type VariantBehavior } from './variantBehaviors';
 
-// Hooks
-export { useComponentTheme } from './hooks';
+// Hooks & utils
+export { useComponentTheme } from './Utils/useComponentTheme';
+export { computeComponentTheme, type ComponentThemeParams, type ComponentThemeResult } from './Utils/componentTheme';
 
 // Elevation & Interaction
 export { resolveElevation } from './elevation';
+export type { ElevationKind } from './elevation';
 export { buildInteractionClasses } from './interactionBehaviors';

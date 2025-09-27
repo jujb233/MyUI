@@ -36,7 +36,6 @@ export function useMyPanel(props: UseMyPanelProps) {
         bordered: true,
         shadow,
         elevationKind: 'panel',
-        isCard: glass,
     });
 
     const panelStyle: React.CSSProperties = {

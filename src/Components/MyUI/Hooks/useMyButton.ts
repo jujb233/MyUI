@@ -26,7 +26,6 @@ export function useMyButton(props: UseMyButtonProps) {
 
     const sizeStyle = SIZE_CONFIG[size];
 
-    // 按钮不需要边框样式由内联 style 控制，这里关闭 bordered
     const { style: themedStyle } = useComponentStyle({
         variant,
         color,
@@ -34,7 +33,6 @@ export function useMyButton(props: UseMyButtonProps) {
         bordered: false,
         shadow,
         elevationKind: "button",
-        isCard: false,
     });
 
     const buttonStyle: React.CSSProperties = {

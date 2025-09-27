@@ -53,30 +53,14 @@ export const buildTheme = (from: string, to: string, text?: string): ComponentTh
 };
 
 /**
- * 为卡片构建一个特殊的主题，具有更柔和的背景和边框
- */
-export const buildCardTheme = (from: string, to: string, text?: string): ComponentTheme => {
-    const base = buildTheme(from, to, text);
-    return {
-        ...base,
-        '--bg': gradient(adjustHex(from, 80), adjustHex(to, 90)), // 更浅的背景
-        '--bg-hover': gradient(adjustHex(from, 75), adjustHex(to, 85)),
-        '--border': alphaFromHex(from, 0.3),
-    };
-};
-
-/**
  * 基于“强度变体”从基色构建主题。
  * 变体=强度，颜色=色调。
  */
 export const buildThemeByIntensity = (
     from: string,
     to: string,
-    variant: IntensityVariant,
-    opts?: { isCard?: boolean }
+    variant: IntensityVariant
 ): ComponentTheme => {
-    const isCard = opts?.isCard ?? false;
-
     const make = (bg: { from: string; to: string }, cfg: { text?: string; border?: string; focusA?: number; glassA?: { base: number; hover: number; border: number } }): ComponentTheme => {
         const textColor = cfg.text ?? yiqTextColor(bg.to);
         const focusRing = alphaFromHex(to, cfg.focusA ?? 0.5);
@@ -91,15 +75,6 @@ export const buildThemeByIntensity = (
             '--glass-bg-hover': gradient(alphaFromHex(from, cfg.glassA?.hover ?? 0.25), alphaFromHex(to, cfg.glassA?.hover ?? 0.25)),
             '--glass-border': alphaFromHex(from, cfg.glassA?.border ?? 0.2),
         };
-
-        if (isCard) {
-            return {
-                ...base,
-                '--bg': gradient(adjustHex(bg.from, 80), adjustHex(bg.to, 90)),
-                '--bg-hover': gradient(adjustHex(bg.from, 75), adjustHex(bg.to, 85)),
-                '--border': cfg.border ?? alphaFromHex(from, 0.3),
-            };
-        }
 
         return base;
     };

@@ -41,7 +41,6 @@ export function useMyCard(props: UseMyCardProps) {
         glass,
         bordered,
         shadow,
-        isCard: true,
         elevationKind: "card",
     });
     const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage });
