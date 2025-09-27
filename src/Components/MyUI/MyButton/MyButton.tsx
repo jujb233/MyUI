@@ -1,8 +1,6 @@
 import React from "react";
 import {
-    VARIANT_BEHAVIORS,
-    type VariantName,
-    type ColorPresetName,
+    type ComponentVariant,
     type SizeName,
     type ShadowName,
 } from "../../../Styles";
@@ -14,8 +12,7 @@ import { useMyButton } from "../Hooks/useMyButton";
 
 export type MyButtonProps = {
     htmlType?: "button" | "submit" | "reset";
-    variant?: VariantName;
-    color?: ColorPresetName | string;
+    variant?: ComponentVariant;
     size?: SizeName;
     disabled?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
@@ -29,8 +26,7 @@ export type MyButtonProps = {
 
 function MyButton({
     htmlType = "button",
-    variant = "solid",
-    color,
+    variant,
     size = "medium",
     disabled = false,
     onClick,
@@ -41,16 +37,15 @@ function MyButton({
     icon,
     actions,
 }: MyButtonProps) {
-    const { buttonStyle, buttonClasses } = useMyButton({ variant, color, size, glass, shadow, disabled, className });
-    const variantBehavior = VARIANT_BEHAVIORS[variant]?.button?.classes;
+    const { buttonStyle, buttonClasses } = useMyButton({ variant, size, glass, shadow, disabled, className });
 
     return (
-        <ButtonProvider value={{ variant, color, size, glass, shadow, disabled }}>
+        <ButtonProvider value={{ variant, size, glass, shadow, disabled }}>
             <button
                 type={htmlType}
                 disabled={disabled}
                 onClick={onClick}
-                className={[buttonClasses, variantBehavior].filter(Boolean).join(" ")}
+                className={buttonClasses}
                 style={buttonStyle}
             >
                 {icon && <ButtonIcon icon={icon} />}

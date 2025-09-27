@@ -1,11 +1,10 @@
-import { SIZE_CONFIG, type VariantName, type ColorPresetName, type SizeName, type ShadowName, DEFAULT_STYLES, buildInteractionClasses } from "../../../Styles";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Styles";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import clsx from "clsx";
 
 export type UseMyButtonProps = {
-    htmlType?: "button" | "submit" | "reset"; // 仅透传给组件，不参与样式计算
-    variant?: VariantName;
-    color?: ColorPresetName | string;
+    htmlType?: "button" | "submit" | "reset";
+    variant?: ComponentVariant;
     size?: SizeName;
     disabled?: boolean;
     className?: string;
@@ -15,8 +14,7 @@ export type UseMyButtonProps = {
 
 export function useMyButton(props: UseMyButtonProps) {
     const {
-        variant = "solid",
-        color,
+        variant: variantProp,
         size = "medium",
         disabled = false,
         className = "",
@@ -24,6 +22,12 @@ export function useMyButton(props: UseMyButtonProps) {
         shadow = "sm",
     } = props;
 
+    // 解析变体与颜色（与 Card/Panel 保持一致）
+    const role = variantProp?.role || 'primary';
+    const color = variantProp?.color || 'blue';
+    const variant = VARIANT_ROLE_STYLES[role] as any;
+
+    // 尺寸样式
     const sizeStyle = SIZE_CONFIG[size];
 
     const { style: themedStyle } = useComponentStyle({

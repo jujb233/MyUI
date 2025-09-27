@@ -54,7 +54,7 @@ export const CARD_SIZE_CONFIG = {
 /**
  * 尺寸类型
  */
-export type SizeConfig = typeof SIZE_CONFIG[keyof typeof SIZE_CONFIG]
+export type SizeStyle = typeof SIZE_CONFIG[keyof typeof SIZE_CONFIG]
 export type SizeName = keyof typeof SIZE_CONFIG
 export type CardSizeConfig = typeof CARD_SIZE_CONFIG[keyof typeof CARD_SIZE_CONFIG]
 export type CardSizeName = keyof typeof CARD_SIZE_CONFIG

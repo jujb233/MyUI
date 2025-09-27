@@ -1,11 +1,11 @@
-import { DEFAULT_BASE_COLOR, type VariantName } from "../colorThemes";
+import { DEFAULT_BASE_COLOR, type IntensityName } from "../colorThemes";
 import { type ColorPresetName, PRESET_THEMES } from "./colorPresets";
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
-import { adjustHex, isHexColor } from "../Utils/colorUtils";
+import { adjustColorBrightness, isHexColor } from "../Utils/colorUtils";
 
 export type ThemeResolverParams = {
-    variant?: VariantName;
-    color?: ColorPresetName | string; // 允许自定义十六进制颜色
+    variant?: IntensityName;
+    color?: ColorPresetName | string;
 };
 
 /**
@@ -33,10 +33,10 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
     // 2) 十六进制颜色：按强度构建
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
         const from = themeColor;
-        const to = adjustHex(themeColor, -12);
+        const to = adjustColorBrightness(themeColor, -12);
         return buildThemeByIntensity(from, to, variant);
     }
 
-    // 3) 兜底：默认基色 + 指定强度
+    // 3) 备用方案：默认颜色 + 指定强度
     return presetThemes[DEFAULT_BASE_COLOR][variant];
 };

@@ -4,7 +4,7 @@ import { SHADOWS, type ShadowName } from '../styleConstants';
 import { resolveElevation, type ElevationKind } from '../elevation';
 import type { ComponentTheme } from '../Themes/themeBuilder';
 
-export interface ComponentThemeParams extends ThemeResolverParams {
+export interface ThemeOptions extends ThemeResolverParams {
     glass?: boolean;
     shadow?: ShadowName;
     disabled?: boolean;
@@ -24,7 +24,7 @@ export interface ComponentThemeResult {
 /**
  * 纯函数：根据入参计算 theme、elevation 与最终 style（支持禁用与样式覆盖）。
  */
-export function computeComponentTheme(params: ComponentThemeParams): ComponentThemeResult {
+export function computeComponentTheme(params: ThemeOptions): ComponentThemeResult {
     const {
         glass = true,
         shadow = 'md',

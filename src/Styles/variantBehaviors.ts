@@ -1,35 +1,38 @@
-import type { VariantName } from './colorThemes';
+/**
+ * 定义组件可用的具体颜色。
+ */
+export type Color = 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'gray';
 
 /**
- * 变体行为配置
- * 将组件中基于 variant 的分支样式抽离到配置，便于集中维护与扩展。
+ * 定义组件的语义化功能角色。
  */
-export interface VariantBehavior {
-    button?: {
-        /** 额外的 class（会追加在按钮基础样式后） */
-        classes?: string;
-    };
-    card?: {
-        classes?: string;
-    };
-    panel?: {
-        classes?: string;
-    };
+export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text';
+
+/**
+ * 组件的变体属性，结合了功能角色和具体颜色。
+ */
+export interface ComponentVariant {
+    role: VariantRole;
+    color: Color;
 }
 
-export const VARIANT_BEHAVIORS: Record<VariantName, VariantBehavior> = {
-    solid: {},
-    soft: {},
-    subtle: {},
-    text: {
-        button: {
-            classes: [
-                'underline underline-offset-4',
-                'hover:-translate-y-0.5 shadow-sm',
-                'hover:scale-100 active:scale-100'
-            ].join(' '),
-        },
-    },
+/**
+ * 变体角色到样式的映射。
+ * 这定义了每个功能角色（如 'primary'）对应的基础样式。
+ * 例如，'primary' 角色可能对应 'filled' 样式，而 'secondary' 对应 'outlined'。
+ */
+import type { IntensityName } from './colorThemes';
+
+/**
+ * 角色 -> 强度变体 映射
+ * 主题系统支持的变体为: 'solid' | 'soft' | 'subtle' | 'text'
+ */
+export const VARIANT_ROLE_STYLES: Record<VariantRole, IntensityName> = {
+    primary: 'solid',
+    secondary: 'soft',
+    success: 'solid',
+    warning: 'solid',
+    danger: 'solid',
+    text: 'text',
 };
 
-export type VariantBehaviorsMap = typeof VARIANT_BEHAVIORS;

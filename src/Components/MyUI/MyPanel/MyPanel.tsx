@@ -1,7 +1,6 @@
 import React from "react";
 import {
-    type VariantName,
-    type ColorPresetName,
+    type ComponentVariant,
     type SizeName,
     type ShadowName,
 } from "../../../Styles";
@@ -12,8 +11,7 @@ import PanelFooter from "./PanelFooter";
 import { useMyPanel } from "../Hooks/useMyPanel";
 
 export type MyPanelProps = {
-    variant?: VariantName;
-    color?: ColorPresetName | string;
+    variant?: ComponentVariant;
     size?: SizeName;
     glass?: boolean;
     shadow?: ShadowName;
@@ -26,8 +24,7 @@ export type MyPanelProps = {
 };
 
 function MyPanel({
-    variant = "solid",
-    color,
+    variant,
     size = "medium",
     glass = true,
     shadow = "md",
@@ -38,9 +35,9 @@ function MyPanel({
     backgroundImage,
     footer,
 }: MyPanelProps) {
-    const { panelStyle, panelClasses } = useMyPanel({ variant, color, size, glass, shadow, className, disabled, title, backgroundImage });
+    const { panelStyle, panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title, backgroundImage });
     return (
-        <PanelProvider value={{ variant, color, size, glass, shadow, disabled, title, backgroundImage }}>
+        <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage }}>
             <div className={panelClasses} style={panelStyle}>
                 <PanelHeader title={title} />
                 <PanelContent>{children}</PanelContent>

@@ -1,17 +1,17 @@
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
-import { VARIANTS, type VariantName } from "../colorThemes";
+import { INTENSITY, type IntensityName } from "../colorThemes";
 
 /**
  * 定义颜色预设的渐变起止点
  * 这是所有主题颜色的单一来源
  */
-export const COLOR_PRESET_STOPS = {
+export const COLOR_BASE = {
     blue: { from: '#3b82f6', to: '#2563eb' },
     indigo: { from: '#4f46e5', to: '#7c3aed' },
     violet: { from: '#8b5cf6', to: '#7c3aed' },
     purple: { from: '#a855f7', to: '#7c3aed' },
     cyan: { from: '#06b6d4', to: '#0891b2' },
-    cyanBlue: { from: '#06b6d4', to: '#3b82f6' },
+    skyBlue: { from: '#06b6d4', to: '#3b82f6' },
     teal: { from: '#14b8a6', to: '#0d9488' },
     emerald: { from: '#10b981', to: '#059669' },
     green: { from: '#22c55e', to: '#16a34a' },
@@ -29,23 +29,23 @@ export const COLOR_PRESET_STOPS = {
     grayLight: { from: '#f8fafc', to: '#e2e8f0' },
 } as const;
 
-export type ColorPresetName = keyof typeof COLOR_PRESET_STOPS;
-export const COLOR_PRESET_NAMES = Object.keys(COLOR_PRESET_STOPS) as ColorPresetName[];
+export type ColorPresetName = keyof typeof COLOR_BASE;
+export const COLOR_PRESET_NAMES = Object.keys(COLOR_BASE) as ColorPresetName[];
 
 /**
  * 嵌套预设：每个颜色拥有四种强度变体的完整主题。
  * PRESET_THEMES[color][variant]
  */
-export const PRESET_THEMES: Record<ColorPresetName, Record<VariantName, ComponentTheme>> =
+export const PRESET_THEMES: Record<ColorPresetName, Record<IntensityName, ComponentTheme>> =
     Object.fromEntries(
-        Object.entries(COLOR_PRESET_STOPS).map(([color, stop]) => [
+        Object.entries(COLOR_BASE).map(([color, stop]) => [
             color,
             Object.fromEntries(
-                (Array.from(VARIANTS) as VariantName[]).map((v) => [
+                (Array.from(INTENSITY) as IntensityName[]).map((v) => [
                     v,
                     buildThemeByIntensity(stop.from, stop.to, v),
                 ])
-            ) as Record<VariantName, ComponentTheme>,
+            ) as Record<IntensityName, ComponentTheme>,
         ])
-    ) as Record<ColorPresetName, Record<VariantName, ComponentTheme>>;
+    ) as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>;
 

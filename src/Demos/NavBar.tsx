@@ -16,19 +16,19 @@ const NavBar = ({ onSelectContent, currentContent }: NavBarProps) => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-2">
                             <MyButton
-                                variant={currentContent === 'buttons' ? 'solid' : 'text'}
+                                variant={currentContent === 'buttons' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                                 onClick={() => onSelectContent("buttons")}
                             >
                                 按钮 (Buttons)
                             </MyButton>
                             <MyButton
-                                variant={currentContent === 'cards' ? 'solid' : 'text'}
+                                variant={currentContent === 'cards' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                                 onClick={() => onSelectContent("cards")}
                             >
                                 卡片 (Cards)
                             </MyButton>
                             <MyButton
-                                variant={currentContent === 'panels' ? 'solid' : 'text'}
+                                variant={currentContent === 'panels' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                                 onClick={() => onSelectContent("panels")}
                             >
                                 面板 (Panels)

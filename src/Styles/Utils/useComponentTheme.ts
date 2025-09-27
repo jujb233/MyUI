@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
-import type { ComponentThemeParams, ComponentThemeResult } from './componentTheme';
+import type { ThemeOptions, ComponentThemeResult } from './componentTheme';
 import { computeComponentTheme } from './componentTheme';
 
 /**
  * Hook：对 computeComponentTheme 的结果进行依赖精简与记忆化。
  */
-export function useComponentTheme(params: ComponentThemeParams): ComponentThemeResult {
+export function useThemeStyles(params: ThemeOptions): ComponentThemeResult {
     // 将会影响 theme 的仅有 variant / color
     const themeKey = `${params.variant ?? ''}|${params.color ?? ''}`;
     const elevKey = `${params.glass ?? true}|${params.shadow ?? 'md'}|${params.elevationKind ?? ''}`;
@@ -16,4 +16,4 @@ export function useComponentTheme(params: ComponentThemeParams): ComponentThemeR
     return result;
 }
 
-export type { ComponentThemeParams as UseComponentThemeParams } from './componentTheme';
+export type { ThemeOptions as UseComponentThemeParams } from './componentTheme';

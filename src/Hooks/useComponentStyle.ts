@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useComponentTheme, type VariantName, type ColorPresetName, type ShadowName } from "../Styles";
+import { useComponentTheme, type VariantName, type Color, type ShadowName, VARIANT_ROLE_STYLES, type VariantRole } from "../Styles";
 import type { ElevationKind } from "../Styles";
 
 /**
@@ -7,14 +7,14 @@ import type { ElevationKind } from "../Styles";
  */
 export type UseComponentStyleProps = {
     /**
-     * @description 样式变体
+     * @description 样式变体或功能角色
      * @default "solid"
      */
-    variant?: VariantName;
+    variant?: VariantName | VariantRole;
     /**
      * @description 颜色预设或自定义颜色
      */
-    color?: ColorPresetName | string;
+    color?: Color | string;
     /**
      * @description 是否启用玻璃效果
      * @default true
@@ -44,7 +44,7 @@ export type UseComponentStyleProps = {
  */
 export function useComponentStyle(props: UseComponentStyleProps) {
     const {
-        variant = "solid",
+        variant: variantOrRole = "solid",
         color,
         glass = true,
         bordered = true,
@@ -52,18 +52,26 @@ export function useComponentStyle(props: UseComponentStyleProps) {
         elevationKind = "card",
     } = props;
 
+    // 检查 variantOrRole 是否是角色，如果是，则从映射中获取实际的 variant 样式
+    const variant = (VARIANT_ROLE_STYLES as Record<string, VariantName>)[variantOrRole] || variantOrRole;
+
     const { style: themedStyle, theme } = useComponentTheme({
-        variant,
+        variant: variant as VariantName,
         color,
         glass,
         shadow,
         elevationKind,
     });
 
-    const style = useMemo(() => ({
-        ...themedStyle,
-        border: bordered ? `1px solid ${theme["--border"]}` : "none",
-    }), [themedStyle, bordered, theme]);
+    const style = useMemo(() => {
+        if (!theme) {
+            return {}; // 防御性编程，防止 theme 未定义时崩溃
+        }
+        return {
+            ...themedStyle,
+            border: bordered ? `1px solid ${theme["--border"]}` : "none",
+        };
+    }, [themedStyle, bordered, theme]);
 
     return { style, theme };
 }

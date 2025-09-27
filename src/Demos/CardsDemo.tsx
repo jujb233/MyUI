@@ -8,7 +8,7 @@ const CardsDemo = () => {
             backgroundImage="/demo.png"
             className="p-4 md:p-8 min-h-screen rounded-none"
         >
-            <MyPanel color="gray" className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
+            <MyPanel variant={{ role: 'secondary', color: 'gray' }} className="bg-opacity-80 dark:bg-opacity-80 text-gray-200">
                 <header className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold tracking-tight mb-2 text-white">MyCard 组件</h1>
                     <p className="text-lg text-gray-300">探索 MyCard 组件的多种用途和灵活性。</p>
@@ -32,8 +32,8 @@ const CardsDemo = () => {
                             <MyCard.Content>前端开发者，热衷于构建美观且实用的用户界面。</MyCard.Content>
                             <MyCard.Footer>
                                 <div className="flex justify-end space-x-2">
-                                    <MyButton size="small" variant="text" color="blue">查看主页</MyButton>
-                                    <MyButton size="small" variant="solid">关注</MyButton>
+                                    <MyButton size="small" variant={{ role: 'text', color: 'blue' }}>查看主页</MyButton>
+                                    <MyButton size="small" variant={{ role: 'primary', color: 'blue' }}>关注</MyButton>
                                 </div>
                             </MyCard.Footer>
                         </MyCard>
@@ -54,7 +54,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>构建下一代UI组件库</MyCard.Header>
                                 <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                             <MyCard>
@@ -63,7 +63,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>设计系统中的色彩哲学</MyCard.Header>
                                 <MyCard.Content>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                             <MyCard>
@@ -72,7 +72,7 @@ const CardsDemo = () => {
                                 <MyCard.Header>前端性能优化实战</MyCard.Header>
                                 <MyCard.Content>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</MyCard.Content>
                                 <MyCard.Actions>
-                                    <MyButton variant="text" color="blue">阅读全文 →</MyButton>
+                                    <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
                                 </MyCard.Actions>
                             </MyCard>
                         </div>
@@ -90,7 +90,7 @@ const CardsDemo = () => {
                             <MyCard
                                 clickable
                                 hoverable
-                                color="rose"
+                                variant={{ role: 'danger', color: 'red' }}
                                 onClick={() => alert("跳转到好友请求页面！")}
                                 className="w-80"
                             >
@@ -100,7 +100,7 @@ const CardsDemo = () => {
                             <MyCard
                                 clickable
                                 hoverable
-                                color="amber"
+                                variant={{ role: 'warning', color: 'yellow' }}
                                 onClick={() => alert("查看详情！")}
                                 className="w-80"
                             >
@@ -128,9 +128,9 @@ const CardsDemo = () => {
                                 <MyCard.Content>玻璃态</MyCard.Content>
                             </MyCard>
                         ))}
-                        <MyCard color="#6366f1">
-                            <MyCard.Header>Hex 主题</MyCard.Header>
-                            <MyCard.Content>#6366f1 自定义色</MyCard.Content>
+                        <MyCard variant={{ role: 'primary', color: 'purple' }}>
+                            <MyCard.Header>自定义主题</MyCard.Header>
+                            <MyCard.Content>紫色</MyCard.Content>
                         </MyCard>
                     </MyPanel>
                 </section>
@@ -144,7 +144,7 @@ const CardsDemo = () => {
                     <MyPanel glass className="p-6 rounded-lg flex justify-center">
                         <MyCard
                             glass={false}
-                            color="emerald"
+                            variant={{ role: 'success', color: 'green' }}
                             className="max-w-md"
                         >
                             <MyCard.Header>自定义卡片</MyCard.Header>

@@ -50,7 +50,7 @@ export const rgbToHex = (r: number, g: number, b: number): string => {
  * @param amount 调整量 (-100 到 100)。正值使颜色变亮，负值使颜色变暗。
  * @returns 调整后的十六进制颜色字符串
  */
-export const adjustHex = (hex: string, amount: number): string => {
+export const adjustColorBrightness = (hex: string, amount: number): string => {
     const { r, g, b } = hexToRgb(hex);
     const k = amount / 100;
     const mix = (c: number) => (k >= 0 ? c + (255 - c) * k : c * (1 + k));

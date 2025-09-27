@@ -1,4 +1,4 @@
-import { adjustHex, alphaFromHex, yiqTextColor } from "../Utils/colorUtils";
+import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../Utils/colorUtils";
 
 /**
  * 定义主题对象的结构
@@ -35,8 +35,8 @@ export type IntensityVariant = 'solid' | 'soft' | 'subtle' | 'text';
  * @returns ComponentTheme 对象
  */
 export const buildTheme = (from: string, to: string, text?: string): ComponentTheme => {
-    const hoverFrom = adjustHex(from, -12);
-    const hoverTo = adjustHex(to, -12);
+    const hoverFrom = adjustColorBrightness(from, -12);
+    const hoverTo = adjustColorBrightness(to, -12);
     const textColor = text ?? yiqTextColor(to);
 
     return {
@@ -67,7 +67,7 @@ export const buildThemeByIntensity = (
 
         const base: ComponentTheme = {
             '--bg': gradient(bg.from, bg.to),
-            '--bg-hover': gradient(adjustHex(bg.from, -6), adjustHex(bg.to, -6)),
+            '--bg-hover': gradient(adjustColorBrightness(bg.from, -6), adjustColorBrightness(bg.to, -6)),
             '--text': textColor,
             '--border': cfg.border ?? 'transparent',
             '--focus-ring': focusRing,

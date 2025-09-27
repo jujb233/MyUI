@@ -1,10 +1,9 @@
-import { SIZE_CONFIG, type VariantName, type ColorPresetName, type SizeName, type ShadowName, buildInteractionClasses } from "../../../Styles";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Styles";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import clsx from "clsx";
 
 export type UseMyPanelProps = {
-    variant?: VariantName;
-    color?: ColorPresetName | string;
+    variant?: ComponentVariant;
     size?: SizeName;
     glass?: boolean;
     shadow?: ShadowName;
@@ -16,8 +15,7 @@ export type UseMyPanelProps = {
 
 export function useMyPanel(props: UseMyPanelProps) {
     const {
-        variant = "solid",
-        color,
+        variant: variantProp,
         size = "medium",
         glass = true,
         shadow = "md",
@@ -26,6 +24,10 @@ export function useMyPanel(props: UseMyPanelProps) {
         title,
         backgroundImage,
     } = props;
+
+    const role = variantProp?.role || 'primary';
+    const color = variantProp?.color || 'blue';
+    const variant = VARIANT_ROLE_STYLES[role] as any;
 
     const sizeStyle = SIZE_CONFIG[size];
 

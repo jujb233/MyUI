@@ -1,8 +1,9 @@
 import MyButton from "../Components/MyUI/MyButton/MyButton";
 import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
-import { VARIANTS } from "../Styles";
+import { VARIANT_ROLE_STYLES } from "../Styles";
 
 const ButtonsDemo = () => {
+    const variants = Object.keys(VARIANT_ROLE_STYLES) as (keyof typeof VARIANT_ROLE_STYLES)[];
     return (
         <MyPanel backgroundImage="/demo.png" className="p-4 md:p-8 min-h-screen rounded-none">
 
@@ -19,12 +20,12 @@ const ButtonsDemo = () => {
                 </p>
                 <MyPanel glass className="p-6 rounded-lg">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {VARIANTS.map((variant) => (
+                        {variants.map((variant) => (
                             <div key={variant} className="flex flex-col items-center space-y-2">
-                                <MyButton variant={variant} size="large" color="rose">
+                                <MyButton variant={{ role: variant, color: 'blue' }} size="large">
                                     {variant.charAt(0).toUpperCase() + variant.slice(1)}
                                 </MyButton>
-                                <code className="text-sm bg-black/50 px-2 py-1 rounded">{`variant="${variant}"`}</code>
+                                <code className="text-sm bg-black/50 px-2 py-1 rounded">{`variant={{ role: '${variant}', color: 'blue' }}`}</code>
                             </div>
                         ))}
                     </div>
@@ -39,10 +40,10 @@ const ButtonsDemo = () => {
                         使用 <code>color</code> 属性为按钮赋予不同的情感和语义。
                     </p>
                     <MyPanel glass className="p-6 rounded-lg flex flex-wrap justify-center gap-6">
-                        <MyButton color="green" variant="solid">保存成功</MyButton>
-                        <MyButton color="red" variant="solid">删除警告</MyButton>
-                        <MyButton color="amber" variant="solid">操作确认</MyButton>
-                        <MyButton color="blue" variant="solid">常规操作</MyButton>
+                        <MyButton variant={{ role: 'success', color: 'green' }}>保存成功</MyButton>
+                        <MyButton variant={{ role: 'danger', color: 'red' }}>删除警告</MyButton>
+                        <MyButton variant={{ role: 'warning', color: 'yellow' }}>操作确认</MyButton>
+                        <MyButton variant={{ role: 'primary', color: 'blue' }}>常规操作</MyButton>
                     </MyPanel>
                 </section>
 
@@ -53,9 +54,9 @@ const ButtonsDemo = () => {
                         通过 <code>size</code> 属性控制按钮大小以适应不同空间。
                     </p>
                     <MyPanel glass className="p-6 rounded-lg flex items-center justify-center gap-6">
-                        <MyButton size="small" color="blue">小型</MyButton>
-                        <MyButton size="medium" color="green">中型</MyButton>
-                        <MyButton size="large" color="red">大型</MyButton>
+                        <MyButton size="small" variant={{ role: 'primary', color: 'blue' }}>小型</MyButton>
+                        <MyButton size="medium" variant={{ role: 'success', color: 'green' }}>中型</MyButton>
+                        <MyButton size="large" variant={{ role: 'danger', color: 'red' }}>大型</MyButton>
                     </MyPanel>
                 </section>
             </div>
@@ -72,7 +73,7 @@ const ButtonsDemo = () => {
                         <h3 className="font-semibold mb-3">实体阴影 (glass={'{false}'})</h3>
                         <div className="flex flex-wrap gap-4">
                             {(['sm', 'md', 'lg', 'xl'] as const).map(s => (
-                                <MyButton key={s} shadow={s} glass={false} variant="solid" color="blue">
+                                <MyButton key={s} shadow={s} glass={false} variant={{ role: 'primary', color: 'blue' }}>
                                     shadow={s}
                                 </MyButton>
                             ))}
@@ -81,8 +82,8 @@ const ButtonsDemo = () => {
                     <div>
                         <h3 className="font-semibold mb-3">玻璃态默认投影</h3>
                         <div className="flex flex-wrap gap-4">
-                            {(['solid', 'soft', 'subtle'] as const).map(v => (
-                                <MyButton key={v} variant={v} glass>
+                            {(['primary', 'secondary'] as const).map(v => (
+                                <MyButton key={v} variant={{ role: v, color: 'blue' }} glass>
                                     {v}
                                 </MyButton>
                             ))}
@@ -91,8 +92,8 @@ const ButtonsDemo = () => {
                     <div>
                         <h3 className="font-semibold mb-3">Text 变体交互</h3>
                         <div className="flex gap-4">
-                            <MyButton variant="text" color="blue">普通 Text</MyButton>
-                            <MyButton variant="text" color="#6366f1">自定义 Hex</MyButton>
+                            <MyButton variant={{ role: 'text', color: 'blue' }}>普通 Text</MyButton>
+                            <MyButton variant={{ role: 'text', color: 'purple' }}>自定义颜色</MyButton>
                         </div>
                     </div>
                 </MyPanel>
@@ -107,11 +108,11 @@ const ButtonsDemo = () => {
                 <MyPanel glass className="p-8 rounded-lg">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-center justify-items-center">
                         <div className="flex flex-col items-center space-y-3">
-                            <MyButton glass color="purple">玻璃效果</MyButton>
+                            <MyButton glass variant={{ role: 'primary', color: 'purple' }}>玻璃效果</MyButton>
                             <code className="bg-black/50 text-white px-2 py-1 rounded">glass={`{true}`}</code>
                         </div>
                         <div className="flex flex-col items-center space-y-3">
-                            <MyButton glass={false} color="purple">实体效果</MyButton>
+                            <MyButton glass={false} variant={{ role: 'primary', color: 'purple' }}>实体效果</MyButton>
                             <code className="bg-black/50 text-white px-2 py-1 rounded">glass={`{false}`}</code>
                         </div>
                         <div className="flex flex-col items-center space-y-3">

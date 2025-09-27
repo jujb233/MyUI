@@ -29,14 +29,14 @@ const PanelsDemo = () => {
                 <section className="mt-12">
                     <h2 className="text-3xl font-bold mb-4 border-l-4 border-green-500 pl-4">场景二：突出重要信息</h2>
                     <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        使用 <code>variant="solid"</code> 和 <code>color</code> 属性，可以将面板变成一个醒目的行动号召 (Call to Action) 区域或重要通知。
+                        使用 <code>variant</code> 属性，可以将面板变成一个醒目的行动号召 (Call to Action) 区域或重要通知。
                     </p>
                     <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel variant="solid" size="large" color="blue">
+                        <MyPanel size="large" variant={{ role: 'primary', color: 'blue' }}>
                             <h3 className="font-bold text-xl mb-2">升级到高级版</h3>
                             <p>解锁所有高级功能，享受无限制的创作体验。</p>
                             <div className="mt-4">
-                                <MyButton color="white">立即升级</MyButton>
+                                <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
                             </div>
                         </MyPanel>
                     </div>
@@ -49,7 +49,7 @@ const PanelsDemo = () => {
                         当玻璃拟态不适用时，可以通过设置 <code>glass={`{false}`}</code> 和 <code>shadow</code> 来创建具有实体感和层次感的面板，这在Material Design风格中很常见。
                     </p>
                     <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel glass={false} shadow="lg" color="amber">
+                        <MyPanel glass={false} shadow="lg" variant={{ role: 'warning', color: 'yellow' }}>
                             <h3 className="font-bold text-lg mb-2">新功能发布</h3>
                             <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
                         </MyPanel>
@@ -64,20 +64,20 @@ const PanelsDemo = () => {
                     </p>
                     <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                         {(['sm', 'md', 'lg'] as const).map(sh => (
-                            <MyPanel key={sh} shadow={sh} glass={false} color="gray" size="small">
+                            <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small">
                                 <h4 className="font-semibold mb-1">实体 shadow={sh}</h4>
                                 <p className="text-sm opacity-80">glass=false</p>
                             </MyPanel>
                         ))}
                         {(['sm', 'md', 'lg'] as const).map(sh => (
-                            <MyPanel key={`g-${sh}`} shadow={sh} glass color="gray" size="small">
+                            <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small">
                                 <h4 className="font-semibold mb-1">玻璃 {sh}</h4>
                                 <p className="text-sm opacity-80">glass=true</p>
                             </MyPanel>
                         ))}
-                        <MyPanel size="small" color="#6366f1">
-                            <h4 className="font-semibold mb-1">自定义 Hex</h4>
-                            <p className="text-sm opacity-80">color="#6366f1"</p>
+                        <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }}>
+                            <h4 className="font-semibold mb-1">自定义颜色</h4>
+                            <p className="text-sm opacity-80">color="purple"</p>
                         </MyPanel>
                     </div>
                 </section>
@@ -94,7 +94,7 @@ const PanelsDemo = () => {
                             shadow="xl"
                             backgroundImage="/demo.png"
                             title="欢迎来到我们的社区"
-                            color="white"
+                            variant={{ role: 'primary', color: 'blue' }}
                             className="text-white"
                         >
                             <p className="font-bold">
