@@ -56,7 +56,7 @@ export function useComponentStyle(props: UseComponentStyleProps) {
     const variant = (VARIANT_ROLE_STYLES as Record<string, VariantName>)[variantOrRole] || variantOrRole;
 
     const { style: themedStyle, theme } = useComponentTheme({
-        variant: variant as VariantName,
+        intensity: variant as VariantName,
         color,
         glass,
         shadow,

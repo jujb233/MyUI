@@ -4,7 +4,7 @@ import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
 import { adjustColorBrightness, isHexColor } from "../Utils/colorUtils";
 
 export type ThemeResolverParams = {
-    variant?: IntensityName;
+    intensity?: IntensityName;
     color?: ColorPresetName | string;
 };
 
@@ -20,23 +20,23 @@ export type ThemeResolverParams = {
  * @returns `ComponentTheme` 对象
  */
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { variant = 'solid', color } = params;
+    const { intensity: intensity = 'solid', color } = params;
     const presetThemes = PRESET_THEMES;
 
     let themeColor: ColorPresetName | string | undefined = color ?? DEFAULT_BASE_COLOR;
 
     // 1) 预设名称：返回嵌套结构的对应强度
     if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
-        return presetThemes[themeColor as ColorPresetName][variant];
+        return presetThemes[themeColor as ColorPresetName][intensity];
     }
 
     // 2) 十六进制颜色：按强度构建
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
         const from = themeColor;
         const to = adjustColorBrightness(themeColor, -12);
-        return buildThemeByIntensity(from, to, variant);
+        return buildThemeByIntensity(from, to, intensity);
     }
 
     // 3) 备用方案：默认颜色 + 指定强度
-    return presetThemes[DEFAULT_BASE_COLOR][variant];
+    return presetThemes[DEFAULT_BASE_COLOR][intensity];
 };

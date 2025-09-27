@@ -7,7 +7,7 @@ import { computeComponentTheme } from './componentTheme';
  */
 export function useThemeStyles(params: ThemeOptions): ComponentThemeResult {
     // 将会影响 theme 的仅有 variant / color
-    const themeKey = `${params.variant ?? ''}|${params.color ?? ''}`;
+    const themeKey = `${params.intensity ?? ''}|${params.color ?? ''}`;
     const elevKey = `${params.glass ?? true}|${params.shadow ?? 'md'}|${params.elevationKind ?? ''}`;
     const disabledKey = params.disabled ? '1' : '0';
 
