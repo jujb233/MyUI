@@ -1,55 +1,46 @@
 
 
-# MyButton 教程
+# MyButton
 
-`MyButton` 是一个多功能、可主题化的按钮组件，支持玻璃材质、图标、不同尺寸和多种主题。推荐结合 `ButtonIcon` 进行组合式内容扩展。
+`MyButton` 是支持主题与交互动效的按钮组件，内置玻璃态、阴影、尺寸与图标/操作区组合能力。
 
 ## 快速开始
 
 ```tsx
-import { MyButton, ButtonIcon } from 'myui';
+import { MyButton } from '@jujb233/myui';
 
-<MyButton variant="solid">主按钮</MyButton>
+<MyButton variant={{ role: 'primary', color: 'blue' }}>主按钮</MyButton>
 ```
 
-## 核心属性
+## Props
 
-| 属性         | 类型                                 | 默认值      | 说明                   |
-|--------------|--------------------------------------|-------------|------------------------|
-| htmlType     | 'button' | 'submit' | 'reset'        | 'button'    | 原生按钮类别           |
-| variant      | 'solid' | 'soft' | 'subtle' | 'text' | 'solid'    | 强度变体（视觉强烈程度）|
-| color        | 预设色名或十六进制                  | 'blue'      | 色调（与变体解耦）      |
-| size         | 'small' | 'medium' | 'large'         | 'medium'    | 按钮尺寸               |
-| glass        | boolean                              | true        | 是否启用玻璃材质效果   |
-| shadow       | 'sm' | 'md' | 'lg' 等                | 'sm'        | 按钮阴影               |
-| disabled     | boolean                              | false       | 是否禁用               |
-| onClick      | React.MouseEventHandler              | -           | 点击事件               |
-| children     | ReactNode                            | -           | 按钮内容               |
-| className    | string                               | ''          | 自定义类名             |
+- htmlType：`'button' | 'submit' | 'reset'`（默认 `'button'`）
+- variant：`{ role: 'primary'|'secondary'|'success'|'warning'|'danger'|'text'; color: 预设色名 }`（可选）
+- size：`'small' | 'medium' | 'large'`（默认 `'medium'`）
+- glass：`boolean`（默认 `true`）
+- shadow：`'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner' | 'none'`（默认 `'sm'`）
+- disabled：`boolean`（默认 `false`）
+- icon：`ReactNode`（图标节点，自动出现在文本前）
+- actions：`ReactNode`（操作区节点，自动出现在文本后）
+- onClick：`React.MouseEventHandler<HTMLButtonElement>`
+- children：`ReactNode`
+- className：`string`
 
-## 常见用法
+说明：传入 `icon` 会渲染 `ButtonIcon` 包裹的前置图标；传入 `actions` 会渲染 `ButtonActions` 包裹的后置元素。
+
+## 用法示例
 
 ```tsx
-// 主题按钮（强度+色调）
-<MyButton variant="solid" color="blue">确定</MyButton>
+// 主题与尺寸
+<MyButton size="large" variant={{ role: 'primary', color: 'indigo' }}>确定</MyButton>
 
-// 自定义 HEX，无玻璃效果
-<MyButton variant="solid" color="#00bfae" glass={false}>自定义色</MyButton>
-
-// 带图标按钮（推荐组合式写法）
-<MyButton>
-  <ButtonIcon name="plus" /> 新建
+// 带图标/操作区
+<MyButton icon={<PlusIcon />} actions={<Kbd>⌘K</Kbd>}>
+  新建
 </MyButton>
 
-// 禁用按钮
+// 禁用
 <MyButton disabled>不可用</MyButton>
 ```
 
-## 进阶技巧
-
-- 结合 `shadow` 属性实现多层次阴影。
-- 通过 `className` 定制样式。
-- 支持任意 React 节点作为内容。
-- 可与 `ButtonIcon`、自定义内容组合。
-
-更多高级用法请参考源码或 DEMOS.md。
+提示：`shadow` 建议在按钮上使用 `sm` 或 `md`，获得更自然的动效与层次。

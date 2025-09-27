@@ -1,31 +1,31 @@
 
-# 演示教程
+# 演示指南
 
-本页介绍如何体验 MyUI 组件库的所有功能演示。
+项目内置示例用于演示组件搭配与主题能力。
 
-## 演示入口
+## 位置与入口
 
-所有演示页面位于 `src/Demos` 目录：
-- `Demo.tsx`：主入口，集成导航和内容区。
-- `NavBar.tsx`：导航栏，切换各组件演示。
-- `ButtonsDemo.tsx`：按钮演示。
-- `CardsDemo.tsx`：卡片演示。
-- `PanelsDemo.tsx`：面板演示。
+- 代码位于 `src/Demos`：`Demo.tsx`（总入口）、`NavBar.tsx`、`ButtonsDemo.tsx`、`CardsDemo.tsx`、`PanelsDemo.tsx`。
+- 启动开发服务器后访问本地地址即可查看。
 
-## 体验流程
+## 启动
 
-1. 终端运行：
-	```bash
-	npm run dev
-	```
-2. 浏览器访问本地地址，进入演示主页。
-3. 推荐体验顺序：
-	- 按钮演示
-	- 卡片演示
-	- 面板演示
+```bash
+npm run dev
+```
 
-每个演示页面均有丰富示例和代码片段，适合边看边学。
+## 示例中的 API 要点
 
-如需自定义演示，可修改 `src/Demos` 下相关文件。
+- 组件主题通过 `variant={{ role, color }}` 传入，而不是字符串变体。
+- `MyCard.Tags` 需传入 `tags` 数组：`<MyCard.Tags tags={["React", "TS"]} />`
+- 大多数组件支持 `glass` 与 `shadow` 组合，阴影可选 `'xs'|'sm'|'md'|'lg'|'xl'|'2xl'|'inner'|'none'`。
 
-注意：示例使用新 API（variant 为强度：solid/soft/subtle/text；color 为色调或 HEX）。
+## 导入路径说明
+
+- 在演示代码中多为相对路径导入，例如：
+  - `import MyCard from "../Components/MyUI/MyCard"`
+  - `import MyButton from "../Components/MyUI/MyButton/MyButton"`
+- 在应用中作为依赖使用时，建议：
+  - `import { MyButton, MyCard, MyPanel } from '@jujb233/myui'`
+
+以上与示例代码略有差异，属项目内外使用场景不同所致。

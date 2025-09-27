@@ -1,86 +1,73 @@
 
 
-# MyCard 教程
+# MyCard
 
-`MyCard` 是一个灵活的卡片容器组件，支持图片、标签、操作区、玻璃拟态等多种布局。推荐使用组合式 API 进行内容和结构扩展。
+`MyCard` 是组合式卡片容器，支持图片、标签、操作区、页脚、横纵向布局与玻璃态。
 
 ## 快速开始
 
 ```tsx
-import { MyCard, MyButton } from 'myui';
+import { MyCard, MyButton } from '@jujb233/myui';
 
-<MyCard variant="soft" color="blue" size="medium" glass>
+<MyCard variant={{ role: 'secondary', color: 'blue' }} size="medium" glass>
   <MyCard.Image src="/demo.png" alt="示例图片" />
   <MyCard.Header>示例卡片</MyCard.Header>
   <MyCard.Content>这是一段内容。</MyCard.Content>
   <MyCard.Actions>
     <MyButton size="small">了解更多</MyButton>
   </MyCard.Actions>
-  <MyCard.Tags>科技</MyCard.Tags>
+  <MyCard.Tags tags={["科技"]} />
+  <MyCard.Footer>底部说明</MyCard.Footer>
+  {/* 亦支持 imagePosition="background" 做背景图 */}
 </MyCard>
 ```
 
-## 组件结构与核心属性
+## Props（根组件）
 
-MyCard 采用组合式 API，支持以下子组件：
+- variant：`{ role: 'primary'|'secondary'|'success'|'warning'|'danger'|'text'; color: 预设色名 }`
+- size：`'small' | 'medium' | 'large'`（默认 `'medium'`）
+- glass：`boolean`（默认 `true`）
+- clickable：`boolean`（默认 `false`）
+- className：`string`
+- bordered：`boolean`（默认 `true`）
+- shadow：`'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner' | 'none'`（默认 `'md'`）
+- imagePosition：`'top' | 'left' | 'right' | 'background'`（默认 `'top'`）
+- direction：`'vertical' | 'horizontal'`（默认 `'vertical'`）
+- hoverable：`boolean`（默认 `true`）
+- onClick：`(e) => void`
+- children：组合子组件
 
-- `MyCard.Image`：图片展示，props: `src`, `alt`, `position`（可选）
-- `MyCard.Header`：标题区域
-- `MyCard.Content`：内容区域
-- `MyCard.Actions`：操作区（如按钮）
-- `MyCard.Tags`：标签区
-- `MyCard.Footer`：底部区域（可选）
+## 子组件与 Props
 
-MyCard 支持以下核心属性：
+- `MyCard.Image`：`{ src: string; alt?: string }`，根据 `imagePosition` 自动选择背景图或 <img>。
+- `MyCard.Header`：`{ children; className? }`
+- `MyCard.Content`：`{ children; className? }`
+- `MyCard.Actions`：`{ children; className? }`
+- `MyCard.Tags`：`{ tags: ReactNode[]; className? }`（注意：需以数组传入）
+- `MyCard.Footer`：`{ children; className? }`
 
-| 属性           | 类型                                 | 默认值      | 说明                   |
-|----------------|--------------------------------------|-------------|------------------------|
-| variant        | 'solid' | 'soft' | 'subtle' | 'text' | 'soft'     | 强度变体               |
-| color          | 预设色名或十六进制                  | 'blue'      | 色调（与变体解耦）     |
-| size           | 'small' | 'medium' | 'large'         | 'medium'    | 卡片尺寸               |
-| glass          | boolean                              | true        | 是否启用玻璃材质效果   |
-| clickable      | boolean                              | false       | 是否可点击             |
-| shadow         | 阴影等级（如 'md'）                  | 'md'        | 卡片阴影               |
-| bordered       | boolean                              | true        | 是否显示边框           |
-| imagePosition  | 'top' | 'left' | 'right' | 'background'| 'top'      | 图片位置               |
-| direction      | 'vertical' | 'horizontal'             | 'vertical'  | 内容布局方向           |
-| hoverable      | boolean                              | true        | 是否启用悬停效果       |
-| className      | string                               | ''          | 自定义类名             |
-| children       | ReactNode                            | 必须        | 组合子组件或自定义内容 |
-
-> 说明：图片、标签、操作区等推荐通过子组件实现，而非直接作为 props 传递。
-
-## 常见用法
+## 示例
 
 ```tsx
-// 组合式卡片，图片在顶部，带操作区
-<MyCard>
+// 图片在左，横向布局
+<MyCard imagePosition="left" direction="horizontal" className="max-w-lg">
+  <MyCard.Image src="/vite.svg" />
+  <MyCard.Header>标题</MyCard.Header>
+  <MyCard.Content>内容</MyCard.Content>
+  <MyCard.Footer>页脚</MyCard.Footer>
+</MyCard>
+
+// 作为背景图使用
+<MyCard imagePosition="background">
   <MyCard.Image src="/demo.png" />
-  <MyCard.Header>新闻</MyCard.Header>
-  <MyCard.Content>卡片内容...</MyCard.Content>
-  <MyCard.Actions>
-    <MyButton>阅读</MyButton>
-  </MyCard.Actions>
+  <MyCard.Header>覆盖在背景图之上</MyCard.Header>
 </MyCard>
 
-// 横向布局，带标签
-<MyCard direction="horizontal">
-  <MyCard.Tags>科技</MyCard.Tags>
-  <MyCard.Content>横向内容</MyCard.Content>
+// 阴影与玻璃态对比
+<MyCard shadow="lg" glass={false}>
+  <MyCard.Header>实体阴影</MyCard.Header>
 </MyCard>
-
-// 纯自定义内容
-<MyCard bordered={false}>
-  <h3>自定义内容</h3>
+<MyCard shadow="lg" glass>
+  <MyCard.Header>玻璃态</MyCard.Header>
 </MyCard>
 ```
-
-## 进阶技巧
-
-- 结合 `imagePosition` 实现多种图片布局。
-- `hoverable` 控制悬停动画。
-- `glass` 属性实现玻璃拟态。
-- 可通过 `MyCard.Footer` 扩展底部内容。
-- 通过组合子组件实现复杂结构。
-
-更多高级用法请参考源码或 DEMOS.md。

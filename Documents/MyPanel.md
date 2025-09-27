@@ -1,41 +1,47 @@
 
 
-# MyPanel 教程
+# MyPanel
 
-`MyPanel` 是一个通用内容容器组件，适合分组、布局和展示任意内容，支持玻璃材质、背景图、标题、底部扩展等。推荐结合 PanelHeader、PanelContent、PanelFooter 进行内容扩展。
+`MyPanel` 是通用内容容器，支持标题、背景图、页脚扩展与玻璃态，适合分组与布局。
 
 ## 快速开始
 
 ```tsx
-import { MyPanel, PanelHeader, PanelContent, PanelFooter } from 'myui';
+// 注意：仓库内演示通过相对路径导入 MyPanel
+// 应用作为依赖时，顶层包当前未导出 MyPanel（后续可能提供）
+import MyPanel from '../src/Components/MyUI/MyPanel';
+import { PanelHeader, PanelContent, PanelFooter } from '../src/Components/MyUI/MyPanel';
 
 <MyPanel title="探索新世界">
   <p>面板内容</p>
 </MyPanel>
 ```
 
-## 核心属性
+## Props
 
-| 属性             | 类型                                 | 默认值      | 说明                   |
-|------------------|--------------------------------------|-------------|------------------------|
-| variant          | 'solid' | 'soft' | 'subtle' | 'text' | 'solid'    | 面板强度变体           |
-| color            | 预设色名或自定义色                   | 依赖 variant| 主题/自定义颜色        |
-| size             | 'small' | 'medium' | 'large'         | 'medium'    | 面板尺寸（内边距）     |
-| glass            | boolean                              | true        | 是否启用玻璃材质效果   |
-| shadow           | 'sm' | 'md' | 'lg' 等                | 'md'        | 面板阴影               |
-| disabled         | boolean                              | false       | 是否禁用               |
-| title            | string                               | -           | 标题（顶部显示）       |
-| backgroundImage  | string                               | -           | 背景图片 URL           |
-| footer           | ReactNode                            | -           | 底部内容区域           |
-| className        | string                               | ''          | 自定义类名             |
-| children         | ReactNode                            | -           | 面板内容               |
+- variant：`{ role: 'primary'|'secondary'|'success'|'warning'|'danger'|'text'; color: 预设色名或 HEX }`
+- size：`'small' | 'medium' | 'large'`（默认 `'medium'`）
+- glass：`boolean`（默认 `true`）
+- shadow：`'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner' | 'none'`（默认 `'md'`）
+- className：`string`
+- disabled：`boolean`（默认 `false`）
+- title：`string`（渲染在内置 `PanelHeader` 中）
+- backgroundImage：`string`（作为背景图样式应用）
+- footer：`ReactNode`（存在时渲染于内置 `PanelFooter` 中）
+- children：内容（默认包裹在内置 `PanelContent`）
 
-## 常见用法
+## 子组件
+
+- `PanelHeader`：`{ title?: string }`
+- `PanelContent`：`{ children? }`
+- `PanelFooter`：`{ children? }`
+
+## 示例
 
 ```tsx
-// 带背景图和标题的大面板，底部扩展
+// 带背景图和标题的大面板
 <MyPanel 
-  variant="solid" 
+  variant={{ role: 'primary', color: 'teal' }}
   size="large"
   title="探索新世界"
   backgroundImage="/demo.png"
@@ -46,7 +52,7 @@ import { MyPanel, PanelHeader, PanelContent, PanelFooter } from 'myui';
   </PanelContent>
 </MyPanel>
 
-// 纯内容面板（可单独使用 PanelHeader/PanelContent/PanelFooter）
+// 自定义组合（也可直接使用内置 Header/Content/Footer）
 <MyPanel>
   <PanelHeader title="分组内容" />
   <PanelContent>
@@ -55,13 +61,3 @@ import { MyPanel, PanelHeader, PanelContent, PanelFooter } from 'myui';
   <PanelFooter>自定义底部</PanelFooter>
 </MyPanel>
 ```
-
-## 进阶技巧
-
-- 结合 `backgroundImage` 实现多样化视觉。
-- `glass` 属性实现玻璃拟态。
-- 通过 `className` 定制样式。
-- 可通过 `footer` 属性或 `PanelFooter` 组件扩展底部内容。
-- PanelHeader/PanelContent/PanelFooter 可单独组合使用。
-
-更多高级用法请参考源码或 DEMOS.md。
