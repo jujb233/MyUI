@@ -21,7 +21,7 @@ const ButtonsDemo = () => {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {VARIANTS.map((variant) => (
                             <div key={variant} className="flex flex-col items-center space-y-2">
-                                <MyButton variant={variant} size="large" color="blue">
+                                <MyButton variant={variant} size="large" color="rose">
                                     {variant.charAt(0).toUpperCase() + variant.slice(1)}
                                 </MyButton>
                                 <code className="text-sm bg-black/50 px-2 py-1 rounded">{`variant="${variant}"`}</code>

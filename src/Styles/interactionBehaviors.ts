@@ -3,7 +3,7 @@
  * 避免在各组件内分散硬编码 scale/translate 类。
  */
 export interface InteractionBehavior {
-    classes: string; // Tailwind utility class 串
+    classes: string;
 }
 
 export type InteractionKind = 'button' | 'card' | 'panel';

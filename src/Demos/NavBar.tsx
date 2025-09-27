@@ -1,4 +1,4 @@
-import MyButton from "../Components/MyUI/MyButton";
+import { MyButton } from "../Components/MyUI/MyButton/index";
 
 type NavBarProps = {
     onSelectContent: (content: "buttons" | "cards" | "panels") => void;
@@ -16,19 +16,19 @@ const NavBar = ({ onSelectContent, currentContent }: NavBarProps) => {
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-2">
                             <MyButton
-                                variant={currentContent === 'buttons' ? 'primary' : 'normal'}
+                                variant={currentContent === 'buttons' ? 'solid' : 'text'}
                                 onClick={() => onSelectContent("buttons")}
                             >
                                 按钮 (Buttons)
                             </MyButton>
                             <MyButton
-                                variant={currentContent === 'cards' ? 'primary' : 'normal'}
+                                variant={currentContent === 'cards' ? 'solid' : 'text'}
                                 onClick={() => onSelectContent("cards")}
                             >
                                 卡片 (Cards)
                             </MyButton>
                             <MyButton
-                                variant={currentContent === 'panels' ? 'primary' : 'normal'}
+                                variant={currentContent === 'panels' ? 'solid' : 'text'}
                                 onClick={() => onSelectContent("panels")}
                             >
                                 面板 (Panels)
