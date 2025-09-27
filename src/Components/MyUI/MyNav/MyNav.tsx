@@ -39,8 +39,8 @@ function MyNav({
     return (
         <NavProvider value={{ variant, size, glass, shadow }}>
             <nav
-                className={navClasses.containerClasses}
-                style={navStyle.style}
+                className={navClasses}
+                style={navStyle}
             >
                 {brand && <NavBrand>{brand}</NavBrand>}
                 <NavContent>

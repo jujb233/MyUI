@@ -2,14 +2,6 @@ import { useState } from "react";
 import ButtonsDemo from "./ButtonsDemo";
 import CardsDemo from "./CardsDemo";
 import PanelsDemo from "./PanelsDemo";
-import NavBar from "./NavBar";
-
-type DemoContent = "buttons" | "cards" | "panels";
-
-// ...existing code...
-import ButtonsDemo from "./ButtonsDemo";
-import CardsDemo from "./CardsDemo";
-import PanelsDemo from "./PanelsDemo";
 import NavsDemo from "./NavsDemo";
 import NavBar from "./NavBar";
 
@@ -27,7 +19,7 @@ const contentMap: ContentMap = {
     navs: NavsDemo,
 };
 
-type ContentKey = keyof ContentMap;
+export type ContentKey = keyof ContentMap;
 
 function Demo() {
     const [content, setContent] = useState<ContentKey>("buttons");
@@ -49,6 +41,5 @@ function Demo() {
         </div>
     );
 }
-// ...existing code...
 
 export default Demo;

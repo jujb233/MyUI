@@ -6,7 +6,7 @@ function NavsDemo() {
         <div className="w-full p-4 space-y-4">
             <h2 className="text-xl font-bold">Solid Nav</h2>
             <MyNav
-                variant={{ role: 'primary' }}
+                variant={{ role: 'primary', color: 'blue' }}
                 brand={<a href="#" className="font-bold text-lg">MyApp</a>}
                 menu={
                     <>
@@ -21,7 +21,7 @@ function NavsDemo() {
             />
             <h2 className="text-xl font-bold">Soft Nav</h2>
             <MyNav
-                variant={{ role: 'soft' }}
+                variant={{ role: 'secondary', color: 'blue' }}
                 brand={<a href="#" className="font-bold text-lg">MyApp</a>}
                 menu={
                     <>
@@ -31,7 +31,7 @@ function NavsDemo() {
                     </>
                 }
                 actions={
-                    <MyButton size="small" variant={{ role: 'soft' }}>Login</MyButton>
+                    <MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>
                 }
             />
             <h2 className="text-xl font-bold">Glass Nav</h2>
