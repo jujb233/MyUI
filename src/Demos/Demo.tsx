@@ -33,10 +33,8 @@ function Demo() {
     return (
         <div className="min-h-screen bg-gray-100">
             <NavBar onSelectContent={handleSelectContent} currentContent={content} />
-            <main className="p-4 sm:p-6 lg:p-8">
-                <div className="max-w-7xl mx-auto">
-                    <ContentComponent />
-                </div>
+            <main className="p-0">
+                <ContentComponent />
             </main>
         </div>
     );

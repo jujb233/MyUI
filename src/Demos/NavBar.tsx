@@ -11,7 +11,7 @@ const NavBar = ({ onSelectContent, currentContent }: NavBarProps) => {
     return (
         <MyNav
             glass
-            brand={<span className="font-bold text-xl">MyUI 组件演示</span>}
+            title={<span className="font-bold text-xl">MyUI 组件演示</span>}
             menu={
                 <>
                     <MyButton

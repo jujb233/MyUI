@@ -18,7 +18,7 @@ export type MyNavProps = {
     className?: string;
     glass?: boolean;
     shadow?: ShadowName;
-    brand?: React.ReactNode;
+    title?: React.ReactNode;
     menu?: React.ReactNode;
     actions?: React.ReactNode;
 };
@@ -30,7 +30,7 @@ function MyNav({
     className = "",
     glass = true,
     shadow = "sm",
-    brand,
+    title: title,
     menu,
     actions,
 }: MyNavProps) {
@@ -42,7 +42,7 @@ function MyNav({
                 className={navClasses}
                 style={navStyle}
             >
-                {brand && <NavBrand>{brand}</NavBrand>}
+                {title && <NavBrand>{title}</NavBrand>}
                 <NavContent>
                     {menu && <NavMenu>{menu}</NavMenu>}
                     {children}

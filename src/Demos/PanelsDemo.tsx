@@ -1,124 +1,115 @@
 import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
 import MyButton from "../Components/MyUI/MyButton/MyButton";
+import DemoLayout, { DemoSection } from "./DemoLayout";
 
 const PanelsDemo = () => {
     return (
-        <div className="p-4 md:p-8 space-y-12">
-            <MyPanel>
-                <header className="text-center mb-12">
-                    <h1 className="text-4xl font-extrabold tracking-tight mb-2">MyPanel 组件</h1>
-                    <p className="text-lg text-gray-500 dark:text-gray-400">一个多功能的容器，用于组织和突出显示内容。</p>
-                </header>
+        <DemoLayout
+            title="MyPanel 组件"
+            description="用于组织内容、制造分层和打造场景氛围的万能容器。通过尺寸、投影、玻璃态与背景图的组合，MyPanel 能从表单卡片扩展到英雄横幅。"
+        >
+            <DemoSection
+                title="场景一：通用内容容器"
+                accentClassName="border-blue-500"
+                description={(
+                    <>
+                        默认玻璃态即可提供柔和背景与分层感，非常适合作为设置面板、表单或信息块的包裹容器。
+                    </>
+                )}
+            >
+                <MyPanel>
+                    <h3 className="mb-2 text-lg font-bold">个人资料设置</h3>
+                    <p>在这里修改您的个人信息和偏好设置。</p>
+                </MyPanel>
+            </DemoSection>
 
-                {/* 场景一: 通用内容容器 */}
-                <section>
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-blue-500 pl-4">场景一：通用内容容器</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        <code>MyPanel</code> 的最基本用途是作为一个内容容器。默认情况下，它带有优雅的玻璃拟态效果，非常适合包裹文本、表单或其他组件，使界面布局更有条理。
-                    </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel>
-                            <h3 className="font-bold text-lg mb-2">个人资料设置</h3>
-                            <p>在这里修改您的个人信息和偏好设置。</p>
-                            {/* 可以在这里放置表单 */}
-                        </MyPanel>
+            <DemoSection
+                title="场景二：突出重要信息"
+                accentClassName="border-green-500"
+                description="运用 variant 配色打造 CTA 或通知区域，视觉上更具指向性。"
+            >
+                <MyPanel size="large" variant={{ role: 'primary', color: 'blue' }}>
+                    <h3 className="mb-2 text-xl font-bold">升级到高级版</h3>
+                    <p>解锁所有高级功能，享受无限制的创作体验。</p>
+                    <div className="mt-4">
+                        <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
                     </div>
-                </section>
+                </MyPanel>
+            </DemoSection>
 
-                {/* 场景二: 突出重要信息 */}
-                <section className="mt-12">
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-green-500 pl-4">场景二：突出重要信息</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        使用 <code>variant</code> 属性，可以将面板变成一个醒目的行动号召 (Call to Action) 区域或重要通知。
-                    </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel size="large" variant={{ role: 'primary', color: 'blue' }}>
-                            <h3 className="font-bold text-xl mb-2">升级到高级版</h3>
-                            <p>解锁所有高级功能，享受无限制的创作体验。</p>
-                            <div className="mt-4">
-                                <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
-                            </div>
-                        </MyPanel>
-                    </div>
-                </section>
+            <DemoSection
+                title="场景三：创造深度与质感"
+                accentClassName="border-amber-500"
+                description={(
+                    <>
+                        关闭玻璃态并叠加 <code>shadow</code>，就能获得更具实体感的卡片效果，这在 Material 风格页面中十分常见。
+                    </>
+                )}
+            >
+                <MyPanel glass={false} shadow="lg" variant={{ role: 'warning', color: 'yellow' }}>
+                    <h3 className="mb-2 text-lg font-bold">新功能发布</h3>
+                    <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
+                </MyPanel>
+            </DemoSection>
 
-                {/* 场景三: 创造深度与质感 */}
-                <section className="mt-12">
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-amber-500 pl-4">场景三：创造深度与质感</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        当玻璃拟态不适用时，可以通过设置 <code>glass={`{false}`}</code> 和 <code>shadow</code> 来创建具有实体感和层次感的面板，这在Material Design风格中很常见。
-                    </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel glass={false} shadow="lg" variant={{ role: 'warning', color: 'yellow' }}>
-                            <h3 className="font-bold text-lg mb-2">新功能发布</h3>
-                            <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
-                        </MyPanel>
-                    </div>
-                </section>
+            <DemoSection
+                title="交互与投影 (Elevation)"
+                accentClassName="border-indigo-500"
+                description="不同的 shadow 等级与 glass 组合，帮助界面形成轻重缓急的层次。"
+                panelProps={{ className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" }}
+            >
+                {(['sm', 'md', 'lg'] as const).map((sh) => (
+                    <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small">
+                        <h4 className="mb-1 font-semibold">实体 shadow={sh}</h4>
+                        <p className="text-sm opacity-80">glass=false</p>
+                    </MyPanel>
+                ))}
+                {(['sm', 'md', 'lg'] as const).map((sh) => (
+                    <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small">
+                        <h4 className="mb-1 font-semibold">玻璃 {sh}</h4>
+                        <p className="text-sm opacity-80">glass=true</p>
+                    </MyPanel>
+                ))}
+                <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }}>
+                    <h4 className="mb-1 font-semibold">自定义颜色</h4>
+                    <p className="text-sm opacity-80">color="purple"</p>
+                </MyPanel>
+            </DemoSection>
 
-                {/* 交互 & Elevation 对比 */}
-                <section className="mt-12">
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-indigo-500 pl-4">交互与投影 (Elevation)</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        面板在不同投影与玻璃态下的层次差异。玻璃态更柔和，实体投影更强调浮起感。
+            <DemoSection
+                title="场景四：视觉叙事与装饰"
+                accentClassName="border-purple-500"
+                description={(
+                    <>
+                        <code>backgroundImage</code> 与 <code>title</code> 让面板化身英雄横幅或欢迎区域，玻璃态能够让背景图隐约透出。
+                    </>
+                )}
+            >
+                <MyPanel
+                    size="large"
+                    shadow="xl"
+                    backgroundImage="/demo.png"
+                    title="欢迎来到我们的社区"
+                    variant={{ role: 'primary', color: 'blue' }}
+                    className="text-white"
+                >
+                    <p className="font-bold">
+                        在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
                     </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {(['sm', 'md', 'lg'] as const).map(sh => (
-                            <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small">
-                                <h4 className="font-semibold mb-1">实体 shadow={sh}</h4>
-                                <p className="text-sm opacity-80">glass=false</p>
-                            </MyPanel>
-                        ))}
-                        {(['sm', 'md', 'lg'] as const).map(sh => (
-                            <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small">
-                                <h4 className="font-semibold mb-1">玻璃 {sh}</h4>
-                                <p className="text-sm opacity-80">glass=true</p>
-                            </MyPanel>
-                        ))}
-                        <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }}>
-                            <h4 className="font-semibold mb-1">自定义颜色</h4>
-                            <p className="text-sm opacity-80">color="purple"</p>
-                        </MyPanel>
-                    </div>
-                </section>
+                </MyPanel>
+            </DemoSection>
 
-                {/* 场景四: 视觉叙事与装饰 */}
-                <section className="mt-12">
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-purple-500 pl-4">场景四：视觉叙事与装饰</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        通过 <code>backgroundImage</code> 和 <code>title</code> 属性，面板可以成为一个富有表现力的视觉元素，非常适合用作页面头部、特色卡片或欢迎横幅。
-                    </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel
-                            size="large"
-                            shadow="xl"
-                            backgroundImage="/demo.png"
-                            title="欢迎来到我们的社区"
-                            variant={{ role: 'primary', color: 'blue' }}
-                            className="text-white"
-                        >
-                            <p className="font-bold">
-                                在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
-                            </p>
-                        </MyPanel>
-                    </div>
-                </section>
-
-                {/* 场景五: 表示非活动状态 */}
-                <section className="mt-12">
-                    <h2 className="text-3xl font-bold mb-4 border-l-4 border-gray-500 pl-4">场景五：表示非活动状态</h2>
-                    <p className="text-gray-600 dark:text-gray-300 mb-6">
-                        使用 <code>disabled</code> 属性可以清晰地向用户传达某个区域当前不可用，例如在特定条件下禁用的功能模块。
-                    </p>
-                    <div className="bg-gray-50 dark:bg-gray-800/50 p-6 rounded-lg">
-                        <MyPanel size="small" disabled>
-                            <h3 className="font-bold text-md mb-2">高级筛选（未激活）</h3>
-                            <p>升级到高级版以解锁此功能。</p>
-                        </MyPanel>
-                    </div>
-                </section>
-            </MyPanel>
-        </div>
+            <DemoSection
+                title="场景五：表示非活动状态"
+                accentClassName="border-gray-500"
+                description="通过 disabled 属性，淡化视觉与指针交互，传达当前不可用状态。"
+            >
+                <MyPanel size="small" disabled>
+                    <h3 className="mb-2 text-md font-bold">高级筛选（未激活）</h3>
+                    <p>升级到高级版以解锁此功能。</p>
+                </MyPanel>
+            </DemoSection>
+        </DemoLayout>
     );
 };
 
