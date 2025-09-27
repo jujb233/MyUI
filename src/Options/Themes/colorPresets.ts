@@ -1,5 +1,5 @@
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
-import { INTENSITY, type IntensityName } from "../colorThemes";
+import { INTENSITY, type IntensityName } from "./colorThemes";
 
 /**
  * 定义颜色预设的渐变起止点

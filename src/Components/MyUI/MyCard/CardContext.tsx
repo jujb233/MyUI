@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import type { UseMyCardProps } from "../Hooks/useMyCard";
-import type { SizeName } from "../../../Styles";
+import type { SizeName } from "../../../Options";
 
 export type CardContextType = UseMyCardProps & {
     size: SizeName;
@@ -21,7 +21,7 @@ export const CardContext = createContext<CardContextType | null>(null);
 export const useCardContext = () => {
     const context = useContext(CardContext);
     if (!context) {
-        throw new Error("useCardContext must be used within a MyCard component");
+        throw new Error("useCardContext必须在MyCard组件中使用");
     }
     return context;
 };

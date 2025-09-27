@@ -1,4 +1,4 @@
-import type { COLOR_BASE } from "./Themes/colorPresets";
+import type { COLOR_BASE } from "./colorPresets";
 
 /**
  * 强度变体（Intensity Variants）

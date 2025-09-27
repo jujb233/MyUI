@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import { buildInteractionClasses } from "../Styles";
+import { buildInteractionClasses } from "../Options";
 
 /**
  * @description `useComponentClasses` 的属性

@@ -1,7 +1,7 @@
 import type React from 'react';
 import { resolveTheme, type ThemeResolverParams } from '../Themes/themeResolver';
-import { SHADOWS, type ShadowName } from '../styleConstants';
-import { resolveElevation, type ElevationKind } from '../elevation';
+import { SHADOWS, type ShadowName } from '../Styles/styleConstants';
+import { resolveElevation, type ElevationKind } from '../Styles/elevation';
 import type { ComponentTheme } from '../Themes/themeBuilder';
 
 export interface ThemeOptions extends ThemeResolverParams {

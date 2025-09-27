@@ -1,4 +1,4 @@
-import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Styles";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Options";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import clsx from "clsx";
 

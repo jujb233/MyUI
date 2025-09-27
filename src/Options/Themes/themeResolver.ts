@@ -1,4 +1,4 @@
-import { DEFAULT_BASE_COLOR, type IntensityName } from "../colorThemes";
+import { DEFAULT_BASE_COLOR, type IntensityName } from "./colorThemes";
 import { type ColorPresetName, PRESET_THEMES } from "./colorPresets";
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
 import { adjustColorBrightness, isHexColor } from "../Utils/colorUtils";

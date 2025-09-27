@@ -1,6 +1,6 @@
 import MyButton from "../Components/MyUI/MyButton/MyButton";
 import MyPanel from "../Components/MyUI/MyPanel/MyPanel";
-import { VARIANT_ROLE_STYLES } from "../Styles";
+import { VARIANT_ROLE_STYLES } from "../Options";
 
 const ButtonsDemo = () => {
     const variants = Object.keys(VARIANT_ROLE_STYLES) as (keyof typeof VARIANT_ROLE_STYLES)[];

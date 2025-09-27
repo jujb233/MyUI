@@ -3,7 +3,7 @@ import {
     type ComponentVariant,
     type SizeName,
     type ShadowName,
-} from "../../../Styles";
+} from "../../../Options";
 import { PanelProvider } from "./PanelContext";
 import PanelHeader from "./PanelHeader";
 import PanelContent from "./PanelContent";

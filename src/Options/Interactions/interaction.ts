@@ -2,13 +2,13 @@
  * 交互（hover/active）行为统一配置。
  * 避免在各组件内分散硬编码 scale/translate 类。
  */
-export interface InteractionBehavior {
+export interface Interaction {
     classes: string;
 }
 
 export type InteractionKind = 'button' | 'card' | 'panel';
 
-const BASE: Record<InteractionKind, InteractionBehavior> = {
+const INTERACTION_BASE: Record<InteractionKind, Interaction> = {
     button: {
         classes: [
             'transition-transform',
@@ -38,12 +38,12 @@ export interface UseInteractionParams {
     enabled?: boolean;
 }
 
-export function getInteractionBehavior(kind: InteractionKind): InteractionBehavior {
-    return BASE[kind];
+export function getInteraction(kind: InteractionKind): Interaction {
+    return INTERACTION_BASE[kind];
 }
 
 export function buildInteractionClasses(params: UseInteractionParams): string | undefined {
     const { kind, enabled } = params;
     if (!enabled) return undefined;
-    return getInteractionBehavior(kind).classes;
+    return getInteraction(kind).classes;
 }

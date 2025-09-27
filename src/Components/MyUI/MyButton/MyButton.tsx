@@ -3,7 +3,7 @@ import {
     type ComponentVariant,
     type SizeName,
     type ShadowName,
-} from "../../../Styles";
+} from "../../../Options";
 import { ButtonProvider } from "./ButtonContext";
 import ButtonContent from "./ButtonContent";
 import ButtonIcon from "./ButtonIcon";

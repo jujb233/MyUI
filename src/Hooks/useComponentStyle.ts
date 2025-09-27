@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { useComponentTheme, type VariantName, type Color, type ShadowName, VARIANT_ROLE_STYLES, type VariantRole } from "../Styles";
-import type { ElevationKind } from "../Styles";
+import { useComponentTheme, type VariantName, type Color, type ShadowName, VARIANT_ROLE_STYLES, type VariantRole } from "../Options";
+import type { ElevationKind } from "../Options";
 
 /**
  * @description `useComponentStyle` 的属性
