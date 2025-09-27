@@ -1,7 +1,7 @@
 import React from "react";
 import { useMyCard, type UseMyCardProps } from "../Hooks/useMyCard";
 import ErrorBoundary from "../../Utils/ErrorBoundary";
-import { CardContext, type CardContextType } from "./Context";
+import { CardContext, type CardContextType } from "./CardContext";
 import { CardImage } from "./CardImage";
 
 export type MyCardProps = UseMyCardProps & {

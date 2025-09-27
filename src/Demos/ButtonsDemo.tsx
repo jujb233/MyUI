@@ -40,7 +40,7 @@ const ButtonsDemo = () => {
                         使用 <code>color</code> 属性为按钮赋予不同的情感和语义。
                     </p>
                     <MyPanel glass className="p-6 rounded-lg flex flex-wrap justify-center gap-6">
-                        <MyButton variant={{ role: 'success', color: 'green' }}>保存成功</MyButton>
+                        <MyButton variant={{ role: 'success', color: 'blue' }}>保存成功</MyButton>
                         <MyButton variant={{ role: 'danger', color: 'red' }}>删除警告</MyButton>
                         <MyButton variant={{ role: 'warning', color: 'yellow' }}>操作确认</MyButton>
                         <MyButton variant={{ role: 'primary', color: 'blue' }}>常规操作</MyButton>

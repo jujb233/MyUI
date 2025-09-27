@@ -4,7 +4,7 @@ import {
     type SizeName,
     type ShadowName,
 } from "../../../Styles";
-import { ButtonProvider } from "./Context";
+import { ButtonProvider } from "./ButtonContext";
 import ButtonContent from "./ButtonContent";
 import ButtonIcon from "./ButtonIcon";
 import ButtonActions from "./ButtonActions";

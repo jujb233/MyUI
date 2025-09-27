@@ -1,5 +1,5 @@
 import React from "react";
-import { useCardContext } from "./Context";
+import { useCardContext } from "./CardContext";
 import { getCardImageClasses } from "./cardUtils";
 
 export const CardImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = "" }) => {

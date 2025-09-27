@@ -4,7 +4,7 @@ import {
     type SizeName,
     type ShadowName,
 } from "../../../Styles";
-import { PanelProvider } from "./Context";
+import { PanelProvider } from "./PanelContext";
 import PanelHeader from "./PanelHeader";
 import PanelContent from "./PanelContent";
 import PanelFooter from "./PanelFooter";

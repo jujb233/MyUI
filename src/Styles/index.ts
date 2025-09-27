@@ -2,14 +2,14 @@
 export type { Color, VariantRole, ComponentVariant } from './variantBehaviors';
 export type { IntensityName as VariantName } from './colorThemes';
 export type { ColorPresetName } from './Themes/colorPresets';
-export type { SizeName, CardSizeName } from './sizeConfig';
+export type { SizeName } from './sizeConfig';
 export type { ShadowName } from './styleConstants';
 
 // 主题解析器 (核心 API)
 export { computeComponentTheme, type ThemeOptions as ComponentThemeParams, type ComponentThemeResult } from './Utils/componentTheme';
 
 // 尺寸配置
-export { SIZE_CONFIG, CARD_SIZE_CONFIG } from './sizeConfig';
+export { SIZE_CONFIG } from './sizeConfig';
 export { DEFAULT_STYLES } from './styleConstants';
 
 // 样式常量

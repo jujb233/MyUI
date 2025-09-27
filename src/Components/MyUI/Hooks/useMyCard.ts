@@ -1,11 +1,11 @@
-import { CARD_SIZE_CONFIG, type ComponentVariant, type CardSizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Styles";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Styles";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import { useComponentClasses } from "../../../Hooks/useComponentClasses";
 import { useCardLayout } from "../../../Hooks/useCardLayout";
 
 export type UseMyCardProps = {
     variant?: ComponentVariant;
-    size?: CardSizeName;
+    size?: SizeName;
     glass?: boolean;
     clickable?: boolean;
     className?: string;
@@ -36,7 +36,7 @@ export function useMyCard(props: UseMyCardProps) {
     const color = variantProp?.color || 'blue';
     const variant = VARIANT_ROLE_STYLES[role] as any;
 
-    const sizeConfig = CARD_SIZE_CONFIG[size];
+    const sizeConfig = SIZE_CONFIG[size];
     const { style: cardStyle } = useComponentStyle({
         variant,
         color,

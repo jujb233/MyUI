@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 import type { UseMyCardProps } from "../Hooks/useMyCard";
-import type { CardSizeName } from "../../../Styles";
+import type { SizeName } from "../../../Styles";
 
 export type CardContextType = UseMyCardProps & {
-    size: CardSizeName;
+    size: SizeName;
     isHorizontal: boolean;
     imagePosition: "top" | "left" | "right" | "background";
     sizeConfig: {
