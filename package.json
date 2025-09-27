@@ -1,7 +1,7 @@
 {
   "name": "@jujb233/myui",
   "private": false,
-  "version": "19.3.2",
+  "version": "19.4.0",
   "type": "module",
   "description": "一个使用Taildwind CSS的现代React UI组件库",
   "keywords": [

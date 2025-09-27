@@ -1,6 +1,21 @@
-import { type ComponentTheme } from "../../Options";
+import type { SizeName } from "../../../Options";
 
-export const MyNavTheme: ComponentTheme = {
+type NavVariant = 'solid' | 'soft' | 'subtle' | 'text';
+
+interface MyNavTheme {
+    defaultProps: {
+        size: SizeName;
+        variant: NavVariant;
+    },
+    styles: {
+        root: {
+            base: string;
+            sizes: Record<SizeName, string>;
+        }
+    }
+}
+
+export const MyNavTheme: MyNavTheme = {
     defaultProps: {
         size: 'medium',
         variant: 'solid',
