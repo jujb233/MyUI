@@ -3,26 +3,7 @@ import { useMyCard } from "../Hooks/useMyCard";
 import ErrorBoundary from "../../Utils/ErrorBoundary";
 import { CardContext, type CardContextType } from "./CardContext";
 import { CardImage } from "./CardImage";
-import type {
-    ThemeableProps,
-    StylableProps,
-    BorderableProps,
-    ClickableProps,
-    OrientationProps,
-    MediaPlacementProps,
-    PressableProps,
-} from "../Interfase";
-
-export type MyCardProps =
-    ThemeableProps &
-    StylableProps &
-    BorderableProps &
-    ClickableProps &
-    OrientationProps &
-    MediaPlacementProps &
-    PressableProps<HTMLDivElement> & {
-        children: React.ReactNode;
-    };
+import type { MyCardProps } from "./Interfase/myCardProps";
 
 function CardRoot({
     children,

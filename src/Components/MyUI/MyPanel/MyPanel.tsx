@@ -1,29 +1,9 @@
-import React from "react";
-import { type SizeName } from "../../../Options";
 import { PanelProvider } from "./PanelContext";
 import PanelHeader from "./PanelHeader";
 import PanelContent from "./PanelContent";
 import PanelFooter from "./PanelFooter";
 import { useMyPanel } from "../Hooks/useMyPanel";
-import type {
-    ThemeableProps,
-    StylableProps,
-    DisableableProps,
-    WithTitleProps,
-    WithBackgroundImageProps,
-    WithFooterProps,
-} from "../Interfase";
-
-export type MyPanelProps =
-    ThemeableProps &
-    StylableProps &
-    DisableableProps &
-    WithTitleProps &
-    WithBackgroundImageProps &
-    WithFooterProps & {
-        size?: SizeName;
-        children?: React.ReactNode;
-    };
+import type { MyPanelProps } from "./Interfase/myPanelProps";
 
 function MyPanel({
     variant,

@@ -1,22 +1,10 @@
-import React from "react";
-import { type SizeName } from "../../../Options";
 import { NavProvider } from "./NavContext";
 import NavContent from "./NavContent";
 import NavActions from "./NavActions";
 import NavBrand from "./NavBrand";
 import NavMenu from "./NavMenu";
 import { useMyNav } from "../Hooks/useMyNav";
-import type { ThemeableProps, StylableProps, WithTitleProps, WithActionsProps } from "../Interfase";
-
-export type MyNavProps =
-    ThemeableProps &
-    StylableProps &
-    WithTitleProps &
-    WithActionsProps & {
-        size?: SizeName;
-        children?: React.ReactNode;
-        menu?: React.ReactNode;
-    };
+import type { MyNavProps } from "./Interfase/myNavProps";
 
 function MyNav({
     variant,
@@ -26,7 +14,7 @@ function MyNav({
     style,
     glass = true,
     shadow = "sm",
-    title: title,
+    title,
     menu,
     actions,
 }: MyNavProps) {
