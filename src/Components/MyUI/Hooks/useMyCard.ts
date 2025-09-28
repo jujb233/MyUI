@@ -71,6 +71,9 @@ export function useMyCard(props: UseMyCardProps) {
         sizeConfig,
         cardStyle,
         containerClasses,
+        // 统一命名别名
+        rootStyle: cardStyle,
+        rootClasses: containerClasses,
         bodyClasses,
         isHorizontal,
         imagePosition,

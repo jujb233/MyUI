@@ -65,6 +65,9 @@ export function useMyPanel(props: UseMyPanelProps) {
         sizeStyle,
         panelStyle,
         panelClasses,
+        // 统一命名别名
+        rootStyle: panelStyle,
+        rootClasses: panelClasses,
         disabled,
         title,
         backgroundImage,

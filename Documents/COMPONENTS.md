@@ -2,6 +2,8 @@
 
 本文档概览可用组件与通用 API 约定，便于快速定位到具体组件说明。
 
+> 想了解“统一 API 接口（Interfase）”及如何为新组件定义一致的 Props？请阅读 [INTERFASE.md](./INTERFASE.md)。
+
 ## 可用组件
 
 - [MyButton](./MyButton.md)：按钮，支持主题（role+color）/图标/尺寸/阴影。

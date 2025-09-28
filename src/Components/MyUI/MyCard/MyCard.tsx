@@ -1,13 +1,28 @@
 import React from "react";
-import { useMyCard, type UseMyCardProps } from "../Hooks/useMyCard";
+import { useMyCard } from "../Hooks/useMyCard";
 import ErrorBoundary from "../../Utils/ErrorBoundary";
 import { CardContext, type CardContextType } from "./CardContext";
 import { CardImage } from "./CardImage";
+import type {
+    ThemeableProps,
+    StylableProps,
+    BorderableProps,
+    ClickableProps,
+    OrientationProps,
+    MediaPlacementProps,
+    PressableProps,
+} from "../Interfase";
 
-export type MyCardProps = UseMyCardProps & {
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
-    children: React.ReactNode;
-};
+export type MyCardProps =
+    ThemeableProps &
+    StylableProps &
+    BorderableProps &
+    ClickableProps &
+    OrientationProps &
+    MediaPlacementProps &
+    PressableProps<HTMLDivElement> & {
+        children: React.ReactNode;
+    };
 
 function CardRoot({
     children,
@@ -49,7 +64,7 @@ function CardRoot({
             <CardContext.Provider value={contextValue}>
                 <div
                     className={containerClasses}
-                    style={cardStyle}
+                    style={{ ...cardStyle, ...(props.style || {}) }}
                     onClick={onClick}
                     role={props.clickable ? 'button' : undefined}
                     tabIndex={props.clickable ? 0 : undefined}

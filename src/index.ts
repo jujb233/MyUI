@@ -5,3 +5,6 @@ export { default as MyCard } from './Components/MyUI/MyCard/MyCard'
 // 导出组件类型  
 export type { MyButtonProps } from './Components/MyUI/MyButton/MyButton'
 export type { MyCardProps } from './Components/MyUI/MyCard/MyCard'
+
+// 导出通用接口/插槽/契约（Interfase）
+export * from './Components/MyUI/Interfase'

@@ -70,6 +70,9 @@ export function useMyButton(props: UseMyButtonProps) {
         sizeStyle,
         buttonStyle,
         buttonClasses,
+        // 统一命名别名
+        rootStyle: buttonStyle,
+        rootClasses: buttonClasses,
         disabled,
         glass,
     };

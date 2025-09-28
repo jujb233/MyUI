@@ -33,5 +33,5 @@ export function useMyNav(options: UseMyNavOptions) {
         className
     );
 
-    return { navStyle, navClasses };
+    return { navStyle, navClasses, rootStyle: navStyle, rootClasses: navClasses };
 }

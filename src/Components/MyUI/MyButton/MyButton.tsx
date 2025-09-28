@@ -1,37 +1,40 @@
 import React from "react";
-import {
-    type ComponentVariant,
-    type SizeName,
-    type ShadowName,
-} from "../../../Options";
+import { type SizeName } from "../../../Options";
 import { ButtonProvider } from "./ButtonContext";
 import ButtonContent from "./ButtonContent";
 import ButtonIcon from "./ButtonIcon";
 import ButtonActions from "./ButtonActions";
 import { useMyButton } from "../Hooks/useMyButton";
+import type {
+    ThemeableProps,
+    StylableProps,
+    DisableableProps,
+    PressableProps,
+    WithIconProps,
+    WithActionsProps,
+    HtmlTypeProp,
+} from "../Interfase";
 
-export type MyButtonProps = {
-    htmlType?: "button" | "submit" | "reset";
-    variant?: ComponentVariant;
-    size?: SizeName;
-    disabled?: boolean;
-    onClick?: React.MouseEventHandler<HTMLButtonElement>;
-    children?: React.ReactNode;
-    className?: string;
-    glass?: boolean;
-    shadow?: ShadowName;
-    icon?: React.ReactNode;
-    actions?: React.ReactNode;
-};
+export type MyButtonProps =
+    ThemeableProps &
+    StylableProps &
+    DisableableProps &
+    PressableProps<HTMLButtonElement> &
+    WithIconProps &
+    WithActionsProps &
+    HtmlTypeProp & {
+        children?: React.ReactNode;
+    };
 
 function MyButton({
     htmlType = "button",
     variant,
-    size = "medium",
+    size = "medium" as SizeName,
     disabled = false,
     onClick,
     children,
     className = "",
+    style,
     glass = true,
     shadow = "sm",
     icon,
@@ -46,7 +49,7 @@ function MyButton({
                 disabled={disabled}
                 onClick={onClick}
                 className={buttonClasses}
-                style={buttonStyle}
+                style={{ ...buttonStyle, ...(style || {}) }}
             >
                 {icon && <ButtonIcon icon={icon} />}
                 <ButtonContent>{children}</ButtonContent>
