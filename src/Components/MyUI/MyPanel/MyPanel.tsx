@@ -3,6 +3,7 @@ import PanelHeader from "./PanelHeader";
 import PanelContent from "./PanelContent";
 import PanelFooter from "./PanelFooter";
 import { useMyPanel } from "../Hooks/useMyPanel";
+import { useAnimation } from "../Hooks/useAnimation";
 import type { MyPanelProps } from "./Interface/myPanelProps";
 
 function MyPanel({
@@ -17,11 +18,14 @@ function MyPanel({
     title,
     backgroundImage,
     footer,
+    animation,
 }: MyPanelProps) {
     const { panelStyle, panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title: typeof title === 'string' ? title : undefined, backgroundImage });
+    const animationClasses = useAnimation(animation);
+    const classes = [panelClasses, animationClasses].filter(Boolean).join(" ");
     return (
         <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage }}>
-            <div className={panelClasses} style={{ ...panelStyle, ...(style || {}) }}>
+            <div className={classes} style={{ ...panelStyle, ...(style || {}) }}>
                 <PanelHeader title={title} />
                 <PanelContent>{children}</PanelContent>
                 {footer && <PanelFooter>{footer}</PanelFooter>}

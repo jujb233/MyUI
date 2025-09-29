@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import MyCard from "../Components/MyUI/MyCard";
 import MyButton from "../Components/MyUI/MyButton/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
@@ -93,6 +94,75 @@ const CardsDemo = () => {
                     <MyCard.Header>系统更新</MyCard.Header>
                     <MyCard.Content>系统将在今晚凌晨2点进行维护更新，届时服务可能会短暂中断。</MyCard.Content>
                 </MyCard>
+            </DemoSection>
+
+            <DemoSection
+                title="场景四：入场动画（更直观）"
+                accentClassName="border-cyan-500"
+                description={(
+                    <>
+                        更典型的动画演示：支持一键重播与交错播放，便于对比不同动画类型与节奏。
+                    </>
+                )}
+                panelProps={{ className: "space-y-4" }}
+            >
+                {(() => {
+                    const [replayKey, setReplayKey] = useState(0);
+                    const [stagger, setStagger] = useState(true);
+
+                    const items = useMemo(
+                        () => [
+                            { label: '淡入（fade）', config: { type: 'fade' as const } },
+                            { label: '向上滑入（slide-up）', config: { type: 'slide-up' as const } },
+                            { label: '向下滑入（slide-down）', config: { type: 'slide-down' as const } },
+                            { label: '缩放进入（scale-in）', config: { type: 'scale-in' as const } },
+                            { label: '自定义时长（slide-down, 600ms）', config: { type: 'slide-down' as const, duration: 600 } },
+                            { label: '自定义延迟（fade, 300ms）', config: { type: 'fade' as const, delay: 300 } },
+                            { label: '自定义缓动（slide-up, in-out）', config: { type: 'slide-up' as const, easing: 'in-out' as const } },
+                        ],
+                        []
+                    );
+
+                    return (
+                        <div className="space-y-4">
+                            <div className="flex items-center gap-4">
+                                <MyButton
+                                    size="small"
+                                    variant={{ role: 'primary', color: 'blue' }}
+                                    onClick={() => setReplayKey((k) => k + 1)}
+                                >
+                                    重播全部
+                                </MyButton>
+                                <label className="flex items-center gap-2 text-sm select-none cursor-pointer">
+                                    <input
+                                        type="checkbox"
+                                        checked={stagger}
+                                        onChange={(e) => setStagger(e.target.checked)}
+                                    />
+                                    交错播放
+                                </label>
+                            </div>
+
+                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                {items.map((item, idx) => {
+                                    const cfg: any = { ...(item.config as any) };
+                                    if (stagger) {
+                                        cfg.delay = (cfg.delay || 0) + idx * 120; // 交错更明显
+                                    }
+                                    return (
+                                        <MyCard
+                                            key={`${replayKey}-${idx}`}
+                                            animation={cfg}
+                                            className="h-28 flex items-center justify-center"
+                                        >
+                                            <MyCard.Header>{item.label}</MyCard.Header>
+                                        </MyCard>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    );
+                })()}
             </DemoSection>
 
             <DemoSection

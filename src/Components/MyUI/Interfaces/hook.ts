@@ -1,7 +1,4 @@
-/**
- * 统一的交互种类，用于 buildInteractionClasses 等工具
- */
-export type InteractionKind = 'button' | 'card' | 'panel' | 'nav';
+// 已统一交互 API，取消基于 kind 的交互类型。
 
 /**
  * Hook 返回值约定（基础）：统一命名 rootStyle/rootClasses

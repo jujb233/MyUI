@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import { buildInteractionClasses } from "../Options";
+import { buildHookInteractionClasses } from "../Components/MyUI/Interfaces/Interaction";
 
 /**
  * @description `useComponentClasses` 的属性
@@ -48,10 +48,12 @@ export type UseComponentClassesProps = {
      */
     bordered?: boolean;
     /**
-     * @description 交互类型
-     * @default "card"
+     * @description 是否启用统一交互（hover/active）
+     * @default true（当 hoverable 或 clickable 为 true 时生效）
      */
-    interactionKind?: any;
+    interactionEnabled?: boolean;
+    /** 是否显示 focus ring（容器类组件默认不显示） */
+    focusRing?: boolean;
 };
 
 /**
@@ -69,7 +71,8 @@ export function useComponentClasses(props: UseComponentClassesProps) {
         hoverable = true,
         clickable = false,
         className = "",
-        interactionKind = "card",
+        interactionEnabled = true,
+        focusRing = false,
     } = props;
     // bordered 仅用于类型兼容，实际 class 逻辑未用到
 
@@ -86,11 +89,11 @@ export function useComponentClasses(props: UseComponentClassesProps) {
             ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]"
             : "[background:var(--bg)] hover:[background:var(--bg-hover)]",
         "text-[var(--text)] border border-[var(--border)]",
-        (hoverable || clickable) && buildInteractionClasses({ kind: interactionKind, enabled: true }),
+        (hoverable || clickable) && interactionEnabled && buildHookInteractionClasses({ enabled: true, focusRing }),
         clickable && "cursor-pointer",
         glass && "backdrop-blur-md",
         className
-    ), [isHorizontal, imagePosition, sizeConfig, glass, hoverable, clickable, className, baseClass, interactionKind]);
+    ), [isHorizontal, imagePosition, sizeConfig, glass, hoverable, clickable, className, baseClass, interactionEnabled, focusRing]);
 
     return { containerClasses, isHorizontal };
 }

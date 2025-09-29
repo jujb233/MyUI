@@ -6,6 +6,7 @@ import type {
     OrientationProps,
     MediaPlacementProps,
     Pressable,
+    AnimationProps,
 } from "../../Interfaces";
 
 export type MyCardProps =
@@ -17,4 +18,4 @@ export type MyCardProps =
     MediaPlacementProps &
     Pressable<HTMLDivElement> & {
         children: React.ReactNode;
-    };
+    } & AnimationProps;

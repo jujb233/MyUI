@@ -25,3 +25,4 @@ export { useThemeStyles as useComponentTheme } from './Utils/useComponentTheme';
 export { resolveElevation } from './Styles/elevation';
 export type { ElevationKind } from './Styles/elevation';
 export { buildInteractionClasses } from './Interactions/interaction';
+export type { BuildInteractionOptions } from './Interactions/interaction';

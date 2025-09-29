@@ -1,5 +1,6 @@
 import React from "react";
 import { useMyCard } from "../Hooks/useMyCard";
+import { useAnimation } from "../Hooks/useAnimation";
 import ErrorBoundary from "../../Utils/ErrorBoundary";
 import { CardContext, type CardContextType } from "./CardContext";
 import { CardImage } from "./CardImage";
@@ -20,6 +21,9 @@ function CardRoot({
         bodyClasses,
         ...rest
     } = useMyCard({ ...props, hasImage });
+
+    // 解析动画类名
+    const animationClasses = useAnimation(props.animation);
 
     const contextValue: CardContextType = {
         ...props,
@@ -44,7 +48,7 @@ function CardRoot({
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Card component failed to render.</div>}>
             <CardContext.Provider value={contextValue}>
                 <div
-                    className={containerClasses}
+                    className={[containerClasses, animationClasses].filter(Boolean).join(" ")}
                     style={{ ...cardStyle, ...(props.style || {}) }}
                     onClick={onClick}
                     role={props.clickable ? 'button' : undefined}

@@ -56,7 +56,7 @@ export function useMyCard(props: UseMyCardProps) {
         clickable,
         className,
         bordered,
-        interactionKind: "card",
+        interactionEnabled: true,
     });
     const bodyClasses = [
         "my-card-body",

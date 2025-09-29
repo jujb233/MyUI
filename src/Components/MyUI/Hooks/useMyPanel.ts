@@ -1,4 +1,5 @@
-import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Options";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Options";
+import { buildHookInteractionClasses } from "../Interfaces/Interaction";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import clsx from "clsx";
 
@@ -53,7 +54,7 @@ export function useMyPanel(props: UseMyPanelProps) {
         glass
             ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] text-[var(--text)]"
             : "[background:var(--bg)] hover:[background:var(--bg-hover)] text-[var(--text)]",
-        !disabled && buildInteractionClasses({ kind: 'panel', enabled: true }),
+        !disabled && buildHookInteractionClasses({ enabled: true, focusRing: false }),
         glass && "backdrop-blur-md",
         backgroundImage && "bg-cover bg-center",
         disabled && "opacity-60 cursor-not-allowed",

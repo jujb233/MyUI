@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import type { MyPanelProps } from "./MyPanel";
+import type { MyPanelProps } from "./Interface/myPanelProps";
 
 export type PanelContextType = Omit<MyPanelProps, "children" | "className">;
 

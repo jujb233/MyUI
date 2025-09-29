@@ -6,6 +6,7 @@ import type {
     WithTitle,
     WithBackgroundImage,
     WithFooter,
+    AnimationProps,
 } from "../../Interfaces";
 
 export type MyPanelProps =
@@ -14,7 +15,8 @@ export type MyPanelProps =
     Disableable &
     WithTitle &
     WithBackgroundImage &
-    WithFooter & {
+    WithFooter &
+    AnimationProps & {
         size?: SizeName;
         children?: React.ReactNode;
     };

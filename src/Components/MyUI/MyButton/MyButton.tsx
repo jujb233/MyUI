@@ -4,6 +4,7 @@ import ButtonContent from "./ButtonContent";
 import ButtonIcon from "./ButtonIcon";
 import ButtonActions from "./ButtonActions";
 import { useMyButton } from "../Hooks/useMyButton";
+import { useAnimation } from "../Hooks/useAnimation";
 import type { MyButtonProps } from "./Interface/myButtonProps";
 
 function MyButton({
@@ -19,8 +20,11 @@ function MyButton({
     shadow = "sm",
     icon,
     actions,
+    animation,
 }: MyButtonProps) {
     const { buttonStyle, buttonClasses } = useMyButton({ variant, size, glass, shadow, disabled, className });
+    const animationClasses = useAnimation(animation);
+    const classes = [buttonClasses, animationClasses].filter(Boolean).join(" ");
 
     return (
         <ButtonProvider value={{ variant, size, glass, shadow, disabled }}>
@@ -28,7 +32,7 @@ function MyButton({
                 type={htmlType}
                 disabled={disabled}
                 onClick={onClick}
-                className={buttonClasses}
+                className={classes}
                 style={{ ...buttonStyle, ...(style || {}) }}
             >
                 {icon && <ButtonIcon icon={icon} />}

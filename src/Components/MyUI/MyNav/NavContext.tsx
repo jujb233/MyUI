@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import type { MyNavProps } from "./MyNav";
+import type { MyNavProps } from "./Interface/myNavProps";
 
 export type NavContextType = Omit<MyNavProps, "children" | "className">;
 

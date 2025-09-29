@@ -1,4 +1,5 @@
-import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, buildInteractionClasses, VARIANT_ROLE_STYLES } from "../../../Options";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, VARIANT_ROLE_STYLES } from "../../../Options";
+import { buildHookInteractionClasses } from "../Interfaces/Interaction";
 import { useComponentStyle } from "../../../Hooks/useComponentStyle";
 import clsx from "clsx";
 
@@ -58,9 +59,8 @@ export function useMyButton(props: UseMyButtonProps) {
             ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
             : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
         'text-[var(--text)]',
-        buildInteractionClasses({ kind: 'button', enabled: !disabled }),
+        buildHookInteractionClasses({ enabled: !disabled, focusRing: !disabled }),
         "disabled:opacity-60 disabled:cursor-not-allowed",
-        "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
         glass && !disabled && "backdrop-blur-md border",
         className
     );
