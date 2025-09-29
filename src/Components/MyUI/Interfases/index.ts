@@ -3,7 +3,7 @@ export * from './style';
 export * from './state';
 export * from './container';
 export * from './layout';
-export * from './slots';
+export * from './slot/slots';
 export * from './events';
 export * from './hook';
 export * from './button';

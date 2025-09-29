@@ -1,149 +1,150 @@
-# Interfase 指南
+# Interfase 统一接口指南
 
 本文档详细说明本库的“统一 API 接口（Interfase）”体系：它将组件的通用能力拆分为职责单一的小接口，以便在新组件中按需组合，保持一致的 Props、主题、交互与可访问性体验。
 
 ## 为什么使用 Interfase
 
-- 统一：新组件通过组合相同的小接口，天然获得一致的 Props 命名与行为。
-- 可维护：职责单一、清晰边界，类型与文档更易演进。
-- 低心智：团队成员在开发与使用组件时，能快速预期 API 形状与默认值。
+- **统一**：新组件通过组合相同的小接口，天然获得一致的 Props 命名与行为。
+- **可维护**：职责单一、清晰边界，类型与文档更易演进。
+- **低心智**：在开发与使用组件时，能快速预期 API 形状与默认值。
 
-## 目录结构
+## 核心 API 属性
 
-源代码位置：`src/Components/MyUI/Interfase/`
+以下是可在大多数组件中通用的核心属性，它们由不同的接口模块提供。
 
-- `theme.ts`：
-  - `ThemeableProps`（variant/size/glass/shadow）
-  - `ThemeContextValue`（Context 基本主题字段）
-- `style.ts`：`StylableProps`（className/style/id）
-- `state.ts`：`DisableableProps`
-- `container.ts`：`BorderableProps`、`ClickableProps`
-- `layout.ts`：`OrientationProps`、`MediaPlacementProps`
-- `slots.ts`：`WithIconProps`、`WithActionsProps`、`WithTitleProps`、`WithFooterProps`、`WithBackgroundImageProps`
-- `events.ts`：`PressableProps<T>`（onClick）
-- `hook.ts`：`InteractionKind`、`UseComponentBaseResult`
-- `button.ts`：`HtmlTypeProp`
-- `polymorphic.ts`：`AsComponent`、`PolymorphicComponentProps`
+### 主题与样式 (`theme.ts`, `style.ts`)
 
-包入口已做聚合导出：可直接从 `@jujb233/myui` 导入这些类型。
+这些是构建组件视觉表现的基础。
 
+- `variant`: `ComponentVariant` - 对象形式的主题配置，结构为 `{ role, color }`。
+  - `role`: `'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text'`
+  - `color`: `'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'gray'` (更多颜色见 `colorPresets.ts`)
+- `size`: `'small' | 'medium' | 'large'` (默认 `'medium'`)
+- `glass`: `boolean` - 是否启用玻璃态效果 (默认 `true`)
+- `shadow`: `'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'inner' | 'none'` - 阴影等级。
+- `className`: `string` - 自定义 CSS 类名。
+- `style`: `React.CSSProperties` - 自定义内联样式。
+- `id`: `string` - DOM 元素的 ID。
+
+**示例：**
+```tsx
+import { MyButton, MyCard } from '@jujb233/myui';
+
+// 语义为主操作（primary），色调为 blue
+<MyButton variant={{ role: 'primary', color: 'blue' }} size="large" />
+
+// 柔和风格的容器，带自定义阴影
+<MyCard variant={{ role: 'secondary', color: 'green' }} shadow="lg" />
+```
+
+### 状态与事件 (`state.ts`, `events.ts`)
+
+控制组件的交互状态和响应。
+
+- `disabled`: `boolean` - 禁用组件，阻止所有交互。
+- `onClick`: `React.MouseEventHandler<T>` - 点击事件回调。
+
+### 容器专属 (`container.ts`)
+
+用于卡片、面板等容器类组件。
+
+- `bordered`: `boolean` - 是否显示边框。
+- `clickable`: `boolean` - 使容器可点击，通常会附带 `role='button'` 和 `tabIndex=0` 以保证可访问性。
+- `hoverable`: `boolean` - 是否在鼠标悬停时显示反馈效果。
+
+### 布局 (`layout.ts`)
+
+控制内容和媒体的排列方式。
+
+- `direction`: `'vertical' | 'horizontal'` - 内部元素的布局方向。
+- `imagePosition`: `'top' | 'left' | 'right' | 'background'` - 图片相对于内容的位置。
+
+### 插槽 (`slot/slots.ts`)
+
+为组件提供灵活的内容注入点。
+
+- `icon`: `React.ReactNode` - 在组件前方（或指定位置）渲染图标。
+- `actions`: `React.ReactNode` - 在组件末尾（或指定位置）渲染操作按钮或元素。
+- `title`: `React.ReactNode` - 组件的标题。
+- `footer`: `React.ReactNode` - 组件的页脚区域。
+- `backgroundImage`: `string` - 设置容器的背景图片 URL。
+
+### 其他 (`button.ts`, `polymorphic.ts`)
+
+- `buttonType`: `'button' | 'submit' | 'reset'` - 仅用于按钮，指定其 `type` 属性。
+- `as`: `React.ElementType` - 多态支持，允许将组件渲染为不同的 HTML 标签，如 `as="a"`。
+
+## 接口定义源文件
+
+所有接口定义均位于 `src/Components/MyUI/Interfases/` 目录，并已在包入口聚合导出，可直接从 `@jujb233/myui` 导入。
+
+- `theme.ts`: `ThemeProps`, `ThemeContextValue`
+- `style.ts`: `StyleProps`
+- `state.ts`: `Disableable`
+- `container.ts`: `Borderable`, `Clickable`
+- `layout.ts`: `OrientationProps`, `MediaPlacementProps`
+- `slot/slots.ts`: `WithIcon`, `WithActions`, `WithTitle`, `WithFooter`, `WithBackgroundImage`
+- `events.ts`: `Pressable<T>`
+- `button.ts`: `HtmlButtonType`
+- `polymorphic.ts`: `AsComponent`, `PolymorphicComponentProps`
+- `hook.ts`: `InteractionKind`, `UseComponentBaseResult` (供内部 Hooks 使用)
+
+**顶层导入示例：**
 ```ts
 import type {
-  ThemeableProps,
-  StylableProps,
-  DisableableProps,
-  BorderableProps,
-  ClickableProps,
+  ThemeProps,
+  StyleProps,
+  Disableable,
+  Borderable,
+  Clickable,
   OrientationProps,
   MediaPlacementProps,
-  WithIconProps,
-  WithActionsProps,
-  WithTitleProps,
-  WithFooterProps,
-  WithBackgroundImageProps,
-  PressableProps,
-  HtmlTypeProp,
+  WithIcon,
+  WithActions,
+  WithTitle,
+  WithFooter,
+  WithBackgroundImage,
+  Pressable,
+  HtmlButtonType,
 } from '@jujb233/myui';
 ```
 
-## 组合使用示例
+## 新组件组合示例
 
-- 交互型组件（如按钮）
+通过组合这些标准接口，可以快速定义新组件的 Props。
 
+- **交互型组件 (如按钮):**
 ```ts
 export type MyActionProps =
-  ThemeableProps &
-  StylableProps &
-  DisableableProps &
-  PressableProps<HTMLButtonElement> &
-  WithIconProps &
-  WithActionsProps &
-  HtmlTypeProp & {
+  ThemeProps &
+  StyleProps &
+  Disableable &
+  Pressable<HTMLButtonElement> &
+  WithIcon &
+  WithActions &
+  HtmlButtonType & {
     children?: React.ReactNode;
   };
 ```
 
-- 容器型组件（如卡片/面板）
-
+- **容器型组件 (如卡片/面板):**
 ```ts
 export type MyContainerProps =
-  ThemeableProps &
-  StylableProps &
-  BorderableProps &
-  ClickableProps &
+  ThemeProps &
+  StyleProps &
+  Borderable &
+  Clickable &
   OrientationProps &
   MediaPlacementProps &
-  PressableProps<HTMLDivElement> & {
+  Pressable<HTMLDivElement> & {
     children?: React.ReactNode;
   };
 ```
 
-## Hooks 返回值统一
+## 内部实现约定
 
-库内 hooks 已提供统一别名：
-- `rootStyle`（对应原先 `*Style`）
-- `rootClasses`（对应原先 `*Classes`）
+- **Hooks 返回值**: 库内 Hooks 使用 `rootStyle` 和 `rootClasses` 作为标准返回字段，以统一不同组件的样式和类名输出。
+- **Context**: 每个组件的 Context 至少应包含 `ThemeContextValue` 的字段，确保主题和状态能正确传递给子组件。
+- **可访问性 (A11y)**: `clickable` 的容器应添加 `role='button'` 和 `tabIndex=0`，并支持键盘交互和焦点环。
 
-在新组件中推荐仅使用 `rootStyle/rootClasses`，避免历史命名差异带来的心智负担。
-
-## Context 约定
-
-- 每个组件的 Context 至少暴露 `ThemeContextValue` 字段：
-  - `{ variant?, size, glass, shadow, disabled? }`
-- 子组件消费 Context，不重复解析主题或尺寸。
-
-## 可访问性（A11y）建议
-
-- `clickable` 容器：
-  - 添加 `role='button'` 与 `tabIndex=0`
-  - 支持键盘 Enter/Space 触发 `onClick`
-  - 显示焦点环（`focus-visible`），颜色来自 `--focus-ring`
-- `disabled` 或 `isLoading` 时，阻断交互事件并提供一致的禁用样式
-
-## 多态 as（可选）
-
-- 对需要多态渲染的组件（如按钮/链接），可使用 `AsComponent` 与 `PolymorphicComponentProps`；
-- 建议在设计上保持默认元素语义（button/a/div），按需提供 `as` 以覆盖。
-
-## 迁移与命名映射
-
-- 现有组件仍保留历史字段（如 `buttonStyle`、`cardStyle`），并提供 `rootStyle/rootClasses` 别名。
-- 新增组件应直接使用统一命名，老组件可在后续重构中逐步收敛。
-
-## 新组件清单（Checklist）
-
-- 选择合适的组合接口构成 `Props`（Themeable/Styable/Disableable/...）
-- 默认值只在实现层（组件/Hook）设置，不写进类型
-- 使用 `useComponentStyle/useComponentClasses` 与主题系统对齐
-- 根节点 className/style 最后合并（外部传入优先级最高）
-- A11y：焦点环、键盘交互、aria 透传
-- Context：Provider 提供主题/状态给子组件
-- 导出：`default` + `Object.assign` 挂载子组件 + 导出 Props 类型
-
-## 参考实现（简版骨架）
-
-```ts
-// MyBadge.tsx（示例骨架）
-import React from 'react';
-import type { ThemeableProps, StylableProps } from '@jujb233/myui';
-import { useComponentStyle } from 'src/Hooks/useComponentStyle';
-import { VARIANT_ROLE_STYLES } from 'src/Options';
-
-export type MyBadgeProps = ThemeableProps & StylableProps & {
-  children?: React.ReactNode;
-};
-
-export default function MyBadge({ variant, size = 'small', glass = true, shadow = 'none', className = '', style, children }: MyBadgeProps) {
-  const role = variant?.role ?? 'secondary';
-  const color = variant?.color ?? 'gray';
-  const intensity = VARIANT_ROLE_STYLES[role];
-  const { style: themed } = useComponentStyle({ variant: intensity, color, glass, shadow, bordered: true, elevationKind: 'card' });
-
-  const rootStyle = { ...themed, ...(style || {}) } as React.CSSProperties;
-  const rootClasses = `inline-flex items-center rounded-lg px-2 py-0.5 text-xs border text-[var(--text)] ${glass ? 'backdrop-blur-sm' : ''} ${className}`.trim();
-
-  return <span className={rootClasses} style={rootStyle}>{children}</span>;
-}
-```
-
-如需更深入的规范或样例，我可以为你的团队补充一份“黄金样例”组件（如 `MyBadge`）的完整实现与测试用例。
+通过遵循此 Interfase 指南，我们可以确保整个组件库的 API 设计保持高度一致和可预测。

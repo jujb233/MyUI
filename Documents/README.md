@@ -30,7 +30,6 @@ npm run dev
 ## 文档导航
 
 - [COMPONENTS.md](./COMPONENTS.md)：组件总览与通用 API
-- [CONFIGS.md](./CONFIGS.md)：主题与配置
 - [DEMOS.md](./DEMOS.md)：项目内演示说明
 - [INTERFASE.md](./INTERFASE.md)：统一 API 接口（Interfase）指南
 

@@ -1,20 +1,20 @@
 import type { SizeName } from "../../../../Options";
 import type {
-    ThemeableProps,
-    StylableProps,
-    DisableableProps,
-    WithTitleProps,
-    WithBackgroundImageProps,
-    WithFooterProps,
+    ThemeProps,
+    StyleProps,
+    Disableable,
+    WithTitle,
+    WithBackgroundImage,
+    WithFooter,
 } from "../../Interfases";
 
 export type MyPanelProps =
-    ThemeableProps &
-    StylableProps &
-    DisableableProps &
-    WithTitleProps &
-    WithBackgroundImageProps &
-    WithFooterProps & {
+    ThemeProps &
+    StyleProps &
+    Disableable &
+    WithTitle &
+    WithBackgroundImage &
+    WithFooter & {
         size?: SizeName;
         children?: React.ReactNode;
     };

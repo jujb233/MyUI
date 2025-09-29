@@ -7,7 +7,7 @@ import { useMyButton } from "../Hooks/useMyButton";
 import type { MyButtonProps } from "./Interfase/myButtonProps";
 
 function MyButton({
-    htmlType = "button",
+    buttonType: htmlType = "button",
     variant,
     size = "medium" as SizeName,
     disabled = false,

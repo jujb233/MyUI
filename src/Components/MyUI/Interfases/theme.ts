@@ -1,7 +1,7 @@
 import type { ComponentVariant, SizeName, ShadowName } from '../../../Options';
 
 /** 主题与尺寸（所有主题相关组件可选实现） */
-export interface ThemeableProps {
+export interface ThemeProps {
     /** { role, color }，role 经 VARIANT_ROLE_STYLES 映射到 intensity */
     variant?: ComponentVariant;
     /** 'small' | 'medium' | 'large' */

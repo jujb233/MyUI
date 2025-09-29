@@ -1,11 +1,11 @@
 import type { SizeName } from "../../../../Options";
-import type { ThemeableProps, StylableProps, WithTitleProps, WithActionsProps } from "../../Interfases";
+import type { ThemeProps, StyleProps, WithTitle, WithActions } from "../../Interfases";
 
 export type MyNavProps =
-    ThemeableProps &
-    StylableProps &
-    WithTitleProps &
-    WithActionsProps & {
+    ThemeProps &
+    StyleProps &
+    WithTitle &
+    WithActions & {
         size?: SizeName;
         children?: React.ReactNode;
         menu?: React.ReactNode;

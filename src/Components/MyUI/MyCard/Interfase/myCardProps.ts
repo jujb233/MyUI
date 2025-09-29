@@ -1,20 +1,20 @@
 import type {
-    ThemeableProps,
-    StylableProps,
-    BorderableProps,
-    ClickableProps,
+    ThemeProps,
+    StyleProps,
+    Borderable,
+    Clickable,
     OrientationProps,
     MediaPlacementProps,
-    PressableProps,
+    Pressable,
 } from "../../Interfases";
 
 export type MyCardProps =
-    ThemeableProps &
-    StylableProps &
-    BorderableProps &
-    ClickableProps &
+    ThemeProps &
+    StyleProps &
+    Borderable &
+    Clickable &
     OrientationProps &
     MediaPlacementProps &
-    PressableProps<HTMLDivElement> & {
+    Pressable<HTMLDivElement> & {
         children: React.ReactNode;
     };

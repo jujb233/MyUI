@@ -1,21 +1,21 @@
 import React from "react";
 import type {
-    ThemeableProps,
-    StylableProps,
-    DisableableProps,
-    PressableProps,
-    WithIconProps,
-    WithActionsProps,
-    HtmlTypeProp,
+    ThemeProps,
+    StyleProps,
+    Disableable,
+    Pressable,
+    WithIcon,
+    WithActions,
+    HtmlButtonType,
 } from "../../Interfases";
 
 export type MyButtonProps =
-    ThemeableProps &
-    StylableProps &
-    DisableableProps &
-    PressableProps<HTMLButtonElement> &
-    WithIconProps &
-    WithActionsProps &
-    HtmlTypeProp & {
+    ThemeProps &
+    StyleProps &
+    Disableable &
+    Pressable<HTMLButtonElement> &
+    WithIcon &
+    WithActions &
+    HtmlButtonType & {
         children?: React.ReactNode;
     };
