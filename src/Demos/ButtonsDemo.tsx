@@ -1,4 +1,4 @@
-import MyButton from "../Components/MyUI/MyButton/MyButton";
+import { MyButton } from "../Components/MyUI/MyButton";
 import { VARIANT_ROLE_STYLES } from "../Options";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
@@ -42,10 +42,18 @@ const ButtonsDemo = () => {
                     className="h-full"
                 >
                     <div className="flex flex-wrap justify-center gap-6">
-                        <MyButton variant={{ role: 'success', color: 'blue' }}>保存成功</MyButton>
-                        <MyButton variant={{ role: 'danger', color: 'red' }}>删除警告</MyButton>
-                        <MyButton variant={{ role: 'warning', color: 'yellow' }}>操作确认</MyButton>
-                        <MyButton variant={{ role: 'primary', color: 'blue' }}>常规操作</MyButton>
+                        <MyButton variant={{ role: 'success', color: 'blue' }} icon={<span>✅</span>} actions={<span className="opacity-75">Ctrl+S</span>}>
+                            保存成功
+                        </MyButton>
+                        <MyButton variant={{ role: 'danger', color: 'red' }} icon={<span>🗑️</span>}>
+                            删除警告
+                        </MyButton>
+                        <MyButton variant={{ role: 'warning', color: 'yellow' }} icon={<span>⚠️</span>}>
+                            操作确认
+                        </MyButton>
+                        <MyButton variant={{ role: 'primary', color: 'blue' }} icon={<span>✨</span>}>
+                            常规操作
+                        </MyButton>
                     </div>
                 </DemoSection>
 
@@ -60,9 +68,9 @@ const ButtonsDemo = () => {
                     className="h-full"
                 >
                     <div className="flex items-center justify-center gap-6">
-                        <MyButton size="small" variant={{ role: 'primary', color: 'blue' }}>小型</MyButton>
+                        <MyButton size="small" variant={{ role: 'primary', color: 'blue' }} icon={<span>🫧</span>}>小型</MyButton>
                         <MyButton size="medium" variant={{ role: 'success', color: 'green' }}>中型</MyButton>
-                        <MyButton size="large" variant={{ role: 'danger', color: 'red' }}>大型</MyButton>
+                        <MyButton size="large" variant={{ role: 'danger', color: 'red' }} actions={<span className="opacity-75">↵</span>}>大型</MyButton>
                     </div>
                 </DemoSection>
             </div>
@@ -81,7 +89,7 @@ const ButtonsDemo = () => {
                     <h3 className="font-semibold">实体阴影（glass={'{false}'})</h3>
                     <div className="flex flex-wrap gap-4">
                         {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
-                            <MyButton key={s} shadow={s} glass={false} variant={{ role: 'primary', color: 'blue' }}>
+                            <MyButton key={s} shadow={s} glass={false} variant={{ role: 'primary', color: 'blue' }} animation={{ type: 'pulse' }}>
                                 shadow={s}
                             </MyButton>
                         ))}

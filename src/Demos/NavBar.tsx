@@ -1,4 +1,4 @@
-import { MyButton } from "../Components/MyUI/MyButton/index";
+import { MyButton } from "../Components/MyUI/MyButton";
 import { MyNav } from "../Components/MyUI/MyNav";
 import type { ContentKey } from "./Demo";
 
@@ -18,25 +18,25 @@ const NavBar = ({ onSelectContent, currentContent }: NavBarProps) => {
                         variant={currentContent === 'buttons' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                         onClick={() => onSelectContent("buttons")}
                     >
-                        按钮 (Buttons)
+                        🍞 按钮
                     </MyButton>
                     <MyButton
                         variant={currentContent === 'cards' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                         onClick={() => onSelectContent("cards")}
                     >
-                        卡片 (Cards)
+                        🗂️ 卡片
                     </MyButton>
                     <MyButton
                         variant={currentContent === 'panels' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                         onClick={() => onSelectContent("panels")}
                     >
-                        面板 (Panels)
+                        🪟 面板
                     </MyButton>
                     <MyButton
                         variant={currentContent === 'navs' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
                         onClick={() => onSelectContent("navs")}
                     >
-                        导航 (Navs)
+                        🧭 导航
                     </MyButton>
                 </>
             }

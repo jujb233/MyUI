@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import MyCard from "../Components/MyUI/MyCard";
-import MyButton from "../Components/MyUI/MyButton/MyButton";
+import { MyCard } from "../Components/MyUI/MyCard";
+import { MyButton } from "../Components/MyUI/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
 const CardsDemo = () => {
@@ -39,7 +39,7 @@ const CardsDemo = () => {
                 description="图片、标签与摘要的组合突出阅读价值，适合博客、资讯或知识库列表。"
                 panelProps={{ className: "grid gap-8 md:grid-cols-2 lg:grid-cols-3" }}
             >
-                <MyCard>
+                <MyCard animation={{ type: 'fade' }}>
                     <MyCard.Image src="/demo.png" />
                     <MyCard.Tags tags={["React", "TypeScript", "TailwindCSS"]} />
                     <MyCard.Header>构建下一代UI组件库</MyCard.Header>
@@ -48,7 +48,7 @@ const CardsDemo = () => {
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
                     </MyCard.Actions>
                 </MyCard>
-                <MyCard>
+                <MyCard animation={{ type: 'slide-up' }}>
                     <MyCard.Image src="/demo.png" />
                     <MyCard.Tags tags={["设计", "色彩", "UI/UX"]} />
                     <MyCard.Header>设计系统中的色彩哲学</MyCard.Header>
@@ -57,7 +57,7 @@ const CardsDemo = () => {
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
                     </MyCard.Actions>
                 </MyCard>
-                <MyCard>
+                <MyCard animation={{ type: 'scale-in' }}>
                     <MyCard.Image src="/demo.png" />
                     <MyCard.Tags tags={["性能", "Webpack", "Web Vitals"]} />
                     <MyCard.Header>前端性能优化实战</MyCard.Header>
