@@ -3,7 +3,7 @@ import { useMyCard } from "../Hooks/useMyCard";
 import ErrorBoundary from "../../Utils/ErrorBoundary";
 import { CardContext, type CardContextType } from "./CardContext";
 import { CardImage } from "./CardImage";
-import type { MyCardProps } from "./Interfase/myCardProps";
+import type { MyCardProps } from "./Interface/myCardProps";
 
 function CardRoot({
     children,

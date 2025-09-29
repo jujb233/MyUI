@@ -4,7 +4,7 @@ import NavActions from "./NavActions";
 import NavBrand from "./NavBrand";
 import NavMenu from "./NavMenu";
 import { useMyNav } from "../Hooks/useMyNav";
-import type { MyNavProps } from "./Interfase/myNavProps";
+import type { MyNavProps } from "./Interface/myNavProps";
 
 function MyNav({
     variant,

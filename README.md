@@ -62,7 +62,7 @@ import { MyButton } from '@jujb233/myui'
 function App() {
   return (
     <div>
-      <MyButton styleType="primary" onClick={() => alert('Hello!')}>
+      <MyButton variant={{ role: 'primary', color: 'blue' }} onClick={() => alert('Hello!')}>
         点击我
       </MyButton>
     </div>
@@ -80,7 +80,7 @@ import '@jujb233/myui/styles'
 
 ## 组件文档
 
-详细的组件使用说明请查看 [组件文档](./Documents/COMPONENTS.md)。
+详细的使用说明请查看 [使用文档](./Documents/README.md)。
 
 ## TypeScript 支持
 
@@ -91,7 +91,7 @@ import { MyButton, MyButtonProps } from '@jujb233/myui'
 
 // 使用组件类型
 const buttonProps: MyButtonProps = {
-  styleType: 'primary',
+  variant: { role: 'primary', color: 'blue' },
   onClick: () => console.log('clicked')
 }
 

@@ -4,7 +4,7 @@ import ButtonContent from "./ButtonContent";
 import ButtonIcon from "./ButtonIcon";
 import ButtonActions from "./ButtonActions";
 import { useMyButton } from "../Hooks/useMyButton";
-import type { MyButtonProps } from "./Interfase/myButtonProps";
+import type { MyButtonProps } from "./Interface/myButtonProps";
 
 function MyButton({
     buttonType: htmlType = "button",

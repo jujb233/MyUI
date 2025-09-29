@@ -6,7 +6,7 @@ import type {
     OrientationProps,
     MediaPlacementProps,
     Pressable,
-} from "../../Interfases";
+} from "../../Interfaces";
 
 export type MyCardProps =
     ThemeProps &

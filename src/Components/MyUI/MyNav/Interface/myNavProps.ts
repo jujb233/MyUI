@@ -1,5 +1,5 @@
 import type { SizeName } from "../../../../Options";
-import type { ThemeProps, StyleProps, WithTitle, WithActions } from "../../Interfases";
+import type { ThemeProps, StyleProps, WithTitle, WithActions } from "../../Interfaces";
 
 export type MyNavProps =
     ThemeProps &

@@ -3,7 +3,7 @@ import PanelHeader from "./PanelHeader";
 import PanelContent from "./PanelContent";
 import PanelFooter from "./PanelFooter";
 import { useMyPanel } from "../Hooks/useMyPanel";
-import type { MyPanelProps } from "./Interfase/myPanelProps";
+import type { MyPanelProps } from "./Interface/myPanelProps";
 
 function MyPanel({
     variant,

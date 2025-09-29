@@ -6,7 +6,7 @@ import type {
     WithTitle,
     WithBackgroundImage,
     WithFooter,
-} from "../../Interfases";
+} from "../../Interfaces";
 
 export type MyPanelProps =
     ThemeProps &

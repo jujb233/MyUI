@@ -7,7 +7,7 @@ import type {
     WithIcon,
     WithActions,
     HtmlButtonType,
-} from "../../Interfases";
+} from "../../Interfaces";
 
 export type MyButtonProps =
     ThemeProps &
