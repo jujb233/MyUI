@@ -23,6 +23,7 @@ const DemoLayout = ({
         <MyPanel
             backgroundImage="/demo.png"
             className="relative min-h-screen rounded-none overflow-hidden p-4 md:p-10"
+            interaction='none'
         >
             <div
                 className="absolute inset-0 bg-slate-950/75 backdrop-blur-2xl"
@@ -90,6 +91,7 @@ export const DemoSection = ({
                     "rounded-2xl border border-white/10 bg-slate-900/40 p-6 shadow-lg md:p-8",
                     panelClassName
                 )}
+                interaction='none'
             >
                 {children}
             </MyPanel>

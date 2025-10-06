@@ -39,3 +39,47 @@ export function buildInteractionClasses(options: BuildInteractionOptions = {}): 
 
     return classes.join(' ');
 }
+
+/**
+ * 预设交互策略
+ */
+export const INTERACTION_PRESETS = {
+  none: { enabled: false },
+  basic: {
+    enabled: true,
+    behavior: {
+      hover: true,
+      focus: true,
+      active: false,
+      transition: true,
+      disabled: true,
+    },
+  },
+  rich: {
+    enabled: true,
+    behavior: {
+      hover: true,
+      focus: true,
+      active: true,
+      transition: true,
+      disabled: true,
+    },
+    effects: {
+      scale: {
+        hover: 1.05,
+        active: 0.95,
+        disabled: 1,
+      },
+    },
+  },
+  minimal: {
+    enabled: true,
+    behavior: {
+      hover: true,
+      focus: false,
+      active: false,
+      transition: false,
+      disabled: true,
+    },
+  },
+} as const;

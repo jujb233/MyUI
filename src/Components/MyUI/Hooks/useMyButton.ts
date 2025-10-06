@@ -1,17 +1,20 @@
-import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, VARIANT_ROLE_STYLES } from "../../../Options";
-import { buildHookInteractionClasses } from "../Interfaces/Interaction";
-import { useComponentStyle } from "../../../Hooks/useComponentStyle";
-import clsx from "clsx";
+import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, VARIANT_ROLE_STYLES } from "../../../Options"
+import { useComponentStyle } from "../../../Hooks/useComponentStyle"
+import clsx from "clsx"
+import { buildHookInteractionClasses } from "./useInteraction"
+import { INTERACTION_PRESETS } from "../../../Options/Interactions/interaction"
+import type { InteractionPolicy } from "../Interfaces/interaction"
 
 export type UseMyButtonProps = {
-    htmlType?: "button" | "submit" | "reset";
-    variant?: ComponentVariant;
-    size?: SizeName;
-    disabled?: boolean;
-    className?: string;
-    glass?: boolean;
-    shadow?: ShadowName;
-};
+    htmlType?: "button" | "submit" | "reset"
+    variant?: ComponentVariant
+    size?: SizeName
+    disabled?: boolean
+    className?: string
+    glass?: boolean
+    shadow?: ShadowName
+    interaction?: InteractionPolicy
+}
 
 export function useMyButton(props: UseMyButtonProps) {
     const {
@@ -21,15 +24,16 @@ export function useMyButton(props: UseMyButtonProps) {
         className = "",
         glass = true,
         shadow = "sm",
-    } = props;
+        interaction = 'rich',
+    } = props
 
     // 解析变体与颜色（与 Card/Panel 保持一致）
-    const role = variantProp?.role || 'primary';
-    const color = variantProp?.color || 'blue';
-    const variant = VARIANT_ROLE_STYLES[role] as any;
+    const role = variantProp?.role || 'primary'
+    const color = variantProp?.color || 'blue'
+    const variant = VARIANT_ROLE_STYLES[role] as any
 
     // 尺寸样式
-    const sizeStyle = SIZE_CONFIG[size];
+    const sizeStyle = SIZE_CONFIG[size]
 
     const { style: themedStyle } = useComponentStyle({
         variant,
@@ -38,7 +42,7 @@ export function useMyButton(props: UseMyButtonProps) {
         bordered: false,
         shadow,
         elevationKind: "button",
-    });
+    })
 
     const buttonStyle: React.CSSProperties = {
         ...themedStyle,
@@ -46,7 +50,7 @@ export function useMyButton(props: UseMyButtonProps) {
             background: DEFAULT_STYLES.disabled.background,
             color: DEFAULT_STYLES.disabled.color,
         }),
-    } as React.CSSProperties;
+    } as React.CSSProperties
 
     const buttonClasses = clsx(
         sizeStyle.padding,
@@ -59,11 +63,13 @@ export function useMyButton(props: UseMyButtonProps) {
             ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
             : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
         'text-[var(--text)]',
-        buildHookInteractionClasses({ enabled: !disabled, focusRing: !disabled }),
+        buildHookInteractionClasses(typeof interaction === 'string'
+                    ? INTERACTION_PRESETS[interaction]
+                    : interaction),
         "disabled:opacity-60 disabled:cursor-not-allowed",
         glass && !disabled && "backdrop-blur-md border",
         className
-    );
+    )
 
     return {
         size,
@@ -75,5 +81,5 @@ export function useMyButton(props: UseMyButtonProps) {
         rootClasses: buttonClasses,
         disabled,
         glass,
-    };
+    }
 }

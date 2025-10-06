@@ -1,4 +1,4 @@
-import type { SizeName } from "../../../../Options";
+import type { SizeName } from "../../../../Options"
 import type {
     ThemeProps,
     StyleProps,
@@ -7,7 +7,8 @@ import type {
     WithBackgroundImage,
     WithFooter,
     AnimationProps,
-} from "../../Interfaces";
+} from "../../Interfaces"
+import type { InteractionPolicy } from "../../Interfaces/interaction"
 
 export type MyPanelProps =
     ThemeProps &
@@ -18,5 +19,6 @@ export type MyPanelProps =
     WithFooter &
     AnimationProps & {
         size?: SizeName;
-        children?: React.ReactNode;
-    };
+        children?: React.ReactNode
+        interaction?: InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal'
+    }

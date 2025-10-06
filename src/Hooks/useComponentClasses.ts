@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import { buildHookInteractionClasses } from "../Components/MyUI/Interfaces/Interaction";
+import { buildHookInteractionClasses } from "../Components/MyUI/Hooks/useInteraction";
+
 
 /**
  * @description `useComponentClasses` 的属性
@@ -89,7 +90,7 @@ export function useComponentClasses(props: UseComponentClassesProps) {
             ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]"
             : "[background:var(--bg)] hover:[background:var(--bg-hover)]",
         "text-[var(--text)] border border-[var(--border)]",
-        (hoverable || clickable) && interactionEnabled && buildHookInteractionClasses({ enabled: true, focusRing }),
+        (hoverable || clickable) && interactionEnabled && buildHookInteractionClasses({ enabled: true }),
         clickable && "cursor-pointer",
         glass && "backdrop-blur-md",
         className

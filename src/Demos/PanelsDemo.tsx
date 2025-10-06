@@ -17,7 +17,7 @@ const PanelsDemo = () => {
                     </>
                 )}
             >
-                <MyPanel>
+                <MyPanel interaction='rich'>
                     <h3 className="mb-2 text-lg font-bold">个人资料设置</h3>
                     <p>在这里修改您的个人信息和偏好设置。</p>
                 </MyPanel>

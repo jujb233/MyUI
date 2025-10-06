@@ -29,12 +29,25 @@ import { PanelHeader, PanelContent, PanelFooter } from '../src/Components/MyUI/M
 - backgroundImage：`string`（作为背景图样式应用）
 - footer：`ReactNode`（存在时渲染于内置 `PanelFooter` 中）
 - children：内容（默认包裹在内置 `PanelContent`）
+ - title：`string`（渲染在内置 `PanelHeader` 中）
+ - backgroundImage：`string`（作为背景图样式应用）
+ - footer：`ReactNode`（存在时渲染于内置 `PanelFooter` 中）
+ - animation：`AnimationProp`（可选）— 控制入场/强调动画，会被 `useAnimation` 映射为 className。
+ - interaction：`InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal'`（可选）— 指定交互策略或使用预设名。
+ - children：内容（默认包裹在内置 `PanelContent`）
 
 ## 子组件
 
 - `PanelHeader`：`{ title?: string }`
 - `PanelContent`：`{ children? }`
 - `PanelFooter`：`{ children? }`
+
+## 交互（Interaction）
+
+- 默认行为：`MyPanel` 支持通过 `interaction` prop 传入交互策略；若未传入则使用 hook/预设的默认值（通常为 `'none'` 或组件内部默认）。
+- `interaction` 可接受预设字符串（`'none' | 'basic' | 'rich' | 'minimal'`）或自定义 `InteractionPolicy` 对象（见 `src/Components/MyUI/Interfaces/interaction.ts`）。
+- `disabled`：若为 `true`，多数交互视觉反馈（hover/active）会被抑制。
+- 实现细节：`useMyPanel` 会把 `interaction` 透传给内部的 `buildHookInteractionClasses`，生成最终的交互类名并与 `animation` 类拼接到根节点上。
 
 ## 示例
 

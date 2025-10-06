@@ -14,7 +14,7 @@ import { MyButton } from '@jujb233/myui';
 
 ## Props
 
-- htmlType：`'button' | 'submit' | 'reset'`（默认 `'button'`）
+- buttonType：`'button' | 'submit' | 'reset'`（默认 `'button'`）
 - variant：`{ role: 'primary'|'secondary'|'success'|'warning'|'danger'|'text'; color: 预设色名 }`（可选）
 - size：`'small' | 'medium' | 'large'`（默认 `'medium'`）
 - glass：`boolean`（默认 `true`）
@@ -25,8 +25,15 @@ import { MyButton } from '@jujb233/myui';
 - onClick：`React.MouseEventHandler<HTMLButtonElement>`
 - children：`ReactNode`
 - className：`string`
+ - animation：`AnimationProp`（可选） — 控制入场/强调动画，会被 `useAnimation` 映射为 className。
 
 说明：传入 `icon` 会渲染 `ButtonIcon` 包裹的前置图标；传入 `actions` 会渲染 `ButtonActions` 包裹的后置元素。
+
+## 交互（Interaction）
+
+- 默认行为：组件内部使用库的交互预设（默认为 `rich`），会开启 hover/focus/active/transition 等视觉反馈，除非处于 `disabled` 状态。
+- 可控性：当前 `MyButton` 组件没有对外暴露 `interaction` 策略 prop（内部通过 `useMyButton` 使用默认策略），但 `disabled` 会关闭绝大多数交互效果。
+- 实现细节：内部使用 `buildHookInteractionClasses`（来自 `useInteraction`）结合 `INTERACTION_PRESETS` 生成最终的 className，且会与 `useAnimation` 结果一起拼接到 `className` 上。
 
 ## 用法示例
 

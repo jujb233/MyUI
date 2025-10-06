@@ -74,9 +74,9 @@ import { MyButton, MyCard } from '@jujb233/myui';
 - `buttonType`: `'button' | 'submit' | 'reset'` - 仅用于按钮，指定其 `type` 属性。
 - `as`: `React.ElementType` - 多态支持，允许将组件渲染为不同的 HTML 标签，如 `as="a"`。
 
-## 接口定义源文件
+## 接口定义与导出
 
-所有接口定义均位于 `src/Components/MyUI/Interfases/` 目录，并已在包入口聚合导出，可直接从 `@jujb233/myui` 导入。
+大多数对外可用的接口定义位于 `src/Components/MyUI/Interfaces/` 目录，并通过该目录的 `index.ts` 聚合导出（可以从包中直接导入）。该目录下的常用接口包括：
 
 - `theme.ts`: `ThemeProps`, `ThemeContextValue`
 - `style.ts`: `StyleProps`
@@ -85,9 +85,12 @@ import { MyButton, MyCard } from '@jujb233/myui';
 - `layout.ts`: `OrientationProps`, `MediaPlacementProps`
 - `slot/slots.ts`: `WithIcon`, `WithActions`, `WithTitle`, `WithFooter`, `WithBackgroundImage`
 - `events.ts`: `Pressable<T>`
-- `button.ts`: `HtmlButtonType`
+- `button.ts`: `HtmlButtonType` (包含 `buttonType?: 'button'|'submit'|'reset'`)
 - `polymorphic.ts`: `AsComponent`, `PolymorphicComponentProps`
-- `hook.ts`: `InteractionKind`, `UseComponentBaseResult` (供内部 Hooks 使用)
+- `hook.ts`: `UseComponentBaseResult`（库内 Hooks 的标准返回字段）
+- `animation.ts`: `AnimationProps`
+
+注意：一些内部/可选的交互构建工具位于 `src/Components/MyUI/Interfaces/interaction.ts` （交互策略的类型定义），以及 `src/Options/Interactions/interaction.ts`（提供 `buildInteractionClasses`、`INTERACTION_PRESETS` 等实用函数和预设）。
 
 **顶层导入示例：**
 ```ts
@@ -106,6 +109,8 @@ import type {
   WithBackgroundImage,
   Pressable,
   HtmlButtonType,
+  UseComponentBaseResult,
+  AnimationProps,
 } from '@jujb233/myui';
 ```
 

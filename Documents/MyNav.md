@@ -58,6 +58,7 @@ import MyNav, { NavBrand, NavContent, NavMenu, NavActions } from '../src/Compone
 - menu?: `React.ReactNode`（有值时在 `NavContent` 内渲染 `NavMenu`）
 - actions?: `React.ReactNode`（有值时渲染 `NavActions`）
 - children?: `React.ReactNode`（在 `NavContent` 内与 `menu` 并列渲染）
+ - animation?: `AnimationProp`（可选）— 控制入场/强调动画，会被 `useAnimation` 映射为 className。
 
 说明：
 - 组件内部使用 `useMyNav` 结合主题系统生成 `navStyle`（CSS 变量）与 `navClasses`（类名），并通过 Context 将 variant/size/glass/shadow 传递给子组件。
@@ -107,3 +108,11 @@ import MyNav, { NavBrand, NavContent, NavMenu, NavActions } from '../src/Compone
 
 - 源码：`src/Components/MyUI/MyNav/`（`MyNav.tsx`、`NavBrand.tsx`、`NavContent.tsx`、`NavMenu.tsx`、`NavActions.tsx`）
 - 演示用法：`src/Demos/NavBar.tsx`
+
+## 交互（Interaction）
+
+- 默认行为：导航栏默认不启用整体交互（`interactionEnabled` 在 hook 层面默认为 `false`），以避免整个导航条在 hover/active 时产生全局反馈。
+- 可控项（Hook 层面）：
+  - `interactionEnabled?: boolean` — 若为 `true`，会启用容器交互并使用 `interaction` 策略生成类名。
+  - `interaction?: InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal'` — 可传入预设名称或自定义策略（默认 `'none'`）。
+- 实现细节：`useMyNav` 在 `interactionEnabled` 为 `true` 时会调用 `buildHookInteractionClasses`（结合 `INTERACTION_PRESETS`）生成交互类名，并与 `useAnimation` 的类名一同拼接到 `nav` 的 `className` 上。

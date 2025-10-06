@@ -1,5 +1,3 @@
-
-
 # MyCard
 
 `MyCard` 是组合式卡片容器，支持图片、标签、操作区、页脚、横纵向布局与玻璃态。
@@ -36,6 +34,7 @@ import { MyCard, MyButton } from '@jujb233/myui';
 - hoverable：`boolean`（默认 `true`）
 - onClick：`(e) => void`
 - children：组合子组件
+ - animation：`AnimationProp`（可选）— 控制入场/强调动画，会被 `useAnimation` 映射为 className。
 
 ## 子组件与 Props
 
@@ -71,3 +70,13 @@ import { MyCard, MyButton } from '@jujb233/myui';
   <MyCard.Header>玻璃态</MyCard.Header>
 </MyCard>
 ```
+
+## 交互（Interaction）
+
+- 默认行为：`MyCard` 是容器型组件，默认 `hoverable=true`，会在 hover/active 时提供视觉反馈（例如 scale / opacity），除非外部通过 prop 关闭。
+- 可控 Props：
+  - `hoverable?: boolean`（默认 `true`）— 是否启用鼠标悬停反馈。
+  - `clickable?: boolean`（默认 `false`）— 将容器设为可点击，会额外添加 `role='button'` 和 `tabIndex=0` 以增强可访问性；此时也会与交互类名一起生效。
+- 实现细节：内部通过 `useMyCard`、`useComponentClasses` 与 `buildHookInteractionClasses` 生成 container 的 className；`animation` prop 的类名会与交互类拼接。
+
+````
