@@ -18,7 +18,7 @@ export type MyPanelProps =
     WithBackgroundImage &
     WithFooter &
     AnimationProps & {
-        size?: SizeName;
+        size?: SizeName
         children?: React.ReactNode
         interaction?: InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal'
     }

@@ -1,4 +1,4 @@
-import clsx from "clsx";
+import clsx from "clsx"
 
 
 export const getCardImageClasses = (
@@ -6,7 +6,7 @@ export const getCardImageClasses = (
     borderRadius: string | undefined
 ) => {
     if (position === "background") {
-        return "absolute inset-0 bg-cover bg-center opacity-10";
+        return "absolute inset-0 bg-cover bg-center opacity-10"
     }
 
     return clsx(
@@ -15,5 +15,5 @@ export const getCardImageClasses = (
         position === "left" && "w-32 h-full",
         position === "right" && "w-32 h-full",
         borderRadius
-    );
-};
+    )
+}

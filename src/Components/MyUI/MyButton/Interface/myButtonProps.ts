@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import type {
     ThemeProps,
     StyleProps,
@@ -8,7 +8,7 @@ import type {
     WithActions,
     HtmlButtonType,
     AnimationProps,
-} from "../../Interfaces";
+} from "../../Interfaces"
 
 export type MyButtonProps =
     ThemeProps &
@@ -19,5 +19,5 @@ export type MyButtonProps =
     WithActions &
     HtmlButtonType &
     AnimationProps & {
-        children?: React.ReactNode;
-    };
+        children?: React.ReactNode
+    }

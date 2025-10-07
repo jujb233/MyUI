@@ -1,10 +1,10 @@
-import React from "react";
-import { useMyCard } from "../Hooks/useMyCard";
-import { useAnimation } from "../Hooks/useAnimation";
-import ErrorBoundary from "../../Utils/ErrorBoundary";
-import { CardContext, type CardContextType } from "./CardContext";
-import { CardImage } from "./CardImage";
-import type { MyCardProps } from "./Interface/myCardProps";
+import React from "react"
+import { useMyCard } from "../Hooks/useMyCard"
+import { useAnimation } from "../Hooks/useAnimation"
+import ErrorBoundary from "../../Utils/ErrorBoundary"
+import { CardContext, type CardContextType } from "./CardContext"
+import { CardImage } from "./CardImage"
+import type { MyCardProps } from "./Interface/myCardProps"
 
 function CardRoot({
     children,
@@ -13,17 +13,17 @@ function CardRoot({
 }: MyCardProps) {
     const hasImage = React.Children.toArray(children).some(
         (child) => (child as React.ReactElement).type === CardImage
-    );
+    )
 
     const {
         cardStyle,
         containerClasses,
         bodyClasses,
         ...rest
-    } = useMyCard({ ...props, hasImage });
+    } = useMyCard({ ...props, hasImage })
 
     // 解析动画类名
-    const animationClasses = useAnimation(props.animation);
+    const animationClasses = useAnimation(props.animation)
 
     const contextValue: CardContextType = {
         ...props,
@@ -31,18 +31,18 @@ function CardRoot({
         isHorizontal: rest.isHorizontal,
         imagePosition: rest.imagePosition,
         sizeConfig: rest.sizeConfig,
-    };
+    }
 
     // 筛选出非图片子元素
     const contentChildren = React.Children.toArray(children).filter(
         child => (child as React.ReactElement).type !== CardImage
-    );
+    )
     // 筛选出图片子元素
     const imageChild = React.Children.toArray(children).find(
         child => (child as React.ReactElement).type === CardImage
-    );
+    )
 
-    const { isHorizontal, imagePosition } = rest;
+    const { isHorizontal, imagePosition } = rest
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Card component failed to render.</div>}>
@@ -68,7 +68,7 @@ function CardRoot({
                 </div>
             </CardContext.Provider>
         </ErrorBoundary>
-    );
+    )
 }
 
-export default CardRoot;
+export default CardRoot

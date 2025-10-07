@@ -1,5 +1,5 @@
-export { default as MyPanel } from "./MyPanel";
-export { default as PanelHeader } from "./PanelHeader";
-export { default as PanelContent } from "./PanelContent";
-export { default as PanelFooter } from "./PanelFooter";
-export * from "./PanelContext";
+export { default as MyPanel } from "./MyPanel"
+export { default as PanelHeader } from "./PanelHeader"
+export { default as PanelContent } from "./PanelContent"
+export { default as PanelFooter } from "./PanelFooter"
+export * from "./PanelContext"

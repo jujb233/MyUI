@@ -1,5 +1,5 @@
-import type { SizeName } from "../../../../Options";
-import type { ThemeProps, StyleProps, WithTitle, WithActions, AnimationProps } from "../../Interfaces";
+import type { SizeName } from "../../../../Options"
+import type { ThemeProps, StyleProps, WithTitle, WithActions, AnimationProps } from "../../Interfaces"
 
 export type MyNavProps =
     ThemeProps &
@@ -7,7 +7,7 @@ export type MyNavProps =
     WithTitle &
     WithActions &
     AnimationProps & {
-        size?: SizeName;
-        children?: React.ReactNode;
-        menu?: React.ReactNode;
-    };
+        size?: SizeName
+        children?: React.ReactNode
+        menu?: React.ReactNode
+    }

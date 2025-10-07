@@ -1,9 +1,14 @@
+/**
+ * useMyNav
+ * 简要：为导航（MyNav）组件生成主题样式与 className，支持可选的交互类（hover/focus）
+ * 返回：{ navStyle, navClasses, rootStyle, rootClasses }
+ */
 import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../../Options"
 import clsx from "clsx"
 import { buildHookInteractionClasses } from "./useInteraction"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
-import { INTERACTION_PRESETS } from "../../../Options/Interactions/interaction"
+import { INTERACTION_PRESETS } from "../../../Options/Interactions/presets"
 
 export type UseMyNavOptions = {
     variant?: ComponentVariant
@@ -29,6 +34,9 @@ export function useMyNav(options: UseMyNavOptions) {
         interaction = 'none',
     } = options
 
+    // 解构 options 并使用默认值
+
+    // 通过主题 hook 获取对应的 theme 类与行内样式
     const { theme, style: navStyle } = useComponentTheme({
         intensity: variant ? VARIANT_ROLE_STYLES[variant.role] : undefined,
         color: variant?.color,
@@ -36,12 +44,14 @@ export function useMyNav(options: UseMyNavOptions) {
         shadow,
     })
 
+    // 若启用交互，则合成交互相关的类
     const interactionClasses = interactionEnabled
         ? buildHookInteractionClasses(typeof interaction === 'string'
             ? INTERACTION_PRESETS[interaction]
             : interaction)
         : ''
 
+    // 组合最终的 nav 类：基础类 + 大小 + 主题 + 交互 + 用户自定义
     const navClasses = clsx(
         'my-nav',
         `my-nav-${size}`,
@@ -50,5 +60,6 @@ export function useMyNav(options: UseMyNavOptions) {
         className
     )
 
+    // 返回样式与类名，提供 rootStyle/rootClasses 便于组件统一使用
     return { navStyle, navClasses, rootStyle: navStyle, rootClasses: navClasses }
 }

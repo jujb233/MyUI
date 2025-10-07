@@ -1,5 +1,5 @@
-import React from "react";
-import clsx from "clsx";
+import React from "react"
+import clsx from "clsx"
 
 export const CardTags: React.FC<{ tags: React.ReactNode[]; className?: string }> = ({ tags, className }) => (
     <div className={clsx("flex flex-wrap gap-2 mb-3", className)}>
@@ -12,6 +12,6 @@ export const CardTags: React.FC<{ tags: React.ReactNode[]; className?: string }>
             </span>
         ))}
     </div>
-);
+)
 
-CardTags.displayName = "CardTags";
+CardTags.displayName = "CardTags"

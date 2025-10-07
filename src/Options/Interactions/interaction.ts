@@ -3,6 +3,8 @@
  * 目标：所有组件共享同一组交互效果，并可按需关闭部分效果。
  */
 
+import type { InteractionBehavior, InteractionConfig } from "../../Components/MyUI/Interfaces";
+
 export interface BuildInteractionOptions {
     /** 是否启用交互（总开关） */
     enabled?: boolean;
@@ -41,45 +43,30 @@ export function buildInteractionClasses(options: BuildInteractionOptions = {}): 
 }
 
 /**
- * 预设交互策略
+ * 默认交互行为配置
  */
-export const INTERACTION_PRESETS = {
-  none: { enabled: false },
-  basic: {
-    enabled: true,
-    behavior: {
-      hover: true,
-      focus: true,
-      active: false,
-      transition: true,
-      disabled: true,
-    },
+export const DEFAULT_INTERACTION_BEHAVIOR: InteractionBehavior = {
+  hover: true,
+  focus: true,
+  active: true,
+  transition: true,
+  disabled: true,
+}
+
+/**
+ * 默认交互效果配置
+ */
+export const DEFAULT_INTERACTION_EFFECTS: InteractionConfig = {
+  scale: {
+    hover: 1.02,
+    active: 0.98,
+    disabled: 1,
   },
-  rich: {
-    enabled: true,
-    behavior: {
-      hover: true,
-      focus: true,
-      active: true,
-      transition: true,
-      disabled: true,
-    },
-    effects: {
-      scale: {
-        hover: 1.05,
-        active: 0.95,
-        disabled: 1,
-      },
-    },
+  opacity: {
+    hover: 0.9,
+    active: 0.8,
+    disabled: 0.6,
   },
-  minimal: {
-    enabled: true,
-    behavior: {
-      hover: true,
-      focus: false,
-      active: false,
-      transition: false,
-      disabled: true,
-    },
-  },
-} as const;
+}
+
+

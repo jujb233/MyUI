@@ -1,2 +1,1 @@
-export { default } from './MyNav';
-export type { MyNavProps } from './MyNav';
+export { default } from './MyNav'

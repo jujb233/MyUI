@@ -45,3 +45,20 @@ export interface AnimationConfig {
  * - 也可以是详细的动画配置对象。
  */
 export type AnimationProp = AnimationType | AnimationConfig;
+
+export const animationMap: Record<string, string> = {
+    fade: 'animate-fade',
+    'slide-up': 'animate-slide-up',
+    'slide-down': 'animate-slide-down',
+    'scale-in': 'animate-scale-in',
+    pulse: 'animate-pulse',
+    spin: 'animate-spin',
+}
+
+// 将自定义的缓动关键字映射为 CSS 动画的 timing-function 值
+export const easingValueMap: Record<NonNullable<AnimationConfig['easing']>, string> = {
+    linear: 'linear',
+    in: 'ease-in',
+    out: 'ease-out',
+    'in-out': 'ease-in-out',
+}

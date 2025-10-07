@@ -1,16 +1,16 @@
-import type { SizeName } from "../../../Options";
+import type { SizeName } from "../../../Options"
 
-type NavVariant = 'solid' | 'soft' | 'subtle' | 'text';
+type NavVariant = 'solid' | 'soft' | 'subtle' | 'text'
 
 interface MyNavTheme {
     defaultProps: {
-        size: SizeName;
-        variant: NavVariant;
+        size: SizeName
+        variant: NavVariant
     },
     styles: {
         root: {
-            base: string;
-            sizes: Record<SizeName, string>;
+            base: string
+            sizes: Record<SizeName, string>
         }
     }
 }
@@ -30,4 +30,4 @@ export const MyNavTheme: MyNavTheme = {
             },
         },
     },
-};
+}
