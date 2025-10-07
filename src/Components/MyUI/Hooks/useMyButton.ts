@@ -3,7 +3,7 @@ import { useComponentStyle } from "../../../Hooks/useComponentStyle"
 import clsx from "clsx"
 import { buildHookInteractionClasses } from "./useInteraction"
 import { INTERACTION_PRESETS } from "../../../Options/Interactions/interaction"
-import type { InteractionPolicy } from "../Interfaces/interaction"
+import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 
 export type UseMyButtonProps = {
     htmlType?: "button" | "submit" | "reset"
@@ -64,8 +64,8 @@ export function useMyButton(props: UseMyButtonProps) {
             : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
         'text-[var(--text)]',
         buildHookInteractionClasses(typeof interaction === 'string'
-                    ? INTERACTION_PRESETS[interaction]
-                    : interaction),
+            ? INTERACTION_PRESETS[interaction]
+            : interaction),
         "disabled:opacity-60 disabled:cursor-not-allowed",
         glass && !disabled && "backdrop-blur-md border",
         className

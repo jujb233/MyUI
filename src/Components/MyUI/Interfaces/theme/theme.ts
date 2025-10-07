@@ -1,4 +1,4 @@
-import type { ComponentVariant, SizeName, ShadowName } from '../../../Options';
+import type { ComponentVariant, SizeName, ShadowName } from '../../../../Options';
 
 /** 主题与尺寸（所有主题相关组件可选实现） */
 export interface ThemeProps {

@@ -1,4 +1,4 @@
-import type { InteractionBehavior, InteractionConfig, InteractionPolicy } from "../Interfaces/interaction";
+import type { InteractionBehavior, InteractionConfig, InteractionPolicy } from "../Interfaces/behavior/interaction";
 
 /**
  * 默认交互行为配置

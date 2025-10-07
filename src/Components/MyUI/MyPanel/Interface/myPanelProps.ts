@@ -8,7 +8,7 @@ import type {
     WithFooter,
     AnimationProps,
 } from "../../Interfaces"
-import type { InteractionPolicy } from "../../Interfaces/interaction"
+import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 
 export type MyPanelProps =
     ThemeProps &

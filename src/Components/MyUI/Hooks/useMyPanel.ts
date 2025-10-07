@@ -1,7 +1,7 @@
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
 import clsx from "clsx"
-import type { InteractionPolicy } from "../Interfaces/interaction"
+import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import { buildHookInteractionClasses } from "./useInteraction"
 import { INTERACTION_PRESETS } from "../../../Options/Interactions/interaction"
 

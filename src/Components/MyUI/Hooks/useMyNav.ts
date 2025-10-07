@@ -2,7 +2,7 @@ import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../../Options"
 import clsx from "clsx"
 import { buildHookInteractionClasses } from "./useInteraction"
-import type { InteractionPolicy } from "../Interfaces/interaction"
+import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../../Options/Interactions/interaction"
 
 export type UseMyNavOptions = {

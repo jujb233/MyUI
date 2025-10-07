@@ -1,4 +1,4 @@
-import type { AnimationProp } from '../../../Options/Animations/Animation';
+import type { AnimationProp } from '../../../../Options/Animations/Animation';
 
 /**
  * 为组件提供动画能力的接口。
