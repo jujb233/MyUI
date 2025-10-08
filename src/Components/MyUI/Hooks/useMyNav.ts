@@ -1,7 +1,7 @@
 import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../../Options"
 import clsx from "clsx"
-import { buildHookInteractionClasses } from "./useInteraction"
+import { styleUtil } from "../Utils/styleBuilder"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../../Options/Interactions/presets"
 
@@ -31,30 +31,32 @@ export function useMyNav(options: UseMyNavOptions) {
 
     // 解构 options 并使用默认值
 
-    // 通过主题 hook 获取对应的 theme 类与行内样式
+    // 通过主题 hook 获取对应的 theme 类与行内样式，合并 style 为 className
     const { theme, style: navStyle } = useComponentTheme({
         intensity: variant ? VARIANT_ROLE_STYLES[variant.role] : undefined,
         color: variant?.color,
         glass,
         shadow,
     })
-
+    const themedClass = Object.entries(navStyle || {})
+        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+        .filter(Boolean)
+        .join(' ')
     // 若启用交互，则合成交互相关的类
     const interactionClasses = interactionEnabled
-        ? buildHookInteractionClasses(typeof interaction === 'string'
+        ? styleUtil.buildHookInteractionClasses(typeof interaction === 'string'
             ? INTERACTION_PRESETS[interaction]
             : interaction)
         : ''
-
-    // 组合最终的 nav 类：基础类 + 大小 + 主题 + 交互 + 用户自定义
+    // 组合最终的 nav 类：基础类 + 大小 + 主题 + 交互 + 用户自定义 + themedClass
     const navClasses = clsx(
         'my-nav',
         `my-nav-${size}`,
         theme,
         interactionClasses,
+        themedClass,
         className
     )
-
-    // 返回样式与类名，提供 rootStyle/rootClasses 便于组件统一使用
-    return { navStyle, navClasses, rootStyle: navStyle, rootClasses: navClasses }
+    // 返回样式与类名，移除 style 相关
+    return { navClasses, rootClasses: navClasses }
 }

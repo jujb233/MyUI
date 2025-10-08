@@ -1,7 +1,7 @@
 import React from "react"
 import { useMyCard } from "../Hooks/useMyCard"
-import { useAnimation } from "../Hooks/useAnimation"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
+import { styleUtil } from "../Utils/styleBuilder"
+import ErrorBoundary from "../Utils/ErrorBoundary"
 import { CardContext, type CardContextType } from "./CardContext"
 import { CardImage } from "./CardImage"
 import type { MyCardProps } from "./Interface/myCardProps"
@@ -16,14 +16,13 @@ function CardRoot({
     )
 
     const {
-        cardStyle,
         containerClasses,
         bodyClasses,
         ...rest
     } = useMyCard({ ...props, hasImage })
 
     // 解析动画类名
-    const animationClasses = useAnimation(props.animation)
+    const animationClasses = styleUtil.animationPropToClass(props.animation)
 
     const contextValue: CardContextType = {
         ...props,
@@ -49,7 +48,6 @@ function CardRoot({
             <CardContext.Provider value={contextValue}>
                 <div
                     className={[containerClasses, animationClasses].filter(Boolean).join(" ")}
-                    style={{ ...cardStyle, ...(props.style || {}) }}
                     onClick={onClick}
                     role={props.clickable ? 'button' : undefined}
                     tabIndex={props.clickable ? 0 : undefined}

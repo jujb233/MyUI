@@ -41,7 +41,7 @@ export function useMyCard(props: UseMyCardProps) {
     // 尺寸相关配置（padding/spacing/fontSize 等）
     const sizeConfig = SIZE_CONFIG[size]
 
-    // 获取基于主题的行内样式（card 专用）
+    // 获取基于主题的行内样式（card 专用），合并为 className
     const { style: cardStyle } = useComponentStyle({
         variant,
         color,
@@ -50,11 +50,16 @@ export function useMyCard(props: UseMyCardProps) {
         shadow,
         elevationKind: "card",
     })
+    const themedClass = Object.entries(cardStyle || {})
+        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+        .filter(Boolean)
+        .join(' ')
 
     // 根据方向与图片位置判断布局是否为水平布局
     const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
 
-    // 组合容器级别的类（包含交互、size、imagePosition、user class 等）
+    // 组合容器级别的类（包含交互、size、imagePosition、user class、主题style等）
+    // themedClass 合并进 containerClasses
     const { containerClasses } = useComponentClasses({
         baseClass: "my-card",
         direction,
@@ -63,9 +68,10 @@ export function useMyCard(props: UseMyCardProps) {
         glass,
         hoverable,
         clickable,
-        className,
+        className: [className, themedClass].filter(Boolean).join(' '),
         bordered,
         interactionEnabled: true,
+        // ...existing behavior
     })
 
     // 构建 body 的类名（内部内容区），考虑 spacing 与 横向伸展
@@ -77,14 +83,12 @@ export function useMyCard(props: UseMyCardProps) {
         imagePosition === "background" ? "relative z-10" : ""
     ].filter(Boolean).join(" ")
 
-    // 返回对组件渲染有用的值与别名
+    // 返回对组件渲染有用的值与别名（移除 style 相关）
     return {
         size,
         sizeConfig,
-        cardStyle,
         containerClasses,
         // 统一命名别名
-        rootStyle: cardStyle,
         rootClasses: containerClasses,
         bodyClasses,
         isHorizontal,

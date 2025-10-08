@@ -3,9 +3,9 @@ import PanelHeader from "./PanelHeader"
 import PanelContent from "./PanelContent"
 import PanelFooter from "./PanelFooter"
 import { useMyPanel } from "../Hooks/useMyPanel"
-import { useAnimation } from "../Hooks/useAnimation"
+import { styleUtil } from "../Utils/styleBuilder"
 import type { MyPanelProps } from "./Interface/myPanelProps"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
+import ErrorBoundary from "../Utils/ErrorBoundary"
 
 function MyPanel({
     variant,
@@ -13,7 +13,6 @@ function MyPanel({
     glass = true,
     shadow = "md",
     className = "",
-    style,
     children,
     disabled = false,
     title,
@@ -22,13 +21,13 @@ function MyPanel({
     animation,
     interaction,
 }: MyPanelProps) {
-    const { panelStyle, panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title: typeof title === 'string' ? title : undefined, backgroundImage, interaction })
-    const animationClasses = useAnimation(animation)
+    const { panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title: typeof title === 'string' ? title : undefined, backgroundImage, interaction })
+    const animationClasses = styleUtil.animationPropToClass(animation)
     const classes = [panelClasses, animationClasses].filter(Boolean).join(" ")
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Panel component failed to render.</div>}>
             <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage, interaction }}>
-                <div className={classes} style={{ ...panelStyle, ...(style || {}) }}>
+                <div className={classes}>
                     <PanelHeader title={title} />
                     <PanelContent>{children}</PanelContent>
                     {footer && <PanelFooter>{footer}</PanelFooter>}

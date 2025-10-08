@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import clsx from "clsx";
-import { buildHookInteractionClasses } from "../Components/MyUI/Hooks/useInteraction";
+import { styleUtil } from "../Components/MyUI/Utils/styleBuilder";
 
 
 /**
@@ -90,7 +90,7 @@ export function useComponentClasses(props: UseComponentClassesProps) {
             ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]"
             : "[background:var(--bg)] hover:[background:var(--bg-hover)]",
         "text-[var(--text)] border border-[var(--border)]",
-        (hoverable || clickable) && interactionEnabled && buildHookInteractionClasses({ enabled: true }),
+        (hoverable || clickable) && interactionEnabled && styleUtil.buildHookInteractionClasses({ enabled: true }),
         clickable && "cursor-pointer",
         glass && "backdrop-blur-md",
         className

@@ -4,16 +4,15 @@ import NavActions from "./NavActions"
 import NavBrand from "./NavBrand"
 import NavMenu from "./NavMenu"
 import { useMyNav } from "../Hooks/useMyNav"
-import { useAnimation } from "../Hooks/useAnimation"
+import { styleUtil } from "../Utils/styleBuilder"
 import type { MyNavProps } from "./Interface/myNavProps"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
+import ErrorBoundary from "../Utils/ErrorBoundary"
 
 function MyNav({
     variant,
     size = "medium",
     children,
     className = "",
-    style,
     glass = true,
     shadow = "sm",
     title,
@@ -21,14 +20,14 @@ function MyNav({
     actions,
     animation,
 }: MyNavProps) {
-    const { navStyle, navClasses } = useMyNav({ variant, size, glass, shadow, className })
-    const animationClasses = useAnimation(animation)
+    const { navClasses } = useMyNav({ variant, size, glass, shadow, className })
+    const animationClasses = styleUtil.animationPropToClass(animation)
     const classes = [navClasses, animationClasses].filter(Boolean).join(" ")
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Nav component failed to render.</div>}>
             <NavProvider value={{ variant, size, glass, shadow }}>
-                <nav className={classes} style={{ ...navStyle, ...(style || {}) }}>
+                <nav className={classes}>
                     {title && <NavBrand>{title}</NavBrand>}
                     <NavContent>
                         {menu && <NavMenu>{menu}</NavMenu>}

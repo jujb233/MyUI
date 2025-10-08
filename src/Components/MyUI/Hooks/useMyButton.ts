@@ -1,6 +1,6 @@
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
-import { mergeClasses, buildInteractionClassesFromProp } from "../Utils/classUtils"
+import { styleUtil } from "../Utils/styleBuilder"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import { DEFAULT_COMPONENT_PROPS } from "../Interfaces/components/common"
 
@@ -38,8 +38,7 @@ export function useMyButton(props: UseMyButtonProps) {
     // 根据 size 读取预定义的尺寸样式（padding、fontSize、minWidth 等）
     const sizeStyle = SIZE_CONFIG[size]
 
-    // 通过 useComponentStyle 获取基于 variant/color/glass 的主题样式
-    // themedStyle 为行内样式对象，适合直接赋值到元素的 style
+    // 通过 useComponentStyle 获取基于 variant/color/glass 的主题样式（仅用于生成 className，不再返回 style）
     const { style: themedStyle } = useComponentStyle({
         variant,
         color,
@@ -49,20 +48,19 @@ export function useMyButton(props: UseMyButtonProps) {
         elevationKind: "button",
     })
 
-    // 合并最终的行内样式：以 themedStyle 为基础，若 disabled 则覆盖背景与文字色
-    const buttonStyle: React.CSSProperties = {
-        ...themedStyle,
-        ...(disabled && {
-            background: DEFAULT_STYLES.disabled.background,
-            color: DEFAULT_STYLES.disabled.color,
-        }),
-    } as React.CSSProperties
+    // themedStyle 逻辑合并进 className
+    const themedClass = Object.entries(themedStyle || {})
+        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+        .filter(Boolean)
+        .join(' ')
 
-    // 构建 className 字符串：尺寸类 + 布局/边框/过渡 + 主题背景（glass 或 非 glass）
-    // 还会合入交互类（hover/focus/active）以及用户传入的 className
-    const interactionClasses = buildInteractionClassesFromProp(interaction as any)
+    // disabled 逻辑合并进 className
+    const disabledClass = disabled ? `[background:${DEFAULT_STYLES.disabled.background}] [color:${DEFAULT_STYLES.disabled.color}]` : ''
 
-    const buttonClasses = mergeClasses(
+    // 构建 className 字符串
+    const interactionClasses = styleUtil.buildInteractionClassesFromProp(interaction as any)
+
+    const buttonClasses = styleUtil.mergeClasses(
         sizeStyle.padding,
         sizeStyle.fontSize,
         sizeStyle.minWidth,
@@ -76,17 +74,17 @@ export function useMyButton(props: UseMyButtonProps) {
         interactionClasses,
         "disabled:opacity-60 disabled:cursor-not-allowed",
         glass && !disabled && "backdrop-blur-md border",
+        themedClass,
+        disabledClass,
         className
     )
 
-    // 返回统一的接口，便于组件层直接解构使用
+    // 返回统一的接口，移除 style 相关
     return {
         size,
         sizeStyle,
-        buttonStyle,
         buttonClasses,
         // 统一命名别名
-        rootStyle: buttonStyle,
         rootClasses: buttonClasses,
         disabled,
         glass,
