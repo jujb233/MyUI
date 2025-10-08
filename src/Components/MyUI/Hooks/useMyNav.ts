@@ -1,8 +1,3 @@
-/**
- * useMyNav
- * 简要：为导航（MyNav）组件生成主题样式与 className，支持可选的交互类（hover/focus）
- * 返回：{ navStyle, navClasses, rootStyle, rootClasses }
- */
 import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../../Options"
 import clsx from "clsx"

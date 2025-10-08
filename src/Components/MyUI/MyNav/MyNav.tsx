@@ -6,6 +6,7 @@ import NavMenu from "./NavMenu"
 import { useMyNav } from "../Hooks/useMyNav"
 import { useAnimation } from "../Hooks/useAnimation"
 import type { MyNavProps } from "./Interface/myNavProps"
+import ErrorBoundary from "../../Utils/ErrorBoundary"
 
 function MyNav({
     variant,
@@ -25,16 +26,18 @@ function MyNav({
     const classes = [navClasses, animationClasses].filter(Boolean).join(" ")
 
     return (
-        <NavProvider value={{ variant, size, glass, shadow }}>
-            <nav className={classes} style={{ ...navStyle, ...(style || {}) }}>
-                {title && <NavBrand>{title}</NavBrand>}
-                <NavContent>
-                    {menu && <NavMenu>{menu}</NavMenu>}
-                    {children}
-                </NavContent>
-                {actions && <NavActions>{actions}</NavActions>}
-            </nav>
-        </NavProvider>
+        <ErrorBoundary fallback={<div className="border border-red-500 p-4">Nav component failed to render.</div>}>
+            <NavProvider value={{ variant, size, glass, shadow }}>
+                <nav className={classes} style={{ ...navStyle, ...(style || {}) }}>
+                    {title && <NavBrand>{title}</NavBrand>}
+                    <NavContent>
+                        {menu && <NavMenu>{menu}</NavMenu>}
+                        {children}
+                    </NavContent>
+                    {actions && <NavActions>{actions}</NavActions>}
+                </nav>
+            </NavProvider>
+        </ErrorBoundary>
     )
 }
 

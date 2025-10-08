@@ -1,14 +1,8 @@
-/**
- * useMyPanel
- * 简要：为 Panel 组件处理尺寸、主题、背景图与交互类，返回可直接用于渲染的 style 与 class
- * 返回：{ size, sizeStyle, panelStyle, panelClasses, rootStyle, rootClasses, disabled, title, backgroundImage, glass }
- */
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
-import clsx from "clsx"
+import { mergeClasses, buildInteractionClassesFromProp } from "../Utils/classUtils"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
-import { buildHookInteractionClasses } from "./useInteraction"
-import { INTERACTION_PRESETS } from "../../../Options/Interactions/presets"
+import { DEFAULT_COMPONENT_PROPS } from "../Interfaces/components/common"
 
 export type UseMyPanelProps = {
     variant?: ComponentVariant
@@ -19,20 +13,20 @@ export type UseMyPanelProps = {
     disabled?: boolean
     title?: string
     backgroundImage?: string
-    interaction?: InteractionPolicy | keyof typeof INTERACTION_PRESETS
+    interaction?: InteractionPolicy | string
 }
 
 export function useMyPanel(props: UseMyPanelProps) {
     const {
         variant: variantProp,
-        size = "medium",
-        glass = true,
-        shadow = "md",
+        size = DEFAULT_COMPONENT_PROPS.size,
+        glass = DEFAULT_COMPONENT_PROPS.glass,
+        shadow = DEFAULT_COMPONENT_PROPS.shadow,
         className = "",
-        disabled = false,
+        disabled = DEFAULT_COMPONENT_PROPS.disabled,
         title,
         backgroundImage,
-        interaction = 'rich',
+        interaction = DEFAULT_COMPONENT_PROPS.interaction as any,
     } = props
 
     // 解析 variant 与 color，并从预设获取具体 variant 配置
@@ -60,7 +54,9 @@ export function useMyPanel(props: UseMyPanelProps) {
     } as React.CSSProperties
 
     // 组合 class：基础布局 + size + 主题背景 (glass/normal) + 可选 backdrop / bg-cover / disabled / 交互类
-    const panelClasses = clsx(
+    const interactionClasses = buildInteractionClassesFromProp(interaction as any)
+
+    const panelClasses = mergeClasses(
         "relative overflow-hidden rounded-2xl",
         sizeStyle.padding,
         sizeStyle.fontSize,
@@ -70,9 +66,7 @@ export function useMyPanel(props: UseMyPanelProps) {
         glass && "backdrop-blur-md",
         backgroundImage && "bg-cover bg-center",
         disabled && "opacity-60 cursor-not-allowed",
-        buildHookInteractionClasses(typeof interaction === 'string'
-            ? INTERACTION_PRESETS[interaction]
-            : interaction),
+        interactionClasses,
         className
     )
 

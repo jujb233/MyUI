@@ -5,6 +5,7 @@ import PanelFooter from "./PanelFooter"
 import { useMyPanel } from "../Hooks/useMyPanel"
 import { useAnimation } from "../Hooks/useAnimation"
 import type { MyPanelProps } from "./Interface/myPanelProps"
+import ErrorBoundary from "../../Utils/ErrorBoundary"
 
 function MyPanel({
     variant,
@@ -25,13 +26,15 @@ function MyPanel({
     const animationClasses = useAnimation(animation)
     const classes = [panelClasses, animationClasses].filter(Boolean).join(" ")
     return (
-        <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage, interaction }}>
-            <div className={classes} style={{ ...panelStyle, ...(style || {}) }}>
-                <PanelHeader title={title} />
-                <PanelContent>{children}</PanelContent>
-                {footer && <PanelFooter>{footer}</PanelFooter>}
-            </div>
-        </PanelProvider>
+        <ErrorBoundary fallback={<div className="border border-red-500 p-4">Panel component failed to render.</div>}>
+            <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage, interaction }}>
+                <div className={classes} style={{ ...panelStyle, ...(style || {}) }}>
+                    <PanelHeader title={title} />
+                    <PanelContent>{children}</PanelContent>
+                    {footer && <PanelFooter>{footer}</PanelFooter>}
+                </div>
+            </PanelProvider>
+        </ErrorBoundary>
     )
 }
 

@@ -1,14 +1,8 @@
-/**
- * useMyButton
- * 简要：为 MyButton 组件解析 props（variant/size/disabled/glass 等），并返回计算好的样式对象与 class 字符串
- * 返回：{ size, sizeStyle, buttonStyle, buttonClasses, rootStyle, rootClasses, disabled, glass }
- */
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, DEFAULT_STYLES, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
-import clsx from "clsx"
-import { buildHookInteractionClasses } from "./useInteraction"
+import { mergeClasses, buildInteractionClassesFromProp } from "../Utils/classUtils"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
-import { INTERACTION_PRESETS } from "../../../Options/Interactions/presets"
+import { DEFAULT_COMPONENT_PROPS } from "../Interfaces/components/common"
 
 export type UseMyButtonProps = {
     htmlType?: "button" | "submit" | "reset"
@@ -18,19 +12,19 @@ export type UseMyButtonProps = {
     className?: string
     glass?: boolean
     shadow?: ShadowName
-    interaction?: InteractionPolicy
+    interaction?: InteractionPolicy | string
 }
 
 export function useMyButton(props: UseMyButtonProps) {
     // 从 props 中解构并提供默认值
     const {
         variant: variantProp,
-        size = "medium",
-        disabled = false,
+        size = DEFAULT_COMPONENT_PROPS.size,
+        disabled = DEFAULT_COMPONENT_PROPS.disabled,
         className = "",
-        glass = true,
-        shadow = "sm",
-        interaction = 'rich',
+        glass = DEFAULT_COMPONENT_PROPS.glass,
+        shadow = DEFAULT_COMPONENT_PROPS.shadow,
+        interaction = DEFAULT_COMPONENT_PROPS.interaction,
     } = props
 
     // 基于传入的 variant 计算角色与颜色（与 Card/Panel 保持一致）
@@ -66,7 +60,9 @@ export function useMyButton(props: UseMyButtonProps) {
 
     // 构建 className 字符串：尺寸类 + 布局/边框/过渡 + 主题背景（glass 或 非 glass）
     // 还会合入交互类（hover/focus/active）以及用户传入的 className
-    const buttonClasses = clsx(
+    const interactionClasses = buildInteractionClassesFromProp(interaction as any)
+
+    const buttonClasses = mergeClasses(
         sizeStyle.padding,
         sizeStyle.fontSize,
         sizeStyle.minWidth,
@@ -77,9 +73,7 @@ export function useMyButton(props: UseMyButtonProps) {
             ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
             : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
         'text-[var(--text)]',
-        buildHookInteractionClasses(typeof interaction === 'string'
-            ? INTERACTION_PRESETS[interaction]
-            : interaction),
+        interactionClasses,
         "disabled:opacity-60 disabled:cursor-not-allowed",
         glass && !disabled && "backdrop-blur-md border",
         className

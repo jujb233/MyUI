@@ -1,8 +1,3 @@
-/**
- * useMyCard
- * 简要：为 MyCard 组件整理布局、主题与 class，支持方向、图片位置、可点击/hover 等选项
- * 返回：{ size, sizeConfig, cardStyle, containerClasses, rootStyle, rootClasses, bodyClasses, isHorizontal, imagePosition }
- */
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
 import { useComponentClasses } from "../../../Hooks/useComponentClasses"

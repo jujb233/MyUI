@@ -5,3 +5,4 @@
 
 export * from './button'
 export * from './polymorphic'
+export * from './common'

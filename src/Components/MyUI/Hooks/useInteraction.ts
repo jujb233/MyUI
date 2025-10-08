@@ -1,8 +1,3 @@
-/**
- * useInteraction / buildHookInteractionClasses
- * 简要：根据交互策略（hover/focus/active/disabled）生成一组 Tailwind CSS 类
- * 用途：供组件在构建交互效果时复用（例如按钮、面板、卡片等）
- */
 import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from "../../../Options/Interactions/interaction"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 
