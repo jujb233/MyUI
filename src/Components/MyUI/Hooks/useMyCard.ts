@@ -1,6 +1,6 @@
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../../Options"
 import { useComponentStyle } from "../../../Hooks/useComponentStyle"
-import { useComponentClasses } from "../../../Hooks/useComponentClasses"
+import { styleUtil } from "../Utils/styleBuilder"
 import { useCardLayout } from "../../../Hooks/useCardLayout"
 
 export type UseMyCardProps = {
@@ -50,38 +50,33 @@ export function useMyCard(props: UseMyCardProps) {
         shadow,
         elevationKind: "card",
     })
+
     const themedClass = Object.entries(cardStyle || {})
         .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
         .filter(Boolean)
         .join(' ')
 
-    // 根据方向与图片位置判断布局是否为水平布局
     const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
 
-    // 组合容器级别的类（包含交互、size、imagePosition、user class、主题style等）
-    // themedClass 合并进 containerClasses
-    const { containerClasses } = useComponentClasses({
-        baseClass: "my-card",
-        direction,
-        imagePosition,
-        sizeConfig,
-        glass,
-        hoverable,
-        clickable,
-        className: [className, themedClass].filter(Boolean).join(' '),
-        bordered,
-        interactionEnabled: true,
-        // ...existing behavior
-    })
+    // 用建造者模式构建 containerClasses
+    const containerClasses = new styleUtil.ClassNameBuilder()
+        .add('my-card')
+        .addIf(direction === 'horizontal', 'flex-row')
+        .addIf(direction === 'vertical', 'flex-col')
+        .addIf(!!glass, 'glass')
+        .addIf(!!hoverable, 'hoverable')
+        .addIf(!!clickable, 'clickable')
+        .addIf(!!bordered, 'bordered')
+        .add(themedClass)
+        .add(className)
+        .build()
 
-    // 构建 body 的类名（内部内容区），考虑 spacing 与 横向伸展
-    const bodyClasses = [
-        "my-card-body",
-        sizeConfig.padding,
-        sizeConfig.spacing,
-        isHorizontal ? "flex-1" : "",
-        imagePosition === "background" ? "relative z-10" : ""
-    ].filter(Boolean).join(" ")
+    const bodyClasses = new styleUtil.ClassNameBuilder()
+        .add('my-card-body')
+        .add(sizeConfig.padding, sizeConfig.spacing)
+        .addIf(isHorizontal, 'flex-1')
+        .addIf(imagePosition === 'background', 'relative z-10')
+        .build()
 
     // 返回对组件渲染有用的值与别名（移除 style 相关）
     return {

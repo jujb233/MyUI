@@ -1,6 +1,6 @@
 import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../../Options"
-import clsx from "clsx"
+
 import { styleUtil } from "../Utils/styleBuilder"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../../Options/Interactions/presets"
@@ -38,25 +38,21 @@ export function useMyNav(options: UseMyNavOptions) {
         glass,
         shadow,
     })
-    const themedClass = Object.entries(navStyle || {})
-        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
-        .filter(Boolean)
-        .join(' ')
-    // 若启用交互，则合成交互相关的类
-    const interactionClasses = interactionEnabled
-        ? styleUtil.buildHookInteractionClasses(typeof interaction === 'string'
-            ? INTERACTION_PRESETS[interaction]
-            : interaction)
-        : ''
-    // 组合最终的 nav 类：基础类 + 大小 + 主题 + 交互 + 用户自定义 + themedClass
-    const navClasses = clsx(
-        'my-nav',
-        `my-nav-${size}`,
-        theme,
-        interactionClasses,
-        themedClass,
-        className
-    )
+    const navClasses = new styleUtil.ClassNameBuilder()
+        .add('my-nav', `my-nav-${size}`)
+        .add(typeof theme === 'string' ? theme : undefined)
+        .addIf(
+            interactionEnabled,
+            styleUtil.buildInteractionClasses(typeof interaction === 'string' ? INTERACTION_PRESETS[interaction] : interaction)
+        )
+        .add(
+            Object.entries(navStyle || {})
+                .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+                .filter(Boolean)
+                .join(' ')
+        )
+        .add(className)
+        .build()
     // 返回样式与类名，移除 style 相关
     return { navClasses, rootClasses: navClasses }
 }

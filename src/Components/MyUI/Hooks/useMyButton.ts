@@ -48,36 +48,33 @@ export function useMyButton(props: UseMyButtonProps) {
         elevationKind: "button",
     })
 
-    // themedStyle 逻辑合并进 className
-    const themedClass = Object.entries(themedStyle || {})
-        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
-        .filter(Boolean)
-        .join(' ')
 
-    // disabled 逻辑合并进 className
-    const disabledClass = disabled ? `[background:${DEFAULT_STYLES.disabled.background}] [color:${DEFAULT_STYLES.disabled.color}]` : ''
-
-    // 构建 className 字符串
-    const interactionClasses = styleUtil.buildInteractionClassesFromProp(interaction as any)
-
-    const buttonClasses = styleUtil.mergeClasses(
-        sizeStyle.padding,
-        sizeStyle.fontSize,
-        sizeStyle.minWidth,
-        "inline-flex items-center justify-center select-none relative overflow-hidden",
-        "rounded-xl font-semibold tracking-wide border border-transparent",
-        "transition-all duration-200 ease-out will-change-transform",
-        glass
-            ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
-            : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]',
-        'text-[var(--text)]',
-        interactionClasses,
-        "disabled:opacity-60 disabled:cursor-not-allowed",
-        glass && !disabled && "backdrop-blur-md border",
-        themedClass,
-        disabledClass,
-        className
-    )
+    // 使用建造者模式构建 className
+    const buttonClasses = new styleUtil.ClassNameBuilder()
+        .add(sizeStyle.padding, sizeStyle.fontSize, sizeStyle.minWidth)
+        .add(
+            "inline-flex items-center justify-center select-none relative overflow-hidden",
+            "rounded-xl font-semibold tracking-wide border border-transparent",
+            "transition-all duration-200 ease-out will-change-transform"
+        )
+        .add(
+            glass
+                ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
+                : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]'
+        )
+        .add('text-[var(--text)]')
+        .addInteraction(interaction as any)
+        .add('disabled:opacity-60 disabled:cursor-not-allowed')
+        .addIf(glass && !disabled, "backdrop-blur-md border")
+        .add(
+            Object.entries(themedStyle || {})
+                .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+                .filter(Boolean)
+                .join(' ')
+        )
+        .addIf(disabled, `[background:${DEFAULT_STYLES.disabled.background}] [color:${DEFAULT_STYLES.disabled.color}]`)
+        .add(className)
+        .build()
 
     // 返回统一的接口，移除 style 相关
     return {

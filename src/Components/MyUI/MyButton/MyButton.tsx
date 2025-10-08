@@ -4,7 +4,6 @@ import ButtonContent from "./ButtonContent"
 import ButtonIcon from "./ButtonIcon"
 import ButtonActions from "./ButtonActions"
 import { useMyButton } from "../Hooks/useMyButton"
-import { styleUtil } from "../Utils/styleBuilder"
 import type { MyButtonProps } from "./Interface/myButtonProps"
 import ErrorBoundary from "../Utils/ErrorBoundary"
 
@@ -23,14 +22,9 @@ function MyButton({
     shadow = "sm",
     icon,
     actions,
-    animation,
 }: MyButtonProps) {
-    // 计算基础样式/类名（来自自定义 hook）
+    // 仅通过 hook 计算最终 className
     const { buttonClasses } = useMyButton({ variant, size, glass, shadow, disabled, className })
-    // 计算动画相关的类名（如果有 animation 配置）
-    const animationClasses = styleUtil.animationPropToClass(animation)
-    // 合并最终的 className，过滤空值
-    const classes = [buttonClasses, animationClasses].filter(Boolean).join(" ")
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-2">Button component failed to render.</div>}>
@@ -40,7 +34,7 @@ function MyButton({
                     type={htmlType}
                     disabled={disabled}
                     onClick={onClick}
-                    className={classes}
+                    className={buttonClasses}
                 >
                     {/* 可选图标（在左侧） */}
                     {icon && <ButtonIcon icon={icon} />}

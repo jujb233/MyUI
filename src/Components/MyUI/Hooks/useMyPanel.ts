@@ -46,29 +46,22 @@ export function useMyPanel(props: UseMyPanelProps) {
         shadow,
         elevationKind: 'panel',
     })
-    const themedClass = Object.entries(themedStyle || {})
-        .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
-        .filter(Boolean)
-        .join(' ')
-    // 合并背景图到 className
-    const bgClass = backgroundImage ? `[background-image:url(${backgroundImage})]` : ''
-    // 组合 class
-    const interactionClasses = styleUtil.buildInteractionClassesFromProp(interaction as any)
-    const panelClasses = styleUtil.mergeClasses(
-        "relative overflow-hidden rounded-2xl",
-        sizeStyle.padding,
-        sizeStyle.fontSize,
-        glass
-            ? "[background:var(--glass-bg)] text-[var(--text)]"
-            : "[background:var(--bg)] text-[var(--text)]",
-        glass && "backdrop-blur-md",
-        backgroundImage && "bg-cover bg-center",
-        bgClass,
-        disabled && "opacity-60 cursor-not-allowed",
-        interactionClasses,
-        themedClass,
-        className
-    )
+    const panelClasses = new styleUtil.ClassNameBuilder()
+        .add("relative overflow-hidden rounded-2xl")
+        .add(sizeStyle.padding, sizeStyle.fontSize)
+        .add(glass ? "[background:var(--glass-bg)] text-[var(--text)]" : "[background:var(--bg)] text-[var(--text)]")
+        .addIf(!!glass, "backdrop-blur-md")
+        .addIf(!!backgroundImage, "bg-cover bg-center", `[background-image:url(${backgroundImage})]`)
+        .addIf(!!disabled, "opacity-60 cursor-not-allowed")
+        .addInteraction(interaction as any)
+        .add(
+            Object.entries(themedStyle || {})
+                .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
+                .filter(Boolean)
+                .join(' ')
+        )
+        .add(className)
+        .build()
     // 返回可直接用于渲染的类名，以及一些常用属性
     return {
         size,
