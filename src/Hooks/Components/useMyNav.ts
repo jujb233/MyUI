@@ -1,9 +1,9 @@
-import { useComponentTheme, VARIANT_ROLE_STYLES } from "../../Options"
+import {VARIANT_ROLE_STYLES } from "../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
-
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../Options/Presets/interactionPresets"
+import { useComponentTheme } from ".."
 
 export type UseMyNavOptions = {
     variant?: ComponentVariant
