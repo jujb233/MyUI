@@ -119,3 +119,71 @@
 .myui-gs-lg {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
 }
+
+/* =====================
+   MyUI 自定义动画
+   与 useAnimation 中的类名一一对应
+   ===================== */
+
+@keyframes myui-fade-in {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes myui-slide-up {
+    from {
+        transform: translateY(12px);
+        opacity: 0
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
+
+@keyframes myui-slide-down {
+    from {
+        transform: translateY(-12px);
+        opacity: 0
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1
+    }
+}
+
+@keyframes myui-scale-in {
+    from {
+        transform: scale(0.95);
+        opacity: 0
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1
+    }
+}
+
+/* 默认动画时长 300ms，可通过 duration-[ms] 覆盖 */
+.animate-fade {
+    animation: myui-fade-in 300ms both
+}
+
+.animate-slide-up {
+    animation: myui-slide-up 300ms both
+}
+
+.animate-slide-down {
+    animation: myui-slide-down 300ms both
+}
+
+.animate-scale-in {
+    animation: myui-scale-in 300ms both
+}

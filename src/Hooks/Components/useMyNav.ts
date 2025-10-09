@@ -1,4 +1,5 @@
 import { VARIANT_ROLE_STYLES } from "../../Options"
+import type { AnimationProp } from "../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
@@ -14,7 +15,8 @@ export type UseMyNavOptions = {
     interactionEnabled?: boolean
     /** 容器是否显示 focus ring（默认关闭） */
     focusRing?: boolean
-    interaction?: InteractionPolicy
+    interaction?: InteractionPolicy | string
+    animation?: AnimationProp
 }
 
 export function useMyNav(options: UseMyNavOptions) {
@@ -26,6 +28,7 @@ export function useMyNav(options: UseMyNavOptions) {
         className = '',
         interactionEnabled = false,
         interaction = 'none',
+        animation,
     } = options
 
     // 解构 options 并使用默认值
@@ -58,10 +61,15 @@ export function useMyNav(options: UseMyNavOptions) {
         )
         .add('text-[var(--text)]')
         .add(elevationClass)
+        .addAnimation(animation)
         .addIf(glass, 'backdrop-blur-md')
         .addIf(
             interactionEnabled,
-            styleUtil.buildInteractionClasses(typeof interaction === 'string' ? INTERACTION_PRESETS[interaction] : interaction)
+            styleUtil.buildInteractionClasses(
+                typeof interaction === 'string'
+                    ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none
+                    : interaction
+            )
         )
         .add(className)
         .build()

@@ -16,6 +16,9 @@ function NavsDemo() {
             >
                 <MyNav
                     variant={{ role: 'primary', color: 'blue' }}
+                    animation={{ type: 'slide-down', duration: 400, easing: 'out' }}
+                    interactionEnabled
+                    interaction='rich'
                     title={<a href="#" className="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
@@ -28,6 +31,9 @@ function NavsDemo() {
                 />
                 <MyNav
                     variant={{ role: 'secondary', color: 'blue' }}
+                    animation="fade"
+                    interactionEnabled
+                    interaction='rich'
                     title={<a href="#" className="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
@@ -40,6 +46,9 @@ function NavsDemo() {
                 />
                 <MyNav
                     glass
+                    animation={{ type: 'scale-in', duration: 350 }}
+                    interactionEnabled
+                    interaction='rich'
                     title={<a href="#" className="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
@@ -59,6 +68,9 @@ function NavsDemo() {
             >
                 <MyNav
                     variant={{ role: 'primary', color: 'purple' }}
+                    animation="fade"
+                    interactionEnabled
+                    interaction='rich'
                     title={(
                         <div className="flex items-center gap-2">
                             <span className="text-xl font-black">MyUI</span>
@@ -90,6 +102,9 @@ function NavsDemo() {
                     <MyNav
                         glass
                         shadow="lg"
+                        animation={{ type: 'slide-up', duration: 500, easing: 'in-out' }}
+                        interactionEnabled
+                        interaction='rich'
                         title={<a href="#" className="text-lg font-semibold">Aurora</a>}
                         menu={
                             <>

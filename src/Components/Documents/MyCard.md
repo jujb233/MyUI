@@ -26,4 +26,29 @@
 | `title`           | `React.ReactNode`                              | 卡片的标题内容。                                         |
 | `children`        | `React.ReactNode`                              | 卡片的主要内容。                                         |
 
+## 组合式子组件
+
+为了提升组合性，子组件现在作为命名导出提供（不再挂载在 `MyCard` 对象上）。你可以这样导入并使用：
+
+```tsx
+import MyCard, { CardHeader, CardContent, CardFooter, CardActions, CardTags } from '../Components/MyCard'
+
+<MyCard backgroundImage="/demo.png">
+	<CardTags tags={["React", "TypeScript"]} />
+	<CardHeader>示例标题</CardHeader>
+	<CardContent>主要内容</CardContent>
+	<CardActions>
+		<button>操作</button>
+	</CardActions>
+</MyCard>
+```
+
+注意：旧的写法 `MyCard.Header` / `MyCard.Image` 已废弃并移除，请将代码迁移为上面的组合式用法或使用 `backgroundImage` prop 来传入背景图片。
+
+## 迁移提示
+
+- 将 `<MyCard.Image src="..." />` 改为在 `MyCard` 上使用 `backgroundImage="..."`。
+- 将 `MyCard.Header`、`MyCard.Content`、`MyCard.Footer`、`MyCard.Actions`、`MyCard.Tags` 改为从包中命名导入并直接使用相应组件。
+
+
 

@@ -1,5 +1,10 @@
 import { useMemo, useState } from "react";
 import { MyCard } from "../Components/MyCard";
+import { CardHeader } from "../Components/MyCard/CardHeader";
+import { CardContent } from "../Components/MyCard/CardContent";
+import { CardFooter } from "../Components/MyCard/CardFooter";
+import { CardActions } from "../Components/MyCard/CardActions";
+import { CardTags } from "../Components/MyCard/CardTags";
 import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
@@ -16,20 +21,20 @@ const CardsDemo = () => {
                 panelProps={{ className: "flex justify-center" }}
             >
                 <MyCard
+                    backgroundImage="/vite.svg"
                     imagePosition="left"
                     direction="horizontal"
                     size="medium"
                     className="max-w-lg"
                 >
-                    <MyCard.Image src="/vite.svg" />
-                    <MyCard.Header>Your Name</MyCard.Header>
-                    <MyCard.Content>前端开发者，热衷于构建美观且实用的用户界面。</MyCard.Content>
-                    <MyCard.Footer>
+                    <CardHeader>Your Name</CardHeader>
+                    <CardContent>前端开发者，热衷于构建美观且实用的用户界面。</CardContent>
+                    <CardFooter>
                         <div className="flex justify-end space-x-2">
                             <MyButton size="small" variant={{ role: 'text', color: 'blue' }}>查看主页</MyButton>
                             <MyButton size="small" variant={{ role: 'primary', color: 'blue' }}>关注</MyButton>
                         </div>
-                    </MyCard.Footer>
+                    </CardFooter>
                 </MyCard>
             </DemoSection>
 
@@ -39,32 +44,29 @@ const CardsDemo = () => {
                 description="图片、标签与摘要的组合突出阅读价值，适合博客、资讯或知识库列表。"
                 panelProps={{ className: "grid gap-8 md:grid-cols-2 lg:grid-cols-3" }}
             >
-                <MyCard animation={{ type: 'fade' }}>
-                    <MyCard.Image src="/demo.png" />
-                    <MyCard.Tags tags={["React", "TypeScript", "TailwindCSS"]} />
-                    <MyCard.Header>构建下一代UI组件库</MyCard.Header>
-                    <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>
-                    <MyCard.Actions>
+                <MyCard animation={{ type: 'fade' }} backgroundImage="/demo.png">
+                    <CardTags tags={["React", "TypeScript", "TailwindCSS"]} />
+                    <CardHeader>构建下一代UI组件库</CardHeader>
+                    <CardContent>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</CardContent>
+                    <CardActions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </CardActions>
                 </MyCard>
-                <MyCard animation={{ type: 'slide-up' }}>
-                    <MyCard.Image src="/demo.png" />
-                    <MyCard.Tags tags={["设计", "色彩", "UI/UX"]} />
-                    <MyCard.Header>设计系统中的色彩哲学</MyCard.Header>
-                    <MyCard.Content>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</MyCard.Content>
-                    <MyCard.Actions>
+                <MyCard animation={{ type: 'slide-up' }} backgroundImage="/demo.png">
+                    <CardTags tags={["设计", "色彩", "UI/UX"]} />
+                    <CardHeader>设计系统中的色彩哲学</CardHeader>
+                    <CardContent>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</CardContent>
+                    <CardActions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </CardActions>
                 </MyCard>
-                <MyCard animation={{ type: 'scale-in' }}>
-                    <MyCard.Image src="/demo.png" />
-                    <MyCard.Tags tags={["性能", "Webpack", "Web Vitals"]} />
-                    <MyCard.Header>前端性能优化实战</MyCard.Header>
-                    <MyCard.Content>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</MyCard.Content>
-                    <MyCard.Actions>
+                <MyCard animation={{ type: 'scale-in' }} backgroundImage="/demo.png">
+                    <CardTags tags={["性能", "Webpack", "Web Vitals"]} />
+                    <CardHeader>前端性能优化实战</CardHeader>
+                    <CardContent>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</CardContent>
+                    <CardActions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </CardActions>
                 </MyCard>
             </DemoSection>
 
@@ -81,8 +83,8 @@ const CardsDemo = () => {
                     onClick={() => alert("跳转到好友请求页面！")}
                     className="w-80"
                 >
-                    <MyCard.Header>新消息</MyCard.Header>
-                    <MyCard.Content>您有一条新的好友请求等待处理。</MyCard.Content>
+                    <CardHeader>新消息</CardHeader>
+                    <CardContent>您有一条新的好友请求等待处理。</CardContent>
                 </MyCard>
                 <MyCard
                     clickable
@@ -91,8 +93,8 @@ const CardsDemo = () => {
                     onClick={() => alert("查看详情！")}
                     className="w-80"
                 >
-                    <MyCard.Header>系统更新</MyCard.Header>
-                    <MyCard.Content>系统将在今晚凌晨2点进行维护更新，届时服务可能会短暂中断。</MyCard.Content>
+                    <CardHeader>系统更新</CardHeader>
+                    <CardContent>系统将在今晚凌晨2点进行维护更新，届时服务可能会短暂中断。</CardContent>
                 </MyCard>
             </DemoSection>
 
@@ -155,7 +157,7 @@ const CardsDemo = () => {
                                             animation={cfg}
                                             className="h-28 flex items-center justify-center"
                                         >
-                                            <MyCard.Header>{item.label}</MyCard.Header>
+                                            <CardHeader>{item.label}</CardHeader>
                                         </MyCard>
                                     );
                                 })}
@@ -177,19 +179,19 @@ const CardsDemo = () => {
             >
                 {(['sm', 'md', 'lg'] as const).map((sh) => (
                     <MyCard key={sh} shadow={sh} glass={false}>
-                        <MyCard.Header>{`shadow=${sh}`}</MyCard.Header>
-                        <MyCard.Content>实体投影</MyCard.Content>
+                        <CardHeader>{`shadow=${sh}`}</CardHeader>
+                        <CardContent>实体投影</CardContent>
                     </MyCard>
                 ))}
                 {(['sm', 'md', 'lg'] as const).map((sh) => (
                     <MyCard key={`g-${sh}`} shadow={sh} glass>
-                        <MyCard.Header>{`glass + ${sh}`}</MyCard.Header>
-                        <MyCard.Content>玻璃态</MyCard.Content>
+                        <CardHeader>{`glass + ${sh}`}</CardHeader>
+                        <CardContent>玻璃态</CardContent>
                     </MyCard>
                 ))}
                 <MyCard variant={{ role: 'primary', color: 'purple' }}>
-                    <MyCard.Header>自定义主题</MyCard.Header>
-                    <MyCard.Content>紫色</MyCard.Content>
+                    <CardHeader>自定义主题</CardHeader>
+                    <CardContent>紫色</CardContent>
                 </MyCard>
             </DemoSection>
 
@@ -208,11 +210,11 @@ const CardsDemo = () => {
                     variant={{ role: 'success', color: 'green' }}
                     className="max-w-md"
                 >
-                    <MyCard.Header>自定义卡片</MyCard.Header>
-                    <MyCard.Content>这张卡片关闭了玻璃效果，并使用了 'emerald' 配色。页脚部分可以添加额外信息或操作。</MyCard.Content>
-                    <MyCard.Footer>
+                    <CardHeader>自定义卡片</CardHeader>
+                    <CardContent>这张卡片关闭了玻璃效果，并使用了 'emerald' 配色。页脚部分可以添加额外信息或操作。</CardContent>
+                    <CardFooter>
                         <div className="text-sm opacity-80">最后更新于 5分钟前</div>
-                    </MyCard.Footer>
+                    </CardFooter>
                 </MyCard>
             </DemoSection>
         </DemoLayout>

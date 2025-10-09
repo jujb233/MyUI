@@ -6,14 +6,11 @@ import { CardFooter } from "./CardFooter"
 import { CardActions } from "./CardActions"
 import { CardTags } from "./CardTags"
 
-export const MyCard = Object.assign(CardRoot, {
-    Image: CardImage,
-    Header: CardHeader,
-    Content: CardContent,
-    Footer: CardFooter,
-    Actions: CardActions,
-    Tags: CardTags,
-})
+// Export subcomponents as named exports to encourage composition
+export { CardImage, CardHeader, CardContent, CardFooter, CardActions, CardTags }
 
+// Keep named export for MyCard (component root) for compatibility, but
+// do NOT attach subcomponents onto it (breaking old MyCard.X access).
+export const MyCard = CardRoot
 export default MyCard
 export * from './MyCard'

@@ -18,9 +18,10 @@ function MyButton({
     shadow = "sm",
     icon,
     actions,
+    animation,
 }: MyButtonProps) {
     // 通过 hook 计算最终 className
-    const { buttonClasses } = useMyButton({ variant, size, glass, shadow, disabled, className })
+    const { buttonClasses } = useMyButton({ variant, size, glass, shadow, disabled, className, animation })
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-2">Button component failed to render.</div>}>
