@@ -1,11 +1,11 @@
-import { GLASS_SHADOWS, SHADOWS, type ShadowName } from './styleConstants';
+import { GLASS_SHADOWS, SHADOWS, type ShadowName } from './styleConstants'
 
-export type ElevationKind = 'button' | 'card' | 'panel';
+export type ElevationKind = 'button' | 'card' | 'panel'
 
 interface ElevationParams {
-    glass?: boolean;
-    shadow?: ShadowName;
-    kind?: ElevationKind;
+    glass?: boolean
+    shadow?: ShadowName
+    kind?: ElevationKind
 }
 
 /**
@@ -15,13 +15,13 @@ export function resolveElevation({ glass, shadow = 'md', kind = 'button' }: Elev
     if (glass) {
         switch (kind) {
             case 'card':
-                return GLASS_SHADOWS.lg ?? GLASS_SHADOWS.md;
+                return GLASS_SHADOWS.lg ?? GLASS_SHADOWS.md
             case 'panel':
-                return GLASS_SHADOWS.md;
+                return GLASS_SHADOWS.md
             case 'button':
             default:
-                return GLASS_SHADOWS.md;
+                return GLASS_SHADOWS.md
         }
     }
-    return SHADOWS[shadow];
+    return SHADOWS[shadow]
 }

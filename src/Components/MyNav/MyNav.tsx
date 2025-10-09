@@ -5,7 +5,7 @@ import NavBrand from "./NavBrand"
 import NavMenu from "./NavMenu"
 import { useMyNav } from "../../Hooks"
 import type { MyNavProps } from "./myNavProps"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
+import { ErrorBoundary } from "../../Utils"
 
 function MyNav({
     variant,

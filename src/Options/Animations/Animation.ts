@@ -14,29 +14,29 @@ export type AnimationType =
     | 'slide-down'
     | 'scale-in'
     | 'pulse'
-    | 'spin';
+    | 'spin'
 
 /**
  * 动画的详细配置对象。
  */
 export interface AnimationConfig {
     /** 动画类型 */
-    type: AnimationType;
+    type: AnimationType
     /** 
      * 持续时间 (ms)。若不指定，则使用默认值。
      * 可以映射到 Tailwind 的 `duration-[...]` 类。
      */
-    duration?: number;
+    duration?: number
     /** 
      * 延迟时间 (ms)。
      * 可以映射到 Tailwind 的 `delay-[...]` 类。
      */
-    delay?: number;
+    delay?: number
     /** 
      * 缓动函数。
      * 可以映射到 Tailwind 的 `ease-[...]` 类。
      */
-    easing?: 'linear' | 'in' | 'out' | 'in-out';
+    easing?: 'linear' | 'in' | 'out' | 'in-out'
 }
 
 /**
@@ -44,7 +44,7 @@ export interface AnimationConfig {
  * - 可以是简单的动画类型字符串。
  * - 也可以是详细的动画配置对象。
  */
-export type AnimationProp = AnimationType | AnimationConfig;
+export type AnimationProp = AnimationType | AnimationConfig
 
 export const animationMap: Record<string, string> = {
     fade: 'animate-fade',

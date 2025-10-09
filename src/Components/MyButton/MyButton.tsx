@@ -3,8 +3,8 @@ import ButtonContent from "./ButtonContent"
 import ButtonIcon from "./ButtonIcon"
 import ButtonActions from "./ButtonActions"
 import type { MyButtonProps } from "./myButtonProps"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
-import { useMyButton } from "../../Hooks/Components/useMyButton"
+import { ErrorBoundary } from "../../Utils"
+import { useMyButton } from "../../Hooks"
 
 function MyButton({
     buttonType: htmlType = "button",

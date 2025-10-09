@@ -1,12 +1,12 @@
-import { DEFAULT_BASE_COLOR, type IntensityName } from "./colorThemes";
-import { type ColorPresetName, PRESET_THEMES } from "./colorPresets";
-import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
-import { adjustColorBrightness, isHexColor } from "../../Utils";
+import { DEFAULT_BASE_COLOR, type IntensityName } from "./colorThemes"
+import { type ColorPresetName, PRESET_THEMES } from "../Presets/colorPresets"
+import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder"
+import { adjustColorBrightness, isHexColor } from "../../Utils"
 
 export type ThemeResolverParams = {
-    intensity?: IntensityName;
-    color?: ColorPresetName | string;
-};
+    intensity?: IntensityName
+    color?: ColorPresetName | string
+}
 
 /**
  * 解析并返回最终的组件主题
@@ -20,23 +20,23 @@ export type ThemeResolverParams = {
  * @returns `ComponentTheme` 对象
  */
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { intensity: intensity = 'solid', color } = params;
-    const presetThemes = PRESET_THEMES;
+    const { intensity: intensity = 'solid', color } = params
+    const presetThemes = PRESET_THEMES
 
-    let themeColor: ColorPresetName | string | undefined = color ?? DEFAULT_BASE_COLOR;
+    let themeColor: ColorPresetName | string | undefined = color ?? DEFAULT_BASE_COLOR
 
     // 1) 预设名称：返回嵌套结构的对应强度
     if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
-        return presetThemes[themeColor as ColorPresetName][intensity];
+        return presetThemes[themeColor as ColorPresetName][intensity]
     }
 
     // 2) 十六进制颜色：按强度构建
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
-        const from = themeColor;
-        const to = adjustColorBrightness(themeColor, -12);
-        return buildThemeByIntensity(from, to, intensity);
+        const from = themeColor
+        const to = adjustColorBrightness(themeColor, -12)
+        return buildThemeByIntensity(from, to, intensity)
     }
 
     // 3) 备用方案：默认颜色 + 指定强度
-    return presetThemes[DEFAULT_BASE_COLOR][intensity];
-};
+    return presetThemes[DEFAULT_BASE_COLOR][intensity]
+}

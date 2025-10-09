@@ -1,11 +1,11 @@
-import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder";
-import { INTENSITY, type IntensityName } from "./colorThemes";
+import { buildThemeByIntensity, type ComponentTheme } from "../Themes/themeBuilder"
+import { INTENSITY, type IntensityName } from "../Themes/colorThemes"
 
 /**
  * 定义颜色预设的渐变起止点
  * 这是所有主题颜色的单一来源
  */
-export const COLOR_BASE = {
+export const COLOR_PALETTE = {
     blue: { from: '#3b82f6', to: '#2563eb' },
     indigo: { from: '#4f46e5', to: '#7c3aed' },
     violet: { from: '#8b5cf6', to: '#7c3aed' },
@@ -27,10 +27,10 @@ export const COLOR_BASE = {
     neutral: { from: '#737373', to: '#525252' },
     white: { from: '#ffffff', to: '#f8fafc' },
     grayLight: { from: '#f8fafc', to: '#e2e8f0' },
-} as const;
+} as const
 
-export type ColorPresetName = keyof typeof COLOR_BASE;
-export const COLOR_PRESET_NAMES = Object.keys(COLOR_BASE) as ColorPresetName[];
+export type ColorPresetName = keyof typeof COLOR_PALETTE
+export const COLOR_PRESET_NAMES = Object.keys(COLOR_PALETTE) as ColorPresetName[]
 
 /**
  * 嵌套预设：每个颜色拥有四种强度变体的完整主题。
@@ -38,7 +38,7 @@ export const COLOR_PRESET_NAMES = Object.keys(COLOR_BASE) as ColorPresetName[];
  */
 export const PRESET_THEMES: Record<ColorPresetName, Record<IntensityName, ComponentTheme>> =
     Object.fromEntries(
-        Object.entries(COLOR_BASE).map(([color, stop]) => [
+        Object.entries(COLOR_PALETTE).map(([color, stop]) => [
             color,
             Object.fromEntries(
                 (Array.from(INTENSITY) as IntensityName[]).map((v) => [
@@ -47,5 +47,5 @@ export const PRESET_THEMES: Record<ColorPresetName, Record<IntensityName, Compon
                 ])
             ) as Record<IntensityName, ComponentTheme>,
         ])
-    ) as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>;
+    ) as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>
 

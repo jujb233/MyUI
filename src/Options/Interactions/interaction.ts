@@ -1,16 +1,16 @@
-import type { InteractionBehavior, InteractionConfig } from "../../Interfaces";
+import type { InteractionBehavior, InteractionConfig } from "../../Interfaces"
 
 export interface BuildInteractionOptions {
     /** 是否启用交互（总开关） */
-    enabled?: boolean;
+    enabled?: boolean
     /** 是否启用 hover 态反馈（默认开启） */
-    hover?: boolean;
+    hover?: boolean
     /** 是否启用 active 态反馈（默认开启） */
-    active?: boolean;
+    active?: boolean
     /** 是否包含过渡（默认开启） */
-    transition?: boolean;
+    transition?: boolean
     /** 禁用态是否重置 hover/active 的 scale（默认开启） */
-    disabledReset?: boolean;
+    disabledReset?: boolean
 }
 
 /**
@@ -24,17 +24,17 @@ export function buildInteractionClasses(options: BuildInteractionOptions = {}): 
         active = true,
         transition = true,
         disabledReset = true,
-    } = options;
+    } = options
 
-    if (!enabled) return undefined;
+    if (!enabled) return undefined
 
-    const classes: string[] = [];
-    if (transition) classes.push('transition-transform');
-    if (hover) classes.push('hover:scale-[1.02]');
-    if (active) classes.push('active:scale-95');
-    if (disabledReset) classes.push('disabled:hover:scale-100', 'disabled:active:scale-100');
+    const classes: string[] = []
+    if (transition) classes.push('transition-transform')
+    if (hover) classes.push('hover:scale-[1.02]')
+    if (active) classes.push('active:scale-95')
+    if (disabledReset) classes.push('disabled:hover:scale-100', 'disabled:active:scale-100')
 
-    return classes.join(' ');
+    return classes.join(' ')
 }
 
 /**

@@ -3,7 +3,7 @@ import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
 
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
-import { INTERACTION_PRESETS } from "../../Options/Interactions/presets"
+import { INTERACTION_PRESETS } from "../../Options/Presets/interactionPresets"
 
 export type UseMyNavOptions = {
     variant?: ComponentVariant

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import type { ThemeOptions, ComponentThemeResult } from './componentTheme';
+import type { ThemeOptions, ComponentThemeResult } from '../Utils/componentTheme';
 import { resolveTheme } from '../Options/Themes/themeResolver';
 import { resolveElevation } from '../Options';
 import { SHADOWS } from '../Options/Styles/styleConstants';

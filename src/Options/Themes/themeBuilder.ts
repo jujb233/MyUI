@@ -1,31 +1,31 @@
-import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../../Utils";
+import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../../Utils"
 
 /**
  * 定义主题对象的结构
  */
 export interface ComponentTheme {
     // 背景色 (可以是渐变)
-    '--bg': string;
+    '--bg': string
     // 悬停时的背景色
-    '--bg-hover': string;
+    '--bg-hover': string
     // 主文本颜色
-    '--text': string;
+    '--text': string
     // 边框颜色
-    '--border': string;
+    '--border': string
     // 焦点环颜色
-    '--focus-ring': string;
+    '--focus-ring': string
 
     // 玻璃态背景
-    '--glass-bg': string;
+    '--glass-bg': string
     // 玻璃态悬停背景
-    '--glass-bg-hover': string;
+    '--glass-bg-hover': string
     // 玻璃态边框
-    '--glass-border': string;
+    '--glass-border': string
 }
 
-const gradient = (from: string, to: string) => `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
+const gradient = (from: string, to: string) => `linear-gradient(135deg, ${from} 0%, ${to} 100%)`
 
-export type IntensityVariant = 'solid' | 'soft' | 'subtle' | 'text';
+export type IntensityVariant = 'solid' | 'soft' | 'subtle' | 'text'
 
 /**
  * 从一对颜色构建组件主题
@@ -35,9 +35,9 @@ export type IntensityVariant = 'solid' | 'soft' | 'subtle' | 'text';
  * @returns ComponentTheme 对象
  */
 export const buildTheme = (from: string, to: string, text?: string): ComponentTheme => {
-    const hoverFrom = adjustColorBrightness(from, -12);
-    const hoverTo = adjustColorBrightness(to, -12);
-    const textColor = text ?? yiqTextColor(to);
+    const hoverFrom = adjustColorBrightness(from, -12)
+    const hoverTo = adjustColorBrightness(to, -12)
+    const textColor = text ?? yiqTextColor(to)
 
     return {
         '--bg': gradient(from, to),
@@ -49,8 +49,8 @@ export const buildTheme = (from: string, to: string, text?: string): ComponentTh
         '--glass-bg': gradient(alphaFromHex(from, 0.15), alphaFromHex(to, 0.15)),
         '--glass-bg-hover': gradient(alphaFromHex(from, 0.25), alphaFromHex(to, 0.25)),
         '--glass-border': alphaFromHex(from, 0.2),
-    };
-};
+    }
+}
 
 /**
  * 基于“强度变体”从基色构建主题。
@@ -62,8 +62,8 @@ export const buildThemeByIntensity = (
     variant: IntensityVariant
 ): ComponentTheme => {
     const make = (bg: { from: string; to: string }, cfg: { text?: string; border?: string; focusA?: number; glassA?: { base: number; hover: number; border: number } }): ComponentTheme => {
-        const textColor = cfg.text ?? yiqTextColor(bg.to);
-        const focusRing = alphaFromHex(to, cfg.focusA ?? 0.5);
+        const textColor = cfg.text ?? yiqTextColor(bg.to)
+        const focusRing = alphaFromHex(to, cfg.focusA ?? 0.5)
 
         const base: ComponentTheme = {
             '--bg': gradient(bg.from, bg.to),
@@ -74,14 +74,14 @@ export const buildThemeByIntensity = (
             '--glass-bg': gradient(alphaFromHex(from, cfg.glassA?.base ?? 0.15), alphaFromHex(to, cfg.glassA?.base ?? 0.15)),
             '--glass-bg-hover': gradient(alphaFromHex(from, cfg.glassA?.hover ?? 0.25), alphaFromHex(to, cfg.glassA?.hover ?? 0.25)),
             '--glass-border': alphaFromHex(from, cfg.glassA?.border ?? 0.2),
-        };
+        }
 
-        return base;
-    };
+        return base
+    }
 
     switch (variant) {
         case 'solid':
-            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } });
+            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } })
         case 'soft':
             return make(
                 { from: alphaFromHex(from, 0.2), to: alphaFromHex(to, 0.2) },
@@ -91,7 +91,7 @@ export const buildThemeByIntensity = (
                     focusA: 0.35,
                     glassA: { base: 0.12, hover: 0.18, border: 0.18 },
                 }
-            );
+            )
         case 'subtle':
             return make(
                 { from: alphaFromHex(from, 0.08), to: alphaFromHex(to, 0.08) },
@@ -101,7 +101,7 @@ export const buildThemeByIntensity = (
                     focusA: 0.25,
                     glassA: { base: 0.08, hover: 0.12, border: 0.12 },
                 }
-            );
+            )
         case 'text':
             return {
                 '--bg': 'transparent',
@@ -112,8 +112,8 @@ export const buildThemeByIntensity = (
                 '--glass-bg': 'transparent',
                 '--glass-bg-hover': alphaFromHex(to, 0.06),
                 '--glass-border': 'transparent',
-            };
+            }
         default:
-            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } });
+            return make({ from, to }, { focusA: 0.5, glassA: { base: 0.15, hover: 0.25, border: 0.2 } })
     }
-};
+}

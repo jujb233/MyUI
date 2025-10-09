@@ -8,7 +8,7 @@ export const DEFAULT_STYLES = {
         text: "#1f2937",
         subtleText: "#4b5563",
     },
-} as const;
+} as const
 
 /**
  * 阴影效果
@@ -22,7 +22,7 @@ export const SHADOWS = {
     "2xl": "0 25px 50px -12px rgb(0 0 0 / 0.25)",
     inner: "inset 0 2px 4px 0 rgb(0 0 0 / 0.05)",
     none: "none",
-} as const;
+} as const
 
 /**
  * 玻璃态效果的特殊阴影
@@ -30,9 +30,9 @@ export const SHADOWS = {
 export const GLASS_SHADOWS = {
     md: `0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)`,
     lg: `0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3)`,
-} as const;
+} as const
 
 
-export type DefaultStyles = typeof DEFAULT_STYLES;
-export type ShadowName = keyof typeof SHADOWS;
-export type GlassShadowName = keyof typeof GLASS_SHADOWS;
+export type DefaultStyles = typeof DEFAULT_STYLES
+export type ShadowName = keyof typeof SHADOWS
+export type GlassShadowName = keyof typeof GLASS_SHADOWS
