@@ -1,8 +1,8 @@
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../Options"
-import { useComponentStyle } from "../../Hooks"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import { styleUtil } from "../../Utils/styleBuilder"
 import { DEFAULT_COMPONENT_PROPS } from "../../Interfaces/components/common"
+import type { AnimationProp } from "../../Options"
 
 export type UseMyPanelProps = {
     variant?: ComponentVariant
@@ -14,6 +14,7 @@ export type UseMyPanelProps = {
     title?: string
     backgroundImage?: string
     interaction?: InteractionPolicy | string
+    animation?: AnimationProp
 }
 
 export function useMyPanel(props: UseMyPanelProps) {
@@ -27,39 +28,47 @@ export function useMyPanel(props: UseMyPanelProps) {
         title,
         backgroundImage,
         interaction = DEFAULT_COMPONENT_PROPS.interaction as any,
+        animation,
     } = props
 
     // 解析 variant 与 color，并从预设获取具体 variant 配置
     const role = variantProp?.role || 'primary'
     const color = variantProp?.color || 'blue'
-    const variant = VARIANT_ROLE_STYLES[role] as any
+    const intensity = VARIANT_ROLE_STYLES[role]
 
     // 获取尺寸样式（padding / fontSize 等）
     const sizeStyle = SIZE_CONFIG[size as keyof typeof SIZE_CONFIG]
 
-    // 通过 useComponentStyle 获取面板的主题样式（行内 style），合并为 className
-    const { style: themedStyle } = useComponentStyle({
-        variant,
-        color,
-        glass,
-        bordered: true,
-        shadow,
-        elevationKind: 'panel',
-    })
+    // 主题类与阴影类
+    const themeColorClass = `myui-color-${color}`
+    const themeVariantClass = `myui-variant-${intensity}`
+    const shadowMap: Record<ShadowName, string> = {
+        xs: 'shadow-sm',
+        sm: 'shadow-sm',
+        md: 'shadow-md',
+        lg: 'shadow-lg',
+        xl: 'shadow-xl',
+        '2xl': 'shadow-2xl',
+        inner: 'shadow-inner',
+        none: 'shadow-none',
+    }
+    const elevationClass = glass ? 'myui-gs-lg' : (shadowMap[shadow] || 'shadow-md')
     const panelClasses = new styleUtil.ClassNameBuilder()
+        .add(themeColorClass, themeVariantClass)
         .add("relative overflow-hidden rounded-2xl")
         .add(sizeStyle.padding, sizeStyle.fontSize)
-        .add(glass ? "[background:var(--glass-bg)] text-[var(--text)]" : "[background:var(--bg)] text-[var(--text)]")
+        .add(
+            glass
+                ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
+                : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]'
+        )
+        .add('text-[var(--text)]')
+        .add(elevationClass)
+        .addAnimation(animation)
         .addIf(!!glass, "backdrop-blur-md")
-        .addIf(!!backgroundImage, "bg-cover bg-center", `[background-image:url(${backgroundImage})]`)
+        // 背景图在组件内部以绝对定位 <img> 方式渲染
         .addIf(!!disabled, "opacity-60 cursor-not-allowed")
         .addInteraction(interaction as any)
-        .add(
-            Object.entries(themedStyle || {})
-                .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
-                .filter(Boolean)
-                .join(' ')
-        )
         .add(className)
         .build()
     // 返回可直接用于渲染的类名，以及一些常用属性

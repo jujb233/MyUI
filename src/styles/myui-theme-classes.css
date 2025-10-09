@@ -1,0 +1,121 @@
+/*
+  MyUI 主题类（纯 className，无内联 style）
+  - 思路：
+    1) 用 myui-color-* 设置基础色 --from / --to
+    2) 用 myui-variant-* 根据强度（solid/soft/subtle/text）派生出 --bg / --bg-hover / --text 等变量
+    3) 组件内部通过 [background:var(--bg)] / text-[var(--text)] 等类消费这些变量
+    4) 玻璃态阴影提供 myui-gs-* 类（md/lg），与 Tailwind 的 shadow-* 共存
+*/
+
+/* 颜色基底：与 Options/Presets/COLOR_PALETTE 保持一致（仅覆盖 demo 中用到的颜色） */
+.myui-color-blue {
+    --from: #3b82f6;
+    --to: #2563eb;
+}
+
+.myui-color-purple {
+    --from: #a855f7;
+    --to: #7c3aed;
+}
+
+.myui-color-red {
+    --from: #ef4444;
+    --to: #dc2626;
+}
+
+.myui-color-green {
+    --from: #22c55e;
+    --to: #16a34a;
+}
+
+.myui-color-yellow {
+    --from: #f59e0b;
+    --to: #d97706;
+}
+
+.myui-color-gray {
+    --from: #6b7280;
+    --to: #4b5563;
+}
+
+/* 强度派生：
+   说明：使用 color-mix 近似实现“变暗/透明度”等效果，避免在运行时计算并注入。
+*/
+.myui-variant-solid {
+    /* 背景与悬停背景（略微变暗 12%） */
+    --bg: linear-gradient(135deg, var(--from) 0%, var(--to) 100%);
+    --bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 88%, black 12%) 0%,
+            color-mix(in srgb, var(--to) 88%, black 12%) 100%);
+    --text: #ffffff;
+    --border: transparent;
+    --focus-ring: color-mix(in srgb, var(--to) 50%, transparent);
+    /* 玻璃态背景/边框（使用透明混合近似 alpha） */
+    --glass-bg: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 15%, transparent) 0%,
+            color-mix(in srgb, var(--to) 15%, transparent) 100%);
+    --glass-bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 25%, transparent) 0%,
+            color-mix(in srgb, var(--to) 25%, transparent) 100%);
+    --glass-border: color-mix(in srgb, var(--from) 20%, transparent);
+}
+
+.myui-variant-soft {
+    --bg: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 20%, transparent) 0%,
+            color-mix(in srgb, var(--to) 20%, transparent) 100%);
+    --bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 28%, transparent) 0%,
+            color-mix(in srgb, var(--to) 28%, transparent) 100%);
+    /* 中等对比：使用基色作为文本色 */
+    --text: var(--to);
+    --border: color-mix(in srgb, var(--from) 30%, transparent);
+    --focus-ring: color-mix(in srgb, var(--to) 35%, transparent);
+    --glass-bg: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 12%, transparent) 0%,
+            color-mix(in srgb, var(--to) 12%, transparent) 100%);
+    --glass-bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 18%, transparent) 0%,
+            color-mix(in srgb, var(--to) 18%, transparent) 100%);
+    --glass-border: color-mix(in srgb, var(--from) 18%, transparent);
+}
+
+.myui-variant-subtle {
+    --bg: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 8%, transparent) 0%,
+            color-mix(in srgb, var(--to) 8%, transparent) 100%);
+    --bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 12%, transparent) 0%,
+            color-mix(in srgb, var(--to) 12%, transparent) 100%);
+    /* 低对比：中性深文本 */
+    --text: #1f2937;
+    --border: color-mix(in srgb, var(--from) 22%, transparent);
+    --focus-ring: color-mix(in srgb, var(--to) 25%, transparent);
+    --glass-bg: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 8%, transparent) 0%,
+            color-mix(in srgb, var(--to) 8%, transparent) 100%);
+    --glass-bg-hover: linear-gradient(135deg,
+            color-mix(in srgb, var(--from) 12%, transparent) 0%,
+            color-mix(in srgb, var(--to) 12%, transparent) 100%);
+    --glass-border: color-mix(in srgb, var(--from) 12%, transparent);
+}
+
+.myui-variant-text {
+    --bg: transparent;
+    --bg-hover: color-mix(in srgb, var(--to) 6%, transparent);
+    --text: var(--to);
+    --border: transparent;
+    --focus-ring: color-mix(in srgb, var(--to) 40%, transparent);
+    --glass-bg: transparent;
+    --glass-bg-hover: color-mix(in srgb, var(--to) 6%, transparent);
+    --glass-border: transparent;
+}
+
+/* 玻璃态阴影（与 SHADOWS/GLASS_SHADOWS 对应） */
+.myui-gs-md {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.myui-gs-lg {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}

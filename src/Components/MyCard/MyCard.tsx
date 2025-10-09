@@ -14,6 +14,7 @@ function MyCard({
     footer,
     backgroundImage,
     onClick,
+    children,
     ...props
 }: MyCardProps & {
     content?: React.ReactNode
@@ -41,9 +42,16 @@ function MyCard({
                     role={props.clickable ? 'button' : undefined}
                     tabIndex={props.clickable ? 0 : undefined}
                 >
-                    <CardHeader>{title}</CardHeader>
-                    <CardContent>{content}</CardContent>
-                    <CardFooter>{footer}</CardFooter>
+                    {React.Children.count(children) > 0 ? (
+                        children
+                    ) : (
+                        <>
+                            {/* 兼容旧 API：当未提供 children 时，回退到 props 渲染 */}
+                            <CardHeader>{title}</CardHeader>
+                            <CardContent>{content}</CardContent>
+                            {footer ? <CardFooter>{footer}</CardFooter> : null}
+                        </>
+                    )}
                 </div>
             </CardContext.Provider>
         </ErrorBoundary>

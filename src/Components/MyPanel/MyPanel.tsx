@@ -18,15 +18,21 @@ function MyPanel({
     backgroundImage,
     footer,
     interaction,
+    animation,
 }: MyPanelProps) {
-    const { panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title: typeof title === 'string' ? title : undefined, backgroundImage, interaction })
+    const { panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, title: typeof title === 'string' ? title : undefined, backgroundImage, interaction, animation })
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Panel component failed to render.</div>}>
             <PanelProvider value={{ variant, size, glass, shadow, disabled, title, backgroundImage, interaction }}>
                 <div className={panelClasses}>
-                    <PanelHeader title={title} />
-                    <PanelContent>{children}</PanelContent>
-                    {footer && <PanelFooter>{footer}</PanelFooter>}
+                    {backgroundImage ? (
+                        <img src={backgroundImage} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-10 select-none" />
+                    ) : null}
+                    <div className="relative z-10">
+                        <PanelHeader title={title} />
+                        <PanelContent>{children}</PanelContent>
+                        {footer && <PanelFooter>{footer}</PanelFooter>}
+                    </div>
                 </div>
             </PanelProvider>
         </ErrorBoundary>

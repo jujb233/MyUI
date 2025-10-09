@@ -1,9 +1,8 @@
-import {VARIANT_ROLE_STYLES } from "../../Options"
+import { VARIANT_ROLE_STYLES } from "../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../Options/Presets/interactionPresets"
-import { useComponentTheme } from ".."
 
 export type UseMyNavOptions = {
     variant?: ComponentVariant
@@ -32,24 +31,37 @@ export function useMyNav(options: UseMyNavOptions) {
     // 解构 options 并使用默认值
 
     // 通过主题 hook 获取对应的 theme 类与行内样式，合并 style 为 className
-    const { theme, style: navStyle } = useComponentTheme({
-        intensity: variant ? VARIANT_ROLE_STYLES[variant.role] : undefined,
-        color: variant?.color,
-        glass,
-        shadow,
-    })
+    const role = variant?.role || 'primary'
+    const color = variant?.color || 'blue'
+    const intensity = VARIANT_ROLE_STYLES[role]
+    const themeColorClass = `myui-color-${color}`
+    const themeVariantClass = `myui-variant-${intensity}`
+    const shadowMap: Record<ShadowName, string> = {
+        xs: 'shadow-sm',
+        sm: 'shadow-sm',
+        md: 'shadow-md',
+        lg: 'shadow-lg',
+        xl: 'shadow-xl',
+        '2xl': 'shadow-2xl',
+        inner: 'shadow-inner',
+        none: 'shadow-none',
+    }
+    const elevationClass = glass ? 'myui-gs-md' : (shadowMap[shadow] || 'shadow-none')
+
     const navClasses = new styleUtil.ClassNameBuilder()
-        .add('my-nav', `my-nav-${size}`)
-        .add(typeof theme === 'string' ? theme : undefined)
+        .add(themeColorClass, themeVariantClass)
+        .add(`my-nav-${size}`)
+        .add(
+            glass
+                ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
+                : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]'
+        )
+        .add('text-[var(--text)]')
+        .add(elevationClass)
+        .addIf(glass, 'backdrop-blur-md')
         .addIf(
             interactionEnabled,
             styleUtil.buildInteractionClasses(typeof interaction === 'string' ? INTERACTION_PRESETS[interaction] : interaction)
-        )
-        .add(
-            Object.entries(navStyle || {})
-                .map(([k, v]) => v !== undefined ? `[${k}:${v}]` : null)
-                .filter(Boolean)
-                .join(' ')
         )
         .add(className)
         .build()

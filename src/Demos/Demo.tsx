@@ -3,7 +3,8 @@ import ButtonsDemo from "./ButtonsDemo";
 import CardsDemo from "./CardsDemo";
 import PanelsDemo from "./PanelsDemo";
 import NavsDemo from "./NavsDemo";
-import NavBar from "./NavBar";
+import { MyNav } from "../Components/MyNav";
+import { MyButton } from "../Components/MyButton";
 
 type ContentMap = {
     buttons: React.FC;
@@ -32,7 +33,38 @@ function Demo() {
 
     return (
         <div className="min-h-screen bg-gray-100">
-            <NavBar onSelectContent={handleSelectContent} currentContent={content} />
+            <MyNav
+                glass
+                title={<span className="font-bold text-xl">MyUI 组件演示</span>}
+                menu={
+                    <>
+                        <MyButton
+                            variant={content === 'buttons' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
+                            onClick={() => handleSelectContent("buttons")}
+                        >
+                            🍞 按钮
+                        </MyButton>
+                        <MyButton
+                            variant={content === 'cards' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
+                            onClick={() => handleSelectContent("cards")}
+                        >
+                            🗂️ 卡片
+                        </MyButton>
+                        <MyButton
+                            variant={content === 'panels' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
+                            onClick={() => handleSelectContent("panels")}
+                        >
+                            🪟 面板
+                        </MyButton>
+                        <MyButton
+                            variant={content === 'navs' ? { role: 'primary', color: 'blue' } : { role: 'text', color: 'blue' }}
+                            onClick={() => handleSelectContent("navs")}
+                        >
+                            🧭 导航
+                        </MyButton>
+                    </>
+                }
+            />
             <main className="p-0">
                 <ContentComponent />
             </main>

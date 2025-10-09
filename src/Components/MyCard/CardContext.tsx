@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react"
 import type { MyCardProps } from "./myCardProps"
 
-export type CardContextType = MyCardProps & {
+export type CardContextType = Omit<MyCardProps, 'children'> & {
     isHorizontal: boolean
     imagePosition: "top" | "left" | "right" | "background"
     sizeConfig: {
