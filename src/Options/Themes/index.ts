@@ -1,4 +1,4 @@
 export * from './colorThemes'
 export * from './themeBuilder'
 export * from './themeResolver'
-export * from './variant'
+export * from './variantThemes'
