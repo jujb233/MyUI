@@ -1,5 +1,5 @@
-import { MyButton } from "../Components/MyUI/MyButton";
-import { MyNav } from "../Components/MyUI/MyNav";
+import { MyButton } from "../Components/MyButton";
+import { MyNav } from "../Components/MyNav";
 import type { ContentKey } from "./Demo";
 
 type NavBarProps = {

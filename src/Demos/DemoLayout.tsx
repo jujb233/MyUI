@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 import clsx from "clsx";
-import { MyPanel } from "../Components/MyUI/MyPanel";
+import { MyPanel } from "../Components/MyPanel";
 
 export type DemoLayoutProps = {
     /** 页面主标题 */

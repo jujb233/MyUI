@@ -1,4 +1,4 @@
-import { MyButton } from "../Components/MyUI/MyButton";
+import { MyButton } from "../Components/MyButton";
 import { VARIANT_ROLE_STYLES } from "../Options";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 

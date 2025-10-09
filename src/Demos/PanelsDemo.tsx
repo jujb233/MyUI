@@ -1,5 +1,5 @@
-import { MyPanel } from "../Components/MyUI/MyPanel";
-import { MyButton } from "../Components/MyUI/MyButton";
+import { MyPanel } from "../Components/MyPanel";
+import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
 const PanelsDemo = () => {

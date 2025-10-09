@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import clsx from "clsx";
-import { styleUtil } from "../Components/MyUI/Utils/styleBuilder";
+import { styleUtil } from "../Utils";
 
 
 /**
@@ -75,26 +74,30 @@ export function useComponentClasses(props: UseComponentClassesProps) {
         interactionEnabled = true,
         focusRing = false,
     } = props;
-    // bordered 仅用于类型兼容，实际 class 逻辑未用到
 
     const isHorizontal = direction === "horizontal" && imagePosition !== "top";
 
-    const containerClasses = useMemo(() => clsx(
-        baseClass,
-        isHorizontal ? "flex" : "flex flex-col",
-        imagePosition === "right" && isHorizontal && "flex-row-reverse",
-        sizeConfig.borderRadius,
-        sizeConfig.minHeight,
-        "relative overflow-hidden transition-all duration-300 ease-out",
-        glass
-            ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]"
-            : "[background:var(--bg)] hover:[background:var(--bg-hover)]",
-        "text-[var(--text)] border border-[var(--border)]",
-        (hoverable || clickable) && interactionEnabled && styleUtil.buildHookInteractionClasses({ enabled: true }),
-        clickable && "cursor-pointer",
-        glass && "backdrop-blur-md",
-        className
-    ), [isHorizontal, imagePosition, sizeConfig, glass, hoverable, clickable, className, baseClass, interactionEnabled, focusRing]);
+    const containerClasses = useMemo(() => {
+        return styleUtil.ClassNameBuilder
+            .prototype
+            .add(baseClass)
+            .add(isHorizontal ? "flex" : "flex flex-col")
+            .addIf(imagePosition === "right" && isHorizontal, "flex-row-reverse")
+            .add(sizeConfig.borderRadius)
+            .add(sizeConfig.minHeight)
+            .add("relative overflow-hidden transition-all duration-300 ease-out")
+            .add(
+                glass
+                    ? "[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)]"
+                    : "[background:var(--bg)] hover:[background:var(--bg-hover)]"
+            )
+            .add("text-[var(--text)] border border-[var(--border)]")
+            .addIf((hoverable || clickable) && interactionEnabled, styleUtil.buildInteractionClasses({ enabled: true }))
+            .addIf(clickable, "cursor-pointer")
+            .addIf(glass, "backdrop-blur-md")
+            .add(className)
+            .build();
+    }, [isHorizontal, imagePosition, sizeConfig, glass, hoverable, clickable, className, baseClass, interactionEnabled, focusRing]);
 
     return { containerClasses, isHorizontal };
 }

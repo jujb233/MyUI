@@ -1,4 +1,4 @@
-import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../Utils/colorUtils";
+import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../../Utils";
 
 /**
  * 定义主题对象的结构

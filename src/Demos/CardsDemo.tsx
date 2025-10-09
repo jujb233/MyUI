@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
-import { MyCard } from "../Components/MyUI/MyCard";
-import { MyButton } from "../Components/MyUI/MyButton";
+import { MyCard } from "../Components/MyCard";
+import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
 const CardsDemo = () => {

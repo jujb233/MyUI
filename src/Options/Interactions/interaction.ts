@@ -1,9 +1,4 @@
-/**
- * 统一的交互（hover/active）行为配置。
- * 目标：所有组件共享同一组交互效果，并可按需关闭部分效果。
- */
-
-import type { InteractionBehavior, InteractionConfig } from "../../Components/MyUI/Interfaces";
+import type { InteractionBehavior, InteractionConfig } from "../../Interfaces";
 
 export interface BuildInteractionOptions {
     /** 是否启用交互（总开关） */
