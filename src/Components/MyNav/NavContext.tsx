@@ -1,7 +1,14 @@
 import React, { createContext, useContext } from "react"
-import type { MyNavProps } from "./myNavProps"
 
-export type NavContextType = Omit<MyNavProps, "children" | "className">
+export type NavContextType = {
+    classes: {
+        nav: string
+        brand: string
+        content: string
+        menu: string
+        actions: string
+    }
+}
 
 const NavContext = createContext<NavContextType | undefined>(undefined)
 

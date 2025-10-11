@@ -11,6 +11,15 @@ export type CardContextType = Omit<MyCardProps, 'children'> & {
         borderRadius: string
         minHeight: string
     }
+    // sub-component classes
+    imageClasses: string
+    headerClasses: string
+    titleClasses: string
+    contentClasses: string
+    footerClasses: string
+    actionsClasses: string
+    tagsContainerClasses: string
+    tagClasses: string
 }
 
 export const CardContext = createContext<CardContextType | null>(null)

@@ -1,7 +1,9 @@
 import React from "react"
+import { usePanelContext } from "./PanelContext"
 
-const PanelFooter: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
-    <div className="mt-4">{children}</div>
-)
+const PanelFooter: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+    const { styles } = usePanelContext()
+    return <div className={styles.footer}>{children}</div>
+}
 
 export default PanelFooter

@@ -1,10 +1,8 @@
 import React from "react"
 import { useCardContext } from "./CardContext"
-import { getCardImageClasses } from "./cardUtils"
 
 export const CardImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = "" }) => {
-    const { imagePosition, sizeConfig } = useCardContext()
-    const imageClasses = getCardImageClasses(imagePosition, sizeConfig.borderRadius)
+    const { imagePosition, imageClasses } = useCardContext()
 
     if (imagePosition === "background") {
         // 使用绝对定位的 img 元素，避免行内 style 的 backgroundImage

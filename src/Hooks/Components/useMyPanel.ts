@@ -15,7 +15,7 @@ export type UseMyPanelProps = {
     animation?: AnimationProp | undefined
 }
 
-export function useMyPanel(props: UseMyPanelProps): string {
+export function useMyPanel(props: UseMyPanelProps) {
     const {
         variant: variantProp,
         size = 'medium',
@@ -51,5 +51,11 @@ export function useMyPanel(props: UseMyPanelProps): string {
         .add(!!disabled, "opacity-60 cursor-not-allowed")
         .build()
 
-    return panelClasses
+    return {
+        panel: panelClasses,
+        header: "text-2xl font-bold mb-4",
+        content: "flex-1",
+        footer: "mt-4",
+    }
 }
+

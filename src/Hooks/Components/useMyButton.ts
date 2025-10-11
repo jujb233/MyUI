@@ -29,13 +29,22 @@ export type UseMyButtonProps = {
     animation?: AnimationProp | undefined
 }
 
+export type UseMyButtonResult = {
+    rootClass: string
+    slots: {
+        icon: string
+        content: string
+        actions: string
+    }
+}
+
 /**
  * 根据 props 构建按钮 className
  *
  * 返回值：string — 最终的 className
  * 错误模式：不抛异常；当 props 缺失时使用内置默认值。
  */
-export function useMyButton(props: UseMyButtonProps): string {
+export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
     // 从 props 中解构并提供默认值（保证后续使用不会出现 undefined）
     const {
         variant: variantProp,
@@ -83,5 +92,12 @@ export function useMyButton(props: UseMyButtonProps): string {
         ])
         .build()
 
-    return buttonClasses
+    // 槽位（子组件）样式：与原有硬编码保持一致，但集中由此 Hook 产出
+    const slotClasses = {
+        icon: "mr-2 flex items-center",
+        content: "flex-1 truncate",
+        actions: "ml-2 flex items-center",
+    }
+
+    return { rootClass: buttonClasses, slots: slotClasses }
 }

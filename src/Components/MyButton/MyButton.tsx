@@ -20,18 +20,18 @@ function MyButton({
     actions,
     animation,
 }: MyButtonProps) {
-    // 通过 hook 计算最终 className
-    const buttonClasses = useMyButton({ variant, size, glass, shadow, disabled, className, animation })
+    // 通过 hook 计算最终 className 与子槽位类
+    const { rootClass, slots } = useMyButton({ variant, size, glass, shadow, disabled, className, animation })
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-2">Button component failed to render.</div>}>
             {/* 使用 Provider 将当前按钮的状态/风格传递给内部子组件 */}
-            <ButtonContext.Provider value={{ variant, size, glass, shadow, disabled }}>
+            <ButtonContext.Provider value={{ variant, size, glass, shadow, disabled, classes: { root: rootClass, slots } }}>
                 <button
                     type={htmlType}
                     disabled={disabled}
                     onClick={onClick}
-                    className={buttonClasses}
+                    className={rootClass}
                 >
                     {/* 图标和 actions 的判断逻辑交给子组件内部 */}
                     <ButtonIcon icon={icon} />

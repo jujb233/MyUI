@@ -1,7 +1,9 @@
 import React from "react"
+import { useNavContext } from "./NavContext"
 
 const NavBrand: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-    return <div className="flex-shrink-0">{children}</div>
+    const { classes } = useNavContext()
+    return <div className={classes.brand}>{children}</div>
 }
 
 export default NavBrand

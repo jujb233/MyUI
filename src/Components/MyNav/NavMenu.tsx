@@ -1,7 +1,9 @@
 import React from "react"
+import { useNavContext } from "./NavContext"
 
 const NavMenu: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
-    return <ul className="flex items-center space-x-4">{children}</ul>
+    const { classes } = useNavContext()
+    return <ul className={classes.menu}>{children}</ul>
 }
 
 export default NavMenu

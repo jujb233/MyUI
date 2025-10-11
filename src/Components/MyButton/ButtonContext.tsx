@@ -3,7 +3,18 @@ import type { MyButtonProps } from "./myButtonProps"
 
 // ButtonContextType: 去掉不需要在 context 中传递的字段
 // 允许 variant 为 undefined
-export type ButtonContextType = Omit<MyButtonProps, "children" | "className" | "onClick"> & { variant?: MyButtonProps["variant"] | undefined }
+export type ButtonContextType = (
+    Omit<MyButtonProps, "children" | "className" | "onClick"> & { variant?: MyButtonProps["variant"] | undefined }
+) & {
+    classes?: {
+        root?: string
+        slots?: {
+            icon?: string
+            content?: string
+            actions?: string
+        }
+    }
+}
 
 // 创建 Context，初始为 undefined，以便在未包裹 Provider 时抛出友好错误
 export const ButtonContext = createContext<ButtonContextType | undefined>(undefined)

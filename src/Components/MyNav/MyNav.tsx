@@ -21,13 +21,12 @@ function MyNav({
     interactionEnabled,
     interaction,
 }: MyNavProps) {
-    const navClasses = useMyNav({ variant, size, glass, shadow, className, animation, interactionEnabled, interaction })
-    const classes = navClasses
+    const classes = useMyNav({ variant, size, glass, shadow, className, animation, interactionEnabled, interaction })
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Nav component failed to render.</div>}>
-            <NavProvider value={{ variant, size, glass, shadow }}>
-                <nav className={classes}>
+            <NavProvider value={{ classes }}>
+                <nav className={classes.nav}>
                     {title && <NavBrand>{title}</NavBrand>}
                     <NavContent>
                         {menu && <NavMenu>{menu}</NavMenu>}

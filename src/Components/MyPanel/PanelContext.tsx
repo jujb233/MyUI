@@ -1,7 +1,13 @@
 import React, { createContext, useContext } from "react"
 import type { MyPanelProps } from "./myPanelProps"
 
-export type PanelContextType = Omit<MyPanelProps, "children" | "className">
+export type PanelContextType = Omit<MyPanelProps, "children" | "className"> & {
+    styles: {
+        header: string
+        content: string
+        footer: string
+    }
+}
 
 const PanelContext = createContext<PanelContextType | undefined>(undefined)
 

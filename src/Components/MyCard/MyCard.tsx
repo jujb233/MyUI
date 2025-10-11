@@ -16,7 +16,7 @@ function MyCard({
         containerClasses,
         bodyClasses,
         ...rest
-    } = useMyCard({ ...props, hasImage: !!backgroundImage });
+    } = useMyCard({ ...props, hasImage: !!backgroundImage })
 
     const contextValue: CardContextType = {
         ...props,
@@ -24,7 +24,16 @@ function MyCard({
         isHorizontal: rest.isHorizontal,
         imagePosition: rest.imagePosition,
         sizeConfig: rest.sizeConfig,
-    };
+        // sub-component classes
+        imageClasses: rest.imageClasses,
+        headerClasses: rest.headerClasses,
+        titleClasses: rest.titleClasses,
+        contentClasses: rest.contentClasses,
+        footerClasses: rest.footerClasses,
+        actionsClasses: rest.actionsClasses,
+        tagsContainerClasses: rest.tagsContainerClasses,
+        tagClasses: rest.tagClasses,
+    }
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Card component failed to render.</div>}>
@@ -35,7 +44,9 @@ function MyCard({
                     role={props.clickable ? 'button' : undefined}
                     tabIndex={props.clickable ? 0 : undefined}
                 >
-                    {children}
+                    <div className={bodyClasses}>
+                        {children}
+                    </div>
                 </div>
             </CardContext.Provider>
         </ErrorBoundary>

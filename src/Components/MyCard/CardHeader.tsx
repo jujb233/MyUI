@@ -3,7 +3,7 @@ import clsx from "clsx"
 import { useCardContext } from "./CardContext"
 
 export const CardHeader: React.FC<{ children?: React.ReactNode; className?: string }> = ({ children, className }) => {
-    const { sizeConfig, imagePosition, isHorizontal, backgroundImage } = useCardContext() as any
+    const { imagePosition, isHorizontal, backgroundImage, headerClasses, titleClasses } = useCardContext()
 
     // 渲染图片逻辑
     let imageNode: React.ReactNode = null
@@ -18,10 +18,10 @@ export const CardHeader: React.FC<{ children?: React.ReactNode; className?: stri
     }
 
     return (
-        <div className={clsx("card-header flex items-center", className)}>
+        <div className={clsx(headerClasses, className)}>
             {imageNode}
             {children && (
-                <h3 className={clsx('font-bold text-[var(--text)]', sizeConfig.titleSize)}>{children}</h3>
+                <h3 className={titleClasses}>{children}</h3>
             )}
         </div>
     )

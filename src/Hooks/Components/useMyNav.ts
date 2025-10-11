@@ -17,7 +17,7 @@ export type UseMyNavOptions = {
     animation?: AnimationProp | undefined
 }
 
-export function useMyNav(options: UseMyNavOptions): string {
+export function useMyNav(options: UseMyNavOptions) {
     const {
         variant,
         size = 'medium',
@@ -28,8 +28,6 @@ export function useMyNav(options: UseMyNavOptions): string {
         interaction = 'none',
         animation,
     } = options
-
-    // 解构 options 并使用默认值
 
     const role = variant?.role || 'primary'
     const color = variant?.color || 'blue'
@@ -49,9 +47,16 @@ export function useMyNav(options: UseMyNavOptions): string {
     })
 
     const navClasses = builder
+        .add('flex items-center px-4')
         .add(`my-nav-${size}`)
         .add(SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.none)
         .build()
 
-    return navClasses
+    return {
+        nav: navClasses,
+        brand: "flex-shrink-0",
+        content: "flex-1",
+        menu: "flex items-center space-x-4",
+        actions: "ml-auto flex items-center",
+    }
 }

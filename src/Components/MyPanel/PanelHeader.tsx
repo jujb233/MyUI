@@ -1,8 +1,10 @@
 import React from "react"
+import { usePanelContext } from "./PanelContext"
 
 const PanelHeader: React.FC<{ title?: React.ReactNode }> = ({ title }) => {
+    const { styles } = usePanelContext()
     if (!title) return null
-    return <h2 className="text-2xl font-bold mb-4">{title}</h2>
+    return <h2 className={styles.header}>{title}</h2>
 }
 
 export default PanelHeader

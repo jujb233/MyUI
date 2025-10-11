@@ -1,4 +1,3 @@
-import type { SizeName } from "../../Options"
 import type { ThemeProps, StyleProps, WithTitle, WithActions, AnimationProps } from "../../Interfaces"
 import type { InteractionPolicy } from "../../Interfaces"
 
@@ -8,7 +7,6 @@ export type MyNavProps =
     WithTitle &
     WithActions &
     AnimationProps & {
-        size?: SizeName
         children?: React.ReactNode
         menu?: React.ReactNode
         /** 是否开启容器 hover/active 等交互效果 */

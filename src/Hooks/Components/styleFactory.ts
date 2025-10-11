@@ -48,7 +48,7 @@ export function createBaseBuilder(options: {
     const themeColorClass = `${THEME_CLASS_PREFIX.color}${color}`
     const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`
 
-    const builder: any = new styleUtil.ClassNameBuilder()
+    const baseBuilder: any = new styleUtil.ClassNameBuilder()
         .add(themeColorClass, themeVariantClass)
         .add(TEXT_CLASS)
         .add(glass ? BACKGROUND_CLASSES.glass : BACKGROUND_CLASSES.solid)
@@ -58,7 +58,7 @@ export function createBaseBuilder(options: {
         .add(className)
 
     return {
-        builder,
+        baseBuilder,
         sizeConfig: SIZE_CONFIG[size],
         themeColorClass,
         themeVariantClass,
