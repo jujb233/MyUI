@@ -25,11 +25,14 @@
     "outDir": "./dist",
     /* Linting */
     "strict": true,
+    "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "noImplicitOverride": true,
+    "exactOptionalPropertyTypes": true,
   },
   "include": [
     "src"

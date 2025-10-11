@@ -2,6 +2,7 @@ import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VAR
 import { styleUtil } from "../../Utils/styleBuilder"
 import { useCardLayout } from "../../Hooks/useCardLayout"
 import type { AnimationProp } from "../../Options"
+import { SHADOW_CLASS_MAP, BACKGROUND_CLASSES, TEXT_CLASS, GLASS_BACKDROP_CLASS, GLASS_ELEVATION, THEME_CLASS_PREFIX } from "../../Options/Configs"
 
 export type UseMyCardProps = {
     variant?: ComponentVariant
@@ -44,20 +45,10 @@ export function useMyCard(props: UseMyCardProps) {
     const sizeConfig = SIZE_CONFIG[size]
 
     // 主题类
-    const themeColorClass = `myui-color-${color}`
-    const themeVariantClass = `myui-variant-${intensity}`
+    const themeColorClass = `${THEME_CLASS_PREFIX.color}${color}`
+    const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`
     // 阴影类
-    const shadowMap: Record<ShadowName, string> = {
-        xs: 'shadow-sm',
-        sm: 'shadow-sm',
-        md: 'shadow-md',
-        lg: 'shadow-lg',
-        xl: 'shadow-xl',
-        '2xl': 'shadow-2xl',
-        inner: 'shadow-inner',
-        none: 'shadow-none',
-    }
-    const elevationClass = glass ? 'myui-gs-lg' : (shadowMap[shadow] || 'shadow-md')
+    const elevationClass = glass ? GLASS_ELEVATION.card : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md)
 
     const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
 
@@ -65,27 +56,23 @@ export function useMyCard(props: UseMyCardProps) {
     const containerClasses = new styleUtil.ClassNameBuilder()
         .add(themeColorClass, themeVariantClass)
         .add('relative overflow-hidden rounded-2xl')
-        .addIf(direction === 'horizontal', 'flex flex-row')
-        .addIf(direction === 'vertical', 'flex flex-col')
-        .add(
-            glass
-                ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
-                : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]'
-        )
-        .add('text-[var(--text)]')
+        .add(direction === 'horizontal', 'flex flex-row')
+        .add(direction === 'vertical', 'flex flex-col')
+        .add(glass ? BACKGROUND_CLASSES.glass : BACKGROUND_CLASSES.solid)
+        .add(TEXT_CLASS)
         .add(elevationClass)
         .addAnimation(animation)
-        .addIf(glass, 'backdrop-blur-md')
+        .add(glass, GLASS_BACKDROP_CLASS)
         .addInteraction((hoverable || clickable) ? { enabled: true } : undefined)
-        .addIf(clickable, 'cursor-pointer')
-        .addIf(bordered, 'border')
+        .add(clickable, 'cursor-pointer')
+        .add(bordered, 'border')
         .add(className)
         .build()
 
     const bodyClasses = new styleUtil.ClassNameBuilder()
         .add(sizeConfig.padding, sizeConfig.spacing)
-        .addIf(isHorizontal, 'flex-1')
-        .addIf(imagePosition === 'background', 'relative z-10')
+        .add(isHorizontal, 'flex-1')
+        .add(imagePosition === 'background', 'relative z-10')
         .build()
 
     // 返回对组件渲染有用的值与别名（移除 style 相关）

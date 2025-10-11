@@ -1,31 +1,31 @@
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces"
-import { DEFAULT_COMPONENT_HOOK_PROPS } from "../../Interfaces"
 import { type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES, SIZE_CONFIG, DEFAULT_STYLES } from "../../Options"
+import { SHADOW_CLASS_MAP, BACKGROUND_CLASSES, TEXT_CLASS, GLASS_BACKDROP_CLASS, GLASS_ELEVATION, THEME_CLASS_PREFIX } from "../../Options/Configs"
 import type { AnimationProp } from "../../Options"
 
 export type UseMyButtonProps = {
     htmlType?: "button" | "submit" | "reset"
-    variant?: ComponentVariant
+    variant?: ComponentVariant | undefined
     size?: SizeName
     disabled?: boolean
     className?: string
     glass?: boolean
     shadow?: ShadowName
     interaction?: InteractionPolicy | string
-    animation?: AnimationProp
+    animation?: AnimationProp | undefined
 }
 
-export function useMyButton(props: UseMyButtonProps) {
+export function useMyButton(props: UseMyButtonProps): string {
     // 从 props 中解构并提供默认值
     const {
         variant: variantProp,
-        size = DEFAULT_COMPONENT_HOOK_PROPS.size,
-        disabled = DEFAULT_COMPONENT_HOOK_PROPS.disabled,
+        size = 'medium',
+        disabled = false,
         className = "",
-        glass = DEFAULT_COMPONENT_HOOK_PROPS.glass,
-        shadow = DEFAULT_COMPONENT_HOOK_PROPS.shadow,
-        interaction = DEFAULT_COMPONENT_HOOK_PROPS.interaction,
+        glass = true,
+        shadow = 'md',
+        interaction = 'rich',
         animation,
     } = props
 
@@ -42,23 +42,13 @@ export function useMyButton(props: UseMyButtonProps) {
 
     // 主题类（纯 class）
     // 通过 myui-color-* 与 myui-variant-* 静态类落地 CSS 变量，避免 JIT 丢失
-    const themeColorClass = `myui-color-${color}`
-    const themeVariantClass = `myui-variant-${intensity}`
+    const themeColorClass = `${THEME_CLASS_PREFIX.color}${color}`
+    const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`
 
     // 阴影类：
     // - glass: 使用 myui-gs-md（固定玻璃态阴影），并启用 backdrop-blur
     // - 实体: 映射到 Tailwind 的 shadow-*
-    const shadowMap: Record<ShadowName, string> = {
-        xs: 'shadow-sm',
-        sm: 'shadow-sm',
-        md: 'shadow-md',
-        lg: 'shadow-lg',
-        xl: 'shadow-xl',
-        '2xl': 'shadow-2xl',
-        inner: 'shadow-inner',
-        none: 'shadow-none',
-    }
-    const elevationClass = glass ? 'myui-gs-md' : (shadowMap[shadow] || 'shadow-md')
+    const elevationClass = glass ? GLASS_ELEVATION.button : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md)
 
 
     // 使用建造者模式构建 className（仅静态类 + 变量引用，不拼接运行时任意值）
@@ -72,29 +62,18 @@ export function useMyButton(props: UseMyButtonProps) {
             "transition-all duration-200 ease-out will-change-transform",
         )
         // 玻璃/实体背景与边框均引用变量
-        .add(
-            glass
-                ? '[background:var(--glass-bg)] hover:[background:var(--glass-bg-hover)] border-[var(--glass-border)]'
-                : '[background:var(--bg)] hover:[background:var(--bg-hover)] border-[var(--border)]'
-        )
+        .add(glass ? BACKGROUND_CLASSES.glass : BACKGROUND_CLASSES.solid)
         // 文本色
-        .add('text-[var(--text)]')
+        .add(TEXT_CLASS)
         // 阴影
         .add(elevationClass)
         .addAnimation(animation)
         .addInteraction(interaction as any)
         .add('disabled:opacity-60 disabled:cursor-not-allowed')
-        .addIf(glass && !disabled, "backdrop-blur-md border")
-        .addIf(disabled, `[background:${DEFAULT_STYLES.disabled.background}] [color:${DEFAULT_STYLES.disabled.color}]`)
+        .add(glass && !disabled, `${GLASS_BACKDROP_CLASS} border`)
+        .add(disabled, `[background:${DEFAULT_STYLES.disabled.background}] [color:${DEFAULT_STYLES.disabled.color}]`)
         .add(className)
         .build()
 
-    // 返回统一的接口，移除 style 相关
-    return {
-        size,
-        sizeStyle,
-        buttonClasses,
-        disabled,
-        glass,
-    }
+    return buttonClasses
 }

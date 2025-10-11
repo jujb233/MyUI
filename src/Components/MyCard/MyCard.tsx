@@ -2,11 +2,11 @@ import React from "react"
 import { useMyCard } from "../../Hooks"
 import ErrorBoundary from "../../Utils/ErrorBoundary"
 import { CardContext, type CardContextType } from "./CardContext"
-// Card subcomponents intentionally not imported here; MyCard now requires children (composition only)
 import type { MyCardProps } from "./myCardProps"
 
 
 function MyCard({
+    variant,
     backgroundImage,
     onClick,
     children,

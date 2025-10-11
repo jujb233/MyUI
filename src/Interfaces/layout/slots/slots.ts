@@ -22,5 +22,5 @@ export interface WithFooter {
 
 /** 背景图能力（Panel 等） */
 export interface WithBackgroundImage {
-    backgroundImage?: string
+    backgroundImage?: string | undefined
 }

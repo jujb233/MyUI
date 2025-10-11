@@ -18,28 +18,24 @@ class ClassNameBuilder {
     private cssParts: Array<string | false | undefined | null> = []
 
 
+
     /**
-     * 添加 className 片段
+     * 添加 className 片段，支持条件添加和普通添加的重载
      * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段，可以为字符串、false、undefined 或 null
      * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
      */
-    add(...classes: Array<string | false | undefined | null>): ClassNameBuilder {
-        this.cssParts.push(...classes)
-        return this
-    }
-
-
-    /**
-     * 条件添加 className 片段
-     * @param {boolean} condition - 条件为 true 时才添加 className
-     * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段
-     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
-     */
-    addIf(condition: boolean, ...classes: Array<string | false | undefined | null>): ClassNameBuilder {
-        if (condition) {
-            this.cssParts.push(...classes)
+    add(...classes: Array<string | false | undefined | null>): ClassNameBuilder
+    add(condition: boolean, ...classes: Array<string | false | undefined | null>): ClassNameBuilder
+    add(...args: any[]): ClassNameBuilder {
+        if (typeof args[0] === 'boolean') {
+            const [condition, ...classes] = args;
+            if (condition) {
+                this.cssParts.push(...classes);
+            }
+        } else {
+            this.cssParts.push(...args);
         }
-        return this
+        return this;
     }
 
 

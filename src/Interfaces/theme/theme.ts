@@ -8,7 +8,7 @@ import type { ComponentVariant, SizeName, ShadowName } from '../../Options'
 /** 主题与尺寸（所有主题相关组件可选实现） */
 export interface ThemeProps {
     /** { role, color }，role 经 VARIANT_ROLE_STYLES 映射到 intensity */
-    variant?: ComponentVariant
+    variant?: ComponentVariant | undefined
     /** 'small' | 'medium' | 'large' */
     size?: SizeName
     /** 是否启用玻璃态（默认值由组件内部决定，通常为 true） */

@@ -47,13 +47,13 @@ class InnerErrorBoundary extends Component<
     Omit<ErrorBoundaryProps, "children"> & { children?: ReactNode },
     InnerState
 > {
-    public state: InnerState = { error: null, errorInfo: null }
+    public override state: InnerState = { error: null, errorInfo: null }
 
     public static getDerivedStateFromError(error: Error): InnerState {
         return { error, errorInfo: null }
     }
 
-    public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    public override componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         // 保存 errorInfo 并调用外部钩子
         this.setState({ error, errorInfo })
         try {
@@ -85,7 +85,7 @@ class InnerErrorBoundary extends Component<
         }
     }
 
-    public render() {
+    public override render() {
         if (this.state.error) {
             const { fallback, FallbackComponent, fallbackRender } = this.props
             const renderProps = { error: this.state.error, resetError: this.reset }
