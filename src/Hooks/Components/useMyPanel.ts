@@ -1,7 +1,7 @@
 import { SIZE_CONFIG, type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES } from "../../Options"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import { styleUtil } from "../../Utils/styleBuilder"
-import { DEFAULT_COMPONENT_PROPS } from "../../Interfaces/components/common"
+import { DEFAULT_COMPONENT_HOOK_PROPS } from "../../Interfaces/components/common"
 import type { AnimationProp } from "../../Options"
 
 export type UseMyPanelProps = {
@@ -11,8 +11,6 @@ export type UseMyPanelProps = {
     shadow?: ShadowName
     className?: string
     disabled?: boolean
-    title?: string
-    backgroundImage?: string
     interaction?: InteractionPolicy | string
     animation?: AnimationProp
 }
@@ -20,14 +18,12 @@ export type UseMyPanelProps = {
 export function useMyPanel(props: UseMyPanelProps) {
     const {
         variant: variantProp,
-        size = DEFAULT_COMPONENT_PROPS.size,
-        glass = DEFAULT_COMPONENT_PROPS.glass,
-        shadow = DEFAULT_COMPONENT_PROPS.shadow,
+        size = DEFAULT_COMPONENT_HOOK_PROPS.size,
+        glass = DEFAULT_COMPONENT_HOOK_PROPS.glass,
+        shadow = DEFAULT_COMPONENT_HOOK_PROPS.shadow,
         className = "",
-        disabled = DEFAULT_COMPONENT_PROPS.disabled,
-        title,
-        backgroundImage,
-        interaction = DEFAULT_COMPONENT_PROPS.interaction as any,
+        disabled = DEFAULT_COMPONENT_HOOK_PROPS.disabled,
+        interaction = DEFAULT_COMPONENT_HOOK_PROPS.interaction as any,
         animation,
     } = props
 
@@ -66,21 +62,10 @@ export function useMyPanel(props: UseMyPanelProps) {
         .add(elevationClass)
         .addAnimation(animation)
         .addIf(!!glass, "backdrop-blur-md")
-        // 背景图在组件内部以绝对定位 <img> 方式渲染
         .addIf(!!disabled, "opacity-60 cursor-not-allowed")
         .addInteraction(interaction as any)
         .add(className)
         .build()
     // 返回可直接用于渲染的类名，以及一些常用属性
-    return {
-        size,
-        sizeStyle,
-        panelClasses,
-        // 统一命名别名
-        rootClasses: panelClasses,
-        disabled,
-        title,
-        backgroundImage,
-        glass,
-    }
+    return { panelClasses }
 }

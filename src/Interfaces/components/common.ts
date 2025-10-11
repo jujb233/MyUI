@@ -22,7 +22,7 @@ export interface ComponentBaseProps {
 }
 
 /** 默认值便于在 Hook 中复用 */
-export const DEFAULT_COMPONENT_PROPS = {
+export const DEFAULT_COMPONENT_HOOK_PROPS = {
     size: 'medium' as SizeName,
     glass: true,
     shadow: 'md' as ShadowName,

@@ -1,50 +1,86 @@
 import clsx from 'clsx'
+
 import type { AnimationProp, AnimationConfig } from '../Options/Animations/Animation'
 import { animationMap, easingValueMap } from '../Options/Animations/Animation'
+
 import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../Options/Interactions/interaction'
 import { INTERACTION_PRESETS } from '../Options/Presets/interactionPresets'
 import type { InteractionPolicy } from '../Interfaces/behavior/interaction'
 
 
+
 /**
  * className 建造者模式
+ * 用于链式构建和拼接 className 字符串，支持条件、动画、交互等扩展
  */
 class ClassNameBuilder {
-    private parts: Array<string | false | undefined | null> = []
+    // 存储所有 className 片段
+    private cssParts: Array<string | false | undefined | null> = []
 
-    add(...classes: Array<string | false | undefined | null>) {
-        this.parts.push(...classes)
+
+    /**
+     * 添加 className 片段
+     * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段，可以为字符串、false、undefined 或 null
+     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
+     */
+    add(...classes: Array<string | false | undefined | null>): ClassNameBuilder {
+        this.cssParts.push(...classes)
         return this
     }
 
-    addIf(condition: boolean, ...classes: Array<string | false | undefined | null>) {
+
+    /**
+     * 条件添加 className 片段
+     * @param {boolean} condition - 条件为 true 时才添加 className
+     * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段
+     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
+     */
+    addIf(condition: boolean, ...classes: Array<string | false | undefined | null>): ClassNameBuilder {
         if (condition) {
-            this.parts.push(...classes)
+            this.cssParts.push(...classes)
         }
         return this
     }
 
-    addAnimation(animation?: AnimationProp) {
+
+    /**
+     * 添加动画相关 className
+     * @param {AnimationProp} [animation] - 动画配置，可以为字符串类型动画名或动画配置对象
+     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
+     */
+    addAnimation(animation?: AnimationProp): ClassNameBuilder {
         if (!animation) return this
         const config: AnimationConfig = typeof animation === 'string' ? { type: animation } : animation
-        if (config.type && animationMap[config.type]) this.parts.push(animationMap[config.type])
-        if (config.duration) this.parts.push(`[animation-duration:${config.duration}ms]`)
-        if (config.delay) this.parts.push(`[animation-delay:${config.delay}ms]`)
+        if (config.type && animationMap[config.type]) this.cssParts.push(animationMap[config.type])
+        if (config.duration) this.cssParts.push(`[animation-duration:${config.duration}ms]`)
+        if (config.delay) this.cssParts.push(`[animation-delay:${config.delay}ms]`)
         if (config.easing) {
             const easing = easingValueMap[config.easing]
-            if (easing) this.parts.push(`[animation-timing-function:${easing}]`)
+            if (easing) this.cssParts.push(`[animation-timing-function:${easing}]`)
         }
         return this
     }
 
-    addInteraction(interaction?: InteractionPolicy | keyof typeof INTERACTION_PRESETS) {
+
+    /**
+     * 添加交互相关 className
+     * @param {InteractionPolicy | keyof typeof INTERACTION_PRESETS} [interaction] - 交互策略对象或预设名
+     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
+     */
+    addInteraction(interaction?: InteractionPolicy | keyof typeof INTERACTION_PRESETS): ClassNameBuilder {
         if (!interaction) return this
         const policy: InteractionPolicy = typeof interaction === 'string' ? (INTERACTION_PRESETS as any)[interaction] ?? {} : interaction
-        this.parts.push(ClassNameBuilder.buildInteractionClasses(policy))
+        this.cssParts.push(ClassNameBuilder.#buildInteractionClasses(policy))
         return this
     }
 
-    static buildInteractionClasses(policy: InteractionPolicy = {}): string {
+
+    /**
+     * 静态方法：根据交互策略生成交互相关 className 字符串
+     * @param {InteractionPolicy} [policy] - 交互策略对象，包含 enabled、behavior、effects、classes 等属性
+     * @returns {string} 交互相关的 className 字符串
+     */
+    static #buildInteractionClasses(policy: InteractionPolicy = {}): string {
         const {
             enabled = true,
             behavior = DEFAULT_INTERACTION_BEHAVIOR,
@@ -53,9 +89,11 @@ class ClassNameBuilder {
         } = policy
         if (!enabled) return ''
         const interactionClasses: string[] = []
+        // 过渡动画
         if (behavior.transition) {
             interactionClasses.push('transition-all duration-200 ease-in-out')
         }
+        // hover 效果
         if (behavior.hover) {
             if (effects.scale?.hover) {
                 interactionClasses.push(`hover:scale-[${String(effects.scale.hover)}]`)
@@ -68,6 +106,7 @@ class ClassNameBuilder {
                 interactionClasses.push(classes.hover)
             }
         }
+        // focus 效果
         if (behavior.focus) {
             interactionClasses.push(
                 'focus:outline-none',
@@ -79,6 +118,7 @@ class ClassNameBuilder {
                 interactionClasses.push(classes.focus)
             }
         }
+        // active 效果
         if (behavior.active) {
             if (effects.scale?.active) {
                 interactionClasses.push(`active:scale-[${String(effects.scale.active)}]`)
@@ -91,6 +131,7 @@ class ClassNameBuilder {
                 interactionClasses.push(classes.active)
             }
         }
+        // disabled 效果
         if (behavior.disabled) {
             if (effects.scale?.disabled) {
                 interactionClasses.push(`disabled:scale-[${String(effects.scale.disabled)}]`)
@@ -107,14 +148,20 @@ class ClassNameBuilder {
         return interactionClasses.filter(Boolean).join(' ')
     }
 
-    build() {
-        return clsx(this.parts.filter(Boolean))
+
+    /**
+     * 构建最终 className 字符串
+     * @returns {string} 拼接后的 className 字符串，已自动过滤无效项
+     */
+    build(): string {
+        return clsx(this.cssParts.filter(Boolean))
     }
 }
 
+
+// styleUtil 工具导出
 export const styleUtil = {
     ClassNameBuilder,
-    buildInteractionClasses: ClassNameBuilder.buildInteractionClasses,
 }
 
 export default styleUtil

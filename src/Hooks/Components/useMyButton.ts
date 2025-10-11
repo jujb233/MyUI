@@ -1,6 +1,6 @@
 import { styleUtil } from "../../Utils/styleBuilder"
 import type { InteractionPolicy } from "../../Interfaces"
-import { DEFAULT_COMPONENT_PROPS } from "../../Interfaces"
+import { DEFAULT_COMPONENT_HOOK_PROPS } from "../../Interfaces"
 import { type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES, SIZE_CONFIG, DEFAULT_STYLES } from "../../Options"
 import type { AnimationProp } from "../../Options"
 
@@ -20,12 +20,12 @@ export function useMyButton(props: UseMyButtonProps) {
     // 从 props 中解构并提供默认值
     const {
         variant: variantProp,
-        size = DEFAULT_COMPONENT_PROPS.size,
-        disabled = DEFAULT_COMPONENT_PROPS.disabled,
+        size = DEFAULT_COMPONENT_HOOK_PROPS.size,
+        disabled = DEFAULT_COMPONENT_HOOK_PROPS.disabled,
         className = "",
-        glass = DEFAULT_COMPONENT_PROPS.glass,
-        shadow = DEFAULT_COMPONENT_PROPS.shadow,
-        interaction = DEFAULT_COMPONENT_PROPS.interaction,
+        glass = DEFAULT_COMPONENT_HOOK_PROPS.glass,
+        shadow = DEFAULT_COMPONENT_HOOK_PROPS.shadow,
+        interaction = DEFAULT_COMPONENT_HOOK_PROPS.interaction,
         animation,
     } = props
 
@@ -94,8 +94,6 @@ export function useMyButton(props: UseMyButtonProps) {
         size,
         sizeStyle,
         buttonClasses,
-        // 统一命名别名
-        rootClasses: buttonClasses,
         disabled,
         glass,
     }

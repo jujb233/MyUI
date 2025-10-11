@@ -1,4 +1,6 @@
 import { MyPanel } from "../Components/MyPanel";
+import PanelHeader from "../Components/MyPanel/PanelHeader";
+import PanelContent from "../Components/MyPanel/PanelContent";
 import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
@@ -18,8 +20,10 @@ const PanelsDemo = () => {
                 )}
             >
                 <MyPanel interaction='rich' animation={{ type: 'fade' }}>
-                    <h3 className="mb-2 text-lg font-bold">个人资料设置</h3>
-                    <p>在这里修改您的个人信息和偏好设置。</p>
+                    <PanelHeader title="个人资料设置" />
+                    <PanelContent>
+                        <p>在这里修改您的个人信息和偏好设置。</p>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
 
@@ -29,11 +33,13 @@ const PanelsDemo = () => {
                 description="运用 variant 配色打造 CTA 或通知区域，视觉上更具指向性。"
             >
                 <MyPanel size="large" variant={{ role: 'primary', color: 'blue' }} animation={{ type: 'slide-down', duration: 400 }}>
-                    <h3 className="mb-2 text-xl font-bold">升级到高级版</h3>
-                    <p>解锁所有高级功能，享受无限制的创作体验。</p>
-                    <div className="mt-4">
-                        <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
-                    </div>
+                    <PanelHeader title="升级到高级版" />
+                    <PanelContent>
+                        <p>解锁所有高级功能，享受无限制的创作体验。</p>
+                        <div className="mt-4">
+                            <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
+                        </div>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
 
@@ -47,8 +53,10 @@ const PanelsDemo = () => {
                 )}
             >
                 <MyPanel glass={false} shadow="lg" variant={{ role: 'warning', color: 'yellow' }} animation={{ type: 'scale-in' }}>
-                    <h3 className="mb-2 text-lg font-bold">新功能发布</h3>
-                    <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
+                    <PanelHeader title="新功能发布" />
+                    <PanelContent>
+                        <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
 
@@ -60,19 +68,25 @@ const PanelsDemo = () => {
             >
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
                     <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
-                        <h4 className="mb-1 font-semibold">实体 shadow={sh}</h4>
-                        <p className="text-sm opacity-80">glass=false</p>
+                        <PanelHeader title={`实体 shadow=${sh}`} />
+                        <PanelContent>
+                            <p className="text-sm opacity-80">glass=false</p>
+                        </PanelContent>
                     </MyPanel>
                 ))}
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
                     <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
-                        <h4 className="mb-1 font-semibold">玻璃 {sh}</h4>
-                        <p className="text-sm opacity-80">glass=true</p>
+                        <PanelHeader title={`玻璃 ${sh}`} />
+                        <PanelContent>
+                            <p className="text-sm opacity-80">glass=true</p>
+                        </PanelContent>
                     </MyPanel>
                 ))}
                 <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }} animation="pulse">
-                    <h4 className="mb-1 font-semibold">自定义颜色</h4>
-                    <p className="text-sm opacity-80">color="purple"</p>
+                    <PanelHeader title="自定义颜色" />
+                    <PanelContent>
+                        <p className="text-sm opacity-80">color="purple"</p>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
 
@@ -90,13 +104,15 @@ const PanelsDemo = () => {
                     shadow="xl"
                     animation={{ type: 'fade', duration: 500 }}
                     backgroundImage="/demo.png"
-                    title="欢迎来到我们的社区"
                     variant={{ role: 'primary', color: 'red' }}
                     className="text-white"
                 >
-                    <p className="font-bold">
-                        在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
-                    </p>
+                    <PanelHeader title="欢迎来到我们的社区" />
+                    <PanelContent>
+                        <p className="font-bold">
+                            在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
+                        </p>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
 
@@ -106,8 +122,10 @@ const PanelsDemo = () => {
                 description="通过 disabled 属性，淡化视觉与指针交互，传达当前不可用状态。"
             >
                 <MyPanel size="small" disabled>
-                    <h3 className="mb-2 text-md font-bold">高级筛选（未激活）</h3>
-                    <p>升级到高级版以解锁此功能。</p>
+                    <PanelHeader title="高级筛选（未激活）" />
+                    <PanelContent>
+                        <p>升级到高级版以解锁此功能。</p>
+                    </PanelContent>
                 </MyPanel>
             </DemoSection>
         </DemoLayout>

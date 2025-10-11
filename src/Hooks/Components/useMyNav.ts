@@ -63,16 +63,15 @@ export function useMyNav(options: UseMyNavOptions) {
         .add(elevationClass)
         .addAnimation(animation)
         .addIf(glass, 'backdrop-blur-md')
-        .addIf(
-            interactionEnabled,
-            styleUtil.buildInteractionClasses(
-                typeof interaction === 'string'
+        .addInteraction(
+            interactionEnabled
+                ? (typeof interaction === 'string'
                     ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none
-                    : interaction
-            )
+                    : interaction)
+                : undefined
         )
         .add(className)
         .build()
     // 返回样式与类名，移除 style 相关
-    return { navClasses, rootClasses: navClasses }
+    return { navClasses}
 }

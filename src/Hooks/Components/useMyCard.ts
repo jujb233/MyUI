@@ -76,7 +76,7 @@ export function useMyCard(props: UseMyCardProps) {
         .add(elevationClass)
         .addAnimation(animation)
         .addIf(glass, 'backdrop-blur-md')
-        .addIf(hoverable || clickable, styleUtil.buildInteractionClasses({ enabled: true }))
+        .addInteraction((hoverable || clickable) ? { enabled: true } : undefined)
         .addIf(clickable, 'cursor-pointer')
         .addIf(bordered, 'border')
         .add(className)
@@ -93,8 +93,6 @@ export function useMyCard(props: UseMyCardProps) {
         size,
         sizeConfig,
         containerClasses,
-        // 统一命名别名
-        rootClasses: containerClasses,
         bodyClasses,
         isHorizontal,
         imagePosition,
