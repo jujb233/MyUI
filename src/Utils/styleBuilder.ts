@@ -7,7 +7,7 @@ import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../Op
 import { INTERACTION_PRESETS } from '../Options/Presets/interactionPresets'
 import type { InteractionPolicy } from '../Interfaces/behavior/interaction'
 
-
+type ClassType = string | false | undefined | null | Array<string | false | undefined | null>
 
 /**
  * className 建造者模式
@@ -21,21 +21,46 @@ class ClassNameBuilder {
 
     /**
      * 添加 className 片段，支持条件添加和普通添加的重载
-     * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段，可以为字符串、false、undefined 或 null
+     *
+     * 普通用法：
+     *   add('a', 'b', condition && 'c')
+     *
+     * 条件用法：
+     *   add(condition, 'class-if-true', 'class-if-false')
+     *   add(condition, ['classes-if-true'], ['classes-if-false'])
+     *
+     * @param {...(string | false | undefined | null)[]} classes - 需要添加的 className 片段
      * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
      */
     add(...classes: Array<string | false | undefined | null>): ClassNameBuilder
-    add(condition: boolean, ...classes: Array<string | false | undefined | null>): ClassNameBuilder
+    /**
+     * 条件添加 className 片段
+     * @param {boolean} condition - 条件判断
+     * @param {ClassType} trueClasses - condition 为 true 时添加的 className (可以是字符串或字符串数组)
+     * @param {ClassType} [falseClasses] - condition 为 false 时添加的 className (可以是字符串或字符串数组)
+     * @returns {ClassNameBuilder} 返回当前实例以支持链式调用
+     */
+    add(condition: boolean, trueClasses: ClassType, falseClasses?: ClassType): ClassNameBuilder
+
+    /**
+     * 实现 add 方法重载逻辑
+     * @private
+     */
     add(...args: any[]): ClassNameBuilder {
         if (typeof args[0] === 'boolean') {
-            const [condition, ...classes] = args;
-            if (condition) {
-                this.cssParts.push(...classes);
+            const [condition, trueClasses, falseClasses] = args
+            const classesToAdd = condition ? trueClasses : falseClasses
+            if (classesToAdd) {
+                if (Array.isArray(classesToAdd)) {
+                    this.cssParts.push(...classesToAdd)
+                } else {
+                    this.cssParts.push(classesToAdd)
+                }
             }
         } else {
-            this.cssParts.push(...args);
+            this.cssParts.push(...args)
         }
-        return this;
+        return this
     }
 
 

@@ -24,12 +24,8 @@ export const TEXT_CLASS = "text-[var(--text)]"
 export const GLASS_BACKDROP_CLASS = "backdrop-blur-md"
 
 // 玻璃态各组件的默认海拔（阴影）
-export const GLASS_ELEVATION = {
-    button: "myui-gs-md",
-    card: "myui-gs-lg",
-    panel: "myui-gs-lg",
-    nav: "myui-gs-md",
-} as const
+// 玻璃态各组件的默认海拔（统一为 myui-gs-md）
+export const GLASS_ELEVATION = "myui-gs-md" as const
 
 // 主题类名前缀（避免在各处硬编码）
 export const THEME_CLASS_PREFIX = {

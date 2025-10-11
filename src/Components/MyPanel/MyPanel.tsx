@@ -17,7 +17,7 @@ function MyPanel({
     animation,
     backgroundImage,
 }: MyPanelProps) {
-    const { panelClasses } = useMyPanel({ variant, size, glass, shadow, className, disabled, interaction, animation })
+    const panelClasses = useMyPanel({ variant, size, glass, shadow, className, disabled, interaction, animation })
     // 修复 interaction 可能为 undefined 的类型问题
     const safeInteraction = interaction === undefined ? 'rich' : interaction;
     return (

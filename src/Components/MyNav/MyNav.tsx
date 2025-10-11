@@ -21,7 +21,7 @@ function MyNav({
     interactionEnabled,
     interaction,
 }: MyNavProps) {
-    const { navClasses } = useMyNav({ variant, size, glass, shadow, className, animation, interactionEnabled, interaction })
+    const navClasses = useMyNav({ variant, size, glass, shadow, className, animation, interactionEnabled, interaction })
     const classes = navClasses
 
     return (
