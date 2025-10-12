@@ -78,7 +78,7 @@ const CardsDemo = () => {
             >
                 <MyCard
                     clickable
-                    hoverable
+                    hover
                     variant={{ role: 'danger', color: 'red' }}
                     onClick={() => alert("跳转到好友请求页面！")}
                     className="w-80"
@@ -88,7 +88,7 @@ const CardsDemo = () => {
                 </MyCard>
                 <MyCard
                     clickable
-                    hoverable
+                    hover
                     variant={{ role: 'warning', color: 'yellow' }}
                     onClick={() => alert("查看详情！")}
                     className="w-80"

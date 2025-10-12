@@ -16,7 +16,7 @@ export type UseMyCardProps = {
     shadow?: ShadowName
     imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center",
     direction?: "vertical" | "horizontal"
-    hoverable?: boolean
+    hover?: boolean
     hasImage?: boolean
     disabled?: boolean
     animation?: AnimationProp
@@ -34,7 +34,7 @@ export function useMyCard(props: UseMyCardProps) {
         shadow = "md",
         imagePosition = "top",
         direction = "vertical",
-        hoverable = true,
+        hover = true,
         hasImage = false,
         disabled = false,
         animation,
@@ -58,7 +58,9 @@ export function useMyCard(props: UseMyCardProps) {
         className,
         disabled,
         animation,
-        interaction: (hoverable || clickable) ? { enabled: true } : undefined,
+        interaction: (hover || clickable)
+            ? { enabled: true, behavior: { hover: !!hover } }
+            : undefined,
     })
 
     const containerClasses = builder

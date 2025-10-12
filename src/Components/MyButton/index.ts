@@ -1,17 +1,6 @@
 import ButtonRoot from "./MyButton"
-import ButtonContent from "./ButtonContent"
-import ButtonIcon from "./ButtonIcon"
-import ButtonActions from "./ButtonActions"
-import * as ButtonContext from "./ButtonContext"
 
-export const MyButton = Object.assign(ButtonRoot, {
-    Content: ButtonContent,
-    Icon: ButtonIcon,
-    Actions: ButtonActions,
-})
-
+// Only export the root component. Subcomponents and context are intentionally not exported.
+export const MyButton = ButtonRoot
 export default MyButton
-
-export { ButtonContent, ButtonIcon, ButtonActions }
-export { ButtonContext }
 export type { MyButtonProps } from './myButtonProps'

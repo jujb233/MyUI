@@ -5,7 +5,6 @@ import type {
     Clickable,
     OrientationProps,
 
-    Pressable,
     AnimationProps,
     WithFooter,
     WithImage,
@@ -18,7 +17,7 @@ export type MyCardProps =
     Borderable &
     Clickable &
     OrientationProps &
-    Pressable<HTMLDivElement> &
+    Clickable<HTMLDivElement> &
     AnimationProps &
     WithFooter &
     WithImage &

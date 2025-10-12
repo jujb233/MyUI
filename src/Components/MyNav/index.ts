@@ -1,19 +1,6 @@
 import NavRoot from "./MyNav"
-import NavBrand from "./NavBrand"
-import NavContent from "./NavContent"
-import NavMenu from "./NavMenu"
-import NavActions from "./NavActions"
-import * as NavContext from "./NavContext"
 
-export const MyNav = Object.assign(NavRoot, {
-    Brand: NavBrand,
-    Content: NavContent,
-    Menu: NavMenu,
-    Actions: NavActions,
-})
-
+// Only export the root component. Subcomponents and context are intentionally not exported.
+export const MyNav = NavRoot
 export default MyNav
-
-export { NavBrand, NavContent, NavMenu, NavActions }
-export { NavContext }
 export type { MyNavProps } from './myNavProps'

@@ -1,17 +1,6 @@
 import PanelRoot from "./MyPanel"
-import PanelHeader from "./PanelHeader"
-import PanelContent from "./PanelContent"
-import PanelFooter from "./PanelFooter"
-import * as PanelContext from "./PanelContext"
 
-export const MyPanel = Object.assign(PanelRoot, {
-    Header: PanelHeader,
-    Content: PanelContent,
-    Footer: PanelFooter,
-})
-
+// Only export the root component. Subcomponents and context are intentionally not exported.
+export const MyPanel = PanelRoot
 export default MyPanel
-
-export { PanelHeader, PanelContent, PanelFooter }
-export { PanelContext }
 export type { MyPanelProps } from './myPanelProps'

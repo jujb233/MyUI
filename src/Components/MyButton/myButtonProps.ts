@@ -3,18 +3,18 @@ import type {
     ThemeProps,
     StyleProps,
     Disableable,
-    Pressable,
     WithIcon,
     WithOptions,
     HtmlButtonType,
     AnimationProps,
+    Clickable,
 } from "../../Interfaces"
 
 export type MyButtonProps =
     ThemeProps &
     StyleProps &
     Disableable &
-    Pressable<HTMLButtonElement> &
+    Clickable<HTMLButtonElement> &
     WithIcon &
     WithOptions &
     HtmlButtonType &

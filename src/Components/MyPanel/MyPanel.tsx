@@ -34,7 +34,6 @@ function MyPanel({
                     variant, size, glass, shadow, disabled, backgroundImage: safeBackgroundImage, interaction: safeInteraction, styles
                 }}>
                 <div className={styles.panel}>
-                    {/* 始终渲染子组件，由子组件内部判断 backgroundImage 是否存在 */}
                     <PanelBackground backgroundImage={backgroundImage} className={styles.background} />
                     <div className="relative z-10">
                         {children}
