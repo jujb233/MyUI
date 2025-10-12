@@ -1,0 +1,8 @@
+/* MyUI 主题类（纯 className，无内联 style） */
+/* 将原有大文件拆分为模块并通过 @import 聚合，保持对外不变 */
+
+@import url("./myui/colors.css");
+@import url("./myui/variants.css");
+@import url("./myui/glass.css");
+@import url("./myui/animations.css");
+@import url("./myui/interaction.css");

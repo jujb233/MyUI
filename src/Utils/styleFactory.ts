@@ -4,6 +4,8 @@ import { SHADOW_CLASS_MAP, BACKGROUND_CLASSES, TEXT_CLASS, GLASS_BACKDROP_CLASS,
 import type { AnimationProp } from "../Options"
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
 import type { ComponentVariant, SizeName, ShadowName } from "../Options"
+import { isHexColor } from './colorUtils'
+import { ensureThemeClass } from './dynamicThemeManager'
 
 interface CreateBaseBuilderResult {
     builder: any; // ClassNameBuilder instance
@@ -56,7 +58,10 @@ export function createBaseStyle(options: {
     const color = variant?.color || 'blue'
     const intensity = VARIANT_ROLE_STYLES[role]
 
-    const themeColorClass = `${THEME_CLASS_PREFIX.color}${color}`
+    // 如果 color 是 hex，则动态注入一个带 hash 的 class（并把变量写入 <style>），否则使用预设 class
+    const themeColorClass = isHexColor(String(color))
+        ? ensureThemeClass(String(color), intensity)
+        : `${THEME_CLASS_PREFIX.color}${color}`
     const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`
     const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md)
 

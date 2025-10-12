@@ -1,0 +1,9 @@
+/* Glassy shadows: md | lg */
+
+.myui-glass-md {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.myui-glass-lg {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
