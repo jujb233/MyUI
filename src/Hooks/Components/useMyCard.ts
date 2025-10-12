@@ -14,7 +14,7 @@ export type UseMyCardProps = {
     className?: string
     bordered?: boolean
     shadow?: ShadowName
-    imagePosition?: "top" | "left" | "right" | "background"
+    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center",
     direction?: "vertical" | "horizontal"
     hoverable?: boolean
     hasImage?: boolean

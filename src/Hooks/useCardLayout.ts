@@ -11,7 +11,7 @@ export type UseCardLayoutProps = {
      * @description 图片的位置
      * @default "top"
      */
-    imagePosition?: "top" | "left" | "right" | "background";
+    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center";
     /**
      * @description 是否有图片
      * @default false

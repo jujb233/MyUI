@@ -26,11 +26,12 @@ function MyPanel({
     );
     // 修复 interaction 可能为 undefined 的类型问题
     const safeInteraction = interaction === undefined ? 'rich' : interaction;
+    const safeBackgroundImage = backgroundImage === undefined ? '' : backgroundImage;
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Panel component failed to render.</div>}>
             <PanelProvider value={
                 {
-                    variant, size, glass, shadow, disabled, backgroundImage, interaction: safeInteraction, styles
+                    variant, size, glass, shadow, disabled, backgroundImage: safeBackgroundImage, interaction: safeInteraction, styles
                 }}>
                 <div className={styles.panel}>
                     {/* 始终渲染子组件，由子组件内部判断 backgroundImage 是否存在 */}

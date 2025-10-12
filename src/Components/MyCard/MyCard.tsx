@@ -3,6 +3,7 @@ import { useMyCard } from "../../Hooks"
 import ErrorBoundary from "../../Utils/ErrorBoundary"
 import { CardContext, type CardContextType } from "./CardContext"
 import type { MyCardProps } from "./myCardProps"
+import { CardImage } from "./CardImage"
 
 
 function MyCard({
@@ -22,7 +23,7 @@ function MyCard({
         ...props,
         size: rest.size,
         isHorizontal: rest.isHorizontal,
-        imagePosition: rest.imagePosition,
+        imagePosition: rest.imagePosition as CardContextType['imagePosition'],
         sizeConfig: rest.sizeConfig,
         // sub-component classes
         imageClasses: rest.imageClasses,
@@ -44,6 +45,7 @@ function MyCard({
                     role={props.clickable ? 'button' : undefined}
                     tabIndex={props.clickable ? 0 : undefined}
                 >
+                    {backgroundImage && <CardImage src={backgroundImage} />}
                     <div className={bodyClasses}>
                         {children}
                     </div>

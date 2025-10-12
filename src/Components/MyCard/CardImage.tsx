@@ -4,7 +4,7 @@ import { useCardContext } from "./CardContext"
 export const CardImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = "" }) => {
     const { imagePosition, imageClasses } = useCardContext()
 
-    if (imagePosition === "background") {
+    if (imagePosition === "center") {
         // 使用绝对定位的 img 元素，避免行内 style 的 backgroundImage
         return (
             <div className={imageClasses}>

@@ -3,7 +3,7 @@ import type { MyCardProps } from "./myCardProps"
 
 export type CardContextType = Omit<MyCardProps, 'children'> & {
     isHorizontal: boolean
-    imagePosition: "top" | "left" | "right" | "background"
+    imagePosition: "top" | "left" | "right" | "center" | "bottom"
     sizeConfig: {
         spacing: string
         titleSize: string

@@ -1,5 +1,9 @@
 @import "tailwindcss";
-@import "./styles/index.css";
+@import "./styles/myui/colors.css";
+@import "./styles/myui/variants.css";
+@import "./styles/myui/glass.css";
+@import "./styles/myui/animations.css";
+@import "./styles/myui/interaction.css";
 
 html,
 body,

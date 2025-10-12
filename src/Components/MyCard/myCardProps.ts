@@ -4,11 +4,11 @@ import type {
     Borderable,
     Clickable,
     OrientationProps,
-    MediaPlacementProps,
+
     Pressable,
     AnimationProps,
     WithFooter,
-    WithBackgroundImage,
+    WithImage,
     WithTitle,
 } from "../../Interfaces"
 
@@ -18,11 +18,10 @@ export type MyCardProps =
     Borderable &
     Clickable &
     OrientationProps &
-    MediaPlacementProps &
     Pressable<HTMLDivElement> &
     AnimationProps &
     WithFooter &
-    WithBackgroundImage &
+    WithImage &
     WithTitle & {
         children: React.ReactNode
     }

@@ -8,7 +8,7 @@ export const CardHeader: React.FC<{ children?: React.ReactNode; className?: stri
     // 渲染图片逻辑
     let imageNode: React.ReactNode = null
     if (backgroundImage) {
-        if (imagePosition === "background") {
+        if (imagePosition === "center") {
             imageNode = backgroundImage
         } else if (imagePosition === "top" && !isHorizontal) {
             imageNode = <div className="mb-4">{backgroundImage}</div>

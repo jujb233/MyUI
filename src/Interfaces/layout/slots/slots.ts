@@ -20,7 +20,8 @@ export interface WithFooter {
     footer?: React.ReactNode
 }
 
-/** 背景图能力（Panel 等） */
-export interface WithBackgroundImage {
-    backgroundImage?: string | undefined
+/** 图片能力（Card、Panel 等） */
+export interface WithImage {
+    backgroundImage?: string
+    imagePosition?: 'top' | 'bottom' | 'left' | 'right' | 'center' | 'background'
 }

@@ -3,7 +3,7 @@ import type {
     StyleProps,
     Disableable,
     WithTitle,
-    WithBackgroundImage,
+    WithImage,
     WithFooter,
     AnimationProps,
     InteractionPolicy,
@@ -14,7 +14,7 @@ export type MyPanelProps =
     StyleProps &
     Disableable &
     WithTitle &
-    WithBackgroundImage &
+    WithImage &
     WithFooter &
     AnimationProps & {
         children?: React.ReactNode
