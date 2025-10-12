@@ -3,3 +3,7 @@ export interface StyleProps {
     className?: string
     id?: string
 }
+
+export interface Borderable {
+    bordered?: boolean;
+}

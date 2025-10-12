@@ -1,54 +1,60 @@
 # MyCard 组件文档
 
-`MyCard` 是一个灵活的卡片组件，用于展示内容和操作。它支持多种布局、主题和交互状态。
+`MyCard` 是一个灵活的卡片容器，用于展示内容与操作，支持横纵向布局、主题、交互与动画。
 
-## Props
+## Props（IMyCardProps）
 
-`MyCard` 组件的 Props 继承自多个接口，提供了丰富的定制能力。
+组合接口：ThemeProps、StyleProps、Borderable、OrientationProps、Clickable<HTMLDivElement>、AnimationProps、InteractionBehavior、WithFooter、WithImage、WithTitle。
 
-| Prop              | Type                                           | 描述                                                     |
-|-------------------|------------------------------------------------|----------------------------------------------------------|
-| `variant`         | `ComponentVariant`                             | 主题变体，用于控制卡片的颜色和强度。                     |
-| `size`            | `'small' \| 'medium' \| 'large'`               | 卡片的尺寸。                                             |
-| `glass`           | `boolean`                                      | 是否启用玻璃态效果。                                     |
-| `shadow`          | `ShadowName`                                   | 卡片的阴影等级。                                         |
-| `className`       | `string`                                       | 自定义 CSS 类名。                                        |
-| `id`              | `string`                                       | 元素的唯一 ID。                                          |
-| `bordered`        | `boolean`                                      | 是否显示边框。                                           |
-| `clickable`       | `boolean`                                      | 卡片是否可点击（会添加悬停等交互效果）。                 |
-| `hoverable`       | `boolean`                                      | 是否启用悬停反馈。                                       |
-| `direction`       | `'vertical' \| 'horizontal'`                   | 内容的布局方向。                                         |
-| `imagePosition`   | `'top' \| 'left' \| 'right' \| 'background'`   | 图片或媒体内容的位置。                                   |
-| `onClick`         | `React.MouseEventHandler<HTMLDivElement>`      | 点击事件处理函数。                                       |
-| `animation`       | `AnimationProp`                                | 控制组件的动画效果。                                     |
-| `footer`          | `React.ReactNode`                              | 卡片的页脚内容。                                         |
-| `backgroundImage` | `string`                                       | 设置卡片的背景图片 URL。                                 |
-| `title`           | `React.ReactNode`                              | 卡片的标题内容。                                         |
-| `children`        | `React.ReactNode`                              | 卡片的主要内容。                                         |
+| Prop              | Type                                                 | 来自                   | 描述 |
+|-------------------|------------------------------------------------------|------------------------|------|
+| `variant`         | `ComponentVariant`                                   | ThemeProps             | 主题变体 |
+| `size`            | `'small' \| 'medium' \| 'large'`                     | ThemeProps             | 尺寸 |
+| `glass`           | `boolean`                                            | ThemeProps             | 玻璃态 |
+| `shadow`          | `ShadowName`                                         | ThemeProps             | 阴影等级 |
+| `className`       | `string`                                             | StyleProps             | 自定义类名 |
+| `id`              | `string`                                             | StyleProps             | 元素 ID |
+| `bordered`        | `boolean`                                            | Borderable             | 是否显示边框 |
+| `direction`       | `'vertical' \| 'horizontal'`                         | OrientationProps       | 内容方向 |
+| `clickable`       | `boolean`                                            | Clickable              | 是否呈现可点击态 |
+| `onClick`         | `(e: React.MouseEvent<HTMLDivElement>) => void`      | Clickable              | 点击回调 |
+| `animation`       | `AnimationProp`                                      | AnimationProps         | 动画配置 |
+| `hover`           | `boolean`                                            | InteractionBehavior    | 是否启用 hover 反馈 |
+| `focus`           | `boolean`                                            | InteractionBehavior    | 是否启用 focus 反馈 |
+| `active`          | `boolean`                                            | InteractionBehavior    | 是否启用 active 反馈 |
+| `transition`      | `boolean`                                            | InteractionBehavior    | 交互状态切换是否带过渡 |
+| `disabled`        | `boolean`                                            | InteractionBehavior    | 禁用时是否关闭交互反馈（与 Disableable 无直接关联） |
+| `footer`          | `React.ReactNode`                                    | WithFooter             | 页脚插槽 |
+| `title`           | `React.ReactNode`                                    | WithTitle              | 标题插槽 |
+| `backgroundImage` | `string`                                             | WithImage              | 背景图 URL（作为卡片背景） |
+| `imagePosition`   | `'top' \| 'bottom' \| 'left' \| 'right' \| 'center' \| 'background'` | WithImage | 图片位置策略 |
+| `children`        | `React.ReactNode`                                    | -                      | 内容区域 |
 
-## 组合式子组件
+说明：`InteractionBehavior` 为可选能力，若未提供则遵循组件默认交互策略。
 
-为了提升组合性，子组件现在作为命名导出提供（不再挂载在 `MyCard` 对象上）。你可以这样导入并使用：
+## 子组件 API（挂载在 MyCard 上）
+
+子组件均作为属性挂载在默认导出的 `MyCard` 组件上：
 
 ```tsx
-import MyCard, { CardHeader, CardContent, CardFooter, CardActions, CardTags } from '../Components/MyCard'
+import MyCard from '../Components/MyCard'
 
 <MyCard backgroundImage="/demo.png">
-	<CardTags tags={["React", "TypeScript"]} />
-	<CardHeader>示例标题</CardHeader>
-	<CardContent>主要内容</CardContent>
-	<CardActions>
-		<button>操作</button>
-	</CardActions>
+  <MyCard.Tags tags={["React", "TypeScript"]} />
+  <MyCard.Header>示例标题</MyCard.Header>
+  <MyCard.Content>主要内容</MyCard.Content>
+  <MyCard.Actions>
+    <button>操作</button>
+  </MyCard.Actions>
 </MyCard>
 ```
 
-注意：旧的写法 `MyCard.Header` / `MyCard.Image` 已废弃并移除，请将代码迁移为上面的组合式用法或使用 `backgroundImage` prop 来传入背景图片。
+额外：如需独立前景图层，可使用 `<MyCard.Image src="..." />`，当 `imagePosition="center"` 时将以绝对定位覆盖并以低不透明度铺满容器。
 
 ## 迁移提示
 
-- 将 `<MyCard.Image src="..." />` 改为在 `MyCard` 上使用 `backgroundImage="..."`。
-- 将 `MyCard.Header`、`MyCard.Content`、`MyCard.Footer`、`MyCard.Actions`、`MyCard.Tags` 改为从包中命名导入并直接使用相应组件。
+- 旧版可能使用命名导入的子组件；当前推荐通过 `MyCard.XXX` 访问。
+- `imagePosition` 可选值补充了 `'bottom'` 与 `'center'`。
 
 
 

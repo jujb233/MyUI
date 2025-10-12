@@ -1,6 +1,6 @@
 import React from "react"
 import clsx from "clsx"
-import { useCardContext } from "./CardContext"
+import { useCardContext } from "../MyCard";
 
 export const CardTags: React.FC<{ tags: React.ReactNode[]; className?: string }> = ({ tags, className }) => {
     const { tagsContainerClasses, tagClasses } = useCardContext()

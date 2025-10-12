@@ -1,5 +1,8 @@
 import { buildThemeByIntensity, type ComponentTheme } from "../Themes/themeBuilder"
-import { INTENSITY, type IntensityName } from "../Themes/colorThemes"
+
+// 本地定义强度变体，避免与 colorThemes 的双向依赖导致初始化顺序问题
+const INTENSITY = ['solid', 'soft', 'subtle', 'text'] as const
+type IntensityName = typeof INTENSITY[number]
 
 /**
  * 定义颜色预设的渐变起止点
@@ -35,9 +38,11 @@ export const COLOR_PRESET_NAMES = Object.keys(COLOR_PALETTE) as ColorPresetName[
 /**
  * 嵌套预设：每个颜色拥有四种强度变体的完整主题。
  * PRESET_THEMES[color][variant]
+ * 
+ * 使用函数进行延迟初始化，以避免循环依赖问题。
  */
-export const PRESET_THEMES: Record<ColorPresetName, Record<IntensityName, ComponentTheme>> =
-    Object.fromEntries(
+export function getPresetThemes(): Record<ColorPresetName, Record<IntensityName, ComponentTheme>> {
+    return Object.fromEntries(
         Object.entries(COLOR_PALETTE).map(([color, stop]) => [
             color,
             Object.fromEntries(
@@ -48,4 +53,7 @@ export const PRESET_THEMES: Record<ColorPresetName, Record<IntensityName, Compon
             ) as Record<IntensityName, ComponentTheme>,
         ])
     ) as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>
+}
+
+export const PRESET_THEMES = getPresetThemes()
 

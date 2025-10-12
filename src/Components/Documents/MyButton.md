@@ -1,24 +1,27 @@
 # MyButton 组件文档
 
-`MyButton` 是一个功能丰富的按钮组件，支持主题、样式、禁用、点击、图标、动作等多种配置。
+`MyButton` 是一个功能完善的按钮组件，支持主题、样式、禁用、点击、图标、插槽和动画等配置。
 
-## Props
+## Props（IMyButtonProps）
 
-`MyButton` 组件的 Props 继承自多个接口，提供了丰富的定制能力。
+`MyButton` 组合了多组通用接口：ThemeProps、StyleProps、Disableable、Clickable、WithIcon、WithOptions、HtmlButtonType、AnimationProps。
 
-| Prop         | Type                               | 描述                                                                                                                            |
-|--------------|------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| `variant`    | `ComponentVariant`                 | 主题变体，用于控制按钮的颜色和强度。例如 `{ role: 'primary', color: 'blue' }`。                                                 |
-| `size`       | `'small' \| 'medium' \| 'large'`   | 按钮的尺寸。                                                                                                                    |
-| `glass`      | `boolean`                          | 是否启用玻璃态材质。                                                                                                            |
-| `shadow`     | `ShadowName`                       | 按钮的阴影等级。                                                                                                                |
-| `className`  | `string`                           | 自定义 CSS 类名。                                                                                                               |
-| `id`         | `string`                           | 元素的唯一 ID。                                                                                                                 |
-| `disabled`   | `boolean`                          | 是否禁用按钮。                                                                                                                  |
-| `onClick`    | `React.MouseEventHandler`          | 点击事件处理函数。                                                                                                              |
-| `icon`       | `React.ReactNode`                  | 在按钮内容前显示一个图标。                                                                                                      |
-| `actions`    | `React.ReactNode`                  | 在按钮内容后显示一个操作区域。                                                                                                  |
-| `buttonType` | `'button' \| 'submit' \| 'reset'`  | HTML `<button>` 元素的原生 `type` 属性。                                                                                        |
-| `animation`  | `AnimationProp`                    | 控制组件的动画效果，可以是预设名称字符串或详细配置对象。例如 `animation="fade"` 或 `animation={{ type: 'slide-up' }}`。 |
-| `children`   | `React.ReactNode`                  | 按钮的内容。                                                                                                                    |
+| Prop           | Type                                      | 来自             | 描述 |
+|----------------|-------------------------------------------|------------------|------|
+| `variant`      | `ComponentVariant`                        | ThemeProps       | 主题变体，如 `{ role: 'primary', color: 'blue' }` |
+| `size`         | `'small' \| 'medium' \| 'large'`          | ThemeProps       | 尺寸 |
+| `glass`        | `boolean`                                 | ThemeProps       | 是否启用玻璃态 |
+| `shadow`       | `ShadowName`                              | ThemeProps       | 阴影等级 |
+| `className`    | `string`                                  | StyleProps       | 自定义 CSS 类名 |
+| `id`           | `string`                                  | StyleProps       | 元素唯一 ID |
+| `disabled`     | `boolean`                                 | Disableable/Clickable | 是否禁用（两处接口均可提供该字段） |
+| `clickable`    | `boolean`                                 | Clickable        | 是否呈现可点击态（配合交互样式） |
+| `onClick`      | `(e: React.MouseEvent<HTMLButtonElement>) => void` | Clickable | 点击回调 |
+| `icon`         | `React.ReactNode`                         | WithIcon         | 前置图标插槽 |
+| `options`      | `React.ReactNode`                         | WithOptions      | 末尾操作区插槽（注意：名称为 `options`，非 `actions`） |
+| `buttonType`   | `'button' \| 'submit' \| 'reset'`         | HtmlButtonType   | 原生 `<button>` 的 `type` 属性 |
+| `animation`    | `AnimationProp`                           | AnimationProps   | 动画配置，支持字符串预设或对象配置 |
+| `children`     | `React.ReactNode`                         | -                | 按钮内容 |
+
+提示：若你从旧版本迁移，请将原 `actions` 重命名为 `options`。
 

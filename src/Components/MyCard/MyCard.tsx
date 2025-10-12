@@ -1,29 +1,31 @@
-import React from "react"
-import { useMyCard } from "../../Hooks"
-import ErrorBoundary from "../../Utils/ErrorBoundary"
-import { CardContext, type CardContextType } from "./CardContext"
-import type { MyCardProps } from "./myCardProps"
-import { CardImage } from "./CardImage"
+import { useMyCard } from "../../Hooks";
+import ErrorBoundary from "../../Utils/ErrorBoundary";
+import { createCompoundComponentContext } from "../../Utils/componentFactory";
+import type { IMyCardProps, IMyCardContext } from "./types";
+import { CardImage } from "./subcomponents/CardImage";
+import type { UseMyCardProps } from "../../Hooks/Components/useMyCard";
 
+export const [useCardContext, CardProvider] = createCompoundComponentContext<IMyCardContext>('MyCard');
 
-function MyCard({
-    variant,
-    backgroundImage,
-    onClick,
-    children,
-    ...props
-}: MyCardProps & { children?: React.ReactNode }) {
+function MyCard(props: IMyCardProps) {
+    const {
+        backgroundImage,
+        onClick,
+        children,
+        ...restProps
+    } = props;
+
     const {
         containerClasses,
         bodyClasses,
         ...rest
-    } = useMyCard({ ...props, hasImage: !!backgroundImage })
+    } = useMyCard({ ...restProps, hasImage: !!backgroundImage } as UseMyCardProps);
 
-    const contextValue: CardContextType = {
+    const contextValue: IMyCardContext = {
         ...props,
         size: rest.size,
         isHorizontal: rest.isHorizontal,
-        imagePosition: rest.imagePosition as CardContextType['imagePosition'],
+        imagePosition: rest.imagePosition as IMyCardContext['imagePosition'],
         sizeConfig: rest.sizeConfig,
         // sub-component classes
         imageClasses: rest.imageClasses,
@@ -34,11 +36,11 @@ function MyCard({
         actionsClasses: rest.actionsClasses,
         tagsContainerClasses: rest.tagsContainerClasses,
         tagClasses: rest.tagClasses,
-    }
+    };
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Card component failed to render.</div>}>
-            <CardContext.Provider value={contextValue}>
+            <CardProvider value={contextValue}>
                 <div
                     className={containerClasses}
                     onClick={onClick}
@@ -50,9 +52,9 @@ function MyCard({
                         {children}
                     </div>
                 </div>
-            </CardContext.Provider>
+            </CardProvider>
         </ErrorBoundary>
     );
 }
 
-export default MyCard
+export default MyCard;

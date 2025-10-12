@@ -21,7 +21,7 @@
 ### 示例
 
 ```typescript
-import { buildInteractionClasses } from './interaction';
+import { buildInteractionClasses } from '../Interactions';
 
 // 默认交互
 const defaultClasses = buildInteractionClasses(); 

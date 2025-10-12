@@ -52,6 +52,8 @@ export interface ThemeContextValue {
 }
 ```
 
+注：`ComponentVariant`、`SizeName`、`ShadowName` 均来自 `src/Options`，用于统一组件主题、尺寸与阴影的命名空间。
+
 ## 用法示例
 可在组件开发中引入这些接口，实现主题切换、动画扩展等高级特性。
 

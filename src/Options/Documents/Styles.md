@@ -2,6 +2,8 @@
 
 `Styles` 目录包含了用于定义组件视觉表现的各种预设和工具函数，例如尺寸、阴影（层级感）和样式常量。
 
+导出入口：`src/Options/Styles/index.ts`（可通过 `../Styles` 聚合导入）。
+
 ---
 
 ## 样式常量 (`styleConstants.ts`)
@@ -64,10 +66,10 @@
 -   **参数**:
     -   `glass?: boolean`: 是否为“玻璃态”。如果为 `true`，将使用 `GLASS_SHADOWS`。
     -   `shadow?: ShadowName`: 指定一个在 `SHADOWS` 中定义的阴影级别（默认为 `md`）。
-    -   `kind?: 'button' | 'card' | 'panel'`: 组件的类型。在“玻璃态”下，不同类型的组件可能会有不同的阴-影效果。
+    -   `kind?: 'button' | 'card' | 'panel'`: 组件的类型。在“玻璃态”下，不同类型的组件可能会有不同的阴影效果。
 
 -   **逻辑**:
     1.  如果 `glass` 为 `true`，则根据 `kind` 从 `GLASS_SHADOWS` 中选择合适的阴影。
     2.  否则，直接从 `SHADOWS` 中返回指定的 `shadow` 值。
 
-这个函数使得阴影的管理更加集中和灵活，能够轻松应对不同组件和状态下的视觉需求。
+这个函数使得阴影的管理更加集中和灵活，能够轻松应对不同组件和状态下的视觉需求。返回值为可直接用于 `style={{ boxShadow: ... }}` 的字符串。

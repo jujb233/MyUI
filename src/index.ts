@@ -5,9 +5,9 @@ export { MyNav } from './Components/MyNav'
 export { MyPanel } from './Components/MyPanel'
 
 // 组件 Props 类型导出
-export type { MyButtonProps } from './Components/MyButton/myButtonProps'
-export type { MyCardProps } from './Components/MyCard/myCardProps'
-export type { MyNavProps } from './Components/MyNav/myNavProps'
-export type { MyPanelProps } from './Components/MyPanel/myPanelProps'
+export type { IMyButtonProps as MyButtonProps } from './Components/MyButton';
+export type { IMyCardProps as MyCardProps } from './Components/MyCard';
+export type { IMyNavProps as MyNavProps } from './Components/MyNav';
+export type { IMyPanelProps as MyPanelProps } from './Components/MyPanel';
 
 export * from './Interfaces'

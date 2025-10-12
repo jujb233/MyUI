@@ -1,6 +1,6 @@
 import React from "react"
 import clsx from "clsx"
-import { useCardContext } from "./CardContext"
+import { useCardContext } from "../MyCard";
 
 export const CardFooter: React.FC<{ children?: React.ReactNode; className?: string }> = ({ children, className }) => {
     const { footerClasses } = useCardContext()

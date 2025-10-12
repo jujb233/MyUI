@@ -4,27 +4,7 @@
 
 ## 所有 API 列表
 
-### 1. Borderable
-**文件**：`container.ts`  
-**说明**：容器边框能力（容器类组件常用）。
-```ts
-export interface Borderable {
-    bordered?: boolean
-}
-```
-
-### 2. Clickable
-**文件**：`container.ts`  
-**说明**：可点击/可悬停能力（容器类组件常用）。
-```ts
-export interface Clickable {
-    clickable?: boolean
-    /** 是否允许 hover 反馈（默认通常为 true） */
-    hoverable?: boolean
-}
-```
-
-### 3. OrientationProps
+### 1. OrientationProps
 **文件**：`layout.ts`  
 **说明**：布局方向（卡片等）。
 ```ts
@@ -33,16 +13,7 @@ export interface OrientationProps {
 }
 ```
 
-### 4. MediaPlacementProps
-**文件**：`layout.ts`  
-**说明**：媒体放置位置（卡片/媒体类）。
-```ts
-export interface MediaPlacementProps {
-    imagePosition?: 'top' | 'left' | 'right' | 'background'
-}
-```
-
-### 5. WithIcon
+### 2. WithIcon
 **文件**：`slots/slots.ts`  
 **说明**：常用插槽：前置图标。
 ```ts
@@ -51,16 +22,16 @@ export interface WithIcon {
 }
 ```
 
-### 6. WithActions
+### 3. WithOptions
 **文件**：`slots/slots.ts`  
 **说明**：常用插槽：末尾操作区。
 ```ts
-export interface WithActions {
-    actions?: React.ReactNode
+export interface WithOptions {
+    options?: React.ReactNode
 }
 ```
 
-### 7. WithTitle
+### 4. WithTitle
 **文件**：`slots/slots.ts`  
 **说明**：常用插槽：标题（统一使用 ReactNode 以兼容 string/元素）。
 ```ts
@@ -69,7 +40,7 @@ export interface WithTitle {
 }
 ```
 
-### 8. WithFooter
+### 5. WithFooter
 **文件**：`slots/slots.ts`  
 **说明**：常用插槽：页脚/尾部。
 ```ts
@@ -78,17 +49,18 @@ export interface WithFooter {
 }
 ```
 
-### 9. WithBackgroundImage
+### 6. WithImage
 **文件**：`slots/slots.ts`  
-**说明**：背景图能力（Panel 等）。
+**说明**：图片/背景图能力（Card、Panel 等）。
 ```ts
-export interface WithBackgroundImage {
+export interface WithImage {
     backgroundImage?: string
+    imagePosition?: 'top' | 'bottom' | 'left' | 'right' | 'center' | 'background'
 }
 ```
 
 ## 用法示例
-在需要自定义布局或插槽时组合这些接口，提升组件的灵活性。
+在需要自定义布局或插槽时组合这些接口，例如：Card 同时实现 `OrientationProps` 与 `WithImage`；Nav 实现 `WithTitle` 与 `WithOptions`。
 
 ---
 

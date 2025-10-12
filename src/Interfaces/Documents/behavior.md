@@ -1,27 +1,17 @@
 # behavior 模块接口文档
 
-该模块定义了组件行为相关的接口，如 Hook 能力、交互行为等，便于为组件添加统一的行为扩展。
+该模块定义组件的交互与行为相关类型：交互状态、行为开关、视觉效果、交互策略，以及“可点击”能力等。
 
 ## 所有 API 列表
 
-### 1. UseComponentBaseResult
-**文件**：`hook.ts`  
-**说明**：定义与行为钩子（hooks）相关的类型与契约，用于组件行为复用。Hook 返回值约定（基础）：统一命名 rootStyle/rootClasses。
-```ts
-export interface UseComponentBaseResult {
-    rootStyle: React.CSSProperties
-    rootClasses: string
-}
-```
-
-### 2. InteractionType
+### 1. InteractionType
 **文件**：`interaction.ts`  
 **说明**：交互状态类型。
 ```ts
 export type InteractionType = 'hover' | 'focus' | 'active' | 'disabled'
 ```
 
-### 3. InteractionBehavior
+### 2. InteractionBehavior
 **文件**：`interaction.ts`  
 **说明**：用于描述组件在不同交互状态下（hover/focus/active/disabled）是否启用以及是否启用过渡等通用行为。此接口用于在组件级别声明哪些交互能力应该被开启并由 Hook/主题层去实际应用。
 ```ts
@@ -39,7 +29,7 @@ export interface InteractionBehavior {
 }
 ```
 
-### 4. InteractionConfig
+### 3. InteractionConfig
 **文件**：`interaction.ts`  
 **说明**：定义在不同交互状态下的视觉变换细节（缩放、透明度、背景、阴影等）。
 ```ts
@@ -71,7 +61,7 @@ export interface InteractionConfig {
 }
 ```
 
-### 5. InteractionPolicy
+### 4. InteractionPolicy
 **文件**：`interaction.ts`  
 **说明**：组件交互策略，由各组件的 Hook 决定开启哪些具体交互能力。
 ```ts
@@ -89,7 +79,7 @@ export interface InteractionPolicy {
 }
 ```
 
-### 6. SupportsInteractionPolicy
+### 5. SupportsInteractionPolicy
 **文件**：`interaction.ts`  
 **说明**：提供一个“组件可声明交互策略”的接口，供 Hook/组件实现。
 ```ts
@@ -98,8 +88,19 @@ export interface SupportsInteractionPolicy {
 }
 ```
 
+### 6. Clickable
+**文件**：`interaction.ts`  
+**说明**：“可点击”能力接口，常见于容器类组件；提供统一的 clickable 标记与 onClick 回调签名。
+```ts
+export interface Clickable<T = HTMLElement> {
+    clickable?: boolean
+    onClick?: (event: React.MouseEvent<T>) => void
+    disabled?: boolean
+}
+```
+
 ## 用法示例
-可在新组件中按需组合这些接口，实现一致的行为扩展。
+在新组件中按需组合以上接口，例如：为容器添加 `Clickable`，在 Hook 中解析并应用 `InteractionPolicy`。
 
 ---
 

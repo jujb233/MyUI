@@ -16,16 +16,19 @@
 3.  **`variantThemes.ts`**: 将语义化角色（如 `primary`, `secondary`）映射到具体的强度。
 4.  **`themeResolver.ts`**: 最终的“主题解析器”，根据组件的 `color` 和 `intensity` 属性，决定使用哪个主题。
 
+导出入口：`src/Options/Themes/index.ts`（可通过 `../Themes` 聚合导入）。
+
 ---
 
 ## 1. 颜色主题 (`colorThemes.ts`)
 
--   **`INTENSITY`**: 定义了四种可用的强度变体：
+-   **`INTENSITY`**（常量，导出）: 定义了四种可用的强度变体：
     -   `solid`: 实心填充，对比度最强。
     -   `soft`: 柔和的背景色，通常带有半透明效果。
     -   `subtle`: 更微妙的背景色，对比度较低。
     -   `text`: 无背景，仅将颜色应用于文本。
--   **`DEFAULT_BASE_COLOR`**: 当用户未指定颜色时，默认使用的色调（例如 `'blue'`）。
+-   **`IntensityName`**（类型，导出）: `'solid' | 'soft' | 'subtle' | 'text'`。
+-   **`DEFAULT_BASE_COLOR`**（常量，导出）: 当用户未指定颜色时，默认使用的色调（例如 `'blue'`）。
 
 ---
 
@@ -53,6 +56,13 @@
 -   `solid` 强度会生成一个不透明的蓝色渐变背景。
 -   `soft` 强度会生成一个半透明的蓝色背景，并将主色调应用于文本。
 -   `text` 强度会生成透明背景，仅将蓝色应用于文本。
+
+相关导出：
+
+- `buildTheme(from, to, text?)`
+- `buildThemeByIntensity(from, to, variant)`
+- `ComponentTheme`（类型）
+- `IntensityVariant`（类型：与 `IntensityName` 等价范围）
 
 ---
 
@@ -94,3 +104,18 @@
     -   默认返回 `DEFAULT_BASE_COLOR` 的 `solid` 强度主题。
 
 这个强大的解析器使得 MyUI 的主题系统既能提供一致的预设选项，又具备高度的灵活性和可定制性。
+
+示例：
+
+```ts
+import { resolveTheme } from '../Themes'
+
+// 指定预设颜色 + 强度
+const t1 = resolveTheme({ color: 'red', intensity: 'soft' })
+
+// 使用十六进制色值 + 强度
+const t2 = resolveTheme({ color: '#06b6d4', intensity: 'solid' })
+
+// 仅强度，使用默认色（blue）
+const t3 = resolveTheme({ intensity: 'text' })
+```

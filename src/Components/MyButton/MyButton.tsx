@@ -1,35 +1,37 @@
-import ButtonContent from "./ButtonContent"
-import ButtonIcon from "./ButtonIcon"
-import ButtonActions from "./ButtonActions"
-import type { MyButtonProps } from "./myButtonProps"
+import ButtonContent from "./subcomponents/ButtonContent"
+import ButtonIcon from "./subcomponents/ButtonIcon"
+import ButtonActions from "./subcomponents/ButtonActions"
+import type { IMyButtonProps, IMyButtonContext } from "./types"
 import { ErrorBoundary } from "../../Utils"
 import { useMyButton } from "../../Hooks"
-import { ButtonContext } from "./ButtonContext"
+import { createCompoundComponentContext } from "../../Utils/componentFactory"
 
-function MyButton({
-    buttonType: htmlType = "button",
-    variant,
-    size = "medium",
-    disabled = false,
-    onClick,
-    children,
-    className = "",
-    glass = true,
-    shadow = "sm",
-    icon,
-    options,
-    animation,
-}: MyButtonProps) {
+export const [useButtonContext, ButtonProvider] = createCompoundComponentContext<IMyButtonContext>('MyButton')
+
+function MyButton(props: IMyButtonProps) {
+    const {
+        buttonType: htmlType = "button",
+        onClick,
+        children,
+        icon,
+        options,
+        ...restProps
+    } = props
+
     // 通过 hook 计算最终 className 与子槽位类
-    const { rootClass, slots } = useMyButton({ variant, size, glass, shadow, disabled, className, animation })
+    const { rootClass } = useMyButton(restProps)
+
+    const contextValue: IMyButtonContext = {
+        ...restProps
+    }
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-2">Button component failed to render.</div>}>
             {/* 使用 Provider 将当前按钮的状态/风格传递给内部子组件 */}
-            <ButtonContext.Provider value={{ variant, size, glass, shadow, disabled, classes: { root: rootClass, slots } }}>
+            <ButtonProvider value={contextValue}>
                 <button
                     type={htmlType}
-                    disabled={disabled}
+                    disabled={props.disabled}
                     onClick={onClick}
                     className={rootClass}
                 >
@@ -38,7 +40,7 @@ function MyButton({
                     <ButtonContent>{children}</ButtonContent>
                     <ButtonActions>{options}</ButtonActions>
                 </button>
-            </ButtonContext.Provider>
+            </ButtonProvider>
         </ErrorBoundary>
     )
 }

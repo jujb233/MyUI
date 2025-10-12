@@ -8,4 +8,9 @@ export interface OrientationProps {
     direction?: 'vertical' | 'horizontal'
 }
 
+export interface WithImage {
+    backgroundImage?: string;
+    imagePosition?: 'top' | 'left' | 'right' | 'background' | 'bottom' | 'center';
+}
+
 

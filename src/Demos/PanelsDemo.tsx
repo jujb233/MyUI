@@ -1,15 +1,10 @@
 import { MyPanel } from "../Components/MyPanel";
-import PanelHeader from "../Components/MyPanel/PanelHeader";
-import PanelContent from "../Components/MyPanel/PanelContent";
 import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
-const PanelsDemo = () => {
+export const PanelsSections = () => {
     return (
-        <DemoLayout
-            title="MyPanel 组件"
-            description="用于组织内容、制造分层和打造场景氛围的万能容器。通过尺寸、投影、玻璃态与背景图的组合，MyPanel 能从表单卡片扩展到英雄横幅。"
-        >
+        <>
             <DemoSection
                 title="场景一：通用内容容器"
                 accentClassName="border-blue-500"
@@ -20,10 +15,10 @@ const PanelsDemo = () => {
                 )}
             >
                 <MyPanel interaction='rich' animation={{ type: 'fade' }}>
-                    <PanelHeader title="个人资料设置" />
-                    <PanelContent>
+                    <MyPanel.Header title="个人资料设置" />
+                    <MyPanel.Content>
                         <p>在这里修改您的个人信息和偏好设置。</p>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
 
@@ -33,13 +28,13 @@ const PanelsDemo = () => {
                 description="运用 variant 配色打造 CTA 或通知区域，视觉上更具指向性。"
             >
                 <MyPanel size="large" variant={{ role: 'primary', color: 'blue' }} animation={{ type: 'slide-down', duration: 400 }}>
-                    <PanelHeader title="升级到高级版" />
-                    <PanelContent>
+                    <MyPanel.Header title="升级到高级版" />
+                    <MyPanel.Content>
                         <p>解锁所有高级功能，享受无限制的创作体验。</p>
                         <div className="mt-4">
                             <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
                         </div>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
 
@@ -53,10 +48,10 @@ const PanelsDemo = () => {
                 )}
             >
                 <MyPanel glass={false} shadow="lg" variant={{ role: 'warning', color: 'yellow' }} animation={{ type: 'scale-in' }}>
-                    <PanelHeader title="新功能发布" />
-                    <PanelContent>
+                    <MyPanel.Header title="新功能发布" />
+                    <MyPanel.Content>
                         <p>我们刚刚上线了期待已久的数据分析模块，快去看看吧！</p>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
 
@@ -68,25 +63,25 @@ const PanelsDemo = () => {
             >
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
                     <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
-                        <PanelHeader title={`实体 shadow=${sh}`} />
-                        <PanelContent>
+                        <MyPanel.Header title={`实体 shadow=${sh}`} />
+                        <MyPanel.Content>
                             <p className="text-sm opacity-80">glass=false</p>
-                        </PanelContent>
+                        </MyPanel.Content>
                     </MyPanel>
                 ))}
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
                     <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
-                        <PanelHeader title={`玻璃 ${sh}`} />
-                        <PanelContent>
+                        <MyPanel.Header title={`玻璃 ${sh}`} />
+                        <MyPanel.Content>
                             <p className="text-sm opacity-80">glass=true</p>
-                        </PanelContent>
+                        </MyPanel.Content>
                     </MyPanel>
                 ))}
                 <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }} animation="pulse">
-                    <PanelHeader title="自定义颜色" />
-                    <PanelContent>
+                    <MyPanel.Header title="自定义颜色" />
+                    <MyPanel.Content>
                         <p className="text-sm opacity-80">color="purple"</p>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
 
@@ -107,12 +102,12 @@ const PanelsDemo = () => {
                     variant={{ role: 'primary', color: 'red' }}
                     className="text-white"
                 >
-                    <PanelHeader title="欢迎来到我们的社区" />
-                    <PanelContent>
+                    <MyPanel.Header title="欢迎来到我们的社区" />
+                    <MyPanel.Content>
                         <p className="font-bold">
                             在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
                         </p>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
 
@@ -122,12 +117,23 @@ const PanelsDemo = () => {
                 description="通过 disabled 属性，淡化视觉与指针交互，传达当前不可用状态。"
             >
                 <MyPanel size="small" disabled>
-                    <PanelHeader title="高级筛选（未激活）" />
-                    <PanelContent>
+                    <MyPanel.Header title="高级筛选（未激活）" />
+                    <MyPanel.Content>
                         <p>升级到高级版以解锁此功能。</p>
-                    </PanelContent>
+                    </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
+        </>
+    );
+};
+
+const PanelsDemo = () => {
+    return (
+        <DemoLayout
+            title="MyPanel 组件"
+            description="用于组织内容、制造分层和打造场景氛围的万能容器。通过尺寸、投影、玻璃态与背景图的组合，MyPanel 能从表单卡片扩展到英雄横幅。"
+        >
+            <PanelsSections />
         </DemoLayout>
     );
 };

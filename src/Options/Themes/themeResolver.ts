@@ -14,8 +14,8 @@ export type ThemeResolverParams = {
  * 逻辑:
  * 1. 如果提供了 `color` 且是合法的十六进制值，则动态构建主题。
  * 2. 如果提供了 `color` 且是预set 名称，则使用该预设主题。
- * 3. 如果只提供了 `variant`，则使用该变体对应的默认颜色预设。
- * 4. 如果什么都没提供，则回退到 'normal' 变体的默认主题。
+ * 3. 如果只提供了 `intensity`，则使用该强度对应的默认颜色预设。
+ * 4. 如果什么都没提供，则回退到 'solid' 强度的默认主题。
  *
  * @returns `ComponentTheme` 对象
  */

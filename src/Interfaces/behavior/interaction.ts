@@ -106,3 +106,9 @@ export interface SupportsInteractionPolicy {
     getInteractionPolicy(): InteractionPolicy
 }
 
+export interface Clickable<T = HTMLElement> {
+    clickable?: boolean
+    onClick?: (event: React.MouseEvent<T>) => void
+    disabled?: boolean
+}
+

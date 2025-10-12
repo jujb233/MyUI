@@ -4,16 +4,7 @@
 
 ## 所有 API 列表
 
-### 1. Pressable<T extends HTMLElement = HTMLElement>
-**文件**：events.ts  
-**说明**：按压/点击事件接口，定义 `onClick` 事件。
-```ts
-export interface Pressable<T extends HTMLElement = HTMLElement> {
-	onClick?: React.MouseEventHandler<T>
-}
-```
-
-### 2. Disableable
+### 1. Disableable
 **文件**：state.ts  
 **说明**：可禁用能力接口，定义 `disabled` 属性。
 ```ts
@@ -22,7 +13,7 @@ export interface Disableable {
 }
 ```
 
-### 3. StyleProps
+### 2. StyleProps
 **文件**：style.ts  
 **说明**：样式与通用 DOM 属性接口，定义 `className`、`id` 属性。
 ```ts
@@ -32,8 +23,17 @@ export interface StyleProps {
 }
 ```
 
+### 3. Borderable
+**文件**：style.ts  
+**说明**：边框能力（容器类组件常用）。
+```ts
+export interface Borderable {
+    bordered?: boolean
+}
+```
+
 ## 用法示例
-可在组件开发中直接复用这些接口，实现事件、状态、样式的统一处理。
+在组件开发中直接复用这些接口，实现状态、样式与边框开关的统一处理。
 
 ---
 

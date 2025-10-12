@@ -2,13 +2,10 @@ import { MyButton } from "../Components/MyButton";
 import { VARIANT_ROLE_STYLES } from "../Options";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
-const ButtonsDemo = () => {
+export const ButtonsSections = () => {
   const variants = Object.keys(VARIANT_ROLE_STYLES) as (keyof typeof VARIANT_ROLE_STYLES)[];
   return (
-    <DemoLayout
-      title="MyButton 组件"
-      description="全面的按钮组合，覆盖强调操作、文本链接、警示等场景，让界面在保持一致视觉语言的同时具备灵活的交互表现。"
-    >
+      <>
       <DemoSection
         title="基础按钮与变体"
         accentClassName="border-blue-500"
@@ -137,10 +134,18 @@ const ButtonsDemo = () => {
             <code className="rounded bg-black/50 px-2 py-1 text-white">disabled</code>
           </div>
         </div>
-      </DemoSection>
-    </DemoLayout>
-
+    </DemoSection>
+    </>
   );
 };
+
+const ButtonsDemo = () => (
+  <DemoLayout
+    title="MyButton 组件"
+    description="全面的按钮组合，覆盖强调操作、文本链接、警示等场景，让界面在保持一致视觉语言的同时具备灵活的交互表现。"
+  >
+    <ButtonsSections />
+  </DemoLayout>
+);
 
 export default ButtonsDemo;

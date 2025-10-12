@@ -2,12 +2,9 @@ import { MyNav } from "../Components/MyNav";
 import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
 
-function NavsDemo() {
+export const NavsSections = () => {
     return (
-        <DemoLayout
-            title="MyNav 组件"
-            description="定义品牌区、导航菜单与操作按钮的顶部导航。通过玻璃态、纯色和柔和主题切换，快速适配多种页面背景。"
-        >
+        <>
             <DemoSection
                 title="导航样式速览"
                 accentClassName="border-blue-500"
@@ -117,6 +114,17 @@ function NavsDemo() {
                     />
                 </div>
             </DemoSection>
+        </>
+    );
+};
+
+function NavsDemo() {
+    return (
+        <DemoLayout
+            title="MyNav 组件"
+            description="定义品牌区、导航菜单与操作按钮的顶部导航。通过玻璃态、纯色和柔和主题切换，快速适配多种页面背景。"
+        >
+            <NavsSections />
         </DemoLayout>
     );
 }
