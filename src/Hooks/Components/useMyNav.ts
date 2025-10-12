@@ -2,8 +2,8 @@ import type { AnimationProp } from "../../Options"
 import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import { INTERACTION_PRESETS } from "../../Options/Presets/interactionPresets"
-import { SHADOW_CLASS_MAP } from "../../Options/Configs"
-import { createBaseBuilder } from "./styleFactory"
+import { COMMON_CLASSES } from "../../Options/Configs"
+import { createBaseStyle } from "../../Utils/styleFactory"
 
 export type UseMyNavOptions = {
     variant?: ComponentVariant | undefined
@@ -32,7 +32,7 @@ export function useMyNav(options: UseMyNavOptions) {
     const role = variant?.role || 'primary'
     const color = variant?.color || 'blue'
 
-    const { builder } = createBaseBuilder({
+    const { builder } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
@@ -47,9 +47,8 @@ export function useMyNav(options: UseMyNavOptions) {
     })
 
     const navClasses = builder
-        .add('flex items-center px-4')
+        .add(COMMON_CLASSES.FLEX_CENTER, 'px-4')
         .add(`my-nav-${size}`)
-        .add(SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.none)
         .build()
 
     return {

@@ -27,7 +27,7 @@ function NavsDemo() {
                             <li><a href="#" className="hover:underline">Contact</a></li>
                         </>
                     }
-                    actions={<MyButton size="small">Login</MyButton>}
+                    options={<MyButton size="small">Login</MyButton>}
                 />
                 <MyNav
                     variant={{ role: 'secondary', color: 'blue' }}
@@ -42,7 +42,7 @@ function NavsDemo() {
                             <li><a href="#" className="hover:underline">Contact</a></li>
                         </>
                     }
-                    actions={<MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>}
+                    options={<MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>}
                 />
                 <MyNav
                     glass
@@ -57,7 +57,7 @@ function NavsDemo() {
                             <li><a href="#" className="hover:underline">Contact</a></li>
                         </>
                     }
-                    actions={<MyButton size="small" glass>Login</MyButton>}
+                    options={<MyButton size="small" glass>Login</MyButton>}
                 />
             </DemoSection>
 
@@ -84,7 +84,7 @@ function NavsDemo() {
                             <li><a href="#" className="hover:underline">定价</a></li>
                         </>
                     }
-                    actions={
+                    options={
                         <div className="flex items-center gap-3">
                             <MyButton size="small" variant={{ role: 'text', color: 'purple' }}>登录</MyButton>
                             <MyButton size="small" variant={{ role: 'secondary', color: 'purple' }}>注册</MyButton>
@@ -113,7 +113,7 @@ function NavsDemo() {
                                 <li><a href="#" className="hover:underline">Community</a></li>
                             </>
                         }
-                        actions={<MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>}
+                        options={<MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>}
                     />
                 </div>
             </DemoSection>

@@ -6,8 +6,8 @@ export interface WithIcon {
 }
 
 /** 常用插槽：末尾操作区 */
-export interface WithActions {
-    actions?: React.ReactNode
+export interface WithOptions {
+    options?: React.ReactNode
 }
 
 /** 常用插槽：标题（统一使用 ReactNode 以兼容 string/元素） */

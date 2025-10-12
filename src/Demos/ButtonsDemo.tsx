@@ -42,7 +42,7 @@ const ButtonsDemo = () => {
           className="h-full"
         >
           <div className="flex flex-wrap justify-center gap-6">
-            <MyButton variant={{ role: 'success', color: 'blue' }} icon={<span>✅</span>} actions={<span className="opacity-75">Ctrl+S</span>}>
+            <MyButton variant={{ role: 'success', color: 'blue' }} icon={<span>✅</span>} options={<span className="opacity-75">Ctrl+S</span>}>
               保存成功
             </MyButton>
             <MyButton variant={{ role: 'danger', color: 'red' }} icon={<span>🗑️</span>}>
@@ -70,7 +70,7 @@ const ButtonsDemo = () => {
           <div className="flex items-center justify-center gap-6">
             <MyButton size="small" variant={{ role: 'primary', color: 'blue' }} icon={<span>🫧</span>}>小型</MyButton>
             <MyButton size="medium" variant={{ role: 'success', color: 'green' }}>中型</MyButton>
-            <MyButton size="large" variant={{ role: 'danger', color: 'red' }} actions={<span className="opacity-75">↵</span>}>大型</MyButton>
+            <MyButton size="large" variant={{ role: 'danger', color: 'red' }} options={<span className="opacity-75">↵</span>}>大型</MyButton>
           </div>
         </DemoSection>
       </div>

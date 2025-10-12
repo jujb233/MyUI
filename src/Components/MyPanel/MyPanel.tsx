@@ -2,7 +2,7 @@ import { PanelProvider } from "./PanelContext"
 import { useMyPanel } from "../../Hooks"
 import type { MyPanelProps } from "./myPanelProps"
 import { ErrorBoundary } from "../../Utils"
-
+import { PanelBackground } from "./PanelBackground";
 
 // 组合式 Panel 组件
 function MyPanel({
@@ -17,16 +17,24 @@ function MyPanel({
     animation,
     backgroundImage,
 }: MyPanelProps) {
-    const styles = useMyPanel({ variant, size, glass, shadow, className, disabled, interaction, animation })
+    // 交由 useMyPanel 生成所有样式
+    // 只在有 backgroundImage 时传递该属性，避免 undefined
+    const styles = useMyPanel(
+        backgroundImage !== undefined
+            ? { variant, size, glass, shadow, className, disabled, interaction, animation, backgroundImage }
+            : { variant, size, glass, shadow, className, disabled, interaction, animation }
+    );
     // 修复 interaction 可能为 undefined 的类型问题
     const safeInteraction = interaction === undefined ? 'rich' : interaction;
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Panel component failed to render.</div>}>
-            <PanelProvider value={{ variant, size, glass, shadow, disabled, backgroundImage, interaction: safeInteraction, styles }}>
+            <PanelProvider value={
+                {
+                    variant, size, glass, shadow, disabled, backgroundImage, interaction: safeInteraction, styles
+                }}>
                 <div className={styles.panel}>
-                    {backgroundImage ? (
-                        <img src={backgroundImage} alt="" aria-hidden className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80 select-none" />
-                    ) : null}
+                    {/* 始终渲染子组件，由子组件内部判断 backgroundImage 是否存在 */}
+                    <PanelBackground backgroundImage={backgroundImage} className={styles.background} />
                     <div className="relative z-10">
                         {children}
                     </div>

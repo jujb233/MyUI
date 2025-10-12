@@ -17,7 +17,7 @@ function MyButton({
     glass = true,
     shadow = "sm",
     icon,
-    actions,
+    options,
     animation,
 }: MyButtonProps) {
     // 通过 hook 计算最终 className 与子槽位类
@@ -36,7 +36,7 @@ function MyButton({
                     {/* 图标和 actions 的判断逻辑交给子组件内部 */}
                     <ButtonIcon icon={icon} />
                     <ButtonContent>{children}</ButtonContent>
-                    <ButtonActions>{actions}</ButtonActions>
+                    <ButtonActions>{options}</ButtonActions>
                 </button>
             </ButtonContext.Provider>
         </ErrorBoundary>

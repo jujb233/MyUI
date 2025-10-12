@@ -5,7 +5,7 @@ import type {
     Disableable,
     Pressable,
     WithIcon,
-    WithActions,
+    WithOptions,
     HtmlButtonType,
     AnimationProps,
 } from "../../Interfaces"
@@ -16,7 +16,7 @@ export type MyButtonProps =
     Disableable &
     Pressable<HTMLButtonElement> &
     WithIcon &
-    WithActions &
+    WithOptions &
     HtmlButtonType &
     AnimationProps & {
         children?: React.ReactNode

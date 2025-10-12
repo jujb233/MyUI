@@ -1,8 +1,8 @@
 import type { InteractionPolicy } from "../../Interfaces"
-import { type ComponentVariant, type SizeName, type ShadowName, VARIANT_ROLE_STYLES, DEFAULT_STYLES } from "../../Options"
-import { SHADOW_CLASS_MAP, BACKGROUND_CLASSES, GLASS_BACKDROP_CLASS, GLASS_ELEVATION, THEME_CLASS_PREFIX } from "../../Options/Configs"
+import { type ComponentVariant, type SizeName, type ShadowName } from "../../Options"
+import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs"
 import type { AnimationProp } from "../../Options"
-import { createBaseBuilder } from "./styleFactory"
+import { createBaseStyle } from "../../Utils/styleFactory"
 
 /**
  * 输入 props 类型说明
@@ -34,7 +34,7 @@ export type UseMyButtonResult = {
     slots: {
         icon: string
         content: string
-        actions: string
+        options: string
     }
 }
 
@@ -58,45 +58,34 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
     } = props
 
     // 使用共享工厂创建基础 builder
-    const { builder, sizeConfig } = createBaseBuilder({
+    const { builder, sizeConfig } = createBaseStyle({
         variant: variantProp,
         size,
         glass,
         shadow,
         className,
+        disabled,
         animation,
         interaction,
     })
 
     // 在基础 builder 上补充按钮特有的类
     const buttonClasses = builder
-        .add(`${THEME_CLASS_PREFIX.color}${variantProp?.color || 'blue'}`,
-            `${THEME_CLASS_PREFIX.variant}${VARIANT_ROLE_STYLES[variantProp?.role || 'primary']}`
-        )
         .add(sizeConfig.padding, sizeConfig.fontSize, sizeConfig.minWidth)
         .add(
-            "inline-flex items-center justify-center select-none relative overflow-hidden",
-            "rounded-xl font-semibold tracking-wide border border-transparent",
-            "transition-all duration-200 ease-out will-change-transform",
+            "inline-flex items-center justify-center select-none",
+            COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN,
+            COMMON_CLASSES.ROUNDED_XL,
+            "font-semibold tracking-wide border-transparent",
+            TRANSITION_CLASSES.DEFAULT,
         )
-        .add(glass, BACKGROUND_CLASSES.glass, BACKGROUND_CLASSES.solid)
-        .add(!glass,
-            SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md,
-            GLASS_ELEVATION
-        )
-        .add(`disabled:opacity-60 `, `disabled:cursor-not-allowed`)
-        .add(glass && !disabled, `${GLASS_BACKDROP_CLASS} border`)
-        .add(disabled, [
-            `[background:${DEFAULT_STYLES.disabled.background}]`,
-            `[color:${DEFAULT_STYLES.disabled.color}]`
-        ])
         .build()
 
     // 槽位（子组件）样式：与原有硬编码保持一致，但集中由此 Hook 产出
     const slotClasses = {
         icon: "mr-2 flex items-center",
         content: "flex-1 truncate",
-        actions: "ml-2 flex items-center",
+        options: "ml-2 flex items-center",
     }
 
     return { rootClass: buttonClasses, slots: slotClasses }

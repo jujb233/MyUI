@@ -1,11 +1,11 @@
-import type { ThemeProps, StyleProps, WithTitle, WithActions, AnimationProps } from "../../Interfaces"
+import type { ThemeProps, StyleProps, WithTitle, WithOptions, AnimationProps } from "../../Interfaces"
 import type { InteractionPolicy } from "../../Interfaces"
 
 export type MyNavProps =
     ThemeProps &
     StyleProps &
     WithTitle &
-    WithActions &
+    WithOptions &
     AnimationProps & {
         children?: React.ReactNode
         menu?: React.ReactNode

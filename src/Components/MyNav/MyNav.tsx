@@ -16,7 +16,7 @@ function MyNav({
     shadow = "sm",
     title,
     menu,
-    actions,
+    options: actions,
     animation,
     interactionEnabled,
     interaction,

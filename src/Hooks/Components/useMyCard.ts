@@ -2,8 +2,8 @@ import { type ComponentVariant, type SizeName, type ShadowName } from "../../Opt
 import { styleUtil } from "../../Utils/styleBuilder"
 import { useCardLayout } from "../../Hooks/useCardLayout"
 import type { AnimationProp } from "../../Options"
-import { SHADOW_CLASS_MAP, GLASS_ELEVATION } from "../../Options/Configs"
-import { createBaseBuilder } from "./styleFactory"
+import { COMMON_CLASSES } from "../../Options/Configs"
+import { createBaseStyle } from "../../Utils/styleFactory"
 import clsx from "clsx"
 
 export type UseMyCardProps = {
@@ -18,6 +18,7 @@ export type UseMyCardProps = {
     direction?: "vertical" | "horizontal"
     hoverable?: boolean
     hasImage?: boolean
+    disabled?: boolean
     animation?: AnimationProp
 }
 
@@ -35,6 +36,7 @@ export function useMyCard(props: UseMyCardProps) {
         direction = "vertical",
         hoverable = true,
         hasImage = false,
+        disabled = false,
         animation,
     } = props
 
@@ -44,29 +46,27 @@ export function useMyCard(props: UseMyCardProps) {
     // intensity not needed here because factory handles variant intensity mapping
 
     // 尺寸相关配置（由工厂返回）
-    // 阴影类
-    const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md)
 
     const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
 
     // 使用共享工厂创建基础 builder，再补充 card 特有类
-    const { baseBuilder, sizeConfig } = createBaseBuilder({
+    const { builder, sizeConfig } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
         shadow,
         className,
+        disabled,
         animation,
         interaction: (hoverable || clickable) ? { enabled: true } : undefined,
     })
 
-    const containerClasses = baseBuilder
-        .add('relative overflow-hidden rounded-2xl')
+    const containerClasses = builder
+        .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL)
         .add(direction === 'horizontal', 'flex flex-row')
         .add(direction === 'vertical', 'flex flex-col')
-        .add(elevationClass)
-        .add(clickable, 'cursor-pointer')
-        .add(bordered, 'border')
+        .add(clickable, COMMON_CLASSES.CURSOR_POINTER)
+        .add(bordered, COMMON_CLASSES.BORDER)
         .build()
 
     const bodyClasses = new styleUtil.ClassNameBuilder()
