@@ -31,6 +31,7 @@ npm run dev
 
 - [COMPONENTS.md](../src/Components/Documents/README.md)：组件总览与通用 API
 - [INTERFASE.md](../src/Interfaces/Documents/README.md)：统一 API 接口（Interfase）指南
+- [OPTIONS.md](../src/Options/Documents/README.md)：主题配置与定制
 - [HOOKS.md](../src/Hooks/Documents/README.md)：Hooks 说明与使用
 
 备注：源码中的导航栏组件 MyNav 尚未在文档中单列说明，可参考 `src/Components/MyUI/MyNav` 源码与 `src/Demos/NavBar.tsx` 用法。
