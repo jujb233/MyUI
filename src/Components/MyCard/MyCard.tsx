@@ -1,11 +1,11 @@
-import { useMyCard } from "../../Hooks";
-import ErrorBoundary from "../../Utils/ErrorBoundary";
-import { createCompoundComponentContext } from "../../Utils/componentFactory";
-import type { IMyCardProps, IMyCardContext } from "./types";
-import { CardImage } from "./subcomponents/CardImage";
-import type { UseMyCardProps } from "../../Hooks/Components/useMyCard";
+import { useMyCard } from "../../Hooks"
+import ErrorBoundary from "../../Utils/ErrorBoundary"
+import { createSubcomponentContext } from "../../Utils/componentFactory"
+import type { IMyCardProps, IMyCardContext } from "./types"
+import { CardImage } from "./subcomponents/CardImage"
+import type { UseMyCardProps } from "../../Hooks/Components/useMyCard"
 
-export const [useCardContext, CardProvider] = createCompoundComponentContext<IMyCardContext>('MyCard');
+export const [useCardContext, CardProvider] = createSubcomponentContext<IMyCardContext>('MyCard')
 
 function MyCard(props: IMyCardProps) {
     const {
@@ -13,13 +13,13 @@ function MyCard(props: IMyCardProps) {
         onClick,
         children,
         ...restProps
-    } = props;
+    } = props
 
     const {
         containerClasses,
         bodyClasses,
         ...rest
-    } = useMyCard({ ...restProps, hasImage: !!backgroundImage } as UseMyCardProps);
+    } = useMyCard({ ...restProps, hasImage: !!backgroundImage } as UseMyCardProps)
 
     const contextValue: IMyCardContext = {
         ...props,
@@ -36,7 +36,7 @@ function MyCard(props: IMyCardProps) {
         actionsClasses: rest.actionsClasses,
         tagsContainerClasses: rest.tagsContainerClasses,
         tagClasses: rest.tagClasses,
-    };
+    }
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Card component failed to render.</div>}>
@@ -54,7 +54,7 @@ function MyCard(props: IMyCardProps) {
                 </div>
             </CardProvider>
         </ErrorBoundary>
-    );
+    )
 }
 
-export default MyCard;
+export default MyCard

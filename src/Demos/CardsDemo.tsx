@@ -37,6 +37,7 @@ export const CardsSections = () => {
                 panelProps={{ className: "grid gap-8 md:grid-cols-2 lg:grid-cols-3" }}
             >
                 <MyCard animation={{ type: 'fade' }} backgroundImage="/demo.png">
+                    <MyCard.Tags tags={["JavaScript", "性能", "优化"]} />
                     <MyCard.Tags tags={["React", "TypeScript", "TailwindCSS"]} />
                     <MyCard.Header>构建下一代UI组件库</MyCard.Header>
                     <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>

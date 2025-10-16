@@ -1,27 +1,19 @@
 import React from "react"
 import clsx from "clsx"
 import { useCardContext } from "../MyCard";
+import MyTitle from "../../Parts/myTitle/myTitle"
 
 export const CardHeader: React.FC<{ children?: React.ReactNode; className?: string }> = ({ children, className }) => {
-    const { imagePosition, isHorizontal, backgroundImage, headerClasses, titleClasses } = useCardContext()
+    const { headerClasses, titleClasses } = useCardContext()
 
-    // 渲染图片逻辑
-    let imageNode: React.ReactNode = null
-    if (backgroundImage) {
-        if (imagePosition === "center") {
-            imageNode = backgroundImage
-        } else if (imagePosition === "top" && !isHorizontal) {
-            imageNode = <div className="mb-4">{backgroundImage}</div>
-        } else if (isHorizontal) {
-            imageNode = <div className="flex-shrink-0 mr-4">{backgroundImage}</div>
-        }
-    }
+    // Header 仅负责展示标题或内联内容
+    const imageNode: React.ReactNode = null
 
     return (
         <div className={clsx(headerClasses, className)}>
             {imageNode}
             {children && (
-                <h3 className={titleClasses}>{children}</h3>
+                <MyTitle level={3} className={titleClasses}>{children}</MyTitle>
             )}
         </div>
     )

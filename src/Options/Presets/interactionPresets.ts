@@ -24,10 +24,17 @@ export const INTERACTION_PRESETS = {
     },
     effects: {
       scale: {
-        hover: 1.05,
+        hover: 1.06,
         active: 0.95,
         disabled: 1,
       },
+      opacity: {
+        hover: 0.98,
+      },
+    },
+    // 为 demo 增强视觉反馈，加入额外的 hover classes（box-shadow 与 slight translate）
+    classes: {
+      hover: 'hover:shadow-lg hover:-translate-y-0.5',
     },
   },
   minimal: {

@@ -4,9 +4,9 @@ import ButtonActions from "./subcomponents/ButtonActions"
 import type { IMyButtonProps, IMyButtonContext } from "./types"
 import { ErrorBoundary } from "../../Utils"
 import { useMyButton } from "../../Hooks"
-import { createCompoundComponentContext } from "../../Utils/componentFactory"
+import { createSubcomponentContext } from "../../Utils/componentFactory"
 
-export const [useButtonContext, ButtonProvider] = createCompoundComponentContext<IMyButtonContext>('MyButton')
+export const [useButtonContext, ButtonProvider] = createSubcomponentContext<IMyButtonContext>('MyButton')
 
 function MyButton(props: IMyButtonProps) {
     const {
@@ -15,14 +15,14 @@ function MyButton(props: IMyButtonProps) {
         children,
         icon,
         options,
-        ...restProps
+        ...otherProps
     } = props
 
     // 通过 hook 计算最终 className 与子槽位类
-    const { rootClass } = useMyButton(restProps)
+    const { rootClass } = useMyButton(otherProps)
 
     const contextValue: IMyButtonContext = {
-        ...restProps
+        ...otherProps
     }
 
     return (

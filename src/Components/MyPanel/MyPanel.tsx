@@ -2,9 +2,9 @@ import { useMyPanel } from "../../Hooks";
 import type { IMyPanelProps, IMyPanelContext } from "./types";
 import { ErrorBoundary } from "../../Utils";
 import { PanelBackground } from "./subcomponents/PanelBackground";
-import { createCompoundComponentContext } from "../../Utils/componentFactory";
+import { createSubcomponentContext } from "../../Utils/componentFactory";
 
-export const [usePanelContext, PanelProvider] = createCompoundComponentContext<IMyPanelContext>('MyPanel');
+export const [usePanelContext, PanelProvider] = createSubcomponentContext<IMyPanelContext>('MyPanel');
 
 // 组合式 Panel 组件
 function MyPanel(props: IMyPanelProps) {

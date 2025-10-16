@@ -1,5 +1,5 @@
 import React from "react"
-import { useCardContext } from "../MyCard";
+import { useCardContext } from "../MyCard"
 
 export const CardImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = "" }) => {
     const { imagePosition, imageClasses } = useCardContext()

@@ -1,13 +1,13 @@
-import NavContent from "./subcomponents/NavContent";
-import NavActions from "./subcomponents/NavActions";
-import NavBrand from "./subcomponents/NavBrand";
-import NavMenu from "./subcomponents/NavMenu";
-import { useMyNav } from "../../Hooks";
-import type { IMyNavProps, IMyNavContext } from "./types";
-import { ErrorBoundary } from "../../Utils";
-import { createCompoundComponentContext } from "../../Utils/componentFactory";
+import NavContent from "./subcomponents/NavContent"
+import NavActions from "./subcomponents/NavActions"
+import NavBrand from "./subcomponents/NavBrand"
+import NavMenu from "./subcomponents/NavMenu"
+import { useMyNav } from "../../Hooks"
+import type { IMyNavProps, IMyNavContext } from "./types"
+import { ErrorBoundary } from "../../Utils"
+import { createSubcomponentContext } from "../../Utils/componentFactory"
 
-export const [useNavContext, NavProvider] = createCompoundComponentContext<IMyNavContext>('MyNav');
+export const [useNavContext, NavProvider] = createSubcomponentContext<IMyNavContext>('MyNav')
 
 function MyNav(props: IMyNavProps) {
     const {
@@ -15,14 +15,14 @@ function MyNav(props: IMyNavProps) {
         title,
         menu,
         options: actions,
-        ...restProps
-    } = props;
+        ...otherProps
+    } = props
 
-    const classes = useMyNav(restProps);
+    const classes = useMyNav(otherProps)
 
     const contextValue: IMyNavContext = {
-        ...restProps
-    };
+        ...otherProps
+    }
 
     return (
         <ErrorBoundary fallback={<div className="border border-red-500 p-4">Nav component failed to render.</div>}>
@@ -37,7 +37,7 @@ function MyNav(props: IMyNavProps) {
                 </nav>
             </NavProvider>
         </ErrorBoundary>
-    );
+    )
 }
 
 export default MyNav
