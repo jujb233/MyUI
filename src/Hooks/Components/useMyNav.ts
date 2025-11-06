@@ -1,21 +1,24 @@
-import type { AnimationProp } from "../../Options"
-import type { ComponentVariant, SizeName, ShadowName } from "../../Options"
-import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
-import { INTERACTION_PRESETS } from "../../Options/Presets/interactionPresets"
-import { COMMON_CLASSES } from "../../Options/Configs"
-import { createBaseStyle } from "../../Utils/styleFactory"
+import type { AnimationProp } from "../../styles/config/animation";
+import type { ComponentVariant, SizeName, ShadowName } from "../../types";
+import type { InteractionPolicy } from "../../styles/config/interaction";
+import { INTERACTION_PRESETS } from "../../styles/config/interaction";
+import { createBaseStyle } from "../../Utils/styleFactory";
+
+const COMMON_CLASSES = {
+    FLEX_CENTER: "flex items-center justify-center",
+};
 
 export type UseMyNavOptions = {
-    variant?: ComponentVariant | undefined
-    size?: SizeName
-    glass?: boolean
-    shadow?: ShadowName
-    className?: string
-    interactionEnabled?: boolean | undefined
-    focusRing?: boolean
-    interaction?: InteractionPolicy | string | undefined
-    animation?: AnimationProp | undefined
-}
+    variant?: ComponentVariant;
+    size?: SizeName;
+    glass?: boolean;
+    shadow?: ShadowName;
+    className?: string;
+    interactionEnabled?: boolean;
+    focusRing?: boolean;
+    interaction?: InteractionPolicy | string;
+    animation?: AnimationProp;
+};
 
 export function useMyNav(options: UseMyNavOptions) {
     const {
@@ -27,10 +30,10 @@ export function useMyNav(options: UseMyNavOptions) {
         interactionEnabled = false,
         interaction = 'none',
         animation,
-    } = options
+    } = options;
 
-    const role = variant?.role || 'primary'
-    const color = variant?.color || 'blue'
+    const role = variant?.role || 'primary';
+    const color = variant?.color || 'blue';
 
     const { builder } = createBaseStyle({
         variant: { role, color },
@@ -44,12 +47,12 @@ export function useMyNav(options: UseMyNavOptions) {
                 ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none
                 : interaction)
             : undefined
-    })
+    });
 
     const navClasses = builder
         .add(COMMON_CLASSES.FLEX_CENTER, 'px-4')
         .add(`my-nav-${size}`)
-        .build()
+        .build();
 
     return {
         nav: navClasses,
@@ -57,5 +60,5 @@ export function useMyNav(options: UseMyNavOptions) {
         content: "flex-1",
         menu: "flex items-center space-x-4",
         actions: "ml-auto flex items-center",
-    }
+    };
 }

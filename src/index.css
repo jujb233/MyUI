@@ -1,9 +1,5 @@
 @import "tailwindcss";
-@import "./styles/myui/colors.css";
 @import "./styles/myui/variants.css";
-@import "./styles/myui/glass.css";
-@import "./styles/myui/animations.css";
-@import "./styles/myui/interaction.css";
 
 html,
 body,
@@ -11,11 +7,14 @@ body,
     height: 100%;
 }
 
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    background-color: #f8fafc;
-    color: #1f2937;
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@layer base {
+    :root {
+        /* Example of defining CSS variables for border radius, can be used in tailwind.config.js */
+        --radius-lg: 0.5rem;
+        --radius-xl: 0.75rem;
+        --radius-2xl: 1rem;
+    }
 }

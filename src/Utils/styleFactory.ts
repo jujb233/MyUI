@@ -1,48 +1,68 @@
-import { styleUtil } from "./styleBuilder"
-import { SIZE_CONFIG, VARIANT_ROLE_STYLES } from "../Options"
-import { SHADOW_CLASS_MAP, BACKGROUND_CLASSES, TEXT_CLASS, GLASS_BACKDROP_CLASS, GLASS_ELEVATION, THEME_CLASS_PREFIX, COMMON_CLASSES } from "../Options/Configs"
-import type { AnimationProp } from "../Options"
-import type { InteractionPolicy } from "../Interfaces/behavior/interaction"
-import type { ComponentVariant, SizeName, ShadowName } from "../Options"
-import { isHexColor } from './colorUtils'
-import { ensureThemeClass } from './dynamicThemeManager'
+import styleBuilder from "./styleBuilder";
+import { sizeConfig } from "../styles/config/base";
+import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../types";
+import type { AnimationProp } from "../styles/config/animation";
+import type { InteractionPolicy } from "../styles/config/interaction";
+import { isHexColor } from './colorUtils';
+import { ensureThemeClass } from './dynamicThemeManager';
 
-interface CreateBaseBuilderResult {
-    builder: any; // ClassNameBuilder instance
-    sizeConfig: typeof SIZE_CONFIG[SizeName];
+// Mappings from semantic names to Tailwind classes
+const SHADOW_CLASS_MAP: Record<ShadowName, string> = {
+    xs: 'shadow-xs',
+    sm: 'shadow-sm',
+    md: 'shadow-md',
+    lg: 'shadow-lg',
+    xl: 'shadow-xl',
+    '2xl': 'shadow-2xl',
+    inner: 'shadow-inner',
+    none: 'shadow-none',
+};
+
+const BACKGROUND_CLASSES = {
+    glass: "bg-white/30 backdrop-blur-lg",
+    traditional: "bg-gradient-to-br",
+};
+
+const TEXT_CLASS = "text-white";
+const GLASS_BACKDROP_CLASS = "backdrop-filter";
+const GLASS_ELEVATION = "shadow-glass-md";
+const THEME_CLASS_PREFIX = {
+    color: "theme-color-",
+    variant: "theme-variant-",
+};
+const COMMON_CLASSES = {
+    DISABLED_STATE: "opacity-50 cursor-not-allowed",
+    RELATIVE_OVERFLOW_HIDDEN: "relative overflow-hidden",
+    ROUNDED_XL: "rounded-xl",
+};
+
+const VARIANT_ROLE_STYLES: Record<VariantRole, 'solid' | 'soft' | 'subtle' | 'text'> = {
+    primary: 'solid',
+    secondary: 'soft',
+    success: 'solid',
+    warning: 'solid',
+    danger: 'solid',
+    text: 'text',
+};
+
+interface CreateBaseStyleResult {
+    builder: ReturnType<typeof styleBuilder.builder>;
+    sizeConfig: typeof sizeConfig[SizeName];
     themeColorClass: string;
     themeVariantClass: string;
     elevationClass: string;
 }
 
-/**
- * createBaseBuilder
- *
- * 一个通用的 className 构建器工厂，用于统一不同组件 hook 的 className 构建逻辑。
- * 返回一个配置好的 ClassNameBuilder 实例；调用者可以继续链式调用 add/addAnimation/addInteraction/add(className) 然后 build()
- *
- * inputs:
- * - options.variant: ComponentVariant | undefined
- * - options.size: SizeName
- * - options.glass: boolean
- * - options.shadow: ShadowName
- * - options.className: string
- * - options.disabled: boolean
- * - options.animation: AnimationProp | undefined
- * - options.interaction: InteractionPolicy | string | undefined
- *
- * 保持最小侵入：不修改外部的 class 语义，仅把常见操作抽取出来。
- */
 export function createBaseStyle(options: {
-    variant?: ComponentVariant | undefined
-    size?: SizeName
-    glass?: boolean
-    shadow?: ShadowName
-    className?: string
-    disabled?: boolean
-    animation?: AnimationProp | undefined
-    interaction?: InteractionPolicy | string | undefined
-}): CreateBaseBuilderResult {
+    variant?: ComponentVariant;
+    size?: SizeName;
+    glass?: boolean;
+    shadow?: ShadowName;
+    className?: string;
+    disabled?: boolean;
+    animation?: AnimationProp;
+    interaction?: InteractionPolicy | string;
+}): CreateBaseStyleResult {
     const {
         variant,
         size = 'medium',
@@ -52,20 +72,19 @@ export function createBaseStyle(options: {
         disabled = false,
         animation,
         interaction,
-    } = options
+    } = options;
 
-    const role = variant?.role || 'primary'
-    const color = variant?.color || 'blue'
-    const intensity = VARIANT_ROLE_STYLES[role]
+    const role = variant?.role || 'primary';
+    const color = variant?.color || 'blue';
+    const intensity = VARIANT_ROLE_STYLES[role];
 
-    // 如果 color 是 hex，则动态注入一个带 hash 的 class（并把变量写入 <style>），否则使用预设 class
     const themeColorClass = isHexColor(String(color))
         ? ensureThemeClass(String(color), intensity)
-        : `${THEME_CLASS_PREFIX.color}${color}`
-    const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`
-    const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md)
+        : `${THEME_CLASS_PREFIX.color}${color}`;
+    const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`;
+    const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md);
 
-    const builder = new styleUtil.ClassNameBuilder()
+    const builder = styleBuilder.builder()
         .add(themeColorClass, themeVariantClass)
         .add(TEXT_CLASS)
         .add(glass, BACKGROUND_CLASSES.glass, BACKGROUND_CLASSES.traditional)
@@ -74,13 +93,13 @@ export function createBaseStyle(options: {
         .add(!!disabled, COMMON_CLASSES.DISABLED_STATE)
         .addAnimation(animation)
         .addInteraction(interaction as any)
-        .add(className)
+        .add(className);
 
     return {
         builder,
-        sizeConfig: SIZE_CONFIG[size],
+        sizeConfig: sizeConfig[size],
         themeColorClass,
         themeVariantClass,
         elevationClass,
-    }
+    };
 }
