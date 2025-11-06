@@ -8,9 +8,22 @@ export interface OrientationProps {
     direction?: 'vertical' | 'horizontal'
 }
 
-export interface WithImage {
-    backgroundImage?: string;
-    imagePosition?: 'top' | 'left' | 'right' | 'background' | 'bottom' | 'center';
+/**
+ * 描述与父容器的相对位置
+ */
+export interface PositionProps {
+    /** 
+     * 与父容器的上距离 (单位: rem)
+     * @TJS-type integer
+     * @minimum 0
+     */
+    top?: number;
+    /** 
+     * 与父容器的左距离 (单位: rem)
+     * @TJS-type integer
+     * @minimum 0
+     */
+    left?: number;
 }
 
 

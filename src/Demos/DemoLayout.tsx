@@ -22,7 +22,7 @@ const DemoLayout = ({
     return (
         <MyPanel
             backgroundImage="/demo.png"
-            className="relative min-h-screen rounded-none overflow-hidden p-4 md:p-10"
+            class="relative min-h-screen rounded-none overflow-hidden p-4 md:p-10"
             interaction='none'
         >
             <div
@@ -74,7 +74,7 @@ export const DemoSection = ({
     panelProps,
     children,
 }: DemoSectionProps) => {
-    const { className: panelClassName, glass, ...restPanelProps } = panelProps ?? {};
+    const { class: panelClassName, glass, ...restPanelProps } = panelProps ?? {};
 
     return (
         <section class={clsx("space-y-6", className)}>
@@ -87,7 +87,7 @@ export const DemoSection = ({
             <MyPanel
                 glass={glass ?? true}
                 {...restPanelProps}
-                className={clsx(
+                class={clsx(
                     "rounded-2xl border border-white/10 bg-slate-900/40 p-6 shadow-lg md:p-8",
                     panelClassName
                 )}

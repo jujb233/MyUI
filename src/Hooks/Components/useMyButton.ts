@@ -1,8 +1,9 @@
-import type { InteractionPolicy } from "../../Interfaces"
+import type { InteractionPolicy, PositionProps } from "../../Interfaces"
 import { type ComponentVariant, type SizeName, type ShadowName } from "../../Options"
 import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs"
 import type { AnimationProp } from "../../Options"
 import { createBaseStyle } from "../../Utils/styleFactory"
+import type { JSX } from "solid-js"
 
 /**
  * 输入 props 类型说明
@@ -17,7 +18,7 @@ import { createBaseStyle } from "../../Utils/styleFactory"
  * interaction - 交互策略（传给 .addInteraction）
  * animation - 动画配置（传给 .addAnimation）
  */
-export type UseMyButtonProps = {
+export type UseMyButtonProps = PositionProps & {
     htmlType?: "button" | "submit" | "reset"
     variant?: ComponentVariant | undefined
     size?: SizeName
@@ -31,6 +32,7 @@ export type UseMyButtonProps = {
 
 export type UseMyButtonResult = {
     rootClass: string
+    rootStyle?: JSX.CSSProperties
     slots: {
         icon: string
         content: string
@@ -88,5 +90,19 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         options: "ml-2 flex items-center",
     }
 
-    return { rootClass: buttonClasses, slots: slotClasses }
+    // 位置样式（单位 rem）
+    const rootStyle: JSX.CSSProperties | undefined =
+        props.top !== undefined || props.left !== undefined
+            ? {
+                ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
+                ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+            }
+            : undefined
+
+    const result: UseMyButtonResult = { rootClass: buttonClasses, slots: slotClasses }
+    if (rootStyle) {
+        // 仅在存在位置样式时才添加该属性，避免 exactOptionalPropertyTypes 下的 undefined 赋值
+        ; (result as any).rootStyle = rootStyle
+    }
+    return result
 }

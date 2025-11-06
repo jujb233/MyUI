@@ -9,7 +9,7 @@ export const NavsSections = () => {
                 title="导航样式速览"
                 accentClassName="border-blue-500"
                 description="不同 variant 与 glass 组合的对比，展示 Solid、Soft 与 Glass 风格的层次感。"
-                panelProps={{ className: "space-y-6" }}
+                panelProps={{ class: "space-y-6" }}
             >
                 <MyNav
                     variant={{ role: 'primary', color: 'blue' }}

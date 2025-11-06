@@ -1,5 +1,3 @@
-import type { JSX } from 'solid-js'
-
 /**
  * Layout - container
  * 简要：定义容器（container）相关的布局接口与辅助类型。
@@ -11,9 +9,7 @@ export interface Borderable {
 }
 
 /** 可点击/可悬停能力（容器类组件常用） */
-export interface Clickable<T extends HTMLElement = HTMLElement> {
-    clickable?: boolean
-    /** 是否启用 hover 效果（替代旧的 hoverable 字段） */
+export interface Focusable {
+    clickFocusable?: boolean
     hover?: boolean
-    onClick?: JSX.EventHandler<T, MouseEvent>
 }

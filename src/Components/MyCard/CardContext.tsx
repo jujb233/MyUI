@@ -7,10 +7,11 @@ import type { UseMyCardProps } from "../../Hooks/Components/useMyCard"
 const MyCardContext = createContext<IMyCardContext | null>(null)
 
 export const CardProvider: Component<IMyCardProps> = (props) => {
-    const [local, others] = splitProps(props, ["backgroundImage", "onClick", "children", "clickable"])
+    const [local, others] = splitProps(props, ["backgroundImage", "onClick", "children", "clickable", "clickFocusable"])
 
     const {
         containerClasses,
+        containerStyle,
         bodyClasses,
         ...rest
     } = useMyCard({ ...others, hasImage: !!local.backgroundImage } as UseMyCardProps)
@@ -36,9 +37,10 @@ export const CardProvider: Component<IMyCardProps> = (props) => {
         <MyCardContext.Provider value={contextValue}>
             <div
                 class={containerClasses}
+                style={containerStyle}
                 onClick={local.onClick}
-                role={local.clickable ? 'button' : undefined}
-                tabIndex={local.clickable ? 0 : undefined}
+                role={local.clickFocusable ? 'button' : undefined}
+                tabIndex={local.clickFocusable ? 0 : undefined}
             >
                 {local.backgroundImage && <CardImage src={local.backgroundImage} />}
                 <div class={bodyClasses}>

@@ -59,7 +59,7 @@ export const PanelsSections = () => {
                 title="交互与投影 (Elevation)"
                 accentClassName="border-indigo-500"
                 description="不同的 shadow 等级与 glass 组合，帮助界面形成轻重缓急的层次。"
-                panelProps={{ className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" }}
+                panelProps={{ class: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" }}
             >
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
                     <MyPanel shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
@@ -100,7 +100,7 @@ export const PanelsSections = () => {
                     animation={{ type: 'fade', duration: 500 }}
                     backgroundImage="/demo.png"
                     variant={{ role: 'primary', color: 'red' }}
-                    className="text-white"
+                    class="text-white"
                 >
                     <MyPanel.Header title="欢迎来到我们的社区" />
                     <MyPanel.Content>

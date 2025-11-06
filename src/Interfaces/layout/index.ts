@@ -4,5 +4,5 @@
  */
 
 export * from './container';
-export type { OrientationProps, WithImage } from './layout';
+export * from './layout';
 export * from './slots';

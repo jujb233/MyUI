@@ -5,8 +5,10 @@ import type { AnimationProp } from "../../Options"
 import { COMMON_CLASSES } from "../../Options/Configs"
 import { createBaseStyle } from "../../Utils/styleFactory"
 import clsx from "clsx"
+import type { PositionProps } from "../../Interfaces"
+import type { JSX } from "solid-js"
 
-export type UseMyCardProps = {
+export type UseMyCardProps = PositionProps & {
     variant?: ComponentVariant
     size?: SizeName
     glass?: boolean
@@ -71,6 +73,15 @@ export function useMyCard(props: UseMyCardProps) {
         .add(bordered, COMMON_CLASSES.BORDER)
         .build()
 
+    // 位置样式（单位 rem）
+    const containerStyle: JSX.CSSProperties | undefined =
+        props.top !== undefined || props.left !== undefined
+            ? {
+                ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
+                ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+            }
+            : undefined
+
     const bodyClasses = new styleUtil.ClassNameBuilder()
         .add(sizeConfig.padding, sizeConfig.spacing)
         .add(isHorizontal, 'flex-1')
@@ -109,6 +120,7 @@ export function useMyCard(props: UseMyCardProps) {
         size,
         sizeConfig,
         containerClasses,
+        containerStyle,
         bodyClasses,
         isHorizontal,
         imagePosition,

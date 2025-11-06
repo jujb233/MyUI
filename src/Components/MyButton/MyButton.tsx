@@ -20,7 +20,7 @@ const MyButton: Component<IMyButtonProps> = (props) => {
     ])
 
     // 通过 hook 计算最终 className 与子槽位类
-    const { rootClass } = useMyButton(others)
+    const { rootClass, rootStyle } = useMyButton(others as any)
 
     const contextValue: IMyButtonContext = {
         ...others
@@ -34,10 +34,11 @@ const MyButton: Component<IMyButtonProps> = (props) => {
                     type={local.buttonType || "button"}
                     disabled={local.disabled}
                     onClick={(e) => {
-                        
+
                         local.onClick && local.onClick(e as MouseEvent)
                     }}
                     class={rootClass}
+                    style={rootStyle}
                 >
                     {/* 图标和 actions 的判断逻辑交给子组件内部 */}
                     <ButtonIcon icon={local.icon} />

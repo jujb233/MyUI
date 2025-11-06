@@ -9,9 +9,11 @@ import type {
     WithImage,
     WithTitle,
     InteractionBehavior,
+    PositionProps,
+    Clickable,
 } from "../../Interfaces"
 // 使用 layout 下的 Clickable（泛型），以获得正确的 onClick 事件签名
-import type { Clickable as ContainerClickable } from "../../Interfaces/layout"
+import type { Focusable as ContainerClickable } from "../../Interfaces/layout"
 
 // IMyCardProps combines all the necessary props interfaces.
 // The duplicate Clickable has been removed to fix the type conflict.
@@ -20,7 +22,9 @@ export interface IMyCardProps extends
     StyleProps,
     Borderable,
     OrientationProps,
-    ContainerClickable<HTMLDivElement>,
+    ContainerClickable,
+    Clickable,
+    PositionProps,
     AnimationProps,
     InteractionBehavior,
     WithFooter,

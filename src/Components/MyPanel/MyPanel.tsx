@@ -21,7 +21,7 @@ const MyPanel: Component<IMyPanelProps> = (props) => {
     return (
         <ErrorBoundary fallback={<div class="border border-red-500 p-4">Panel component failed to render.</div>}>
             <PanelProvider value={contextValue}>
-                <div class={styles.panel}>
+                <div class={styles.panel} style={styles.panelStyle}>
                     <PanelBackground backgroundImage={local.backgroundImage} class={styles.background} />
                     <div class="relative z-10">
                         {local.children}

@@ -3,8 +3,10 @@ import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import type { AnimationProp } from "../../Options"
 import { COMMON_CLASSES } from "../../Options/Configs"
 import { createBaseStyle } from "../../Utils/styleFactory"
+import type { PositionProps } from "../../Interfaces"
+import type { JSX } from "solid-js"
 
-export type UseMyPanelProps = {
+export type UseMyPanelProps = PositionProps & {
     variant?: ComponentVariant | undefined
     size?: SizeName
     glass?: boolean
@@ -54,8 +56,18 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         .add(sizeConfig.padding, sizeConfig.fontSize)
         .build()
 
+    // 位置样式（单位 rem）
+    const panelStyle: JSX.CSSProperties | undefined =
+        props.top !== undefined || props.left !== undefined
+            ? {
+                ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
+                ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+            }
+            : undefined
+
     return {
         panel: panelClasses,
+        panelStyle,
         background: backgroundClass,
         header: "text-2xl font-bold mb-4",
         content: "flex-1",

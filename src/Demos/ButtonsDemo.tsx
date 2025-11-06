@@ -80,7 +80,7 @@ export const ButtonsSections = () => {
             统一的交互系统为按钮提供一致的 <code>hover</code> 与 <code>active</code> 缩放反馈，通过 <code>glass</code> 与 <code>shadow</code> 的组合可以构建不同深度层次。
           </>
         )}
-        panelProps={{ className: "space-y-8" }}
+        panelProps={{ class: "space-y-8" }}
       >
         <div class="space-y-3">
           <h3 class="font-semibold">实体阴影（glass={'{false}'})</h3>

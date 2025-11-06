@@ -7,6 +7,8 @@ import type {
     WithOptions,
     HtmlButtonType,
     AnimationProps,
+    Focusable,
+    PositionProps,
     Clickable,
 } from "../../Interfaces"
 
@@ -14,11 +16,13 @@ export interface IMyButtonProps extends
     ThemeProps,
     StyleProps,
     Disableable,
-    Clickable,
+    Focusable,
     WithIcon,
     WithOptions,
     HtmlButtonType,
-    AnimationProps {
+    AnimationProps,
+    PositionProps,
+    Clickable {
     children?: JSX.Element
 }
 
