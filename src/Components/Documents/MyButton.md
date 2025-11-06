@@ -22,6 +22,3 @@
 | `buttonType`   | `'button' \| 'submit' \| 'reset'`         | HtmlButtonType   | 原生 `<button>` 的 `type` 属性 |
 | `animation`    | `AnimationProp`                           | AnimationProps   | 动画配置，支持字符串预设或对象配置 |
 | `children`     | `React.ReactNode`                         | -                | 按钮内容 |
-
-提示：若你从旧版本迁移，请将原 `actions` 重命名为 `options`。
-

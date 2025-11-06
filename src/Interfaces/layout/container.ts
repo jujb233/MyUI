@@ -1,4 +1,4 @@
-import type * as React from 'react'
+import type { JSX } from 'solid-js'
 
 /**
  * Layout - container
@@ -15,5 +15,5 @@ export interface Clickable<T extends HTMLElement = HTMLElement> {
     clickable?: boolean
     /** 是否启用 hover 效果（替代旧的 hoverable 字段） */
     hover?: boolean
-    onClick?: React.MouseEventHandler<T>
+    onClick?: JSX.EventHandler<T, MouseEvent>
 }

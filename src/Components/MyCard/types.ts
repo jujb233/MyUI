@@ -1,8 +1,8 @@
+import type { JSX } from "solid-js";
 import type {
     ThemeProps,
     StyleProps,
     Borderable,
-    Clickable,
     OrientationProps,
     AnimationProps,
     WithFooter,
@@ -10,6 +10,8 @@ import type {
     WithTitle,
     InteractionBehavior,
 } from "../../Interfaces";
+// 使用 layout 下的 Clickable（泛型），以获得正确的 onClick 事件签名
+import type { Clickable as ContainerClickable } from "../../Interfaces/layout";
 
 // IMyCardProps combines all the necessary props interfaces.
 // The duplicate Clickable has been removed to fix the type conflict.
@@ -18,13 +20,13 @@ export interface IMyCardProps extends
     StyleProps,
     Borderable,
     OrientationProps,
-    Clickable<HTMLDivElement>,
+    ContainerClickable<HTMLDivElement>,
     AnimationProps,
     InteractionBehavior,
     WithFooter,
     WithImage,
     WithTitle {
-    children?: React.ReactNode;
+    children?: JSX.Element;
 }
 
 // IMyCardContext defines the shape of the context object for the MyCard component.

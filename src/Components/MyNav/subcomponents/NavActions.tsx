@@ -1,11 +1,11 @@
-import React from "react";
 import { useMyNav } from "../../../Hooks";
 import { useNavContext } from "../MyNav";
+import type { Component, JSX } from "solid-js";
 
-const NavActions: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+const NavActions: Component<{ children?: JSX.Element }> = (props) => {
     const context = useNavContext();
     const classes = useMyNav(context);
-    return <div className={classes.actions}>{children}</div>;
+    return <div class={classes.actions}>{props.children}</div>;
 };
 
 export default NavActions

@@ -1,20 +1,18 @@
-import React from "react"
-import clsx from "clsx"
-import { useCardContext } from "../MyCard";
+import { useCardContext } from "../CardContext";
+import type { Component, JSX } from "solid-js";
+import clsx from "clsx";
 
-export const CardContent: React.FC<{ children?: React.ReactNode; className?: string }> = ({ children, className }) => {
+export const CardContent: Component<{ children?: JSX.Element; class?: string }> = (props) => {
     const { contentClasses } = useCardContext()
     // 横向布局时内容自适应
     return (
         <div
-            className={clsx(
+            class={clsx(
                 contentClasses,
-                className
+                props.class
             )}
         >
-            {children}
+            {props.children}
         </div>
     )
 }
-
-CardContent.displayName = "CardContent"

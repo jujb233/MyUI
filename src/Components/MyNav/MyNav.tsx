@@ -6,34 +6,35 @@ import { useMyNav } from "../../Hooks"
 import type { IMyNavProps, IMyNavContext } from "./types"
 import { ErrorBoundary } from "../../Utils"
 import { createSubcomponentContext } from "../../Utils/componentFactory"
+import { type Component, splitProps, Show } from "solid-js"
 
 export const [useNavContext, NavProvider] = createSubcomponentContext<IMyNavContext>('MyNav')
 
-function MyNav(props: IMyNavProps) {
-    const {
-        children,
-        title,
-        menu,
-        options: actions,
-        ...otherProps
-    } = props
+const MyNav: Component<IMyNavProps> = (props) => {
+    const [local, others] = splitProps(props, ["children", "title", "menu", "options"]);
 
-    const classes = useMyNav(otherProps)
+    const classes = useMyNav(others)
 
     const contextValue: IMyNavContext = {
-        ...otherProps
+        ...others
     }
 
     return (
-        <ErrorBoundary fallback={<div className="border border-red-500 p-4">Nav component failed to render.</div>}>
+        <ErrorBoundary fallback={<div class="border border-red-500 p-4">Nav component failed to render.</div>}>
             <NavProvider value={contextValue}>
-                <nav className={classes.nav}>
-                    {title && <NavBrand>{title}</NavBrand>}
+                <nav class={classes.nav}>
+                    <Show when={local.title}>
+                        <NavBrand>{local.title}</NavBrand>
+                    </Show>
                     <NavContent>
-                        {menu && <NavMenu>{menu}</NavMenu>}
-                        {children}
+                        <Show when={local.menu}>
+                            <NavMenu>{local.menu}</NavMenu>
+                        </Show>
+                        {local.children}
                     </NavContent>
-                    {actions && <NavActions>{actions}</NavActions>}
+                    <Show when={local.options}>
+                        <NavActions>{local.options}</NavActions>
+                    </Show>
                 </nav>
             </NavProvider>
         </ErrorBoundary>

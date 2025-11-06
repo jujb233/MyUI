@@ -1,20 +1,20 @@
-import React from "react"
-import clsx from "clsx"
-import { useCardContext } from "../MyCard";
+import { useCardContext } from "../CardContext";
+import { Show } from "solid-js";
+import type { Component, JSX } from "solid-js";
+import clsx from "clsx";
 
-export const CardFooter: React.FC<{ children?: React.ReactNode; className?: string }> = ({ children, className }) => {
+export const CardFooter: Component<{ children?: JSX.Element; class?: string }> = (props) => {
     const { footerClasses } = useCardContext()
-    if (!children) return null
     return (
-        <div
-            className={clsx(
-                footerClasses,
-                className
-            )}
-        >
-            {children}
-        </div>
+        <Show when={props.children}>
+            <div
+                class={clsx(
+                    footerClasses,
+                    props.class
+                )}
+            >
+                {props.children}
+            </div>
+        </Show>
     )
 }
-
-CardFooter.displayName = "CardFooter"

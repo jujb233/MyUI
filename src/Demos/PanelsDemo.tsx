@@ -31,7 +31,7 @@ export const PanelsSections = () => {
                     <MyPanel.Header title="升级到高级版" />
                     <MyPanel.Content>
                         <p>解锁所有高级功能，享受无限制的创作体验。</p>
-                        <div className="mt-4">
+                        <div class="mt-4">
                             <MyButton variant={{ role: 'primary', color: 'blue' }}>立即升级</MyButton>
                         </div>
                     </MyPanel.Content>
@@ -62,25 +62,25 @@ export const PanelsSections = () => {
                 panelProps={{ className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" }}
             >
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
-                    <MyPanel key={sh} shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
+                    <MyPanel shadow={sh} glass={false} variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
                         <MyPanel.Header title={`实体 shadow=${sh}`} />
                         <MyPanel.Content>
-                            <p className="text-sm opacity-80">glass=false</p>
+                            <p class="text-sm opacity-80">glass=false</p>
                         </MyPanel.Content>
                     </MyPanel>
                 ))}
                 {(['sm', 'md', 'lg'] as const).map((sh, idx) => (
-                    <MyPanel key={`g-${sh}`} shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
+                    <MyPanel shadow={sh} glass variant={{ role: 'secondary', color: 'gray' }} size="small" animation={{ type: 'fade', delay: idx * 120 }}>
                         <MyPanel.Header title={`玻璃 ${sh}`} />
                         <MyPanel.Content>
-                            <p className="text-sm opacity-80">glass=true</p>
+                            <p class="text-sm opacity-80">glass=true</p>
                         </MyPanel.Content>
                     </MyPanel>
                 ))}
                 <MyPanel size="small" variant={{ role: 'primary', color: 'purple' }} animation="pulse">
                     <MyPanel.Header title="自定义颜色" />
                     <MyPanel.Content>
-                        <p className="text-sm opacity-80">color="purple"</p>
+                        <p class="text-sm opacity-80">color="purple"</p>
                     </MyPanel.Content>
                 </MyPanel>
             </DemoSection>
@@ -104,7 +104,7 @@ export const PanelsSections = () => {
                 >
                     <MyPanel.Header title="欢迎来到我们的社区" />
                     <MyPanel.Content>
-                        <p className="font-bold">
+                        <p class="font-bold">
                             在这里，您可以分享想法、提出问题，并与来自世界各地的开发者交流。
                         </p>
                     </MyPanel.Content>

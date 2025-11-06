@@ -1,3 +1,4 @@
+import type { JSX } from "solid-js";
 import type {
     ThemeProps,
     StyleProps,
@@ -13,12 +14,12 @@ export interface IMyButtonProps extends
     ThemeProps,
     StyleProps,
     Disableable,
-    Clickable<HTMLButtonElement>,
+    Clickable,
     WithIcon,
     WithOptions,
     HtmlButtonType,
     AnimationProps {
-    children?: React.ReactNode;
+    children?: JSX.Element;
 }
 
 export interface IMyButtonContext extends Omit<IMyButtonProps, 'children' | 'onClick'> {

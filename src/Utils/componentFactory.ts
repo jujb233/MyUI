@@ -1,4 +1,12 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, type Context } from 'solid-js'
+
+type NullableContext<T> = Context<T | null>
+
+type ContextRegistry = Record<string, NullableContext<unknown>>
+
+type GlobalWithRegistry = typeof globalThis & {
+    __MYUI_CONTEXT_REGISTRY__?: ContextRegistry
+}
 
 /**
  * 为复合组件创建 Context 和 Provider。
@@ -6,20 +14,26 @@ import { createContext, useContext } from 'react'
  * @returns [useContext, Provider, Context]
  */
 export function createSubcomponentContext<T>(displayName: string) {
-    // 1. 创建 Context
-    const Context = createContext<T | null>(null)
-    Context.displayName = `${displayName}Context`
+    // 为避免 HMR 或多版本导致的 Provider 类型不匹配，当本地存在已创建的 Context 时直接复用
+    const globalTarget = globalThis as GlobalWithRegistry
+    const registry = globalTarget.__MYUI_CONTEXT_REGISTRY__ ?? (globalTarget.__MYUI_CONTEXT_REGISTRY__ = {} as ContextRegistry)
 
-    // 2. 创建一个自定义 Hook 用于消费 Context
+    const existingContext = registry[displayName] as NullableContext<T> | undefined
+
+    const context = existingContext ?? createContext<T | null>(null)
+
+    if (!existingContext) {
+        // 将新建的 Context 挂到 globalThis，确保刷新后子组件拿到同一个上下文实例
+        registry[displayName] = context as NullableContext<unknown>
+    }
+
     const useComponentContext = () => {
-        const contextValue = useContext(Context)
+        const contextValue = useContext(context)
         if (contextValue === null) {
-            // 保持运行时错误消息不变（仅翻译注释）
             throw new Error(`'use${displayName}Context' must be used within a <${displayName}.Provider>`)
         }
         return contextValue
     }
 
-    // 3. 返回自定义 Hook、Provider 和 Context 本身
-    return [useComponentContext, Context.Provider, Context] as const
+    return [useComponentContext, context.Provider, context] as const
 }

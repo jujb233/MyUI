@@ -5,7 +5,7 @@ import DemoLayout, { DemoSection } from "./DemoLayout";
 export const ButtonsSections = () => {
   const variants = Object.keys(VARIANT_ROLE_STYLES) as (keyof typeof VARIANT_ROLE_STYLES)[];
   return (
-      <>
+    <>
       <DemoSection
         title="基础按钮与变体"
         accentClassName="border-blue-500"
@@ -15,19 +15,19 @@ export const ButtonsSections = () => {
           </>
         )}
       >
-        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        <div class="grid grid-cols-2 gap-6 md:grid-cols-4">
           {variants.map((variant) => (
-            <div key={variant} className="flex flex-col items-center space-y-2">
+            <div class="flex flex-col items-center space-y-2">
               <MyButton variant={{ role: variant, color: 'blue' }} size="large">
                 {variant.charAt(0).toUpperCase() + variant.slice(1)}
               </MyButton>
-              <code className="rounded bg-black/50 px-2 py-1 text-sm">{`variant={{ role: '${variant}', color: 'blue' }}`}</code>
+              <code class="rounded bg-black/50 px-2 py-1 text-sm">{`variant={{ role: '${variant}', color: 'blue' }}`}</code>
             </div>
           ))}
         </div>
       </DemoSection>
 
-      <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-2">
         <DemoSection
           title="场景化颜色"
           accentClassName="border-green-500"
@@ -38,8 +38,8 @@ export const ButtonsSections = () => {
           )}
           className="h-full"
         >
-          <div className="flex flex-wrap justify-center gap-6">
-            <MyButton variant={{ role: 'success', color: 'blue' }} icon={<span>✅</span>} options={<span className="opacity-75">Ctrl+S</span>}>
+          <div class="flex flex-wrap justify-center gap-6">
+            <MyButton variant={{ role: 'success', color: 'blue' }} icon={<span>✅</span>} options={<span class="opacity-75">Ctrl+S</span>}>
               保存成功
             </MyButton>
             <MyButton variant={{ role: 'danger', color: 'red' }} icon={<span>🗑️</span>}>
@@ -64,10 +64,10 @@ export const ButtonsSections = () => {
           )}
           className="h-full"
         >
-          <div className="flex items-center justify-center gap-6">
+          <div class="flex items-center justify-center gap-6">
             <MyButton size="small" variant={{ role: 'primary', color: 'blue' }} icon={<span>🫧</span>}>小型</MyButton>
             <MyButton size="medium" variant={{ role: 'success', color: 'green' }}>中型</MyButton>
-            <MyButton size="large" variant={{ role: 'danger', color: 'red' }} options={<span className="opacity-75">↵</span>}>大型</MyButton>
+            <MyButton size="large" variant={{ role: 'danger', color: 'red' }} options={<span class="opacity-75">↵</span>}>大型</MyButton>
           </div>
         </DemoSection>
       </div>
@@ -82,29 +82,29 @@ export const ButtonsSections = () => {
         )}
         panelProps={{ className: "space-y-8" }}
       >
-        <div className="space-y-3">
-          <h3 className="font-semibold">实体阴影（glass={'{false}'})</h3>
-          <div className="flex flex-wrap gap-4">
+        <div class="space-y-3">
+          <h3 class="font-semibold">实体阴影（glass={'{false}'})</h3>
+          <div class="flex flex-wrap gap-4">
             {(['sm', 'md', 'lg', 'xl'] as const).map((s) => (
-              <MyButton key={s} shadow={s} glass={false} variant={{ role: 'primary', color: 'blue' }} animation={{ type: 'pulse' }}>
+              <MyButton shadow={s} glass={false} variant={{ role: 'primary', color: 'blue' }} animation={{ type: 'pulse' }}>
                 shadow={s}
               </MyButton>
             ))}
           </div>
         </div>
-        <div className="space-y-3">
-          <h3 className="font-semibold">玻璃态默认投影</h3>
-          <div className="flex flex-wrap gap-4">
+        <div class="space-y-3">
+          <h3 class="font-semibold">玻璃态默认投影</h3>
+          <div class="flex flex-wrap gap-4">
             {(['primary', 'secondary'] as const).map((v) => (
-              <MyButton key={v} variant={{ role: v, color: 'blue' }} glass>
+              <MyButton variant={{ role: v, color: 'blue' }} glass>
                 {v}
               </MyButton>
             ))}
           </div>
         </div>
-        <div className="space-y-3">
-          <h3 className="font-semibold">Text 变体交互</h3>
-          <div className="flex gap-4">
+        <div class="space-y-3">
+          <h3 class="font-semibold">Text 变体交互</h3>
+          <div class="flex gap-4">
             <MyButton variant={{ role: 'text', color: 'blue' }}>普通 Text</MyButton>
             <MyButton variant={{ role: 'text', color: 'purple' }}>自定义颜色</MyButton>
           </div>
@@ -120,21 +120,21 @@ export const ButtonsSections = () => {
           </>
         )}
       >
-        <div className="grid grid-cols-1 items-center justify-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div className="flex flex-col items-center space-y-3">
+        <div class="grid grid-cols-1 items-center justify-items-center gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div class="flex flex-col items-center space-y-3">
             <MyButton glass variant={{ role: 'primary', color: 'purple' }}>玻璃效果</MyButton>
-            <code className="rounded bg-black/50 px-2 py-1 text-white">glass={`{true}`}</code>
+            <code class="rounded bg-black/50 px-2 py-1 text-white">glass={`{true}`}</code>
           </div>
-          <div className="flex flex-col items-center space-y-3">
+          <div class="flex flex-col items-center space-y-3">
             <MyButton glass={false} variant={{ role: 'primary', color: 'purple' }}>实体效果</MyButton>
-            <code className="rounded bg-black/50 px-2 py-1 text-white">glass={`{false}`}</code>
+            <code class="rounded bg-black/50 px-2 py-1 text-white">glass={`{false}`}</code>
           </div>
-          <div className="flex flex-col items-center space-y-3">
+          <div class="flex flex-col items-center space-y-3">
             <MyButton disabled>禁用状态</MyButton>
-            <code className="rounded bg-black/50 px-2 py-1 text-white">disabled</code>
+            <code class="rounded bg-black/50 px-2 py-1 text-white">disabled</code>
           </div>
         </div>
-    </DemoSection>
+      </DemoSection>
     </>
   );
 };

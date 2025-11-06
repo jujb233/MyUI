@@ -1,11 +1,11 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import tailwindcss from "@tailwindcss/vite";
-import { resolve } from "path";
+import { defineConfig } from "vite"
+import tailwindcss from "@tailwindcss/vite"
+import solidjs from "vite-plugin-solid"
+import { resolve } from "path"
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [tailwindcss(), react()],
+  plugins: [tailwindcss(), solidjs()],
   build: {
     lib: {
       entry: resolve(__dirname, "src/index.ts"),
@@ -14,11 +14,10 @@ export default defineConfig({
       fileName: (format) => `index.${format === "es" ? "js" : format}`,
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: ["solid-js"],
       output: {
         globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
+          "solid-js": "SolidJS",
         },
       },
     },

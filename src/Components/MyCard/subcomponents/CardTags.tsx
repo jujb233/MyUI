@@ -1,22 +1,21 @@
-import React from "react"
-import clsx from "clsx"
-import { useCardContext } from "../MyCard";
+import { useCardContext } from "../CardContext";
+import { For } from "solid-js";
+import type { Component, JSX } from "solid-js";
+import clsx from "clsx";
 
-export const CardTags: React.FC<{ tags: React.ReactNode[]; className?: string }> = ({ tags, className }) => {
+export const CardTags: Component<{ tags: JSX.Element[]; class?: string }> = (props) => {
     const { tagsContainerClasses, tagClasses } = useCardContext()
     return (
-        <div className={clsx(tagsContainerClasses, className)}>
-            {tags.map((tag, index) => (
-                <span
-                    key={index}
-                    className={tagClasses}
-                >
-                    {tag}
-                </span>
-            ))}
+        <div class={clsx(tagsContainerClasses, props.class)}>
+            <For each={props.tags}>
+                {(tag) => (
+                    <span
+                        class={tagClasses}
+                    >
+                        {tag}
+                    </span>
+                )}
+            </For>
         </div>
     )
 }
-
-
-CardTags.displayName = "CardTags"

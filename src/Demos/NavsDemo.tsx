@@ -16,12 +16,12 @@ export const NavsSections = () => {
                     animation={{ type: 'slide-down', duration: 400, easing: 'out' }}
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" className="text-lg font-bold">MyApp</a>}
+                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
-                            <li><a href="#" className="hover:underline">Home</a></li>
-                            <li><a href="#" className="hover:underline">About</a></li>
-                            <li><a href="#" className="hover:underline">Contact</a></li>
+                            <li><a href="#" class="hover:underline">Home</a></li>
+                            <li><a href="#" class="hover:underline">About</a></li>
+                            <li><a href="#" class="hover:underline">Contact</a></li>
                         </>
                     }
                     options={<MyButton size="small">Login</MyButton>}
@@ -31,12 +31,12 @@ export const NavsSections = () => {
                     animation="fade"
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" className="text-lg font-bold">MyApp</a>}
+                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
-                            <li><a href="#" className="hover:underline">Home</a></li>
-                            <li><a href="#" className="hover:underline">About</a></li>
-                            <li><a href="#" className="hover:underline">Contact</a></li>
+                            <li><a href="#" class="hover:underline">Home</a></li>
+                            <li><a href="#" class="hover:underline">About</a></li>
+                            <li><a href="#" class="hover:underline">Contact</a></li>
                         </>
                     }
                     options={<MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>}
@@ -46,12 +46,12 @@ export const NavsSections = () => {
                     animation={{ type: 'scale-in', duration: 350 }}
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" className="text-lg font-bold">MyApp</a>}
+                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
                     menu={
                         <>
-                            <li><a href="#" className="hover:underline">Home</a></li>
-                            <li><a href="#" className="hover:underline">About</a></li>
-                            <li><a href="#" className="hover:underline">Contact</a></li>
+                            <li><a href="#" class="hover:underline">Home</a></li>
+                            <li><a href="#" class="hover:underline">About</a></li>
+                            <li><a href="#" class="hover:underline">Contact</a></li>
                         </>
                     }
                     options={<MyButton size="small" glass>Login</MyButton>}
@@ -69,20 +69,20 @@ export const NavsSections = () => {
                     interactionEnabled
                     interaction='rich'
                     title={(
-                        <div className="flex items-center gap-2">
-                            <span className="text-xl font-black">MyUI</span>
-                            <span className="rounded-full bg-white/20 px-2 text-xs uppercase tracking-widest">Pro</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl font-black">MyUI</span>
+                            <span class="rounded-full bg-white/20 px-2 text-xs uppercase tracking-widest">Pro</span>
                         </div>
                     )}
                     menu={
                         <>
-                            <li><a href="#" className="hover:underline">产品</a></li>
-                            <li><a href="#" className="hover:underline">解决方案</a></li>
-                            <li><a href="#" className="hover:underline">定价</a></li>
+                            <li><a href="#" class="hover:underline">产品</a></li>
+                            <li><a href="#" class="hover:underline">解决方案</a></li>
+                            <li><a href="#" class="hover:underline">定价</a></li>
                         </>
                     }
                     options={
-                        <div className="flex items-center gap-3">
+                        <div class="flex items-center gap-3">
                             <MyButton size="small" variant={{ role: 'text', color: 'purple' }}>登录</MyButton>
                             <MyButton size="small" variant={{ role: 'secondary', color: 'purple' }}>注册</MyButton>
                         </div>
@@ -95,19 +95,19 @@ export const NavsSections = () => {
                 accentClassName="border-purple-500"
                 description="将导航置于 Hero 背景之上时，glass + shadow 的组合可以保持可读性的同时维持轻盈质感。"
             >
-                <div className="rounded-xl bg-gradient-to-r from-indigo-500/40 via-transparent to-pink-500/40 p-8">
+                <div class="rounded-xl bg-gradient-to-r from-indigo-500/40 via-transparent to-pink-500/40 p-8">
                     <MyNav
                         glass
                         shadow="lg"
                         animation={{ type: 'slide-up', duration: 500, easing: 'in-out' }}
                         interactionEnabled
                         interaction='rich'
-                        title={<a href="#" className="text-lg font-semibold">Aurora</a>}
+                        title={<a href="#" class="text-lg font-semibold">Aurora</a>}
                         menu={
                             <>
-                                <li><a href="#" className="hover:underline">Features</a></li>
-                                <li><a href="#" className="hover:underline">Docs</a></li>
-                                <li><a href="#" className="hover:underline">Community</a></li>
+                                <li><a href="#" class="hover:underline">Features</a></li>
+                                <li><a href="#" class="hover:underline">Docs</a></li>
+                                <li><a href="#" class="hover:underline">Community</a></li>
                             </>
                         }
                         options={<MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>}

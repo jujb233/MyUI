@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { createSignal } from "solid-js";
 import { MyCard } from "../Components/MyCard";
 import { MyButton } from "../Components/MyButton";
 import DemoLayout, { DemoSection } from "./DemoLayout";
@@ -19,10 +19,10 @@ export const CardsSections = () => {
                     size="medium"
                     className="max-w-lg"
                 >
-                    <MyCard.Header>Your Name</MyCard.Header>
+                    {/* <MyCard.Header>Your Name</MyCard.Header> */}
                     <MyCard.Content>前端开发者，热衷于构建美观且实用的用户界面。</MyCard.Content>
                     <MyCard.Footer>
-                        <div className="flex justify-end space-x-2">
+                        <div class="flex justify-end space-x-2">
                             <MyButton size="small" variant={{ role: 'text', color: 'blue' }}>查看主页</MyButton>
                             <MyButton size="small" variant={{ role: 'primary', color: 'blue' }}>关注</MyButton>
                         </div>
@@ -39,7 +39,7 @@ export const CardsSections = () => {
                 <MyCard animation={{ type: 'fade' }} backgroundImage="/demo.png">
                     <MyCard.Tags tags={["JavaScript", "性能", "优化"]} />
                     <MyCard.Tags tags={["React", "TypeScript", "TailwindCSS"]} />
-                    <MyCard.Header>构建下一代UI组件库</MyCard.Header>
+                    {/* <MyCard.Header>构建下一代UI组件库</MyCard.Header> */}
                     <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>
                     <MyCard.Actions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
@@ -47,7 +47,7 @@ export const CardsSections = () => {
                 </MyCard>
                 <MyCard animation={{ type: 'slide-up' }} backgroundImage="/demo.png">
                     <MyCard.Tags tags={["设计", "色彩", "UI/UX"]} />
-                    <MyCard.Header>设计系统中的色彩哲学</MyCard.Header>
+                    {/* <MyCard.Header>设计系统中的色彩哲学</MyCard.Header> */}
                     <MyCard.Content>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</MyCard.Content>
                     <MyCard.Actions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
@@ -55,7 +55,7 @@ export const CardsSections = () => {
                 </MyCard>
                 <MyCard animation={{ type: 'scale-in' }} backgroundImage="/demo.png">
                     <MyCard.Tags tags={["性能", "Webpack", "Web Vitals"]} />
-                    <MyCard.Header>前端性能优化实战</MyCard.Header>
+                    {/* <MyCard.Header>前端性能优化实战</MyCard.Header> */}
                     <MyCard.Content>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</MyCard.Content>
                     <MyCard.Actions>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
@@ -76,7 +76,7 @@ export const CardsSections = () => {
                     onClick={() => alert("跳转到好友请求页面！")}
                     className="w-80"
                 >
-                    <MyCard.Header>新消息</MyCard.Header>
+                    {/* <MyCard.Header>新消息</MyCard.Header> */}
                     <MyCard.Content>您有一条新的好友请求等待处理。</MyCard.Content>
                 </MyCard>
                 <MyCard
@@ -86,7 +86,7 @@ export const CardsSections = () => {
                     onClick={() => alert("查看详情！")}
                     className="w-80"
                 >
-                    <MyCard.Header>系统更新</MyCard.Header>
+                    {/* <MyCard.Header>系统更新</MyCard.Header> */}
                     <MyCard.Content>系统将在今晚凌晨2点进行维护更新，届时服务可能会短暂中断。</MyCard.Content>
                 </MyCard>
             </DemoSection>
@@ -102,55 +102,51 @@ export const CardsSections = () => {
                 panelProps={{ className: "space-y-4" }}
             >
                 {(() => {
-                    const [replayKey, setReplayKey] = useState(0);
-                    const [stagger, setStagger] = useState(true);
+                    const [replayKey, setReplayKey] = createSignal(0);
+                    const [stagger, setStagger] = createSignal(true);
 
-                    const items = useMemo(
-                        () => [
-                            { label: '淡入（fade）', config: { type: 'fade' as const } },
-                            { label: '向上滑入（slide-up）', config: { type: 'slide-up' as const } },
-                            { label: '向下滑入（slide-down）', config: { type: 'slide-down' as const } },
-                            { label: '缩放进入（scale-in）', config: { type: 'scale-in' as const } },
-                            { label: '自定义时长（slide-down, 600ms）', config: { type: 'slide-down' as const, duration: 600 } },
-                            { label: '自定义延迟（fade, 300ms）', config: { type: 'fade' as const, delay: 300 } },
-                            { label: '自定义缓动（slide-up, in-out）', config: { type: 'slide-up' as const, easing: 'in-out' as const } },
-                        ],
-                        []
-                    );
+                    const items = [
+                        { label: '淡入（fade）', config: { type: 'fade' as const } },
+                        { label: '向上滑入（slide-up）', config: { type: 'slide-up' as const } },
+                        { label: '向下滑入（slide-down）', config: { type: 'slide-down' as const } },
+                        { label: '缩放进入（scale-in）', config: { type: 'scale-in' as const } },
+                        { label: '自定义时长（slide-down, 600ms）', config: { type: 'slide-down' as const, duration: 600 } },
+                        { label: '自定义延迟（fade, 300ms）', config: { type: 'fade' as const, delay: 300 } },
+                        { label: '自定义缓动（slide-up, in-out）', config: { type: 'slide-up' as const, easing: 'in-out' as const } },
+                    ];
 
                     return (
-                        <div className="space-y-4">
-                            <div className="flex items-center gap-4">
+                        <div class="space-y-4">
+                            <div class="flex items-center gap-4">
                                 <MyButton
                                     size="small"
                                     variant={{ role: 'primary', color: 'blue' }}
-                                    onClick={() => setReplayKey((k) => k + 1)}
+                                    onClick={() => setReplayKey(replayKey() + 1)}
                                 >
                                     重播全部
                                 </MyButton>
-                                <label className="flex items-center gap-2 text-sm select-none cursor-pointer">
+                                <label class="flex items-center gap-2 text-sm select-none cursor-pointer">
                                     <input
                                         type="checkbox"
-                                        checked={stagger}
-                                        onChange={(e) => setStagger(e.target.checked)}
+                                        checked={stagger()}
+                                        onChange={(e) => setStagger((e.currentTarget as HTMLInputElement).checked)}
                                     />
                                     交错播放
                                 </label>
                             </div>
 
-                            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                                 {items.map((item, idx) => {
                                     const cfg: any = { ...(item.config as any) };
-                                    if (stagger) {
+                                    if (stagger()) {
                                         cfg.delay = (cfg.delay || 0) + idx * 120; // 交错更明显
                                     }
                                     return (
                                         <MyCard
-                                            key={`${replayKey}-${idx}`}
                                             animation={cfg}
                                             className="h-28 flex items-center justify-center"
                                         >
-                                            <MyCard.Header>{item.label}</MyCard.Header>
+                                            {/* <MyCard.Header>{item.label}</MyCard.Header> */}
                                         </MyCard>
                                     );
                                 })}
@@ -171,19 +167,19 @@ export const CardsSections = () => {
                 panelProps={{ className: "grid gap-6 md:grid-cols-2 lg:grid-cols-3" }}
             >
                 {(['sm', 'md', 'lg'] as const).map((sh) => (
-                    <MyCard key={sh} shadow={sh} glass={false}>
-                        <MyCard.Header>{`shadow=${sh}`}</MyCard.Header>
+                    <MyCard shadow={sh} glass={false}>
+                        {/* <MyCard.Header>{`shadow=${sh}`}</MyCard.Header> */}
                         <MyCard.Content>实体投影</MyCard.Content>
                     </MyCard>
                 ))}
                 {(['sm', 'md', 'lg'] as const).map((sh) => (
-                    <MyCard key={`g-${sh}`} shadow={sh} glass>
-                        <MyCard.Header>{`glass + ${sh}`}</MyCard.Header>
+                    <MyCard shadow={sh} glass>
+                        {/* <MyCard.Header>{`glass + ${sh}`}</MyCard.Header> */}
                         <MyCard.Content>玻璃态</MyCard.Content>
                     </MyCard>
                 ))}
                 <MyCard variant={{ role: 'primary', color: 'purple' }}>
-                    <MyCard.Header>自定义主题</MyCard.Header>
+                    {/* <MyCard.Header>自定义主题</MyCard.Header> */}
                     <MyCard.Content>紫色</MyCard.Content>
                 </MyCard>
             </DemoSection>
@@ -203,10 +199,10 @@ export const CardsSections = () => {
                     variant={{ role: 'success', color: 'green' }}
                     className="max-w-md"
                 >
-                    <MyCard.Header>自定义卡片</MyCard.Header>
+                    {/* <MyCard.Header>自定义卡片</MyCard.Header> */}
                     <MyCard.Content>这张卡片关闭了玻璃效果，并使用了 'emerald' 配色。页脚部分可以添加额外信息或操作。</MyCard.Content>
                     <MyCard.Footer>
-                        <div className="text-sm opacity-80">最后更新于 5分钟前</div>
+                        <div class="text-sm opacity-80">最后更新于 5分钟前</div>
                     </MyCard.Footer>
                 </MyCard>
             </DemoSection>

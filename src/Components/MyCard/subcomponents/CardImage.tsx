@@ -1,18 +1,18 @@
-import React from "react"
-import { useCardContext } from "../MyCard"
+import { useCardContext } from "../CardContext";
+import { Show } from "solid-js";
+import type { Component } from "solid-js";
 
-export const CardImage: React.FC<{ src: string; alt?: string }> = ({ src, alt = "" }) => {
+export const CardImage: Component<{ src: string; alt?: string }> = (props) => {
     const { imagePosition, imageClasses } = useCardContext()
 
-    if (imagePosition === "center") {
-        // 使用绝对定位的 img 元素，避免行内 style 的 backgroundImage
-        return (
-            <div className={imageClasses}>
-                <img src={src} alt={alt} className="absolute inset-0 h-full w-full object-cover opacity-10" />
+    return (
+        <Show
+            when={imagePosition === "center"}
+            fallback={<img src={props.src} alt={props.alt || ""} class={imageClasses} />}
+        >
+            <div class={imageClasses}>
+                <img src={props.src} alt={props.alt || ""} class="absolute inset-0 h-full w-full object-cover opacity-10" />
             </div>
-        )
-    }
-    return <img src={src} alt={alt} className={imageClasses} />
+        </Show>
+    )
 }
-
-CardImage.displayName = "CardImage"

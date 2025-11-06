@@ -1,23 +1,23 @@
-import type * as React from 'react'
+import type { JSX } from 'solid-js'
 
 /** 常用插槽：前置图标 */
 export interface WithIcon {
-    icon?: React.ReactNode
+    icon?: JSX.Element
 }
 
 /** 常用插槽：末尾操作区 */
 export interface WithOptions {
-    options?: React.ReactNode
+    options?: JSX.Element
 }
 
 /** 常用插槽：标题（统一使用 ReactNode 以兼容 string/元素） */
 export interface WithTitle {
-    title?: React.ReactNode
+    title?: JSX.Element
 }
 
 /** 常用插槽：页脚/尾部 */
 export interface WithFooter {
-    footer?: React.ReactNode
+    footer?: JSX.Element
 }
 
 /** 图片能力（Card、Panel 等） */

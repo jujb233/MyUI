@@ -1,10 +1,8 @@
-import React from "react"
-import clsx from "clsx"
-import { useCardContext } from "../MyCard";
+import { useCardContext } from "../CardContext";
+import type { Component, JSX } from "solid-js";
+import clsx from "clsx";
 
-export const CardActions: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className }) => {
+export const CardActions: Component<{ children: JSX.Element; class?: string }> = (props) => {
     const { actionsClasses } = useCardContext()
-    return <div className={clsx(actionsClasses, className)}>{children}</div>
+    return <div class={clsx(actionsClasses, props.class)}>{props.children}</div>
 }
-
-CardActions.displayName = "CardActions"

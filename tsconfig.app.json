@@ -17,7 +17,8 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": false,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
     /* Declaration files */
     "declaration": true,
     "declarationDir": "./dist",

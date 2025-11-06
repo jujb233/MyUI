@@ -1,11 +1,11 @@
-import React from "react";
 import { useMyPanel } from "../../../Hooks";
 import { usePanelContext } from "../MyPanel";
+import type { Component, JSX } from "solid-js";
 
-const PanelFooter: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
+const PanelFooter: Component<{ children?: JSX.Element }> = (props) => {
     const context = usePanelContext();
     const styles = useMyPanel(context);
-    return <div className={styles.footer}>{children}</div>;
+    return <div class={styles.footer}>{props.children}</div>;
 };
 
 export default PanelFooter

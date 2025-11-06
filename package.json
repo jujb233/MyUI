@@ -1,11 +1,11 @@
 {
   "name": "@jujb233/myui",
   "private": false,
-  "version": "19.5.0",
+  "version": "0.0.1",
   "type": "module",
-  "description": "一个使用Taildwind CSS的现代React UI组件库",
+  "description": "一个使用Taildwind CSS的现代Web UI组件库",
   "keywords": [
-    "react",
+    "solid-js",
     "ui",
     "components",
     "tailwind",
@@ -26,11 +26,10 @@
   "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
-    },
-    "./styles": "./dist/style.css"
+    }
   },
   "files": [
     "dist",
@@ -48,20 +47,14 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "clsx": "^2.1.1",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-router-dom": "^7.9.1",
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "vite-plugin-solid": "^2.11.10",
+    "solid-js": "^1.9.8"
   },
   "devDependencies": {
     "@eslint/js": "^9.35.0",
     "@types/node": "^24.5.1",
-    "@types/react": "^19.1.13",
-    "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react-swc": "^4.1.0",
     "eslint": "^9.35.0",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
     "globals": "^16.4.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.44.0",

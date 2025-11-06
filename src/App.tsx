@@ -2,7 +2,7 @@ import Demo from "./Demos/Demo";
 
 function App() {
     return (
-        <div className="App">
+        <div class="App">
             <Demo />
         </div>
     );
