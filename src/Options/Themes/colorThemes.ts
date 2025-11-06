@@ -1,4 +1,4 @@
-import type { COLOR_PALETTE } from "../Presets/colorPresets"
+import { baseColors } from "../../styles/config/base"
 
 /**
  * 强度变体（Intensity Variants）
@@ -12,4 +12,4 @@ export type IntensityName = typeof INTENSITY[number]
  * 默认基色（当未显式提供 color 时使用）
  * 变体与颜色完全解耦：变体=强度，颜色=色调
  */
-export const DEFAULT_BASE_COLOR: keyof typeof COLOR_PALETTE = 'blue'
+export const DEFAULT_BASE_COLOR: keyof typeof baseColors = 'blue'

@@ -1,6 +1,6 @@
 import styleBuilder from "./styleBuilder";
 import { sizeConfig } from "../styles/config/base";
-import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../types";
+import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core/types";
 import type { AnimationProp } from "../styles/config/animation";
 import type { InteractionPolicy } from "../styles/config/interaction";
 import { isHexColor } from './colorUtils';
@@ -60,8 +60,8 @@ export function createBaseStyle(options: {
     shadow?: ShadowName;
     className?: string;
     disabled?: boolean;
-    animation?: AnimationProp;
-    interaction?: InteractionPolicy | string;
+    animation?: AnimationProp | undefined;
+    interaction?: string | InteractionPolicy | undefined;
 }): CreateBaseStyleResult {
     const {
         variant,

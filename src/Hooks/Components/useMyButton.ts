@@ -1,6 +1,6 @@
 import type { InteractionPolicy } from "../../styles/config/interaction";
 import type { PositionProps } from "../../Interfaces";
-import type { ComponentVariant, SizeName, ShadowName } from "../../types";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core/types";
 import type { AnimationProp } from "../../styles/config/animation";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import type { JSX } from "solid-js";
@@ -70,7 +70,7 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
 
     // 使用共享工厂创建基础 builder
     const { builder, sizeConfig } = createBaseStyle({
-        variant,
+        variant: variant ?? { role: 'primary', color: 'blue' },
         size,
         glass,
         shadow,

@@ -1,4 +1,4 @@
-import type { ShadowName } from "..";
+import type { ShadowName } from "../../types";
 
 // 阴影类映射（实体态下使用）
 export const SHADOW_CLASS_MAP: Record<ShadowName, string> = {

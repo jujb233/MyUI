@@ -1,6 +1,7 @@
 import type { AnimationProp } from "../../styles/config/animation";
-import type { ComponentVariant, SizeName, ShadowName } from "../../types";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core/types";
 import type { InteractionPolicy } from "../../styles/config/interaction";
+import type { JSX } from "solid-js";
 import { INTERACTION_PRESETS } from "../../styles/config/interaction";
 import { createBaseStyle } from "../../Utils/styleFactory";
 
@@ -8,17 +9,20 @@ const COMMON_CLASSES = {
     FLEX_CENTER: "flex items-center justify-center",
 };
 
-export type UseMyNavOptions = {
-    variant?: ComponentVariant;
-    size?: SizeName;
-    glass?: boolean;
-    shadow?: ShadowName;
-    className?: string;
-    interactionEnabled?: boolean;
-    focusRing?: boolean;
-    interaction?: InteractionPolicy | string;
-    animation?: AnimationProp;
-};
+export interface UseMyNavOptions {
+    variant?: ComponentVariant | undefined;
+    size?: SizeName | undefined;
+    glass?: boolean | undefined;
+    shadow?: ShadowName | undefined;
+    className?: string | undefined;
+    class?: string | undefined;
+    id?: string | undefined;
+    style?: JSX.CSSProperties | undefined;
+    interactionEnabled?: boolean | undefined;
+    focusRing?: boolean | undefined;
+    interaction?: InteractionPolicy | string | undefined;
+    animation?: AnimationProp | undefined;
+}
 
 export function useMyNav(options: UseMyNavOptions) {
     const {

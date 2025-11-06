@@ -1,20 +1,8 @@
 /**
  * 定义组件可用的具体颜色。
  */
-export type Color = 'red' | 'blue' | 'green' | 'yellow' | 'purple' | 'gray'
-
-/**
- * 定义组件的语义化功能角色。
- */
-export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text'
-
-/**
- * 组件的变体属性，结合了功能角色和具体颜色。
- */
-export interface ComponentVariant {
-    role: VariantRole
-    color: Color
-}
+// 统一类型定义，使用 src/types.ts 的 ComponentVariant
+import type { ComponentVariant, VariantRole, Color } from '../../Interfaces/core/types'
 
 /**
  * 变体角色到样式的映射。

@@ -1,4 +1,4 @@
-import type { ComponentVariant, SizeName, ShadowName } from "../../types";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core/types";
 import styleBuilder from "../../Utils/styleBuilder";
 import { useCardLayout } from "../../Hooks/useCardLayout";
 import type { AnimationProp } from "../../styles/config/animation";
@@ -15,8 +15,9 @@ const COMMON_CLASSES = {
     BORDER: "border",
 };
 
-export type UseMyCardProps = PositionProps & {
-    variant?: ComponentVariant;
+// 类型声明移到顶部
+export interface UseMyCardProps extends PositionProps {
+    variant?: ComponentVariant | undefined;
     size?: SizeName;
     glass?: boolean;
     clickable?: boolean;
@@ -29,7 +30,7 @@ export type UseMyCardProps = PositionProps & {
     hasImage?: boolean;
     disabled?: boolean;
     animation?: AnimationProp;
-};
+}
 
 export function useMyCard(props: UseMyCardProps) {
     // 解构 props 并提供合理默认值
