@@ -3,7 +3,7 @@ import type { ThemeProps } from "../../Interfaces/theme/theme";
 import type { StyleProps } from "../../Interfaces/core/style";
 import type { WithTitle, WithOptions } from "../../Interfaces/layout/slots/slots";
 import type { AnimationProps } from "../../Interfaces/theme/animation";
-import type { InteractionPolicy } from "../../styles/config/interaction";
+import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
 export interface IMyNavProps extends ThemeProps, StyleProps, WithTitle, WithOptions, AnimationProps {
     children?: JSX.Element;
     menu?: JSX.Element;

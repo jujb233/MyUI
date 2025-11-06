@@ -2,7 +2,7 @@ import styleBuilder from "./styleBuilder";
 import { sizeConfig } from "../styles/config/base";
 import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core/types";
 import type { AnimationProp } from "../styles/config/animation";
-import type { InteractionPolicy } from "../styles/config/interaction";
+import type { InteractionPolicy } from "../Interfaces/behavior/interaction";
 import { isHexColor } from './colorUtils';
 import { ensureThemeClass } from './dynamicThemeManager';
 

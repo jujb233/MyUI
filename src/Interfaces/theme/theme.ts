@@ -3,8 +3,7 @@
  * 简要：定义主题对象结构、主题解析器（resolver）所需类型与变体配置接口。
  */
 
-import type { ComponentVariant } from '../../Options'
-import type { SizeName, ShadowName } from '../../types'
+import type { ComponentVariant, SizeName, ShadowName } from '../../Interfaces/core/types'
 
 /** 主题与尺寸（所有主题相关组件可选实现） */
 export interface ThemeProps {

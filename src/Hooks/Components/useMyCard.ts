@@ -5,7 +5,7 @@ import type { AnimationProp } from "../../styles/config/animation";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import clsx from "clsx";
 import type { PositionProps } from "../../Interfaces";
-import type { InteractionPolicy } from "../../styles/config/interaction";
+import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
 import type { JSX } from "solid-js";
 
 const COMMON_CLASSES = {

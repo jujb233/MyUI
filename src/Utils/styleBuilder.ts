@@ -1,9 +1,9 @@
 import clsx from 'clsx';
 import { animationMap, easingValueMap } from '../styles/config/animation';
 import type { AnimationProp, AnimationConfig } from '../styles/config/animation';
-import { INTERACTION_PRESETS } from '../styles/config/interaction';
-import type { InteractionPolicy } from '../styles/config/interaction';
+import type { InteractionPolicy } from '../Interfaces/behavior/interaction';
 import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../styles/config/interaction';
+import { INTERACTION_PRESETS } from '../styles/config/interaction';
 
 type ClassType = string | false | undefined | null | Array<string | false | undefined | null>;
 

@@ -32,15 +32,3 @@ export const INTERACTION_PRESETS = {
         enabled: false,
     },
 };
-
-export interface InteractionPolicy {
-    enabled?: boolean;
-    behavior?: typeof DEFAULT_INTERACTION_BEHAVIOR;
-    effects?: typeof DEFAULT_INTERACTION_EFFECTS;
-    classes?: {
-        hover?: string;
-        focus?: string;
-        active?: string;
-        disabled?: string;
-    };
-}

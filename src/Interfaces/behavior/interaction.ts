@@ -82,19 +82,23 @@ export interface InteractionConfig {
 }
 
 /**
- * 组件交互策略：由各组件的 Hook 决定开启哪些具体交互能力。
- * 将通用的交互（hover/active/transition/disabledReset）与可选的 focusRing 聚合在一起。
+ * InteractionPolicy 定义合并，移除重复定义。
  */
+import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../../styles/config/interaction';
+
 export interface InteractionPolicy {
     /** 总开关 */
     enabled?: boolean
     /** 具体交互行为配置 */
-    behavior?: InteractionBehavior
+    behavior?: typeof DEFAULT_INTERACTION_BEHAVIOR
     /** 视觉反馈配置 */
-    effects?: InteractionConfig
+    effects?: typeof DEFAULT_INTERACTION_EFFECTS
     /** 自定义类名 */
     classes?: {
-        [key in InteractionType]?: string
+        hover?: string
+        focus?: string
+        active?: string
+        disabled?: string
     }
 }
 

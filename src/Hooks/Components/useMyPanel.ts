@@ -1,5 +1,5 @@
 import { type ComponentVariant, type SizeName, type ShadowName } from "../../Interfaces/core/types"
-import type { InteractionPolicy } from "../../styles/config/interaction"
+import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import type { AnimationProp } from "../../styles/config/animation"
 import { COMMON_CLASSES } from "../../Options/Configs"
 import { createBaseStyle } from "../../Utils/styleFactory"

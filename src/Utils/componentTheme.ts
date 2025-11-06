@@ -1,6 +1,6 @@
 import type { JSX } from 'solid-js'
 // import { type ElevationKind } from '../Options' // 已移除无效导入
-import { type ShadowName } from '../types'
+import { type ShadowName } from '../Interfaces/core/types'
 import type { ComponentTheme } from '../Options/Themes/themeBuilder'
 import { type ThemeResolverParams } from '../Options/Themes/themeResolver'
 

@@ -1,3 +1,5 @@
+import type { AnimationConfig } from '../../styles/config/animation';
+
 /**
  * 预设的动画效果类型。
  * 这些名称可以映射到 Tailwind CSS 的动画类或自定义动画。
@@ -15,29 +17,6 @@ export type AnimationType =
     | 'scale-in'
     | 'pulse'
     | 'spin'
-
-/**
- * 动画的详细配置对象。
- */
-export interface AnimationConfig {
-    /** 动画类型 */
-    type: AnimationType
-    /** 
-     * 持续时间 (ms)。若不指定，则使用默认值。
-     * 可以映射到 Tailwind 的 `duration-[...]` 类。
-     */
-    duration?: number
-    /** 
-     * 延迟时间 (ms)。
-     * 可以映射到 Tailwind 的 `delay-[...]` 类。
-     */
-    delay?: number
-    /** 
-     * 缓动函数。
-     * 可以映射到 Tailwind 的 `ease-[...]` 类。
-     */
-    easing?: 'linear' | 'in' | 'out' | 'in-out'
-}
 
 /**
  * 组件的动画属性。
