@@ -15,10 +15,10 @@ export interface Disableable {
 
 ### 2. StyleProps
 **文件**：style.ts  
-**说明**：样式与通用 DOM 属性接口，定义 `className`、`id` 属性。
+**说明**：样式与通用 DOM 属性接口，定义 `class`、`id` 属性。
 ```ts
 export interface StyleProps {
-	className?: string
+	class?: string
 	id?: string
 }
 ```

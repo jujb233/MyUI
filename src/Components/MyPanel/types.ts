@@ -1,4 +1,4 @@
-import type { JSX } from "solid-js";
+import type { JSX } from "solid-js"
 import type {
     ThemeProps,
     StyleProps,
@@ -8,7 +8,7 @@ import type {
     WithFooter,
     AnimationProps,
     InteractionPolicy,
-} from "../../Interfaces";
+} from "../../Interfaces"
 
 export interface IMyPanelProps extends
     ThemeProps,
@@ -18,11 +18,11 @@ export interface IMyPanelProps extends
     WithImage,
     WithFooter,
     AnimationProps {
-    children?: JSX.Element;
-    interaction?: InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal';
+    children?: JSX.Element
+    interaction?: InteractionPolicy | 'none' | 'basic' | 'rich' | 'minimal'
 }
 
 export interface IMyPanelContext extends Omit<IMyPanelProps, 'children'> {
     // Add any panel-specific context properties here if needed
-    backgroundImage?: string;
+    backgroundImage?: string
 }

@@ -12,7 +12,7 @@
 | `size`            | `'small' \| 'medium' \| 'large'`                         | ThemeProps       | 尺寸 |
 | `glass`           | `boolean`                                                | ThemeProps       | 玻璃态 |
 | `shadow`          | `ShadowName`                                             | ThemeProps       | 阴影等级 |
-| `className`       | `string`                                                 | StyleProps       | 自定义类名 |
+| `class`       | `string`                                                 | StyleProps       | 自定义类名 |
 | `id`              | `string`                                                 | StyleProps       | 元素 ID |
 | `disabled`        | `boolean`                                                | Disableable      | 是否禁用（可能影响内部交互） |
 | `title`           | `React.ReactNode`                                        | WithTitle        | 标题插槽（通常显示在头部） |

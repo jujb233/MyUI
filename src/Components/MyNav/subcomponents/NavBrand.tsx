@@ -1,7 +1,7 @@
 import { useMyNav } from "../../../Hooks"
 import { useNavContext } from "../MyNav"
 import { MyTitle } from "../../Parts"
-import type { Component, JSX } from "solid-js";
+import type { Component, JSX } from "solid-js"
 
 const NavBrand: Component<{ children?: JSX.Element }> = (props) => {
     const context = useNavContext()

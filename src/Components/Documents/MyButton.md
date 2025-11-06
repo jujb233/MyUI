@@ -12,7 +12,7 @@
 | `size`         | `'small' \| 'medium' \| 'large'`          | ThemeProps       | 尺寸 |
 | `glass`        | `boolean`                                 | ThemeProps       | 是否启用玻璃态 |
 | `shadow`       | `ShadowName`                              | ThemeProps       | 阴影等级 |
-| `className`    | `string`                                  | StyleProps       | 自定义 CSS 类名 |
+| `class`    | `string`                                  | StyleProps       | 自定义 CSS 类名 |
 | `id`           | `string`                                  | StyleProps       | 元素唯一 ID |
 | `disabled`     | `boolean`                                 | Disableable/Clickable | 是否禁用（两处接口均可提供该字段） |
 | `clickable`    | `boolean`                                 | Clickable        | 是否呈现可点击态（配合交互样式） |

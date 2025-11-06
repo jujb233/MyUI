@@ -1,2 +1,2 @@
-export { default as MyTitle } from './myTitle/myTitle'
+export { MyTitle } from './myTitle'
 

@@ -12,7 +12,7 @@
 | `size`            | `'small' \| 'medium' \| 'large'`                     | ThemeProps             | 尺寸 |
 | `glass`           | `boolean`                                            | ThemeProps             | 玻璃态 |
 | `shadow`          | `ShadowName`                                         | ThemeProps             | 阴影等级 |
-| `className`       | `string`                                             | StyleProps             | 自定义类名 |
+| `class`       | `string`                                             | StyleProps             | 自定义类名 |
 | `id`              | `string`                                             | StyleProps             | 元素 ID |
 | `bordered`        | `boolean`                                            | Borderable             | 是否显示边框 |
 | `direction`       | `'vertical' \| 'horizontal'`                         | OrientationProps       | 内容方向 |

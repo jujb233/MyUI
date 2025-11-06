@@ -6,18 +6,18 @@ export type UseCardLayoutProps = {
      * @description 卡片的布局方向
      * @default "vertical"
      */
-    direction?: "vertical" | "horizontal";
+    direction?: "vertical" | "horizontal"
     /**
      * @description 图片的位置
      * @default "top"
      */
-    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center";
+    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center"
     /**
      * @description 是否有图片
      * @default false
      */
-    hasImage?: boolean;
-};
+    hasImage?: boolean
+}
 
 /**
  * @description `MyCard` 组件的布局逻辑
@@ -29,8 +29,8 @@ export function useCardLayout(props: UseCardLayoutProps) {
         direction = "vertical",
         imagePosition = "top",
         hasImage = false,
-    } = props;
+    } = props
 
-    const isHorizontal = direction === "horizontal" && hasImage && imagePosition !== "top";
-    return { isHorizontal, imagePosition };
+    const isHorizontal = direction === "horizontal" && hasImage && imagePosition !== "top"
+    return { isHorizontal, imagePosition }
 }

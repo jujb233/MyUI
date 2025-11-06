@@ -1,19 +1,19 @@
-import { createContext, useContext, type Component, splitProps } from "solid-js";
-import type { IMyCardProps, IMyCardContext } from "./types";
-import { CardImage } from "./subcomponents/CardImage";
-import { useMyCard } from "../../Hooks";
-import type { UseMyCardProps } from "../../Hooks/Components/useMyCard";
+import { createContext, useContext, type Component, splitProps } from "solid-js"
+import type { IMyCardProps, IMyCardContext } from "./types"
+import { CardImage } from "./subcomponents/CardImage"
+import { useMyCard } from "../../Hooks"
+import type { UseMyCardProps } from "../../Hooks/Components/useMyCard"
 
-const MyCardContext = createContext<IMyCardContext | null>(null);
+const MyCardContext = createContext<IMyCardContext | null>(null)
 
 export const CardProvider: Component<IMyCardProps> = (props) => {
-    const [local, others] = splitProps(props, ["backgroundImage", "onClick", "children", "clickable"]);
+    const [local, others] = splitProps(props, ["backgroundImage", "onClick", "children", "clickable"])
 
     const {
         containerClasses,
         bodyClasses,
         ...rest
-    } = useMyCard({ ...others, hasImage: !!local.backgroundImage } as UseMyCardProps);
+    } = useMyCard({ ...others, hasImage: !!local.backgroundImage } as UseMyCardProps)
 
     const contextValue: IMyCardContext = {
         // 仅保留与上下文相关的其余属性，避免将 children 等无关字段放入 Context
@@ -30,7 +30,7 @@ export const CardProvider: Component<IMyCardProps> = (props) => {
         actionsClasses: rest.actionsClasses,
         tagsContainerClasses: rest.tagsContainerClasses,
         tagClasses: rest.tagClasses,
-    };
+    }
 
     return (
         <MyCardContext.Provider value={contextValue}>
@@ -46,11 +46,11 @@ export const CardProvider: Component<IMyCardProps> = (props) => {
                 </div>
             </div>
         </MyCardContext.Provider>
-    );
-};
+    )
+}
 
 export const useCardContext = () => {
-    const context = useContext(MyCardContext);
+    const context = useContext(MyCardContext)
     if (!context) {
         // 在没有 Provider 的情况下，返回一个安全的降级上下文，避免直接抛错导致整卡片渲染失败
         // 仅在开发环境提示一次
@@ -58,7 +58,7 @@ export const useCardContext = () => {
             // @ts-ignore
             if ((import.meta as any)?.env?.DEV) {
                 // eslint-disable-next-line no-console
-                console.warn("[MyUI] useCardContext() called outside of <MyCard> provider. Fallback styles will be used.");
+                console.warn("[MyUI] useCardContext() called outside of <MyCard> provider. Fallback styles will be used.")
             }
         } catch { /* no-op */ }
 
@@ -99,9 +99,9 @@ export const useCardContext = () => {
             tagsContainerClasses: '',
             tagClasses: '',
             animation: undefined,
-        } as unknown as IMyCardContext;
+        } as unknown as IMyCardContext
 
-        return fallback;
+        return fallback
     }
-    return context;
-};
+    return context
+}

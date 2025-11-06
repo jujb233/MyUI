@@ -1,4 +1,4 @@
-import { type Component, Show } from "solid-js";
+import { type Component, Show } from "solid-js"
 
 // 背景图子组件 props 类型
 type MyPanelBackgroundProps = {

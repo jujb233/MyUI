@@ -47,7 +47,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     // 背景图样式
     const backgroundClass = backgroundImage
         ? "pointer-events-none absolute inset-0 h-full w-full object-cover opacity-80 select-none"
-        : undefined;
+        : undefined
 
     const panelClasses = builder
         .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL)

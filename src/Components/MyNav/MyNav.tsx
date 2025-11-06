@@ -11,7 +11,7 @@ import { type Component, splitProps, Show } from "solid-js"
 export const [useNavContext, NavProvider] = createSubcomponentContext<IMyNavContext>('MyNav')
 
 const MyNav: Component<IMyNavProps> = (props) => {
-    const [local, others] = splitProps(props, ["children", "title", "menu", "options"]);
+    const [local, others] = splitProps(props, ["children", "title", "menu", "options"])
 
     const classes = useMyNav(others)
 

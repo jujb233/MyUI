@@ -1,5 +1,5 @@
-import type { JSX } from "solid-js";
-import type { ThemeProps, StyleProps, WithTitle, WithOptions, AnimationProps, InteractionPolicy } from "../../Interfaces";
+import type { JSX } from "solid-js"
+import type { ThemeProps, StyleProps, WithTitle, WithOptions, AnimationProps, InteractionPolicy } from "../../Interfaces"
 
 export interface IMyNavProps extends
     ThemeProps,
@@ -7,12 +7,12 @@ export interface IMyNavProps extends
     WithTitle,
     WithOptions,
     AnimationProps {
-    children?: JSX.Element;
-    menu?: JSX.Element;
+    children?: JSX.Element
+    menu?: JSX.Element
     /** 是否开启容器 hover/active 等交互效果 */
-    interactionEnabled?: boolean;
+    interactionEnabled?: boolean
     /** 交互策略或预设 key（如 'rich' | 'basic' | 'none'） */
-    interaction?: InteractionPolicy | string;
+    interaction?: InteractionPolicy | string
 }
 
 export interface IMyNavContext extends Omit<IMyNavProps, 'children'> {

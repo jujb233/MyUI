@@ -1,4 +1,4 @@
-import { type Component, splitProps } from "solid-js";
+import { type Component, splitProps } from "solid-js"
 import ButtonContent from "./subcomponents/ButtonContent"
 import ButtonIcon from "./subcomponents/ButtonIcon"
 import ButtonActions from "./subcomponents/ButtonActions"
@@ -17,7 +17,7 @@ const MyButton: Component<IMyButtonProps> = (props) => {
         "options",
         "disabled",
         "onClick"
-    ]);
+    ])
 
     // 通过 hook 计算最终 className 与子槽位类
     const { rootClass } = useMyButton(others)
@@ -35,7 +35,7 @@ const MyButton: Component<IMyButtonProps> = (props) => {
                     disabled={local.disabled}
                     onClick={(e) => {
                         
-                        local.onClick && local.onClick(e as MouseEvent);
+                        local.onClick && local.onClick(e as MouseEvent)
                     }}
                     class={rootClass}
                 >

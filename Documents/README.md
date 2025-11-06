@@ -14,10 +14,10 @@ npm install @jujb233/myui
 2) 使用
 
 ```tsx
-import { MyButton, MyCard } from '@jujb233/myui';
+import { MyButton, MyCard } from '@jujb233/myui'
 
 export function Example() {
-  return <MyButton variant={{ role: 'primary', color: 'blue' }}>Hello</MyButton>;
+  return <MyButton variant={{ role: 'primary', color: 'blue' }}>Hello</MyButton>
 }
 ```
 

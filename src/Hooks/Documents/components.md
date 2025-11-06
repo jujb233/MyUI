@@ -16,7 +16,7 @@ export type UseMyButtonProps = {
 	variant?: ComponentVariant
 	size?: SizeName
 	disabled?: boolean
-	className?: string
+	class?: string
 	glass?: boolean
 	shadow?: ShadowName
 	interaction?: InteractionPolicy | string
@@ -44,10 +44,10 @@ const { rootClass, slots } = useMyButton({
 })
 
 return (
-	<button className={rootClass} type="button">
-		<span className={slots.icon}>{/* icon */}</span>
-		<span className={slots.content}>提交</span>
-		<span className={slots.options}>{/* trailing */}</span>
+	<button class={rootClass} type="button">
+		<span class={slots.icon}>{/* icon */}</span>
+		<span class={slots.content}>提交</span>
+		<span class={slots.options}>{/* trailing */}</span>
 	</button>
 )
 ```
@@ -66,7 +66,7 @@ export type UseMyCardProps = {
 	size?: SizeName
 	glass?: boolean
 	clickable?: boolean
-	className?: string
+	class?: string
 	bordered?: boolean
 	shadow?: ShadowName
 	imagePosition?: 'top' | 'left' | 'right' | 'background' | 'bottom' | 'center'
@@ -105,13 +105,13 @@ export function useMyCard(props: UseMyCardProps): {
 ```tsx
 const card = useMyCard({ clickable: true, hover: true, hasImage: true, imagePosition: 'left' })
 return (
-	<div className={card.containerClasses}>
+	<div class={card.containerClasses}>
 		{/* 可选图片区域 */}
-		<img className={card.imageClasses} src="/cover.jpg" />
-		<div className={card.bodyClasses}>
-			<header className={card.headerClasses}><h3 className={card.titleClasses}>标题</h3></header>
-			<div className={card.contentClasses}>内容</div>
-			<footer className={card.footerClasses}><div className={card.actionsClasses}>{/* actions */}</div></footer>
+		<img class={card.imageClasses} src="/cover.jpg" />
+		<div class={card.bodyClasses}>
+			<header class={card.headerClasses}><h3 class={card.titleClasses}>标题</h3></header>
+			<div class={card.contentClasses}>内容</div>
+			<footer class={card.footerClasses}><div class={card.actionsClasses}>{/* actions */}</div></footer>
 		</div>
 	</div>
 )
@@ -131,7 +131,7 @@ export type UseMyNavOptions = {
 	size?: SizeName
 	glass?: boolean
 	shadow?: ShadowName
-	className?: string
+	class?: string
 	interactionEnabled?: boolean
 	focusRing?: boolean // 当前实现未使用，预留
 	interaction?: InteractionPolicy | string
@@ -156,12 +156,12 @@ export function useMyNav(options: UseMyNavOptions): {
 ```tsx
 const cls = useMyNav({ size: 'medium', interactionEnabled: true, interaction: 'basic' })
 return (
-	<nav className={cls.nav}>
-		<div className={cls.brand}>Brand</div>
-		<div className={cls.content}>
-			<div className={cls.menu}>{/* menu items */}</div>
+	<nav class={cls.nav}>
+		<div class={cls.brand}>Brand</div>
+		<div class={cls.content}>
+			<div class={cls.menu}>{/* menu items */}</div>
 		</div>
-		<div className={cls.actions}>{/* actions */}</div>
+		<div class={cls.actions}>{/* actions */}</div>
 	</nav>
 )
 ```
@@ -180,7 +180,7 @@ export type UseMyPanelProps = {
 	size?: SizeName
 	glass?: boolean
 	shadow?: ShadowName
-	className?: string
+	class?: string
 	disabled?: boolean
 	interaction?: InteractionPolicy | string
 	animation?: AnimationProp
@@ -200,12 +200,12 @@ export function useMyPanel(
 ```tsx
 const cls = useMyPanel({ backgroundImage: '/bg.jpg', size: 'large' })
 return (
-	<section className={cls.panel}>
+	<section class={cls.panel}>
 		{/* 背景层： */}
-		<img src="/bg.jpg" className={cls.background} aria-hidden />
-		<header className={cls.header}>标题</header>
-		<div className={cls.content}>内容</div>
-		<footer className={cls.footer}>页脚</footer>
+		<img src="/bg.jpg" class={cls.background} aria-hidden />
+		<header class={cls.header}>标题</header>
+		<div class={cls.content}>内容</div>
+		<footer class={cls.footer}>页脚</footer>
 	</section>
 )
 ```
