@@ -7,9 +7,6 @@ body,
     height: 100%;
 }
 
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
-
 @layer base {
     :root {
         /* Example of defining CSS variables for border radius, can be used in tailwind.config.js */

@@ -1,6 +1,6 @@
 // src/styles/config/tailwind.ts
 
-import { baseColors, spacing, fontSizes, fontWeights, borderRadius, shadows } from './base';
+import { baseColors, spacing, fontSizes, fontWeights, borderRadius, shadows, glassShadows } from './base';
 
 /**
  * @description Configuration for Tailwind CSS.
@@ -11,9 +11,7 @@ import { baseColors, spacing, fontSizes, fontWeights, borderRadius, shadows } fr
 export const tailwindConfig = {
     theme: {
         extend: {
-            colors: {
-                ...baseColors,
-            },
+            // Avoid overriding Tailwind's default color palette to keep classes like bg-emerald-400 working
             spacing: {
                 ...spacing,
             },
@@ -42,21 +40,29 @@ export const tailwindConfig = {
         },
     },
     plugins: [
-        // Example of a custom plugin
-        function ({ addBase, theme }: any) {
-            addBase({
-                ':root': {
-                    '--primary-color': theme('colors.primary'),
-                    '--background-color': theme('colors.background'),
-                    '--text-color': theme('colors.text'),
-                },
-                // Example for dark mode
-                '.dark': {
-                    '--primary-color': theme('colors.primary'),
-                    '--background-color': theme('colors.dark'),
-                    '--text-color': theme('colors.light'),
+        // Utilities for MyUI theme color classes and glass elevation
+        function ({ addUtilities }: any) {
+            const colorUtilities: Record<string, any> = {};
+            for (const [name, val] of Object.entries(baseColors)) {
+                if (typeof val === 'object' && 'from' in val && 'to' in val) {
+                    colorUtilities[`.myui-color-${name}`] = {
+                        '--from': (val as any).from,
+                        '--to': (val as any).to,
+                    };
                 }
+            }
+            const glassUtilities = {
+                '.myui-glass-md': {
+                    boxShadow: glassShadows.md,
+                },
+                '.myui-glass-lg': {
+                    boxShadow: glassShadows.lg,
+                },
+            } as const;
+            addUtilities({
+                ...colorUtilities,
+                ...glassUtilities,
             });
-        }
+        },
     ],
 };

@@ -46,15 +46,8 @@ export function ensureThemeClass(colorOrPreset: string, intensity: string) {
     const key = `${colorOrPreset}|${intensity}`
     if (injected.has(key)) return injected.get(key) as string
 
-    // 仅对 hex 进行动态注入；如果是预设名称，调用方应使用预设 class
-    if (!/^#([0-9a-fA-F]{6}|[0-9a-fA-F]{3})$/.test(colorOrPreset)) {
-        // fallback: return the class that would have been used
-        const cls = `${THEME_CLASS_PREFIX.color}${colorOrPreset}`
-        injected.set(key, cls)
-        return cls
-    }
-
-    const theme = resolveTheme({ color: colorOrPreset, intensity: intensity as any })
+    // 对预设名或十六进制统一走动态注入，确保在 Tailwind 插件未生效时依然可用
+    const theme = resolveTheme({ color: colorOrPreset as any, intensity: intensity as any })
     const seed = `${colorOrPreset}:${intensity}:${JSON.stringify(theme)}`
     const h = hashString(seed)
     const cls = `${THEME_CLASS_PREFIX.color}h_${h}`
@@ -65,9 +58,13 @@ export function ensureThemeClass(colorOrPreset: string, intensity: string) {
     const el = ensureStyleEl()
     if (el) {
         el.appendChild(document.createTextNode('\n' + rule))
+        // eslint-disable-next-line no-console
+        console.log(`[ensureThemeClass] Injected CSS rule: ${rule}`)
     }
 
     injected.set(key, cls)
+    // eslint-disable-next-line no-console
+    console.log(`[ensureThemeClass] Generated dynamic class: ${cls}`)
     return cls
 }
 

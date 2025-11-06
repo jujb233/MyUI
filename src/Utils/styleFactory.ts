@@ -3,38 +3,18 @@ import { sizeConfig } from "../styles/config/base";
 import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core/types";
 import type { AnimationProp } from "../styles/config/animation";
 import type { InteractionPolicy } from "../Interfaces/behavior/interaction";
-import { isHexColor } from './colorUtils';
+// isHexColor no longer needed since ensureThemeClass handles both hex and preset names
 import { ensureThemeClass } from './dynamicThemeManager';
-
-// Mappings from semantic names to Tailwind classes
-const SHADOW_CLASS_MAP: Record<ShadowName, string> = {
-    xs: 'shadow-xs',
-    sm: 'shadow-sm',
-    md: 'shadow-md',
-    lg: 'shadow-lg',
-    xl: 'shadow-xl',
-    '2xl': 'shadow-2xl',
-    inner: 'shadow-inner',
-    none: 'shadow-none',
-};
-
-const BACKGROUND_CLASSES = {
-    glass: "bg-white/30 backdrop-blur-lg",
-    traditional: "bg-gradient-to-br",
-};
-
-const TEXT_CLASS = "text-white";
-const GLASS_BACKDROP_CLASS = "backdrop-filter";
-const GLASS_ELEVATION = "shadow-glass-md";
-const THEME_CLASS_PREFIX = {
-    color: "theme-color-",
-    variant: "theme-variant-",
-};
-const COMMON_CLASSES = {
-    DISABLED_STATE: "opacity-50 cursor-not-allowed",
-    RELATIVE_OVERFLOW_HIDDEN: "relative overflow-hidden",
-    ROUNDED_XL: "rounded-xl",
-};
+// Use shared class name contracts to keep CSS/JS in sync
+import {
+    SHADOW_CLASS_MAP,
+    BACKGROUND_CLASSES,
+    TEXT_CLASS,
+    GLASS_BACKDROP_CLASS,
+    GLASS_ELEVATION,
+    THEME_CLASS_PREFIX,
+    COMMON_CLASSES,
+} from "../Options/Configs/classConfig";
 
 const VARIANT_ROLE_STYLES: Record<VariantRole, 'solid' | 'soft' | 'subtle' | 'text'> = {
     primary: 'solid',
@@ -78,16 +58,18 @@ export function createBaseStyle(options: {
     const color = variant?.color || 'blue';
     const intensity = VARIANT_ROLE_STYLES[role];
 
-    const themeColorClass = isHexColor(String(color))
-        ? ensureThemeClass(String(color), intensity)
-        : `${THEME_CLASS_PREFIX.color}${color}`;
+    // 始终通过 ensureThemeClass 注入/获取主题类，避免依赖构建期插件
+    const themeColorClass = ensureThemeClass(String(color), intensity);
     const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`;
     const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md);
 
     const builder = styleBuilder.builder()
         .add(themeColorClass, themeVariantClass)
         .add(TEXT_CLASS)
+        // Keep legacy background utility classes for compatibility
         .add(glass, BACKGROUND_CLASSES.glass, BACKGROUND_CLASSES.traditional)
+        // Add a semantic flag class for CSS to switch between glass/traditional backgrounds
+        .add(glass, 'myui-glass')
         .add(glass, GLASS_BACKDROP_CLASS)
         .add(elevationClass)
         .add(!!disabled, COMMON_CLASSES.DISABLED_STATE)

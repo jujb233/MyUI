@@ -28,6 +28,7 @@ export const baseColors = {
     white: { from: '#ffffff', to: '#f8fafc' },
     grayLight: { from: '#f8fafc', to: '#e2e8f0' },
     transparent: 'transparent',
+    yellow: { from: '#facc15', to: '#eab308' }, // 新增黄色
 };
 
 // Example Spacing Units
