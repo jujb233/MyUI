@@ -10,7 +10,7 @@ import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
 import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles } from "../../Utils/sizeStyles"
 import { defaultValues } from "../../Options/Configs/default"
-import type { OrientationProps, WithImage } from "../../Interfaces"
+import { mergeDefaults } from "../../Utils/defaultResolver";
 
 export interface UseMyCardProps extends PositionProps {
     variant?: ComponentVariant | undefined
@@ -29,21 +29,25 @@ export interface UseMyCardProps extends PositionProps {
 }
 
 export function useMyCard(props: UseMyCardProps) {
+    const mergedProps = mergeDefaults(defaultValues.UseMyCardProps as any, props) as UseMyCardProps;
+
     const {
         variant: variantProp,
-        size = defaultValues.SizeProps.size as SizeName,
-        glass = defaultValues.ThemeProps.glass,
-        clickable = defaultValues.Clickable.clickable,
-        className = defaultValues.StyleProps.class,
-        bordered = defaultValues.Borderable.bordered,
-        shadow = defaultValues.ThemeProps.shadow as ShadowName,
-        imagePosition = defaultValues.WithImage.imagePosition as WithImage["imagePosition"],
-        direction = defaultValues.OrientationProps.direction as OrientationProps["direction"],
-        hover = defaultValues.InteractionBehavior.hover,
-        hasImage = false,
-        disabled = defaultValues.Disableable.disabled,
+        size,
+        glass,
+        clickable,
+        className,
+        bordered,
+        shadow,
+        imagePosition,
+        direction,
+        hover,
+        hasImage,
+        disabled,
         animation,
-    } = props
+        top,
+        left,
+    } = mergedProps as any;
 
     const role = variantProp?.role || "primary"
     const color = variantProp?.color || "blue"
@@ -80,8 +84,8 @@ export function useMyCard(props: UseMyCardProps) {
     )
 
     const containerStyle: JSX.CSSProperties | undefined = {
-        ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
-        ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+        ...(top !== undefined ? { top: `${Math.max(0, top)}rem` } : {}),
+        ...(left !== undefined ? { left: `${Math.max(0, left)}rem` } : {}),
     }
 
     // 将动态尺寸/间距类移至 style，保留结构类
@@ -97,7 +101,7 @@ export function useMyCard(props: UseMyCardProps) {
 
     // Safely access `SLOTS_STYLE.image` with a fallback
     const slots = {
-        image: imagePosition ? clsx(SLOTS_STYLE.image[imagePosition]) : undefined,
+        image: imagePosition ? clsx(SLOTS_STYLE.image[imagePosition as keyof typeof SLOTS_STYLE.image]) : '',
         header: clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header),
         title: clsx(SLOTS_STYLE.title),
         content: clsx(SLOTS_STYLE.textMuted, isHorizontal && "flex-1 min-w-0"),

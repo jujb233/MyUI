@@ -165,4 +165,40 @@ export const defaultValues = {
     AnimationProps: {
         animation: undefined,
     },
+    /**
+     * @description `UseMyButtonProps` 的默认属性。
+     */
+    UseMyButtonProps: {
+        htmlType: 'button',
+        variant: undefined,
+        size: 'medium',
+        disabled: false,
+        className: '',
+        glass: true,
+        shadow: 'none',
+        interaction: undefined,
+        animation: undefined,
+        top: 0,
+        left: 0,
+    },
+    /**
+     * @description `UseMyCardProps` 的默认属性。
+     */
+    UseMyCardProps: {
+        variant: undefined,
+        size: 'medium',
+        glass: true,
+        clickable: false,
+        className: '',
+        bordered: false,
+        shadow: 'none',
+        imagePosition: 'center',
+        direction: 'vertical',
+        hover: false,
+        hasImage: false,
+        disabled: false,
+        animation: undefined,
+        top: 0,
+        left: 0,
+    },
 };
