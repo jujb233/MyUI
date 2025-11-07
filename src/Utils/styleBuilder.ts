@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { animationMap, easingValueMap } from '../styles/config/animation';
 import type { AnimationProp, AnimationConfig } from '../styles/config/animation';
-import type { InteractionPolicy } from '../Interfaces/behavior/interaction';
+import type { InteractionPolicy } from '../Interfaces/interaction';
 import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../styles/config/interaction';
 import { INTERACTION_PRESETS } from '../styles/config/interaction';
 

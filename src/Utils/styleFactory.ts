@@ -1,8 +1,8 @@
 import styleBuilder from "./styleBuilder";
 import { sizeConfig } from "../styles/config/base";
-import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core/types";
+import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core";
 import type { AnimationProp } from "../styles/config/animation";
-import type { InteractionPolicy } from "../Interfaces/behavior/interaction";
+import type { InteractionPolicy } from "../Interfaces/interaction";
 // isHexColor no longer needed since ensureThemeClass handles both hex and preset names
 import { ensureThemeClass } from './dynamicThemeManager';
 // Use shared class name contracts to keep CSS/JS in sync
@@ -27,7 +27,7 @@ const VARIANT_ROLE_STYLES: Record<VariantRole, 'solid' | 'soft' | 'subtle' | 'te
 
 interface CreateBaseStyleResult {
     builder: ReturnType<typeof styleBuilder.builder>;
-    sizeConfig: typeof sizeConfig[SizeName];
+    sizeConfig: (typeof sizeConfig)[SizeName];
     themeColorClass: string;
     themeVariantClass: string;
     elevationClass: string;
@@ -45,7 +45,7 @@ export function createBaseStyle(options: {
 }): CreateBaseStyleResult {
     const {
         variant,
-        size = 'medium',
+        size,
         glass = false,
         shadow = 'none',
         className = '',
@@ -54,14 +54,15 @@ export function createBaseStyle(options: {
         interaction,
     } = options;
 
-    const role = variant?.role || 'primary';
-    const color = variant?.color || 'blue';
+    const role: VariantRole = variant?.role ?? 'primary';
+    const color = variant?.color ?? 'blue';
+    const sizeName: SizeName = size ?? 'medium';
     const intensity = VARIANT_ROLE_STYLES[role];
 
     // 始终通过 ensureThemeClass 注入/获取主题类，避免依赖构建期插件
     const themeColorClass = ensureThemeClass(String(color), intensity);
     const themeVariantClass = `${THEME_CLASS_PREFIX.variant}${intensity}`;
-    const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] || SHADOW_CLASS_MAP.md);
+    const elevationClass = glass ? GLASS_ELEVATION : (SHADOW_CLASS_MAP[shadow] ?? SHADOW_CLASS_MAP.md);
 
     const builder = styleBuilder.builder()
         .add(themeColorClass, themeVariantClass)
@@ -79,7 +80,7 @@ export function createBaseStyle(options: {
 
     return {
         builder,
-        sizeConfig: sizeConfig[size],
+        sizeConfig: sizeConfig[sizeName],
         themeColorClass,
         themeVariantClass,
         elevationClass,

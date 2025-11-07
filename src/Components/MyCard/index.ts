@@ -5,10 +5,8 @@ import { CardFooter } from "./subcomponents/CardFooter"
 import { CardHeader } from "./subcomponents/CardHeader"
 import { CardImage } from "./subcomponents/CardImage"
 import { CardTags } from "./subcomponents/CardTags"
-import type { ICompoundComponent } from "../../Interfaces"
-import type { IMyCardProps } from "./types"
 
-type MyCardComponent = ICompoundComponent<IMyCardProps> & {
+type MyCardComponent = {
     Actions: typeof CardActions
     Content: typeof CardContent
     Footer: typeof CardFooter
@@ -17,7 +15,7 @@ type MyCardComponent = ICompoundComponent<IMyCardProps> & {
     Tags: typeof CardTags
 }
 
-const MyCard = MyCardRoot as MyCardComponent
+const MyCard = MyCardRoot as unknown as MyCardComponent
 
 MyCard.Actions = CardActions
 MyCard.Content = CardContent

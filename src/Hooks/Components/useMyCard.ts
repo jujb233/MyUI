@@ -1,11 +1,11 @@
-import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core/types";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core";
 import styleBuilder from "../../Utils/styleBuilder";
 import { useCardLayout } from "../../Hooks/useCardLayout";
 import type { AnimationProp } from "../../styles/config/animation";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import clsx from "clsx";
 import type { PositionProps } from "../../Interfaces";
-import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
+import type { InteractionPolicy } from "../../Interfaces/interaction";
 import type { JSX } from "solid-js";
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";

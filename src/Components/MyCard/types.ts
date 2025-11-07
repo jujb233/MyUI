@@ -8,15 +8,11 @@ import type {
     WithFooter,
     WithImage,
     WithTitle,
-    InteractionBehavior,
     PositionProps,
     Clickable,
 } from "../../Interfaces"
-// 使用 layout 下的 Clickable（泛型），以获得正确的 onClick 事件签名
 import type { Focusable as ContainerClickable } from "../../Interfaces/layout"
 
-// IMyCardProps combines all the necessary props interfaces.
-// The duplicate Clickable has been removed to fix the type conflict.
 export interface IMyCardProps extends
     ThemeProps,
     StyleProps,
@@ -26,14 +22,12 @@ export interface IMyCardProps extends
     Clickable,
     PositionProps,
     AnimationProps,
-    InteractionBehavior,
     WithFooter,
     WithImage,
     WithTitle {
     children?: JSX.Element
 }
 
-// IMyCardContext defines the shape of the context object for the MyCard component.
 export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
     isHorizontal: boolean
     imagePosition: "top" | "left" | "right" | "background" | "bottom" | "center"
@@ -44,7 +38,6 @@ export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
         borderRadius: string
         minHeight: string
     }
-    // sub-component classes
     slots: {
         image: string;
         header: string;

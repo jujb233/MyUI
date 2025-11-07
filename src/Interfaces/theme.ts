@@ -1,9 +1,5 @@
-/**
- * Theme - theme 类型
- * 简要：定义主题对象结构、主题解析器（resolver）所需类型与变体配置接口。
- */
-
-import type { ComponentVariant, SizeName, ShadowName } from '../../Interfaces/core/types'
+import type { ComponentVariant, SizeName, ShadowName } from './core'
+import type { AnimationProp } from '../Options'
 
 /** 主题与尺寸（所有主题相关组件可选实现） */
 export interface ThemeProps {
@@ -25,4 +21,20 @@ export interface ThemeContextValue {
     shadow: ShadowName
     disabled?: boolean
     // ...component-specific
+}
+
+/**
+ * 为组件提供动画能力的接口。
+ */
+export interface AnimationProps {
+    /**
+     * 控制组件的动画效果。
+     *
+     * - **字符串形式**: 直接指定一个预设的动画名称。
+     *   @example `animation="fade"`
+     *
+     * - **对象形式**: 提供更详细的动画配置，如持续时间、延迟等。
+     *   @example `animation={{ type: 'slide-up', duration: 500, delay: 100 }}`
+     */
+    animation?: AnimationProp
 }

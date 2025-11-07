@@ -2,7 +2,7 @@
  * 定义组件可用的具体颜色。
  */
 // 统一类型定义，使用 src/types.ts 的 ComponentVariant
-import type { VariantRole } from '../../Interfaces/core/types'
+import type { VariantRole } from '../../Interfaces/core'
 
 /**
  * 变体角色到样式的映射。

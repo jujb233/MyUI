@@ -1,6 +1,6 @@
-import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
+import type { InteractionPolicy } from "../../Interfaces/interaction";
 import type { PositionProps } from "../../Interfaces";
-import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core/types";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core";
 import type { AnimationProp } from "../../styles/config/animation";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import type { JSX } from "solid-js";

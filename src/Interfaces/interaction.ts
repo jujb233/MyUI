@@ -1,3 +1,5 @@
+import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../styles/config/interaction';
+
 export type InteractionType = 'hover' | 'focus' | 'active' | 'disabled'
 
 /**
@@ -84,8 +86,6 @@ export interface InteractionConfig {
 /**
  * InteractionPolicy 定义合并，移除重复定义。
  */
-import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../../styles/config/interaction';
-
 export interface InteractionPolicy {
     /** 总开关 */
     enabled?: boolean
@@ -115,4 +115,3 @@ export interface Clickable {
     onClick?: (event: MouseEvent) => void
     disabled?: boolean
 }
-

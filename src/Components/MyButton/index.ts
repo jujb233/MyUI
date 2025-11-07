@@ -2,16 +2,14 @@ import MyButtonRoot from "./MyButton"
 import ButtonActions from "./subcomponents/ButtonActions"
 import ButtonContent from "./subcomponents/ButtonContent"
 import ButtonIcon from "./subcomponents/ButtonIcon"
-import type { ICompoundComponent } from "../../Interfaces"
-import type { IMyButtonProps } from "./types"
 
-type MyButtonComponent = ICompoundComponent<IMyButtonProps> & {
+type MyButtonComponent = {
     Actions: typeof ButtonActions
     Content: typeof ButtonContent
     Icon: typeof ButtonIcon
 }
 
-const MyButton = MyButtonRoot as MyButtonComponent
+const MyButton = MyButtonRoot as unknown as MyButtonComponent
 
 MyButton.Actions = ButtonActions
 MyButton.Content = ButtonContent

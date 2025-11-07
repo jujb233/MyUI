@@ -1,5 +1,10 @@
 import type { JSX } from 'solid-js'
 
+/** 按钮专有：htmlType */
+export interface HtmlButtonType {
+    buttonType?: 'button' | 'submit' | 'reset'
+}
+
 /** 常用插槽：前置图标 */
 export interface WithIcon {
     icon?: JSX.Element
