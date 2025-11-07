@@ -1,5 +1,4 @@
 export * from './colorUtils'
-export * from './componentTheme'
 export * from './styleBuilder'
 export { default as ErrorBoundary } from './ErrorBoundary'
 export * from './dynamicThemeManager'

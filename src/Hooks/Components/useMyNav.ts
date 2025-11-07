@@ -4,10 +4,8 @@ import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
 import type { JSX } from "solid-js";
 import { INTERACTION_PRESETS } from "../../styles/config/interaction";
 import { createBaseStyle } from "../../Utils/styleFactory";
-
-const COMMON_CLASSES = {
-    FLEX_CENTER: "flex items-center justify-center",
-};
+import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
+import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 
 export interface UseMyNavOptions {
     variant?: ComponentVariant | undefined;
@@ -39,7 +37,7 @@ export function useMyNav(options: UseMyNavOptions) {
     const role = variant?.role || 'primary';
     const color = variant?.color || 'blue';
 
-    const { builder } = createBaseStyle({
+    const { builder, sizeConfig } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
@@ -54,15 +52,16 @@ export function useMyNav(options: UseMyNavOptions) {
     });
 
     const navClasses = builder
-        .add(COMMON_CLASSES.FLEX_CENTER, 'px-4')
-        .add(`my-nav-${size}`)
+        .add(COMMON_CLASSES.FLEX_CENTER_JUSTIFY)
+        .add(sizeConfig.padding)
+        .add(`${SLOTS_STYLE.navRootSizePrefix}${size}`)
         .build();
 
     return {
         nav: navClasses,
-        brand: "flex-shrink-0",
-        content: "flex-1",
-        menu: "flex items-center space-x-4",
-        actions: "ml-auto flex items-center",
+        brand: SLOTS_STYLE.brand,
+        content: SLOTS_STYLE.content,
+        menu: SLOTS_STYLE.menu,
+        actions: SLOTS_STYLE.navActions,
     };
 }

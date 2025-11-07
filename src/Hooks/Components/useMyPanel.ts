@@ -1,7 +1,8 @@
 import { type ComponentVariant, type SizeName, type ShadowName } from "../../Interfaces/core/types"
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction"
 import type { AnimationProp } from "../../styles/config/animation"
-import { COMMON_CLASSES } from "../../Options/Configs"
+import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
+import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
 import { createBaseStyle } from "../../Utils/styleFactory"
 import type { PositionProps } from "../../Interfaces"
 import type { JSX } from "solid-js"
@@ -69,9 +70,10 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         panel: panelClasses,
         panelStyle,
         background: backgroundClass,
-        header: "text-2xl font-bold mb-4",
-        content: "flex-1",
-        footer: "mt-4",
+        // 使用集中配置 + sizeConfig 的语义尺寸
+        header: `${SLOTS_STYLE.header} ${SLOTS_STYLE.panelHeaderExtra} ${sizeConfig.titleSize}`.trim(),
+        content: `${SLOTS_STYLE.content} ${sizeConfig.contentSize}`.trim(),
+        footer: SLOTS_STYLE.panelFooter,
     }
 }
 

@@ -4,15 +4,8 @@ import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/co
 import type { AnimationProp } from "../../styles/config/animation";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import type { JSX } from "solid-js";
-
-const COMMON_CLASSES = {
-    RELATIVE_OVERFLOW_HIDDEN: "relative overflow-hidden",
-    ROUNDED_XL: "rounded-xl",
-};
-
-const TRANSITION_CLASSES = {
-    DEFAULT: "transition-all duration-200 ease-in-out",
-};
+import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs/classConfig";
+import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 
 /**
  * 输入 props 类型说明
@@ -92,11 +85,11 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         )
         .build();
 
-    // 槽位（子组件）样式：与原有硬编码保持一致，但集中由此 Hook 产出
+    // 槽位（子组件）样式来自集中配置
     const slotClasses = {
-        icon: "mr-2 flex items-center",
-        content: "flex-1 truncate",
-        options: "ml-2 flex items-center",
+        icon: SLOTS_STYLE.buttonIcon,
+        content: SLOTS_STYLE.buttonContent,
+        options: SLOTS_STYLE.buttonOptions,
     };
 
     // 位置样式（单位 rem）

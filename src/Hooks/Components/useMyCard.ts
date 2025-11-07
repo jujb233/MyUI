@@ -7,13 +7,8 @@ import clsx from "clsx";
 import type { PositionProps } from "../../Interfaces";
 import type { InteractionPolicy } from "../../Interfaces/behavior/interaction";
 import type { JSX } from "solid-js";
-
-const COMMON_CLASSES = {
-    RELATIVE_OVERFLOW_HIDDEN: "relative overflow-hidden",
-    ROUNDED_2XL: "rounded-2xl",
-    CURSOR_POINTER: "cursor-pointer",
-    BORDER: "border",
-};
+import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
+import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 
 // 类型声明移到顶部
 export interface UseMyCardProps extends PositionProps {
@@ -108,21 +103,21 @@ export function useMyCard(props: UseMyCardProps) {
         sizeConfig.borderRadius
     );
 
-    const headerClasses = "card-header flex items-center";
-    const titleClasses = clsx('font-bold text-[var(--text)]', sizeConfig.titleSize);
+    const headerClasses = clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header);
+    const titleClasses = clsx(SLOTS_STYLE.title, sizeConfig.titleSize);
     const contentClasses = clsx(
-        'text-[var(--text)]/85',
+        SLOTS_STYLE.textMuted,
         sizeConfig.contentSize,
         isHorizontal ? 'flex-1 min-w-0' : ''
     );
     const footerClasses = clsx(
-        "card-footer mt-auto",
+        SLOTS_STYLE.cardFooterBase,
         sizeConfig.borderRadius.replace('rounded-', 'rounded-b-'),
         isHorizontal ? 'w-full' : ''
     );
-    const actionsClasses = "flex gap-2 mt-4";
-    const tagsContainerClasses = "flex flex-wrap gap-2 mb-3";
-    const tagClasses = "px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded-full";
+    const actionsClasses = SLOTS_STYLE.actions;
+    const tagsContainerClasses = SLOTS_STYLE.tagsContainer;
+    const tagClasses = SLOTS_STYLE.tag;
 
 
     // 返回对组件渲染有用的值与别名（移除 style 相关）
