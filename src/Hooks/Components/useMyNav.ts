@@ -37,7 +37,7 @@ export function useMyNav(options: UseMyNavOptions) {
     const role = variant?.role || 'primary';
     const color = variant?.color || 'blue';
 
-    const { builder, sizeConfig } = createBaseStyle({
+    const { builder } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
@@ -53,12 +53,26 @@ export function useMyNav(options: UseMyNavOptions) {
 
     const navClasses = builder
         .add(COMMON_CLASSES.FLEX_CENTER_JUSTIFY)
-        .add(sizeConfig.padding)
+        // 尺寸 padding 改为内联 style，避免动态类
         .add(`${SLOTS_STYLE.navRootSizePrefix}${size}`)
         .build();
 
+    // 将 padding 移到 style
+    const paddingMap: Record<NonNullable<typeof size>, { px: string; py: string }> = {
+        small: { px: '0.75rem', py: '0.25rem' },
+        medium: { px: '1rem', py: '0.5rem' },
+        large: { px: '1.5rem', py: '0.75rem' },
+    } as const;
+    const navStyle = {
+        'padding-left': paddingMap[size].px,
+        'padding-right': paddingMap[size].px,
+        'padding-top': paddingMap[size].py,
+        'padding-bottom': paddingMap[size].py,
+    } as const;
+
     return {
         nav: navClasses,
+        navStyle,
         brand: SLOTS_STYLE.brand,
         content: SLOTS_STYLE.content,
         menu: SLOTS_STYLE.menu,

@@ -62,7 +62,7 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
     } = props;
 
     // 使用共享工厂创建基础 builder
-    const { builder, sizeConfig } = createBaseStyle({
+    const { builder } = createBaseStyle({
         variant: variant ?? { role: 'primary', color: 'blue' },
         size,
         glass,
@@ -73,9 +73,8 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         interaction,
     });
 
-    // 在基础 builder 上补充按钮特有的类
+    // 在基础 builder 上补充按钮特有的类（将尺寸相关从 class 转为 style）
     const buttonClasses = builder
-        .add(sizeConfig.padding, sizeConfig.fontSize, sizeConfig.minWidth)
         .add(
             "inline-flex items-center justify-center select-none",
             COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN,
@@ -92,19 +91,37 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         options: SLOTS_STYLE.buttonOptions,
     };
 
-    // 位置样式（单位 rem）
-    const rootStyle: JSX.CSSProperties | undefined =
-        props.top !== undefined || props.left !== undefined
-            ? {
-                ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
-                ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
-            }
-            : undefined;
+    // 尺寸映射：将动态 class 转为内联 style，避免 JIT 类爆炸
+    const sizePaddingMap: Record<NonNullable<typeof size>, { px: string; py: string }> = {
+        small: { px: '0.75rem', py: '0.25rem' }, // px-3 py-1
+        medium: { px: '1rem', py: '0.5rem' },    // px-4 py-2
+        large: { px: '1.5rem', py: '0.75rem' },  // px-6 py-3
+    } as const;
+    const sizeFontMap: Record<NonNullable<typeof size>, string> = {
+        small: '0.875rem',  // text-sm
+        medium: '1rem',     // text-base
+        large: '1.125rem',  // text-lg
+    } as const;
+    const sizeMinWidthMap: Record<NonNullable<typeof size>, string> = {
+        small: '4rem',  // min-w-16
+        medium: '5rem', // min-w-20
+        large: '6rem',  // min-w-24
+    } as const;
+
+    const rootStyle: JSX.CSSProperties = {
+        // 位置样式（单位 rem）
+        ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
+        ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+        // 尺寸相关（动态类替换为内联样式）
+        'padding-left': sizePaddingMap[size].px,
+        'padding-right': sizePaddingMap[size].px,
+        'padding-top': sizePaddingMap[size].py,
+        'padding-bottom': sizePaddingMap[size].py,
+        'font-size': sizeFontMap[size],
+        'min-width': sizeMinWidthMap[size],
+    };
 
     const result: UseMyButtonResult = { rootClass: buttonClasses, slots: slotClasses };
-    if (rootStyle) {
-        // 仅在存在位置样式时才添加该属性，避免 exactOptionalPropertyTypes 下的 undefined 赋值
-        (result as any).rootStyle = rootStyle;
-    }
+    (result as any).rootStyle = rootStyle;
     return result;
 }
