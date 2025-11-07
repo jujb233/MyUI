@@ -93,32 +93,31 @@ export function useMyCard(props: UseMyCardProps) {
         .add(imagePosition === 'background', 'relative z-10')
         .build();
 
-    // Sub-component classes
-    const imageClasses = clsx(
-        "object-cover",
-        imagePosition === "top" && "w-full h-48",
-        imagePosition === "left" && "w-32 h-full",
-        imagePosition === "right" && "w-32 h-full",
-        imagePosition === "background" && "absolute inset-0 h-full w-full object-cover opacity-10",
-        sizeConfig.borderRadius
-    );
-
-    const headerClasses = clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header);
-    const titleClasses = clsx(SLOTS_STYLE.title, sizeConfig.titleSize);
-    const contentClasses = clsx(
-        SLOTS_STYLE.textMuted,
-        sizeConfig.contentSize,
-        isHorizontal ? 'flex-1 min-w-0' : ''
-    );
-    const footerClasses = clsx(
-        SLOTS_STYLE.cardFooterBase,
-        sizeConfig.borderRadius.replace('rounded-', 'rounded-b-'),
-        isHorizontal ? 'w-full' : ''
-    );
-    const actionsClasses = SLOTS_STYLE.actions;
-    const tagsContainerClasses = SLOTS_STYLE.tagsContainer;
-    const tagClasses = SLOTS_STYLE.tag;
-
+    const slots = {
+        image: clsx(
+            "object-cover",
+            imagePosition === "top" && "w-full h-48",
+            imagePosition === "left" && "w-32 h-full",
+            imagePosition === "right" && "w-32 h-full",
+            imagePosition === "background" && "absolute inset-0 h-full w-full object-cover opacity-10",
+            sizeConfig.borderRadius
+        ),
+        header: clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header),
+        title: clsx(SLOTS_STYLE.title, sizeConfig.titleSize),
+        content: clsx(
+            SLOTS_STYLE.textMuted,
+            sizeConfig.contentSize,
+            isHorizontal ? 'flex-1 min-w-0' : ''
+        ),
+        footer: clsx(
+            SLOTS_STYLE.cardFooterBase,
+            sizeConfig.borderRadius.replace('rounded-', 'rounded-b-'),
+            isHorizontal ? 'w-full' : ''
+        ),
+        actions: SLOTS_STYLE.actions,
+        tagsContainer: SLOTS_STYLE.tagsContainer,
+        tag: SLOTS_STYLE.tag,
+    };
 
     // 返回对组件渲染有用的值与别名（移除 style 相关）
     return {
@@ -129,14 +128,6 @@ export function useMyCard(props: UseMyCardProps) {
         bodyClasses,
         isHorizontal,
         imagePosition,
-        // sub-component classes
-        imageClasses,
-        headerClasses,
-        titleClasses,
-        contentClasses,
-        footerClasses,
-        actionsClasses,
-        tagsContainerClasses,
-        tagClasses,
+        slots,
     };
 }

@@ -28,4 +28,9 @@ export interface IMyButtonProps extends
 
 export interface IMyButtonContext extends Omit<IMyButtonProps, 'children' | 'onClick'> {
     // Add any button-specific context properties here if needed in the future
+    slots: {
+        icon: string;
+        content: string;
+        options: string;
+    };
 }

@@ -13,18 +13,18 @@ import {
 import { isServer, Dynamic } from 'solid-js/web'
 
 // 一个小型的本地 context，方便消费者访问最近的边界状态
-export type ErrorBoundaryContextType = {
+export type ErrorCheckContextType = {
     // 读取最近边界实例当前错误的 getter
     error: () => Error | null
     reset: () => void
     throw: (error: unknown) => void
 }
 
-const ErrorBoundaryContext = createContext<ErrorBoundaryContextType | null>(null)
+const ErrorCheckContext = createContext<ErrorCheckContextType | null>(null)
 
 type FallbackRenderProps = { error: Error; resetError: () => void }
 
-type ErrorBoundaryProps = {
+type ErrorCheckProps = {
     children: JSX.Element
     // fallback 选项：渲染 props、组件或节点
     fallback?: JSX.Element
@@ -43,7 +43,7 @@ type ErrorBoundaryProps = {
  * 一个 `throw` 函数，允许任何子组件以编程方式触发边界
  * （对异步错误或 hooks 很有用）。
  */
-export function ErrorBoundary(props: ErrorBoundaryProps) {
+export function ErrorCheck(props: ErrorCheckProps) {
     const [error, setError] = createSignal<Error | null>(null)
 
     const reset = () => {
@@ -61,7 +61,7 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
         { defer: true }
     )
 
-    const context: ErrorBoundaryContextType = {
+    const context: ErrorCheckContextType = {
         error,
         reset,
         throw: (err: unknown) => {
@@ -85,7 +85,7 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
     )
 
     return (
-        <ErrorBoundaryContext.Provider value={context}>
+        <ErrorCheckContext.Provider value={context}>
             <Show when={error()} fallback={children}>
                 <Switch>
                     <Match when={typeof props.fallbackRender === 'function'}>
@@ -100,7 +100,7 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
                     </Match>
                 </Switch>
             </Show>
-        </ErrorBoundaryContext.Provider>
+        </ErrorCheckContext.Provider>
     )
 }
 
@@ -108,7 +108,7 @@ export function ErrorBoundary(props: ErrorBoundaryProps) {
  * 用于访问最近边界状态和控制函数的 hook。
  */
 export function useErrorBoundary() {
-    const ctx = useContext(ErrorBoundaryContext)
+    const ctx = useContext(ErrorCheckContext)
     if (!ctx) {
         // 提供安全默认值，使组件可以在没有边界时使用。
         return {
@@ -135,7 +135,7 @@ export function useErrorBoundary() {
  * 示例：const handleError = useErrorHandler(); handleError(err)
  */
 export function useErrorHandler() {
-    const ctx = useContext(ErrorBoundaryContext)
+    const ctx = useContext(ErrorCheckContext)
     return (error: unknown) => {
         if (ctx) {
             ctx.throw(error)
@@ -151,15 +151,15 @@ export function useErrorHandler() {
  */
 export function withErrorBoundary<P extends object>(
     ComponentToWrap: Component<P>,
-    boundaryProps?: Omit<ErrorBoundaryProps, 'children'>
+    boundaryProps?: Omit<ErrorCheckProps, 'children'>
 ) {
     return function Wrapped(props: P) {
         return (
-            <ErrorBoundary {...(boundaryProps || {})}>
+            <ErrorCheck {...(boundaryProps || {})}>
                 <ComponentToWrap {...props} />
-            </ErrorBoundary>
+            </ErrorCheck>
         )
     }
 }
 
-export default ErrorBoundary
+export default ErrorCheck

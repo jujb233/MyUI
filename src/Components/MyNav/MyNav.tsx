@@ -4,7 +4,7 @@ import NavBrand from "./subcomponents/NavBrand"
 import NavMenu from "./subcomponents/NavMenu"
 import { useMyNav } from "../../Hooks"
 import type { IMyNavProps, IMyNavContext } from "./types"
-import { ErrorBoundary } from "../../Utils"
+import { ErrorCheck } from "../../Utils"
 import { createSubcomponentContext } from "../../Utils/componentFactory"
 import { type Component, splitProps, Show } from "solid-js"
 
@@ -20,7 +20,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
     }
 
     return (
-        <ErrorBoundary fallback={<div class="border border-red-500 p-4">Nav component failed to render.</div>}>
+        <ErrorCheck fallback={<div class="border border-red-500 p-4">Nav component failed to render.</div>}>
             <NavProvider value={contextValue}>
                 <nav class={classes.nav}>
                     <Show when={local.title}>
@@ -37,7 +37,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
                     </Show>
                 </nav>
             </NavProvider>
-        </ErrorBoundary>
+        </ErrorCheck>
     )
 }
 

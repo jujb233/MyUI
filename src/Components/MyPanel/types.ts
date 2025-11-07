@@ -25,6 +25,11 @@ export interface IMyPanelProps extends
 }
 
 export interface IMyPanelContext extends Omit<IMyPanelProps, 'children'> {
-    // Add any panel-specific context properties here if needed
     backgroundImage?: string
+    slots: {
+        background?: string;
+        header: string;
+        content: string;
+        footer: string;
+    };
 }

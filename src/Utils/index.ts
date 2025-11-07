@@ -1,4 +1,4 @@
 export * from './colorUtils'
 export * from './styleBuilder'
-export { default as ErrorBoundary } from './ErrorBoundary'
+export { default as ErrorCheck } from './ErrorCheck'
 export * from './dynamicThemeManager'

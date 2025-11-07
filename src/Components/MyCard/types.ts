@@ -36,7 +36,7 @@ export interface IMyCardProps extends
 // IMyCardContext defines the shape of the context object for the MyCard component.
 export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
     isHorizontal: boolean
-    imagePosition: "top" | "left" | "right" | "center" | "bottom"
+    imagePosition: "top" | "left" | "right" | "background" | "bottom" | "center"
     sizeConfig: {
         spacing: string
         titleSize: string
@@ -45,12 +45,14 @@ export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
         minHeight: string
     }
     // sub-component classes
-    imageClasses: string
-    headerClasses: string
-    titleClasses: string
-    contentClasses: string
-    footerClasses: string
-    actionsClasses: string
-    tagsContainerClasses: string
-    tagClasses: string
+    slots: {
+        image: string;
+        header: string;
+        title: string;
+        content: string;
+        footer: string;
+        actions: string;
+        tagsContainer: string;
+        tag: string;
+    };
 }

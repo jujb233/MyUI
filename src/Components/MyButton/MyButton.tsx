@@ -3,7 +3,7 @@ import ButtonContent from "./subcomponents/ButtonContent"
 import ButtonIcon from "./subcomponents/ButtonIcon"
 import ButtonActions from "./subcomponents/ButtonActions"
 import type { IMyButtonProps, IMyButtonContext } from "./types"
-import { ErrorBoundary } from "../../Utils"
+import { ErrorCheck } from "../../Utils"
 import { useMyButton } from "../../Hooks"
 import { createSubcomponentContext } from "../../Utils/componentFactory"
 
@@ -20,14 +20,15 @@ const MyButton: Component<IMyButtonProps> = (props) => {
     ])
 
     // 通过 hook 计算最终 className 与子槽位类
-    const { rootClass, rootStyle } = useMyButton(others as any)
+    const { rootClass, rootStyle, slots } = useMyButton(others as any)
 
     const contextValue: IMyButtonContext = {
-        ...others
+        ...others,
+        slots
     }
 
     return (
-        <ErrorBoundary fallback={<div class="border border-red-500 p-2">Button component failed to render.</div>}>
+        <ErrorCheck fallback={<div class="border border-red-500 p-2">Button component failed to render.</div>}>
             {/* 使用 Provider 将当前按钮的状态/风格传递给内部子组件 */}
             <ButtonProvider value={contextValue}>
                 <button
@@ -46,7 +47,7 @@ const MyButton: Component<IMyButtonProps> = (props) => {
                     <ButtonActions>{local.options}</ButtonActions>
                 </button>
             </ButtonProvider>
-        </ErrorBoundary>
+        </ErrorCheck>
     )
 }
 

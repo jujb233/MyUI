@@ -1,15 +1,24 @@
-import { ErrorBoundary } from "../../Utils"
+import { ErrorCheck } from "../../Utils"
 import { CardProvider } from "./CardContext"
-import type { IMyCardProps } from "./types"
+import type { IMyCardProps, IMyCardContext } from "./types"
+import { useMyCard } from "../../Hooks"
 
 // Root MyCard component subcomponents are attached in index.ts
 const MyCard = (props: IMyCardProps) => {
+    const { slots, ...styles } = useMyCard(props)
+
+    const contextValue: IMyCardContext = {
+        ...props,
+        ...styles,
+        slots,
+    }
+
     return (
-        <ErrorBoundary fallback={<div class="border border-red-500 p-4">Card component failed to render.</div>}>
-            <CardProvider {...props}>
+        <ErrorCheck fallback={<div class="border border-red-500 p-4">Card component failed to render.</div>}>
+            <CardProvider value={contextValue}>
                 {props.children}
             </CardProvider>
-        </ErrorBoundary>
+        </ErrorCheck>
     )
 }
 
