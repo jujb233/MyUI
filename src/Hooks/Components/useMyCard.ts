@@ -1,34 +1,31 @@
-import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core";
-import styleBuilder from "../../Utils/styleBuilder";
-import { useCardLayout } from "../../Hooks/useCardLayout";
-import type { AnimationProp } from "../../styles/config/animation";
-import { createBaseStyle } from "../../Utils/styleFactory";
-import clsx from "clsx";
-import type { PositionProps } from "../../Interfaces";
-import type { InteractionPolicy } from "../../Interfaces/interaction";
-import type { JSX } from "solid-js";
-import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
-import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
+import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core"
+import { useCardLayout } from "../../Hooks/useCardLayout"
+import type { AnimationProp } from "../../styles/config/animation"
+import { createBaseStyle } from "../../Utils/styleFactory"
+import clsx from "clsx"
+import type { PositionProps } from "../../Interfaces"
+import type { InteractionPolicy } from "../../Interfaces/interaction"
+import type { JSX } from "solid-js"
+import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
+import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
 
-// 类型声明移到顶部
 export interface UseMyCardProps extends PositionProps {
-    variant?: ComponentVariant | undefined;
-    size?: SizeName;
-    glass?: boolean;
-    clickable?: boolean;
-    className?: string;
-    bordered?: boolean;
-    shadow?: ShadowName;
-    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center";
-    direction?: "vertical" | "horizontal";
-    hover?: boolean;
-    hasImage?: boolean;
-    disabled?: boolean;
-    animation?: AnimationProp;
+    variant?: ComponentVariant | undefined
+    size?: SizeName
+    glass?: boolean
+    clickable?: boolean
+    className?: string
+    bordered?: boolean
+    shadow?: ShadowName
+    imagePosition?: "top" | "left" | "right" | "background" | "bottom" | "center"
+    direction?: "vertical" | "horizontal"
+    hover?: boolean
+    hasImage?: boolean
+    disabled?: boolean
+    animation?: AnimationProp
 }
 
 export function useMyCard(props: UseMyCardProps) {
-    // 解构 props 并提供合理默认值
     const {
         variant: variantProp,
         size = "medium",
@@ -43,23 +40,18 @@ export function useMyCard(props: UseMyCardProps) {
         hasImage = false,
         disabled = false,
         animation,
-    } = props;
+    } = props
 
-    // 解析 variant -> role/color，并从预设中取到实际的 variant 配置
-    const role = variantProp?.role || 'primary';
-    const color = variantProp?.color || 'blue';
-    // intensity not needed here because factory handles variant intensity mapping
+    const role = variantProp?.role || "primary"
+    const color = variantProp?.color || "blue"
 
-    // 尺寸相关配置（由工厂返回）
+    const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
 
-    const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage });
-
-    const interactionPolicy: InteractionPolicy | undefined = (hover || clickable)
+    const interactionPolicy: InteractionPolicy | undefined = hover || clickable
         ? { enabled: true, behavior: { hover: !!hover, focus: false, active: false, disabled: false, transition: true } }
-        : undefined;
+        : undefined
 
-    // 使用共享工厂创建基础 builder，再补充 card 特有类
-    const { builder, sizeConfig } = createBaseStyle({
+    const { sizeConfig } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
@@ -68,54 +60,48 @@ export function useMyCard(props: UseMyCardProps) {
         disabled,
         animation,
         interaction: interactionPolicy,
-    });
+    })
 
-    const containerClasses = builder
-        .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL)
-        .add(direction === 'horizontal', 'flex flex-row')
-        .add(direction === 'vertical', 'flex flex-col')
-        .add(clickable, COMMON_CLASSES.CURSOR_POINTER)
-        .add(bordered, COMMON_CLASSES.BORDER)
-        .build();
+    const containerClasses = clsx(
+        COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN,
+        COMMON_CLASSES.ROUNDED_2XL,
+        direction === "horizontal" ? "flex flex-row" : "flex flex-col",
+        clickable && COMMON_CLASSES.CURSOR_POINTER,
+        bordered && COMMON_CLASSES.BORDER,
+        className
+    )
 
-    // 位置样式（单位 rem）
-    const containerStyle: JSX.CSSProperties | undefined =
-        props.top !== undefined || props.left !== undefined
-            ? {
-                ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
-                ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
-            }
-            : undefined;
+    const containerStyle: JSX.CSSProperties | undefined = {
+        ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
+        ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+    }
 
-    const bodyClasses = styleBuilder.builder()
-        .add(sizeConfig.padding, sizeConfig.spacing)
-        .add(isHorizontal, 'flex-1')
-        .add(imagePosition === 'background', 'relative z-10')
-        .build();
+    const bodyClasses = clsx(
+        sizeConfig.padding,
+        sizeConfig.spacing,
+        isHorizontal && "flex-1",
+        imagePosition === "background" && "relative z-10"
+    )
 
     const slots = {
-        image: clsx(
-            SLOTS_STYLE.image[imagePosition],
-            sizeConfig.borderRadius
-        ),
+        image: clsx(SLOTS_STYLE.image[imagePosition], sizeConfig.borderRadius),
         header: clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header),
         title: clsx(SLOTS_STYLE.title, sizeConfig.titleSize),
         content: clsx(
             SLOTS_STYLE.textMuted,
             sizeConfig.contentSize,
-            isHorizontal ? 'flex-1 min-w-0' : ''
+            isHorizontal && "flex-1 min-w-0"
         ),
         footer: clsx(
             SLOTS_STYLE.cardFooterBase,
-            sizeConfig.borderRadius.replace('rounded-', 'rounded-b-'),
-            isHorizontal ? 'w-full' : ''
+            sizeConfig.borderRadius.replace("rounded-", "rounded-b-"),
+            isHorizontal && "w-full"
         ),
         actions: SLOTS_STYLE.actions,
         tagsContainer: SLOTS_STYLE.tagsContainer,
         tag: SLOTS_STYLE.tag,
-    };
+    }
 
-    // 返回对组件渲染有用的值与别名（移除 style 相关）
     return {
         size,
         sizeConfig,
@@ -125,5 +111,5 @@ export function useMyCard(props: UseMyCardProps) {
         isHorizontal,
         imagePosition,
         slots,
-    };
+    }
 }

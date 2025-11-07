@@ -11,7 +11,7 @@ import type {
     PositionProps,
     Clickable,
 } from "../../Interfaces"
-import type { Focusable as ContainerClickable } from "../../Interfaces/layout"
+import type { Focusable as ContainerClickable, SizeProps } from "../../Interfaces/layout"
 
 export interface IMyCardProps extends
     ThemeProps,
@@ -21,6 +21,7 @@ export interface IMyCardProps extends
     ContainerClickable,
     Clickable,
     PositionProps,
+    SizeProps,
     AnimationProps,
     WithFooter,
     WithImage,

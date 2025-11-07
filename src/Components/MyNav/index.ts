@@ -1,23 +1,25 @@
-import MyNavRoot from "./MyNav"
-import NavActions from "./subcomponents/NavActions"
-import NavBrand from "./subcomponents/NavBrand"
-import NavContent from "./subcomponents/NavContent"
-import NavMenu from "./subcomponents/NavMenu"
+import MyNavRoot from "./MyNav";
+import NavActions from "./subcomponents/NavActions";
+import NavBrand from "./subcomponents/NavBrand";
+import NavContent from "./subcomponents/NavContent";
+import NavMenu from "./subcomponents/NavMenu";
+import type { Component } from "solid-js";
+import type { IMyNavProps } from "./types";
 
-type MyNavComponent = {
-    Actions: typeof NavActions
-    Brand: typeof NavBrand
-    Content: typeof NavContent
-    Menu: typeof NavMenu
-}
+type MyNavComponent = Component<IMyNavProps> & {
+    Actions: typeof NavActions;
+    Brand: typeof NavBrand;
+    Content: typeof NavContent;
+    Menu: typeof NavMenu;
+};
 
-const MyNav = MyNavRoot as unknown as MyNavComponent
+const MyNav: MyNavComponent = Object.assign(MyNavRoot, {
+    Actions: NavActions,
+    Brand: NavBrand,
+    Content: NavContent,
+    Menu: NavMenu,
+});
 
-MyNav.Actions = NavActions
-MyNav.Brand = NavBrand
-MyNav.Content = NavContent
-MyNav.Menu = NavMenu
-
-export { MyNav }
-export default MyNav
-export * from './types'
+export { MyNav };
+export default MyNav;
+export * from "./types";

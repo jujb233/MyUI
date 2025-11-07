@@ -95,7 +95,7 @@ export const NavsSections = () => {
                 accentClassName="border-purple-500"
                 description="将导航置于 Hero 背景之上时，glass + shadow 的组合可以保持可读性的同时维持轻盈质感。"
             >
-                <div class="rounded-xl bg-gradient-to-r from-indigo-500/40 via-transparent to-pink-500/40 p-8">
+                <div class="rounded-xl bg-linear-to-r from-indigo-500/40 via-transparent to-pink-500/40 p-8">
                     <MyNav
                         glass
                         shadow="lg"
