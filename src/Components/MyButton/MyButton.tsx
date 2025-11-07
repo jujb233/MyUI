@@ -1,7 +1,7 @@
 import { type Component, splitProps } from "solid-js"
 import ButtonContent from "./subcomponents/ButtonContent"
 import ButtonIcon from "./subcomponents/ButtonIcon"
-import ButtonActions from "./subcomponents/ButtonActions"
+import ButtonOptions from "./subcomponents/ButtonOptions"
 import type { IMyButtonProps, IMyButtonContext } from "./types"
 import { ErrorCheck } from "../../Utils"
 import { useMyButton } from "../../Hooks"
@@ -44,7 +44,7 @@ const MyButton: Component<IMyButtonProps> = (props) => {
                     {/* 图标和 actions 的判断逻辑交给子组件内部 */}
                     <ButtonIcon icon={local.icon} />
                     <ButtonContent>{local.children}</ButtonContent>
-                    <ButtonActions>{local.options}</ButtonActions>
+                    <ButtonOptions>{local.options}</ButtonOptions>
                 </button>
             </ButtonProvider>
         </ErrorCheck>

@@ -1,8 +1,8 @@
 import { type Component, type JSX, Show } from "solid-js"
 import { useButtonContext } from "../MyButton"
 
-// ButtonActions: 渲染按钮右侧的附加操作区域（例如下拉箭头或操作按钮）
-const ButtonActions: Component<{ children?: JSX.Element }> = (props) => {
+// ButtonOptions: 渲染按钮右侧的附加操作区域（例如下拉箭头或操作按钮）
+const ButtonOptions: Component<{ children?: JSX.Element }> = (props) => {
     const context = useButtonContext()
     return (
         <Show when={props.children}>
@@ -11,4 +11,4 @@ const ButtonActions: Component<{ children?: JSX.Element }> = (props) => {
     )
 }
 
-export default ButtonActions
+export default ButtonOptions

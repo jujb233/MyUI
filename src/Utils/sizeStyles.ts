@@ -72,3 +72,57 @@ export function buildVerticalStackStyle(tokens: SizeTokens): JSX.CSSProperties {
 export function mergeStyles<A extends JSX.CSSProperties | undefined, B extends JSX.CSSProperties | undefined>(a: A, b: B): JSX.CSSProperties {
     return { ...(a || {}), ...(b || {}) };
 }
+
+export const X_LENGTH_PRESETS: Record<SizeName, string> = {
+    small: '16rem', // w-64
+    medium: '24rem', // w-96
+    large: '32rem', // w-128
+};
+
+export const Y_LENGTH_PRESETS: Record<SizeName, string> = {
+    small: 'auto',
+    medium: 'auto',
+    large: 'auto',
+};
+
+type LengthValue = SizeName | number | string;
+
+/**
+ * Resolves a length value (SizeName, number, or string) into a valid CSS string.
+ * @param value - The length value to resolve.
+ * @param presets - The map of presets to use if the value is a SizeName.
+ * @returns A CSS length string (e.g., '16rem', '100px', '50%').
+ */
+function getLengthValue(value: LengthValue | undefined, presets: Record<SizeName, string>): string | undefined {
+    if (value === undefined) return undefined;
+
+    if (typeof value === 'number') {
+        return `${value}rem`;
+    }
+    if (typeof value === 'string') {
+        if (presets[value as SizeName]) {
+            return presets[value as SizeName];
+        }
+        return value; // Assume it's a valid CSS value like '50%' or '100px'
+    }
+    return undefined;
+}
+
+/**
+ * Builds a style object for width and height based on xLength and yLength props.
+ * @param props - An object containing optional xLength and yLength.
+ * @returns A JSX.CSSProperties object with width and/or height.
+ */
+export function buildSizeStyle(props: { xLength?: LengthValue; yLength?: LengthValue }): JSX.CSSProperties {
+    const style: JSX.CSSProperties = {};
+    const width = getLengthValue(props.xLength, X_LENGTH_PRESETS);
+    const height = getLengthValue(props.yLength, Y_LENGTH_PRESETS);
+
+    if (width !== undefined) {
+        style.width = width;
+    }
+    if (height !== undefined) {
+        style.height = height;
+    }
+    return style;
+}

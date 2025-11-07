@@ -36,30 +36,30 @@ export const CardsSections = () => {
                 description="图片、标签与摘要的组合突出阅读价值，适合博客、资讯或知识库列表。"
                 panelProps={{ class: "grid gap-8 md:grid-cols-2 lg:grid-cols-3" }}
             >
-                <MyCard animation={{ type: 'fade' }} backgroundImage="/demo.png">
+                <MyCard animation={{ type: 'fade' }} backgroundImage="/demo.png" size="medium">
                     <MyCard.Tags tags={["JavaScript", "性能", "优化"]} />
                     <MyCard.Tags tags={["React", "TypeScript", "TailwindCSS"]} />
                     {/* <MyCard.Header>构建下一代UI组件库</MyCard.Header> */}
                     <MyCard.Content>探索如何利用现代技术栈，从零开始打造一个功能强大、可定制的组件库。</MyCard.Content>
-                    <MyCard.Actions>
+                    <MyCard.Options>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </MyCard.Options>
                 </MyCard>
                 <MyCard animation={{ type: 'slide-up' }} backgroundImage="/demo.png">
                     <MyCard.Tags tags={["设计", "色彩", "UI/UX"]} />
                     {/* <MyCard.Header>设计系统中的色彩哲学</MyCard.Header> */}
                     <MyCard.Content>色彩不仅仅是美化界面，它还承载着品牌、情感和可用性。本文深入探讨了如何在设计系统中有效运用色彩。</MyCard.Content>
-                    <MyCard.Actions>
+                    <MyCard.Options>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </MyCard.Options>
                 </MyCard>
                 <MyCard animation={{ type: 'scale-in' }} backgroundImage="/demo.png">
                     <MyCard.Tags tags={["性能", "Webpack", "Web Vitals"]} />
                     {/* <MyCard.Header>前端性能优化实战</MyCard.Header> */}
                     <MyCard.Content>从代码分割到图片懒加载，学习一系列实用的技巧，显著提升你的Web应用加载速度和用户体验。</MyCard.Content>
-                    <MyCard.Actions>
+                    <MyCard.Options>
                         <MyButton variant={{ role: 'text', color: 'blue' }}>阅读全文 →</MyButton>
-                    </MyCard.Actions>
+                    </MyCard.Options>
                 </MyCard>
             </DemoSection>
 

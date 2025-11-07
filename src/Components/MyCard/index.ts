@@ -1,5 +1,5 @@
 import MyCardRoot from "./MyCard"
-import { CardActions } from "./subcomponents/CardActions"
+import { CardOptions } from "./subcomponents/CardOptions"
 import { CardContent } from "./subcomponents/CardContent"
 import { CardFooter } from "./subcomponents/CardFooter"
 import { CardHeader } from "./subcomponents/CardHeader"
@@ -9,7 +9,7 @@ import type { Component } from "solid-js"
 import type { IMyCardProps } from "./types"
 
 type MyCardComponent = Component<IMyCardProps> & {
-    Actions: typeof CardActions
+    Options: typeof CardOptions
     Content: typeof CardContent
     Footer: typeof CardFooter
     Header: typeof CardHeader
@@ -18,7 +18,7 @@ type MyCardComponent = Component<IMyCardProps> & {
 }
 
 const MyCard: MyCardComponent = Object.assign(MyCardRoot, {
-    Actions: CardActions,
+    Options: CardOptions,
     Content: CardContent,
     Footer: CardFooter,
     Header: CardHeader,

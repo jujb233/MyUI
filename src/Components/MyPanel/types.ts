@@ -8,6 +8,7 @@ import type {
     WithFooter,
     AnimationProps,
     PositionProps,
+    InteractionProp,
 } from "../../Interfaces"
 
 export interface IMyPanelProps extends
@@ -18,9 +19,10 @@ export interface IMyPanelProps extends
     WithImage,
     WithFooter,
     AnimationProps,
+
     PositionProps {
     children?: JSX.Element
-    interaction?: 'none' | 'basic' | 'rich' | 'minimal'
+    interaction?: InteractionProp
 }
 
 export interface IMyPanelContext extends Omit<IMyPanelProps, 'children'> {

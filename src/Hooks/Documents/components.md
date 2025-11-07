@@ -132,7 +132,7 @@ export type UseMyNavOptions = {
 	glass?: boolean
 	shadow?: ShadowName
 	class?: string
-	interactionEnabled?: boolean
+\- 已移除：使用 `interaction={{ enabled: true }}` 或传入预设 key 启用。
 	focusRing?: boolean // 当前实现未使用，预留
 	interaction?: InteractionPolicy | string
 	animation?: AnimationProp
@@ -148,13 +148,13 @@ export function useMyNav(options: UseMyNavOptions): {
 ```
 
 要点：
-- 当 `interactionEnabled` 为 true 时，`interaction` 可使用预设（如 `'none'|'basic'|'rich'`）或完整策略对象。
+- `interaction` 可使用预设（如 `'none'|'basic'|'rich'`）或完整策略对象。
 - 默认 `glass=false`、`shadow='none'`。
 
 示例（在自定义导航中独立使用 Hook）：
 
 ```tsx
-const cls = useMyNav({ size: 'medium', interactionEnabled: true, interaction: 'basic' })
+const cls = useMyNav({ size: 'medium', interaction: 'basic' })
 return (
 	<nav class={cls.nav}>
 		<div class={cls.brand}>Brand</div>

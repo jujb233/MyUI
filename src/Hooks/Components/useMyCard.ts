@@ -1,20 +1,19 @@
-import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core"
+import type { ComponentVariant, ShadowName } from "../../Interfaces/core"
 import { useCardLayout } from "../../Hooks/useCardLayout"
 import type { AnimationProp } from "../../styles/config/animation"
 import { createBaseStyle } from "../../Utils/styleFactory"
 import clsx from "clsx"
-import type { PositionProps } from "../../Interfaces"
+import type { PositionProps, SizeProps } from "../../Interfaces"
 import type { InteractionPolicy } from "../../Interfaces/interaction"
 import type { JSX } from "solid-js"
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
-import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles } from "../../Utils/sizeStyles"
+import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles, buildSizeStyle } from "../../Utils/sizeStyles"
 import { defaultValues } from "../../Options/Configs/default"
 import { mergeDefaults } from "../../Utils/defaultResolver";
 
-export interface UseMyCardProps extends PositionProps {
+export interface UseMyCardProps extends PositionProps, SizeProps {
     variant?: ComponentVariant | undefined
-    size?: SizeName
     glass?: boolean
     clickable?: boolean
     className?: string
@@ -34,6 +33,8 @@ export function useMyCard(props: UseMyCardProps) {
     const {
         variant: variantProp,
         size,
+        xLength,
+        yLength,
         glass,
         clickable,
         className,
@@ -83,9 +84,12 @@ export function useMyCard(props: UseMyCardProps) {
         className
     )
 
+    const sizeStyle = buildSizeStyle({ xLength, yLength });
+
     const containerStyle: JSX.CSSProperties | undefined = {
         ...(top !== undefined ? { top: `${Math.max(0, top)}rem` } : {}),
         ...(left !== undefined ? { left: `${Math.max(0, left)}rem` } : {}),
+        ...sizeStyle,
     }
 
     // 将动态尺寸/间距类移至 style，保留结构类
@@ -106,7 +110,7 @@ export function useMyCard(props: UseMyCardProps) {
         title: clsx(SLOTS_STYLE.title),
         content: clsx(SLOTS_STYLE.textMuted, isHorizontal && "flex-1 min-w-0"),
         footer: clsx(SLOTS_STYLE.cardFooterBase, isHorizontal && "w-full"),
-        actions: SLOTS_STYLE.actions,
+        options: SLOTS_STYLE.actions,
         tagsContainer: SLOTS_STYLE.tagsContainer,
         tag: SLOTS_STYLE.tag,
     }

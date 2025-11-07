@@ -14,7 +14,6 @@ export const NavsSections = () => {
                 <MyNav
                     variant={{ role: 'primary', color: 'blue' }}
                     animation={{ type: 'slide-down', duration: 400, easing: 'out' }}
-                    interactionEnabled
                     interaction='rich'
                 >
                     <MyNav.Brand>
@@ -25,14 +24,13 @@ export const NavsSections = () => {
                         <li><a href="#" class="hover:underline">About</a></li>
                         <li><a href="#" class="hover:underline">Contact</a></li>
                     </MyNav.Menu>
-                    <MyNav.Actions>
+                    <MyNav.Options>
                         <MyButton size="small">Login</MyButton>
-                    </MyNav.Actions>
+                    </MyNav.Options>
                 </MyNav>
                 <MyNav
                     variant={{ role: 'secondary', color: 'blue' }}
                     animation="fade"
-                    interactionEnabled
                     interaction='rich'
                 >
                     <MyNav.Brand>
@@ -43,14 +41,13 @@ export const NavsSections = () => {
                         <li><a href="#" class="hover:underline">About</a></li>
                         <li><a href="#" class="hover:underline">Contact</a></li>
                     </MyNav.Menu>
-                    <MyNav.Actions>
+                    <MyNav.Options>
                         <MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>
-                    </MyNav.Actions>
+                    </MyNav.Options>
                 </MyNav>
                 <MyNav
                     glass
                     animation={{ type: 'scale-in', duration: 350 }}
-                    interactionEnabled
                     interaction='rich'
                 >
                     <MyNav.Brand>
@@ -61,9 +58,9 @@ export const NavsSections = () => {
                         <li><a href="#" class="hover:underline">About</a></li>
                         <li><a href="#" class="hover:underline">Contact</a></li>
                     </MyNav.Menu>
-                    <MyNav.Actions>
+                    <MyNav.Options>
                         <MyButton size="small" glass>Login</MyButton>
-                    </MyNav.Actions>
+                    </MyNav.Options>
                 </MyNav>
             </DemoSection>
 
@@ -75,7 +72,6 @@ export const NavsSections = () => {
                 <MyNav
                     variant={{ role: 'primary', color: 'purple' }}
                     animation="fade"
-                    interactionEnabled
                     interaction='rich'
                 >
                     <MyNav.Brand>
@@ -89,12 +85,12 @@ export const NavsSections = () => {
                         <li><a href="#" class="hover:underline">解决方案</a></li>
                         <li><a href="#" class="hover:underline">定价</a></li>
                     </MyNav.Menu>
-                    <MyNav.Actions>
+                    <MyNav.Options>
                         <div class="flex items-center gap-3">
                             <MyButton size="small" variant={{ role: 'text', color: 'purple' }}>登录</MyButton>
                             <MyButton size="small" variant={{ role: 'secondary', color: 'purple' }}>注册</MyButton>
                         </div>
-                    </MyNav.Actions>
+                    </MyNav.Options>
                 </MyNav>
             </DemoSection>
 
@@ -108,7 +104,6 @@ export const NavsSections = () => {
                         glass
                         shadow="lg"
                         animation={{ type: 'slide-up', duration: 500, easing: 'in-out' }}
-                        interactionEnabled
                         interaction='rich'
                     >
                         <MyNav.Brand>
@@ -119,9 +114,9 @@ export const NavsSections = () => {
                             <li><a href="#" class="hover:underline">Docs</a></li>
                             <li><a href="#" class="hover:underline">Community</a></li>
                         </MyNav.Menu>
-                        <MyNav.Actions>
+                        <MyNav.Options>
                             <MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>
-                        </MyNav.Actions>
+                        </MyNav.Options>
                     </MyNav>
                 </div>
             </DemoSection>

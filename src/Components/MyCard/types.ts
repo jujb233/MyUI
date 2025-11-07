@@ -10,6 +10,7 @@ import type {
     WithTitle,
     PositionProps,
     Clickable,
+    InteractionProp,
 } from "../../Interfaces"
 import type { Focusable as ContainerClickable, SizeProps } from "../../Interfaces/layout"
 
@@ -27,6 +28,7 @@ export interface IMyCardProps extends
     WithImage,
     WithTitle {
     children?: JSX.Element
+    interaction?: InteractionProp
 }
 
 export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
@@ -45,7 +47,7 @@ export interface IMyCardContext extends Omit<IMyCardProps, 'children'> {
         title: string;
         content: string;
         footer: string;
-        actions: string;
+        options: string;
         tagsContainer: string;
         tag: string;
     };

@@ -2,7 +2,7 @@ import styleBuilder from "./styleBuilder";
 import { sizeConfig } from "../styles/config/base";
 import type { ComponentVariant, SizeName, ShadowName, VariantRole } from "../Interfaces/core";
 import type { AnimationProp } from "../styles/config/animation";
-import type { InteractionPolicy } from "../Interfaces/interaction";
+import type { InteractionProp } from "../Interfaces/interaction";
 // isHexColor no longer needed since ensureThemeClass handles both hex and preset names
 import { ensureThemeClass } from './dynamicThemeManager';
 // Use shared class name contracts to keep CSS/JS in sync
@@ -41,7 +41,7 @@ export function createBaseStyle(options: {
     className?: string;
     disabled?: boolean;
     animation?: AnimationProp | undefined;
-    interaction?: string | InteractionPolicy | undefined;
+    interaction?: InteractionProp | undefined;
 }): CreateBaseStyleResult {
     const {
         variant,

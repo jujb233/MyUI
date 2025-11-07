@@ -1,18 +1,18 @@
 import MyButtonRoot from "./MyButton";
-import ButtonActions from "./subcomponents/ButtonActions";
+import ButtonOptions from "./subcomponents/ButtonOptions";
 import ButtonContent from "./subcomponents/ButtonContent";
 import ButtonIcon from "./subcomponents/ButtonIcon";
 import type { Component } from "solid-js";
 import type { IMyButtonProps } from "./types";
 
 type MyButtonComponent = Component<IMyButtonProps> & {
-    Actions: typeof ButtonActions;
+    Options: typeof ButtonOptions;
     Content: typeof ButtonContent;
     Icon: typeof ButtonIcon;
 };
 
 const MyButton: MyButtonComponent = Object.assign(MyButtonRoot, {
-    Actions: ButtonActions,
+    Options: ButtonOptions,
     Content: ButtonContent,
     Icon: ButtonIcon,
 });

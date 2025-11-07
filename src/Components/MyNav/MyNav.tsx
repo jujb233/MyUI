@@ -1,5 +1,5 @@
 import NavContent from "./subcomponents/NavContent"
-import NavActions from "./subcomponents/NavActions"
+import NavOptions from "./subcomponents/NavOptions"
 import NavBrand from "./subcomponents/NavBrand"
 import NavMenu from "./subcomponents/NavMenu"
 import { useMyNav } from "../../Hooks"
@@ -34,7 +34,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
                         {local.children}
                     </NavContent>
                     <Show when={local.options}>
-                        <NavActions>{local.options}</NavActions>
+                        <NavOptions>{local.options}</NavOptions>
                     </Show>
                 </nav>
             </NavProvider>

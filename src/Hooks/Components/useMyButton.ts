@@ -1,4 +1,4 @@
-import type { InteractionPolicy } from "../../Interfaces/interaction"
+import type { InteractionProp } from "../../Interfaces/interaction"
 import type { PositionProps } from "../../Interfaces"
 import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core"
 import type { AnimationProp } from "../../styles/config/animation"
@@ -30,7 +30,7 @@ export type UseMyButtonProps = PositionProps & {
     className?: string
     glass?: boolean
     shadow?: ShadowName
-    interaction?: InteractionPolicy | string
+    interaction?: InteractionProp
     animation?: AnimationProp
 }
 

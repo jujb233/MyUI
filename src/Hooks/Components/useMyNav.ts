@@ -1,6 +1,6 @@
 import type { AnimationProp } from "../../styles/config/animation";
 import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core";
-import type { InteractionPolicy } from "../../Interfaces/interaction";
+import type { InteractionProp } from "../../Interfaces/interaction";
 import type { JSX } from "solid-js";
 import { INTERACTION_PRESETS } from "../../styles/config/interaction";
 import { createBaseStyle } from "../../Utils/styleFactory";
@@ -18,9 +18,8 @@ export interface UseMyNavOptions {
     class?: string | undefined;
     id?: string | undefined;
     style?: JSX.CSSProperties | undefined;
-    interactionEnabled?: boolean | undefined;
     focusRing?: boolean | undefined;
-    interaction?: InteractionPolicy | string | undefined;
+    interaction?: InteractionProp | undefined;
     animation?: AnimationProp | undefined;
 }
 
@@ -31,8 +30,7 @@ export function useMyNav(options: UseMyNavOptions) {
         glass = defaultValues.ThemeProps.glass,
         shadow = defaultValues.ThemeProps.shadow as ShadowName,
         className = defaultValues.StyleProps.class,
-        interactionEnabled = defaultValues.InteractionPolicy.enabled,
-        interaction = defaultValues.InteractionPolicy.behavior,
+        interaction = defaultValues.InteractionPolicy.enabled ? defaultValues.InteractionPolicy.behavior : undefined,
         animation,
     } = options;
 
@@ -46,11 +44,9 @@ export function useMyNav(options: UseMyNavOptions) {
         shadow,
         className,
         animation,
-        interaction: interactionEnabled
-            ? (typeof interaction === 'string'
-                ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none
-                : interaction)
-            : undefined
+        interaction: typeof interaction === 'string'
+            ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none
+            : interaction
     });
 
     const navClasses = builder
@@ -69,6 +65,6 @@ export function useMyNav(options: UseMyNavOptions) {
         brand: SLOTS_STYLE.brand,
         content: SLOTS_STYLE.content,
         menu: SLOTS_STYLE.menu,
-        actions: SLOTS_STYLE.navActions,
+        options: SLOTS_STYLE.navActions,
     };
 }

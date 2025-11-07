@@ -42,7 +42,6 @@ const Showcase = () => {
                 <MyNav
                     glass
                     shadow="md"
-                    interactionEnabled
                     interaction="rich"
                     title={<span class="font-bold">MyUI</span>}
                     menu={

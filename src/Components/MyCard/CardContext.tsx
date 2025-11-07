@@ -50,7 +50,7 @@ export const useCardContext = () => {
                 title: '',
                 content: '',
                 footer: '',
-                actions: '',
+                options: '',
                 tagsContainer: '',
                 tag: '',
             },

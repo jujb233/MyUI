@@ -19,7 +19,8 @@
 | `animation`          | `AnimationProp`                          | AnimationProps   | 动画配置 |
 | `children`           | `React.ReactNode`                        | -                | 自由内容区（通常是品牌/Logo） |
 | `menu`               | `React.ReactNode`                        | -                | 菜单区插槽 |
-| `interactionEnabled` | `boolean`                                | -                | 是否开启容器 hover/active 等交互效果 |
-| `interaction`        | `InteractionPolicy \| string`            | -                | 交互策略或预设 key（如 `'rich'`/`'basic'`/`'none'`） |
+| `interaction`        | `InteractionProp`                         | -                | 交互策略或预设 key（如 `'rich'`/`'basic'`/`'none'`），等价于传入完整 `InteractionPolicy` 对象或预设 key |
+
+> 破坏性更新：`interactionEnabled` 已移除，请使用 `interaction={{ enabled: true, ... }}` 或预设 key 开启/设置交互。
 
 

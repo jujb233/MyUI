@@ -1,3 +1,5 @@
+import type { SizeName } from "./core";
+
 /**
  * @description 为容器类组件提供边框显示的能力。
  * @interface Borderable
@@ -51,8 +53,12 @@ export interface PositionProps {
 /**
  * @description 描述组件的尺寸。
  * @interface SizeProps
- * @property {'small' | 'medium' | 'large'} [size] - 组件的尺寸。
+ * @property {SizeName} [size] - 预设尺寸，用于确定所有未显式设置的尺寸属性。
+ * @property {SizeName | number | string} [xLength] - 水平长度 (宽度)，可以是预设尺寸、数字 (rem) 或自定义 CSS 字符串。
+ * @property {SizeName | number | string} [yLength] - 垂直长度 (高度)，可以是预设尺寸、数字 (rem) 或自定义 CSS 字符串。
  */
 export interface SizeProps {
-    size?: 'small' | 'medium' | 'large'
+    size?: SizeName
+    xLength?: SizeName | number | string
+    yLength?: SizeName | number | string
 }

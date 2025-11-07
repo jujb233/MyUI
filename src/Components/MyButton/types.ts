@@ -11,6 +11,7 @@ import type {
     PositionProps,
     Clickable,
     SizeProps,
+    InteractionProp,
 } from "../../Interfaces"
 
 export interface IMyButtonProps extends
@@ -26,6 +27,7 @@ export interface IMyButtonProps extends
     SizeProps,
     Clickable {
     children?: JSX.Element
+    interaction?: InteractionProp
 }
 
 export interface IMyButtonContext extends Omit<IMyButtonProps, 'children' | 'onClick'> {

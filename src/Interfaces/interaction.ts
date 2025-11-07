@@ -115,6 +115,26 @@ export interface InteractionPolicy {
 }
 
 /**
+ * @description 统一的交互预设 key。用于在组件 props 中以字符串形式启用交互策略。
+ */
+export type InteractionPresetKey = 'none' | 'basic' | 'rich' | 'minimal'
+
+/**
+ * @description 组件可接受的交互配置类型（统一入口）。
+ * - 可传入内置预设 key（如 'basic' | 'rich'）。
+ * - 或传入完整 InteractionPolicy 对象以实现精细控制。
+ */
+export type InteractionProp = InteractionPolicy | InteractionPresetKey
+
+/**
+ * @description 供组件复用的交互属性集合。
+ * 注意：为简化 API 并避免重复，旧的 interactionEnabled 已移除，请使用 policy.enabled。
+ */
+export interface InteractionProps {
+    interaction?: InteractionProp
+}
+
+/**
  * @description 为组件提供声明其交互策略的能力。
  * @interface SupportsInteractionPolicy
  * @method getInteractionPolicy - 获取组件的交互策略。

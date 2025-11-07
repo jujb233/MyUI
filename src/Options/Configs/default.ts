@@ -201,4 +201,20 @@ export const defaultValues = {
         top: 0,
         left: 0,
     },
+    /**
+     * @description `UseMyPanelProps` 的默认属性。
+     */
+    UseMyPanelProps: {
+        variant: undefined,
+        size: 'medium',
+        glass: true,
+        shadow: 'none',
+        className: '',
+        disabled: false,
+        interaction: undefined,
+        animation: undefined,
+        backgroundImage: '',
+        top: 0,
+        left: 0,
+    },
 };
