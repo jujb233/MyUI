@@ -4,17 +4,17 @@ import type { Component, JSX } from "solid-js";
 import clsx from "clsx";
 
 export const CardFooter: Component<{ children?: JSX.Element; class?: string }> = (props) => {
-    const { footerClasses } = useCardContext()
+    const { slots } = useCardContext();
     return (
         <Show when={props.children}>
             <div
                 class={clsx(
-                    footerClasses,
+                    slots.footer,
                     props.class
                 )}
             >
                 {props.children}
             </div>
         </Show>
-    )
+    );
 }

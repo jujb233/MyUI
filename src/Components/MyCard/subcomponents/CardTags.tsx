@@ -4,18 +4,18 @@ import type { Component, JSX } from "solid-js";
 import clsx from "clsx";
 
 export const CardTags: Component<{ tags: JSX.Element[]; class?: string }> = (props) => {
-    const { tagsContainerClasses, tagClasses } = useCardContext()
+    const { slots } = useCardContext();
     return (
-        <div class={clsx(tagsContainerClasses, props.class)}>
+        <div class={clsx(slots.tagsContainer, props.class)}>
             <For each={props.tags}>
                 {(tag) => (
                     <span
-                        class={tagClasses}
+                        class={slots.tag}
                     >
                         {tag}
                     </span>
                 )}
             </For>
         </div>
-    )
+    );
 }

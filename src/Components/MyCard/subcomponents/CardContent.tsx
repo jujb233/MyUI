@@ -3,16 +3,15 @@ import type { Component, JSX } from "solid-js";
 import clsx from "clsx";
 
 export const CardContent: Component<{ children?: JSX.Element; class?: string }> = (props) => {
-    const { contentClasses } = useCardContext()
-    // 横向布局时内容自适应
+    const { slots } = useCardContext();
     return (
         <div
             class={clsx(
-                contentClasses,
+                slots.content,
                 props.class
             )}
         >
             {props.children}
         </div>
-    )
+    );
 }
