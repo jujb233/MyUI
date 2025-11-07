@@ -6,6 +6,7 @@ import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
 import { createBaseStyle } from "../../Utils/styleFactory"
 import type { PositionProps } from "../../Interfaces"
 import type { JSX } from "solid-js"
+import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles"
 
 export type UseMyPanelProps = PositionProps & {
     variant?: ComponentVariant | undefined
@@ -46,21 +47,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     })
 
     // 动态尺寸类移动为内联样式
-    const titleFontSizeMap: Record<typeof size, string> = {
-        small: '1.125rem', // text-lg
-        medium: '1.25rem', // text-xl
-        large: '1.5rem',   // text-2xl
-    }
-    const contentFontSizeMap: Record<typeof size, string> = {
-        small: '0.875rem', // text-sm
-        medium: '1rem',    // text-base
-        large: '1.125rem', // text-lg
-    }
-    const paddingMap: Record<typeof size, { px: string; py: string }> = {
-        small: { px: '0.75rem', py: '0.25rem' },
-        medium: { px: '1rem', py: '0.5rem' },
-        large: { px: '1.5rem', py: '0.75rem' },
-    }
+    const tokens = getSizeTokens(size)
 
     const slots = {
         background: backgroundImage
@@ -78,16 +65,13 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     const panelStyle: JSX.CSSProperties = {
         ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
         ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
-        'padding-left': paddingMap[size].px,
-        'padding-right': paddingMap[size].px,
-        'padding-top': paddingMap[size].py,
-        'padding-bottom': paddingMap[size].py,
-        'font-size': contentFontSizeMap[size],
+        ...buildPaddingStyle(tokens),
+        'font-size': tokens.fontSizeBase,
     }
 
     const slotStyles = {
-        header: { 'font-size': titleFontSizeMap[size] } as JSX.CSSProperties,
-        content: { 'font-size': contentFontSizeMap[size] } as JSX.CSSProperties,
+        header: { 'font-size': tokens.fontSizeTitle } as JSX.CSSProperties,
+        content: { 'font-size': tokens.fontSizeBase } as JSX.CSSProperties,
     }
 
     return {

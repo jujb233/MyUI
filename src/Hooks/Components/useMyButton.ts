@@ -6,6 +6,7 @@ import { createBaseStyle } from "../../Utils/styleFactory";
 import type { JSX } from "solid-js";
 import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
+import { getSizeTokens } from "../../Utils/sizeStyles";
 
 /**
  * 输入 props 类型说明
@@ -91,34 +92,19 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         options: SLOTS_STYLE.buttonOptions,
     };
 
-    // 尺寸映射：将动态 class 转为内联 style，避免 JIT 类爆炸
-    const sizePaddingMap: Record<NonNullable<typeof size>, { px: string; py: string }> = {
-        small: { px: '0.75rem', py: '0.25rem' }, // px-3 py-1
-        medium: { px: '1rem', py: '0.5rem' },    // px-4 py-2
-        large: { px: '1.5rem', py: '0.75rem' },  // px-6 py-3
-    } as const;
-    const sizeFontMap: Record<NonNullable<typeof size>, string> = {
-        small: '0.875rem',  // text-sm
-        medium: '1rem',     // text-base
-        large: '1.125rem',  // text-lg
-    } as const;
-    const sizeMinWidthMap: Record<NonNullable<typeof size>, string> = {
-        small: '4rem',  // min-w-16
-        medium: '5rem', // min-w-20
-        large: '6rem',  // min-w-24
-    } as const;
+    const tokens = getSizeTokens(size);
 
     const rootStyle: JSX.CSSProperties = {
         // 位置样式（单位 rem）
         ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
         ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
         // 尺寸相关（动态类替换为内联样式）
-        'padding-left': sizePaddingMap[size].px,
-        'padding-right': sizePaddingMap[size].px,
-        'padding-top': sizePaddingMap[size].py,
-        'padding-bottom': sizePaddingMap[size].py,
-        'font-size': sizeFontMap[size],
-        'min-width': sizeMinWidthMap[size],
+        'padding-left': tokens.paddingX,
+        'padding-right': tokens.paddingX,
+        'padding-top': tokens.paddingY,
+        'padding-bottom': tokens.paddingY,
+        'font-size': tokens.fontSizeBase,
+        'min-width': tokens.minWidth,
     };
 
     const result: UseMyButtonResult = { rootClass: buttonClasses, slots: slotClasses };

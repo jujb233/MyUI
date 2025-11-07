@@ -8,6 +8,7 @@ import type { InteractionPolicy } from "../../Interfaces/interaction"
 import type { JSX } from "solid-js"
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
+import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles } from "../../Utils/sizeStyles"
 
 export interface UseMyCardProps extends PositionProps {
     variant?: ComponentVariant | undefined
@@ -81,40 +82,11 @@ export function useMyCard(props: UseMyCardProps) {
         isHorizontal && "flex-1",
         imagePosition === "background" && "relative z-10"
     )
-
-    const paddingMap: Record<typeof size, { px: string; py: string; spacingY: string }> = {
-        small: { px: '0.75rem', py: '0.25rem', spacingY: '0.5rem' }, // px-3 py-1 space-y-2
-        medium: { px: '1rem', py: '0.5rem', spacingY: '0.75rem' },   // px-4 py-2 space-y-3
-        large: { px: '1.5rem', py: '0.75rem', spacingY: '1rem' },    // px-6 py-3 space-y-4
-    }
-
-    const bodyStyle: JSX.CSSProperties = {
-        'padding-left': paddingMap[size].px,
-        'padding-right': paddingMap[size].px,
-        'padding-top': paddingMap[size].py,
-        'padding-bottom': paddingMap[size].py,
-        // 纵向间距通过 gap 模拟 space-y
-        'display': 'flex',
-        'flex-direction': 'column',
-        'row-gap': paddingMap[size].spacingY,
-    }
+    const tokens = getSizeTokens(size)
+    const bodyStyle = mergeStyles(buildPaddingStyle(tokens), buildVerticalStackStyle(tokens))
 
     // 圆角/字体尺寸等动态类移至 style
-    const radiusMap: Record<typeof size, string> = {
-        small: '0.5rem',    // rounded-lg
-        medium: '0.75rem',  // rounded-xl
-        large: '1rem',      // rounded-2xl
-    }
-    const titleFontSizeMap: Record<typeof size, string> = {
-        small: '1.125rem', // text-lg
-        medium: '1.25rem', // text-xl
-        large: '1.5rem',   // text-2xl
-    }
-    const contentFontSizeMap: Record<typeof size, string> = {
-        small: '0.875rem', // text-sm
-        medium: '1rem',    // text-base
-        large: '1.125rem', // text-lg
-    }
+    const radius = tokens.borderRadius
 
     const slots = {
         image: clsx(SLOTS_STYLE.image[imagePosition]),
@@ -128,10 +100,10 @@ export function useMyCard(props: UseMyCardProps) {
     }
 
     const slotStyles = {
-        title: { 'font-size': titleFontSizeMap[size] } as JSX.CSSProperties,
-        content: { 'font-size': contentFontSizeMap[size] } as JSX.CSSProperties,
-        footer: { 'border-bottom-left-radius': radiusMap[size], 'border-bottom-right-radius': radiusMap[size] } as JSX.CSSProperties,
-        image: { 'border-radius': radiusMap[size] } as JSX.CSSProperties,
+        title: { 'font-size': tokens.fontSizeTitle } as JSX.CSSProperties,
+        content: { 'font-size': tokens.fontSizeBase } as JSX.CSSProperties,
+        footer: { 'border-bottom-left-radius': radius, 'border-bottom-right-radius': radius } as JSX.CSSProperties,
+        image: { 'border-radius': radius } as JSX.CSSProperties,
     }
 
     return {

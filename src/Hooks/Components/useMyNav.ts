@@ -6,6 +6,7 @@ import { INTERACTION_PRESETS } from "../../styles/config/interaction";
 import { createBaseStyle } from "../../Utils/styleFactory";
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
+import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles";
 
 export interface UseMyNavOptions {
     variant?: ComponentVariant | undefined;
@@ -58,17 +59,8 @@ export function useMyNav(options: UseMyNavOptions) {
         .build();
 
     // 将 padding 移到 style
-    const paddingMap: Record<NonNullable<typeof size>, { px: string; py: string }> = {
-        small: { px: '0.75rem', py: '0.25rem' },
-        medium: { px: '1rem', py: '0.5rem' },
-        large: { px: '1.5rem', py: '0.75rem' },
-    } as const;
-    const navStyle = {
-        'padding-left': paddingMap[size].px,
-        'padding-right': paddingMap[size].px,
-        'padding-top': paddingMap[size].py,
-        'padding-bottom': paddingMap[size].py,
-    } as const;
+    const tokens = getSizeTokens(size)
+    const navStyle = buildPaddingStyle(tokens)
 
     return {
         nav: navClasses,
