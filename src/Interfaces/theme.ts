@@ -1,7 +1,14 @@
 import type { ComponentVariant, SizeName, ShadowName } from './core'
 import type { AnimationProp } from '../Options'
 
-/** 主题与尺寸（所有主题相关组件可选实现） */
+/**
+ * @description 定义了所有主题相关组件可选择实现的主题和尺寸属性。
+ * @interface ThemeProps
+ * @property {ComponentVariant} [variant] - 组件的变体，包括角色和颜色。
+ * @property {SizeName} [size] - 组件的尺寸。
+ * @property {boolean} [glass] - 是否启用玻璃拟态效果。
+ * @property {ShadowName} [shadow] - 组件的阴影级别。
+ */
 export interface ThemeProps {
     /** { role, color }，role 经 VARIANT_ROLE_STYLES 映射到 intensity */
     variant?: ComponentVariant | undefined
@@ -13,7 +20,15 @@ export interface ThemeProps {
     shadow?: ShadowName
 }
 
-/** Context 约定：各组件 Context 至少提供这些主题字段（可扩展组件自有字段） */
+/**
+ * @description 定义了组件 Context 至少应提供的主题相关字段。
+ * @interface ThemeContextValue
+ * @property {ComponentVariant} [variant] - 组件的变体。
+ * @property {SizeName} size - 组件的尺寸。
+ * @property {boolean} glass - 是否启用玻璃拟态效果。
+ * @property {ShadowName} shadow - 组件的阴影级别。
+ * @property {boolean} [disabled] - 组件是否被禁用。
+ */
 export interface ThemeContextValue {
     variant?: ComponentVariant
     size: SizeName
@@ -24,7 +39,9 @@ export interface ThemeContextValue {
 }
 
 /**
- * 为组件提供动画能力的接口。
+ * @description 为组件提供动画能力的接口。
+ * @interface AnimationProps
+ * @property {AnimationProp} [animation] - 控制组件的动画效果。
  */
 export interface AnimationProps {
     /**

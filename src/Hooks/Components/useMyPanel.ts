@@ -7,6 +7,7 @@ import { createBaseStyle } from "../../Utils/styleFactory"
 import type { PositionProps } from "../../Interfaces"
 import type { JSX } from "solid-js"
 import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles"
+import { defaultValues } from "../../Options/Configs/default"
 
 export type UseMyPanelProps = PositionProps & {
     variant?: ComponentVariant | undefined
@@ -22,14 +23,14 @@ export type UseMyPanelProps = PositionProps & {
 export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }) {
     const {
         variant: variantProp,
-        size = 'medium',
-        glass = true,
-        shadow = 'md',
-        className = "",
-        disabled = false,
-        interaction = 'rich',
+        size = defaultValues.SizeProps.size as SizeName,
+        glass = defaultValues.ThemeProps.glass,
+        shadow = defaultValues.ThemeProps.shadow as ShadowName,
+        className = defaultValues.StyleProps.class,
+        disabled = defaultValues.Disableable.disabled,
+        interaction = defaultValues.InteractionPolicy.behavior as InteractionPolicy,
         animation,
-        backgroundImage,
+        backgroundImage = defaultValues.WithImage.backgroundImage,
     } = props
 
     const role = variantProp?.role || 'primary'

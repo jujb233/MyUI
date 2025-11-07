@@ -1,13 +1,19 @@
 import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../styles/config/interaction';
 
+/**
+ * @description 定义了组件支持的交互状态类型。
+ * @type InteractionType
+ */
 export type InteractionType = 'hover' | 'focus' | 'active' | 'disabled'
 
 /**
- * 交互行为开关与配置
- *
- * 说明：用于描述组件在不同交互状态下（hover/focus/active/disabled）是否启用
- * 以及是否启用过渡等通用行为。此接口用于在组件级别声明哪些交互能力
- * 应该被开启并由 Hook/主题层去实际应用。
+ * @description 配置组件在不同交互状态下的行为，如是否启用效果、过渡等。
+ * @interface InteractionBehavior
+ * @property {boolean} [hover] - 是否启用悬停效果。
+ * @property {boolean} [focus] - 是否启用聚焦效果。
+ * @property {boolean} [active] - 是否启用激活效果。
+ * @property {boolean} [transition] - 是否启用状态切换时的过渡动画。
+ * @property {boolean} [disabled] - 在禁用时是否关闭所有交互反馈。
  */
 export interface InteractionBehavior {
     /** 是否启用悬停效果（hover）
@@ -37,11 +43,12 @@ export interface InteractionBehavior {
 }
 
 /**
- * 交互视觉效果配置
- *
- * 说明：定义在不同交互状态下的视觉变换细节（缩放、透明度、背景、阴影等）。
- * 所有子属性均为可选；可使用 number（视为比例）或 string（CSS 值，例如 '0.95'、'95%'、'1.05' 或 '8px'）
- * 来提供灵活的配置。
+ * @description 定义在不同交互状态下的视觉变换细节，如缩放、透明度、背景和阴影。
+ * @interface InteractionConfig
+ * @property {object} [scale] - 缩放效果配置。
+ * @property {object} [opacity] - 透明度效果配置。
+ * @property {object} [background] - 背景色变化配置。
+ * @property {object} [shadow] - 阴影效果配置。
  */
 export interface InteractionConfig {
     /** 缩放（scale）配置
@@ -84,7 +91,12 @@ export interface InteractionConfig {
 }
 
 /**
- * InteractionPolicy 定义合并，移除重复定义。
+ * @description 定义了组件的完整交互策略，包括是否启用、行为、视觉效果和自定义类。
+ * @interface InteractionPolicy
+ * @property {boolean} [enabled] - 是否启用交互策略。
+ * @property {typeof DEFAULT_INTERACTION_BEHAVIOR} [behavior] - 交互行为配置。
+ * @property {typeof DEFAULT_INTERACTION_EFFECTS} [effects] - 视觉反馈配置。
+ * @property {object} [classes] - 用于不同交互状态的自定义 CSS 类。
  */
 export interface InteractionPolicy {
     /** 总开关 */
@@ -103,13 +115,21 @@ export interface InteractionPolicy {
 }
 
 /**
- * 提供一个“组件可声明交互策略”的接口，供 Hook/组件实现。
- * TypeScript 接口仅作为约束，运行时不强制要求。
+ * @description 为组件提供声明其交互策略的能力。
+ * @interface SupportsInteractionPolicy
+ * @method getInteractionPolicy - 获取组件的交互策略。
  */
 export interface SupportsInteractionPolicy {
     getInteractionPolicy(): InteractionPolicy
 }
 
+/**
+ * @description 为组件提供可点击行为的属性。
+ * @interface Clickable
+ * @property {boolean} [clickable] - 如果为 `true`，组件将响应点击事件。
+ * @property {(event: MouseEvent) => void} [onClick] - 点击事件的回调函数。
+ * @property {boolean} [disabled] - 如果为 `true`，组件将被禁用，不响应点击。
+ */
 export interface Clickable {
     clickable?: boolean
     onClick?: (event: MouseEvent) => void

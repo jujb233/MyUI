@@ -7,6 +7,7 @@ import type { JSX } from "solid-js";
 import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 import { getSizeTokens } from "../../Utils/sizeStyles";
+import { defaultValues } from "../../Options/Configs/default";
 
 /**
  * 输入 props 类型说明
@@ -53,12 +54,12 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
     // 从 props 中解构并提供默认值（保证后续使用不会出现 undefined）
     const {
         variant,
-        size = 'medium',
-        disabled = false,
-        className = "",
-        glass = true,
-        shadow = 'md',
-        interaction = 'rich',
+        size = defaultValues.SizeProps.size as SizeName,
+        disabled = defaultValues.Disableable.disabled,
+        className = defaultValues.StyleProps.class,
+        glass = defaultValues.ThemeProps.glass,
+        shadow = defaultValues.ThemeProps.shadow as ShadowName,
+        interaction = defaultValues.InteractionPolicy.behavior as InteractionPolicy,
         animation,
     } = props;
 
@@ -92,7 +93,7 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         options: SLOTS_STYLE.buttonOptions,
     };
 
-    const tokens = getSizeTokens(size);
+    const tokens = getSizeTokens(size as SizeName);
 
     const rootStyle: JSX.CSSProperties = {
         // 位置样式（单位 rem）

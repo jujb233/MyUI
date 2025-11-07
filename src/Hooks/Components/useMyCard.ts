@@ -9,6 +9,8 @@ import type { JSX } from "solid-js"
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
 import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles } from "../../Utils/sizeStyles"
+import { defaultValues } from "../../Options/Configs/default"
+import type { OrientationProps, WithImage } from "../../Interfaces"
 
 export interface UseMyCardProps extends PositionProps {
     variant?: ComponentVariant | undefined
@@ -29,24 +31,29 @@ export interface UseMyCardProps extends PositionProps {
 export function useMyCard(props: UseMyCardProps) {
     const {
         variant: variantProp,
-        size = "medium",
-        glass = true,
-        clickable = false,
-        className = "",
-        bordered = true,
-        shadow = "md",
-        imagePosition = "top",
-        direction = "vertical",
-        hover = true,
+        size = defaultValues.SizeProps.size as SizeName,
+        glass = defaultValues.ThemeProps.glass,
+        clickable = defaultValues.Clickable.clickable,
+        className = defaultValues.StyleProps.class,
+        bordered = defaultValues.Borderable.bordered,
+        shadow = defaultValues.ThemeProps.shadow as ShadowName,
+        imagePosition = defaultValues.WithImage.imagePosition as WithImage["imagePosition"],
+        direction = defaultValues.OrientationProps.direction as OrientationProps["direction"],
+        hover = defaultValues.InteractionBehavior.hover,
         hasImage = false,
-        disabled = false,
+        disabled = defaultValues.Disableable.disabled,
         animation,
     } = props
 
     const role = variantProp?.role || "primary"
     const color = variantProp?.color || "blue"
 
-    const { isHorizontal } = useCardLayout({ direction, imagePosition, hasImage })
+    // Ensure `useCardLayout` receives valid parameters
+    const { isHorizontal } = useCardLayout({
+        direction: direction ?? "vertical",
+        imagePosition: imagePosition ?? "top",
+        hasImage,
+    })
 
     const interactionPolicy: InteractionPolicy | undefined = hover || clickable
         ? { enabled: true, behavior: { hover: !!hover, focus: false, active: false, disabled: false, transition: true } }
@@ -88,8 +95,9 @@ export function useMyCard(props: UseMyCardProps) {
     // 圆角/字体尺寸等动态类移至 style
     const radius = tokens.borderRadius
 
+    // Safely access `SLOTS_STYLE.image` with a fallback
     const slots = {
-        image: clsx(SLOTS_STYLE.image[imagePosition]),
+        image: imagePosition ? clsx(SLOTS_STYLE.image[imagePosition]) : undefined,
         header: clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header),
         title: clsx(SLOTS_STYLE.title),
         content: clsx(SLOTS_STYLE.textMuted, isHorizontal && "flex-1 min-w-0"),

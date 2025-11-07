@@ -7,6 +7,7 @@ import { createBaseStyle } from "../../Utils/styleFactory";
 import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles";
+import { defaultValues } from "../../Options/Configs/default";
 
 export interface UseMyNavOptions {
     variant?: ComponentVariant | undefined;
@@ -26,12 +27,12 @@ export interface UseMyNavOptions {
 export function useMyNav(options: UseMyNavOptions) {
     const {
         variant,
-        size = 'medium',
-        glass = false,
-        shadow = 'none',
-        className = '',
-        interactionEnabled = false,
-        interaction = 'none',
+        size = defaultValues.SizeProps.size as SizeName,
+        glass = defaultValues.ThemeProps.glass,
+        shadow = defaultValues.ThemeProps.shadow as ShadowName,
+        className = defaultValues.StyleProps.class,
+        interactionEnabled = defaultValues.InteractionPolicy.enabled,
+        interaction = defaultValues.InteractionPolicy.behavior,
         animation,
     } = options;
 
