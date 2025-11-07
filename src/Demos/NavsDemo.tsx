@@ -16,46 +16,55 @@ export const NavsSections = () => {
                     animation={{ type: 'slide-down', duration: 400, easing: 'out' }}
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
-                    menu={
-                        <>
-                            <li><a href="#" class="hover:underline">Home</a></li>
-                            <li><a href="#" class="hover:underline">About</a></li>
-                            <li><a href="#" class="hover:underline">Contact</a></li>
-                        </>
-                    }
-                    options={<MyButton size="small">Login</MyButton>}
-                />
+                >
+                    <MyNav.Brand>
+                        <a href="#" class="text-lg font-bold">MyApp</a>
+                    </MyNav.Brand>
+                    <MyNav.Menu>
+                        <li><a href="#" class="hover:underline">Home</a></li>
+                        <li><a href="#" class="hover:underline">About</a></li>
+                        <li><a href="#" class="hover:underline">Contact</a></li>
+                    </MyNav.Menu>
+                    <MyNav.Actions>
+                        <MyButton size="small">Login</MyButton>
+                    </MyNav.Actions>
+                </MyNav>
                 <MyNav
                     variant={{ role: 'secondary', color: 'blue' }}
                     animation="fade"
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
-                    menu={
-                        <>
-                            <li><a href="#" class="hover:underline">Home</a></li>
-                            <li><a href="#" class="hover:underline">About</a></li>
-                            <li><a href="#" class="hover:underline">Contact</a></li>
-                        </>
-                    }
-                    options={<MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>}
-                />
+                >
+                    <MyNav.Brand>
+                        <a href="#" class="text-lg font-bold">MyApp</a>
+                    </MyNav.Brand>
+                    <MyNav.Menu>
+                        <li><a href="#" class="hover:underline">Home</a></li>
+                        <li><a href="#" class="hover:underline">About</a></li>
+                        <li><a href="#" class="hover:underline">Contact</a></li>
+                    </MyNav.Menu>
+                    <MyNav.Actions>
+                        <MyButton size="small" variant={{ role: 'secondary', color: 'blue' }}>Login</MyButton>
+                    </MyNav.Actions>
+                </MyNav>
                 <MyNav
                     glass
                     animation={{ type: 'scale-in', duration: 350 }}
                     interactionEnabled
                     interaction='rich'
-                    title={<a href="#" class="text-lg font-bold">MyApp</a>}
-                    menu={
-                        <>
-                            <li><a href="#" class="hover:underline">Home</a></li>
-                            <li><a href="#" class="hover:underline">About</a></li>
-                            <li><a href="#" class="hover:underline">Contact</a></li>
-                        </>
-                    }
-                    options={<MyButton size="small" glass>Login</MyButton>}
-                />
+                >
+                    <MyNav.Brand>
+                        <a href="#" class="text-lg font-bold">MyApp</a>
+                    </MyNav.Brand>
+                    <MyNav.Menu>
+                        <li><a href="#" class="hover:underline">Home</a></li>
+                        <li><a href="#" class="hover:underline">About</a></li>
+                        <li><a href="#" class="hover:underline">Contact</a></li>
+                    </MyNav.Menu>
+                    <MyNav.Actions>
+                        <MyButton size="small" glass>Login</MyButton>
+                    </MyNav.Actions>
+                </MyNav>
             </DemoSection>
 
             <DemoSection
@@ -68,26 +77,25 @@ export const NavsSections = () => {
                     animation="fade"
                     interactionEnabled
                     interaction='rich'
-                    title={(
+                >
+                    <MyNav.Brand>
                         <div class="flex items-center gap-2">
                             <span class="text-xl font-black">MyUI</span>
                             <span class="rounded-full bg-white/20 px-2 text-xs uppercase tracking-widest">Pro</span>
                         </div>
-                    )}
-                    menu={
-                        <>
-                            <li><a href="#" class="hover:underline">产品</a></li>
-                            <li><a href="#" class="hover:underline">解决方案</a></li>
-                            <li><a href="#" class="hover:underline">定价</a></li>
-                        </>
-                    }
-                    options={
+                    </MyNav.Brand>
+                    <MyNav.Menu>
+                        <li><a href="#" class="hover:underline">产品</a></li>
+                        <li><a href="#" class="hover:underline">解决方案</a></li>
+                        <li><a href="#" class="hover:underline">定价</a></li>
+                    </MyNav.Menu>
+                    <MyNav.Actions>
                         <div class="flex items-center gap-3">
                             <MyButton size="small" variant={{ role: 'text', color: 'purple' }}>登录</MyButton>
                             <MyButton size="small" variant={{ role: 'secondary', color: 'purple' }}>注册</MyButton>
                         </div>
-                    }
-                />
+                    </MyNav.Actions>
+                </MyNav>
             </DemoSection>
 
             <DemoSection
@@ -102,16 +110,19 @@ export const NavsSections = () => {
                         animation={{ type: 'slide-up', duration: 500, easing: 'in-out' }}
                         interactionEnabled
                         interaction='rich'
-                        title={<a href="#" class="text-lg font-semibold">Aurora</a>}
-                        menu={
-                            <>
-                                <li><a href="#" class="hover:underline">Features</a></li>
-                                <li><a href="#" class="hover:underline">Docs</a></li>
-                                <li><a href="#" class="hover:underline">Community</a></li>
-                            </>
-                        }
-                        options={<MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>}
-                    />
+                    >
+                        <MyNav.Brand>
+                            <a href="#" class="text-lg font-semibold">Aurora</a>
+                        </MyNav.Brand>
+                        <MyNav.Menu>
+                            <li><a href="#" class="hover:underline">Features</a></li>
+                            <li><a href="#" class="hover:underline">Docs</a></li>
+                            <li><a href="#" class="hover:underline">Community</a></li>
+                        </MyNav.Menu>
+                        <MyNav.Actions>
+                            <MyButton size="small" glass variant={{ role: 'primary', color: 'blue' }}>Get Started</MyButton>
+                        </MyNav.Actions>
+                    </MyNav>
                 </div>
             </DemoSection>
         </>
