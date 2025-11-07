@@ -31,4 +31,14 @@ export const SLOTS_STYLE = {
     cardFooterBase: "card-footer mt-auto", // Card 的 footer 基础类
     cardHeaderBase: "card-header", // Card 的 header 基础类（与通用 header 拼接）
     navRootSizePrefix: "my-nav-", // Nav root 尺寸前缀
-} as const;
+
+    // 图片样式
+    image: {
+        top: "object-cover w-full h-48",
+        left: "object-cover w-32 h-full",
+        right: "object-cover w-32 h-full",
+        background: "object-cover absolute inset-0 h-full w-full opacity-10",
+        center: "object-cover absolute inset-0 h-full w-full opacity-10",
+        bottom: "object-cover w-full h-48", // 添加缺失的 bottom 样式
+    },
+} as const

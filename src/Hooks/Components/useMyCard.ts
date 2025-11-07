@@ -95,11 +95,7 @@ export function useMyCard(props: UseMyCardProps) {
 
     const slots = {
         image: clsx(
-            "object-cover",
-            imagePosition === "top" && "w-full h-48",
-            imagePosition === "left" && "w-32 h-full",
-            imagePosition === "right" && "w-32 h-full",
-            imagePosition === "background" && "absolute inset-0 h-full w-full object-cover opacity-10",
+            SLOTS_STYLE.image[imagePosition],
             sizeConfig.borderRadius
         ),
         header: clsx(SLOTS_STYLE.cardHeaderBase, SLOTS_STYLE.header),

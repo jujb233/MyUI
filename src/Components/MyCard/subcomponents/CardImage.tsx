@@ -11,8 +11,8 @@ export const CardImage: Component<{ src: string; alt?: string }> = (props) => {
             fallback={<img src={props.src} alt={props.alt || ""} class={slots.image} />}
         >
             <div class={slots.image}>
-                <img src={props.src} alt={props.alt || ""} class="absolute inset-0 h-full w-full object-cover opacity-10" />
+                <img src={props.src} alt={props.alt || ""} />
             </div>
         </Show>
     );
-}
+};
