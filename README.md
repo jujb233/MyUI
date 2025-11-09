@@ -153,28 +153,48 @@ function App() {
 ```tsx
 import '@jujb233/myui/styles'
 
-### 3. 使用 Web Components (无需框架绑定)
+## 纯 Web Components 使用（无需任何框架）
 
-如果你希望在非 Solid/React/Vue 的环境里直接通过自定义元素使用组件（或在微前端场景），可以加载 web components 入口：
+本库提供了原生 Web Components 封装，可在不依赖 React/Solid/Vue 的环境直接使用 `<myui-*>` 标签。
 
-```html
-<script type="module">
-  import { registerMyUIWebComponents } from 'https://unpkg.com/@jujb233/myui/dist/web-components.js'
-  // 自定义前缀（可选），默认 myui -> <myui-button>
-  registerMyUIWebComponents('myui')
-</script>
+### 我怎么看到使用效果？
 
-<myui-button variant='{"role":"primary","color":"blue"}' onclick="alert('WC click!')">WC 按钮</myui-button>
-```
+- 本仓库快速预览（推荐）：
+  - 运行开发演示：`npm run dev:demos`，浏览器打开控制台显示的地址（如 http://localhost:5173/ ），即可在导航中切换 Buttons/Cards/Navs/Panels/Animations/Interactions 示例。
+  - 或构建纯静态演示：`npm run build:demos`，然后用文件管理器双击打开 `demo-dist/index.html` 即可离线预览。
 
-或在打包环境：
+- 在你的项目里快速试用（CDN/静态 HTML）：
+  ```html
+  <!-- 引入已打包的 Web Components 入口（包含依赖） -->
+  <script type="module">
+    import { registerMyUIWebComponents } from 'https://unpkg.com/@jujb233/myui/dist/web-components.js'
+    registerMyUIWebComponents('myui') // 可自定义前缀，默认 'myui'
+  </script>
+
+  <!-- 提示：为获得完整视觉效果，需搭配本库样式。最快方式是直接参考本仓库的 demo：
+       运行 `npm run build:demos` 后，将 demo-dist/assets/*.css 与页面一同部署并在页面中 <link> 引入；
+       或在你的工程里集成 Tailwind CSS 4 并引入 `src/index.css`（详见本仓库的配置示例）。 -->
+
+  <myui-button variant='{"role":"primary","color":"blue"}' onclick="alert(`Hello`)"
+    >Hello MyUI</myui-button>
+  ```
+
+### 在打包环境使用（Node/npm 项目）
 
 ```ts
 import { registerMyUIWebComponents } from '@jujb233/myui/web-components'
 registerMyUIWebComponents() // 生成 <myui-button> 等标签
 ```
 
-支持的标签（默认前缀 myui）：
+然后在 HTML 中直接写标签：
+
+```html
+<myui-button variant='{"role":"primary","color":"blue"}'>点我</myui-button>
+```
+
+> 样式说明：组件样式基于 Tailwind CSS 4 构建。若你的项目未集成 Tailwind，可直接复用本仓库 `demo-dist/assets/*.css` 产物，或参考 `src/index.css` 的写法在你的 Tailwind 配置中引入。
+
+### 可用标签（默认前缀 myui）
 
 | 元素 | 对应 Solid 组件 |
 |------|------------------|
@@ -183,7 +203,7 @@ registerMyUIWebComponents() // 生成 <myui-button> 等标签
 | `<myui-nav>` | `MyNav` |
 | `<myui-panel>` | `MyPanel` |
 
-属性传递：将原组件的 props 使用 kebab-case 属性或 JSON 字符串传入；JSON 字符串会尝试自动解析（如 `variant='{"role":"primary"}'`）。
+属性传递：将原组件的 props 使用 kebab-case 属性或 JSON 字符串传入；JSON 字符串会自动尝试解析（如 `variant='{"role":"primary"}'`）。
 
 事件绑定：可直接使用原生事件，如 `onclick`，或通过脚本：
 
@@ -191,11 +211,10 @@ registerMyUIWebComponents() // 生成 <myui-button> 等标签
 document.querySelector('myui-button')?.addEventListener('click', () => console.log('clicked'))
 ```
 
-如果需要避免自动注册（默认在浏览器检测到 window 会立即注册），可以在构建后自行调用：
+如果需要避免自动注册（默认在浏览器检测到 window 会立即注册），可以在构建后手动调用：
 
 ```ts
 import { registerMyUIWebComponents } from '@jujb233/myui/web-components'
-// 不调用则不会生成任何自定义元素
 registerMyUIWebComponents('x') // 生成 <x-button> 等
 ```
 ```

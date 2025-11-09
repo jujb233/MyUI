@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nav Demos</title>
+            <link rel="stylesheet" href="/src/index.css">
+  <script type="module" crossorigin src="../assets/index-BdZRRa2s.js"></script>
+  <script type="module" crossorigin src="../assets/main-DlzchaXN.js"></script>
+  <link rel="stylesheet" crossorigin href="../assets/index-CM0YPSJ9.css">
+  <link rel="stylesheet" crossorigin href="../assets/main-DkbO9Q6I.css">
+</head>
+
+<body>
+    <h1>Nav Components</h1>
+
+    <section>
+        <h2>Basic Nav</h2>
+        <myui-nav>
+            <myui-nav-brand>MyLogo</myui-nav-brand>
+            <myui-nav-menu>
+                <myui-button variant="link">Home</myui-button>
+                <myui-button variant="link">Features</myui-button>
+                <myui-button variant="link">About</myui-button>
+            </myui-nav-menu>
+            <myui-nav-content>
+                <myui-button colorTheme="primary">Sign Up</myui-button>
+            </myui-nav-content>
+        </myui-nav>
+    </section>
+
+    <section>
+        <h2>Nav with different alignments</h2>
+        <myui-nav options='{"menuAlign": "center", "contentAlign": "end"}' style="margin-top: 1rem;">
+            <myui-nav-brand>Centered Menu</myui-nav-brand>
+            <myui-nav-menu>
+                <myui-button variant="link">Product</myui-button>
+                <myui-button variant="link">Docs</myui-button>
+            </myui-nav-menu>
+            <myui-nav-content>
+                <myui-button size="sm">Contact Us</myui-button>
+            </myui-nav-content>
+        </myui-nav>
+    </section>
+</body>
+
+</html>

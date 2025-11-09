@@ -1,3 +1,5 @@
+import './index.css'
+
 /**
  * Web Components 注册入口。
  * 使用 solid-element 将现有 Solid 组件包装为自定义元素，尽量保持原有 Props API。
@@ -19,6 +21,9 @@ import type { IMyButtonProps } from './Components/MyButton'
 import type { IMyCardProps } from './Components/MyCard'
 import type { IMyNavProps } from './Components/MyNav'
 import type { IMyPanelProps } from './Components/MyPanel'
+
+// 子组件类型（仅需要 children，不暴露复杂 props）
+type SimpleSlotProps = { children?: any }
 
 // 将可选的复杂对象属性（如 options、animation 等）从字符串自动解析 JSON（如果是字符串且看起来像 JSON）。
 function maybeParse<T>(v: any): T | any {
@@ -50,33 +55,101 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
         }
     }
 
+    // ---------- Button 系列 ----------
     defineOnce(`${prefix}-button`, () => {
-        // 默认属性对象可以留空，保持 API 开放性
         customElement<IMyButtonProps>(`${prefix}-button`, {}, (props) => {
             const p = normalizeProps(props) as IMyButtonProps
             return <MyButton {...p}>{p.children}</MyButton>
         })
     })
+    defineOnce(`${prefix}-button-icon`, () => {
+        // 允许 icon="✅" 或子节点形式
+        customElement<{ icon?: string } & SimpleSlotProps>(`${prefix}-button-icon`, {}, (props) => {
+            const iconNode = props.children || (props.icon ? props.icon : null)
+            return <MyButton.Icon icon={iconNode as any} />
+        })
+    })
+    defineOnce(`${prefix}-button-content`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-button-content`, {}, (props) => <MyButton.Content>{props.children}</MyButton.Content>)
+    })
+    defineOnce(`${prefix}-button-options`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-button-options`, {}, (props) => <MyButton.Options>{props.children}</MyButton.Options>)
+    })
 
+    // ---------- Card 系列 ----------
     defineOnce(`${prefix}-card`, () => {
         customElement<IMyCardProps>(`${prefix}-card`, {}, (props) => {
             const p = normalizeProps(props) as IMyCardProps
             return <MyCard {...p}>{p.children}</MyCard>
         })
     })
+    defineOnce(`${prefix}-card-options`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-card-options`, {}, (props) => <MyCard.Options>{props.children}</MyCard.Options>)
+    })
+    defineOnce(`${prefix}-card-content`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-card-content`, {}, (props) => <MyCard.Content>{props.children}</MyCard.Content>)
+    })
+    defineOnce(`${prefix}-card-footer`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-card-footer`, {}, (props) => <MyCard.Footer>{props.children}</MyCard.Footer>)
+    })
+    defineOnce(`${prefix}-card-header`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-card-header`, {}, (props) => <MyCard.Header>{props.children}</MyCard.Header>)
+    })
+    defineOnce(`${prefix}-card-tags`, () => {
+        customElement<SimpleSlotProps & { tags?: string }>(`${prefix}-card-tags`, {}, (props) => {
+            const raw = (props as any).tags
+            let list: any[] = []
+            if (typeof raw === 'string') list = raw.split(',').map(s => s.trim()).filter(Boolean)
+            // 若没有 tags 属性，允许使用子元素作为 tag 内容（每个子节点包裹成独立标签）
+            if (!raw && props.children) {
+                const childrenArray = Array.isArray(props.children) ? props.children : [props.children]
+                list = childrenArray
+            }
+            return <MyCard.Tags tags={list as any} />
+        })
+    })
+    defineOnce(`${prefix}-card-image`, () => {
+        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-card-image`, {}, (props) => <MyCard.Image src={(props as any).src || ''} />)
+    })
 
+    // ---------- Nav 系列 ----------
     defineOnce(`${prefix}-nav`, () => {
         customElement<IMyNavProps>(`${prefix}-nav`, {}, (props) => {
             const p = normalizeProps(props) as IMyNavProps
             return <MyNav {...p}>{p.children}</MyNav>
         })
     })
+    defineOnce(`${prefix}-nav-brand`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-nav-brand`, {}, (props) => <MyNav.Brand>{props.children}</MyNav.Brand>)
+    })
+    defineOnce(`${prefix}-nav-menu`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-nav-menu`, {}, (props) => <MyNav.Menu>{props.children}</MyNav.Menu>)
+    })
+    defineOnce(`${prefix}-nav-options`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-nav-options`, {}, (props) => <MyNav.Options>{props.children}</MyNav.Options>)
+    })
+    defineOnce(`${prefix}-nav-content`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-nav-content`, {}, (props) => <MyNav.Content>{props.children}</MyNav.Content>)
+    })
 
+    // ---------- Panel 系列 ----------
     defineOnce(`${prefix}-panel`, () => {
         customElement<IMyPanelProps>(`${prefix}-panel`, {}, (props) => {
             const p = normalizeProps(props) as IMyPanelProps
             return <MyPanel {...p}>{p.children}</MyPanel>
         })
+    })
+    defineOnce(`${prefix}-panel-header`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-panel-header`, {}, (props) => <MyPanel.Header title={props.children as any} />)
+    })
+    defineOnce(`${prefix}-panel-content`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-panel-content`, {}, (props) => <MyPanel.Content>{props.children}</MyPanel.Content>)
+    })
+    defineOnce(`${prefix}-panel-footer`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-panel-footer`, {}, (props) => <MyPanel.Footer>{props.children}</MyPanel.Footer>)
+    })
+    defineOnce(`${prefix}-panel-background`, () => {
+        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-panel-background`, {}, (props) => <MyPanel.Background backgroundImage={(props as any).src || ''} />)
     })
 
     return defs

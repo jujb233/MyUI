@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animation & Interaction Demos</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <link rel="stylesheet" href="demo-styles.css">
+    <script type="module" src="../main.ts"></script>
+    <style>
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .demo-box {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Animations</h1>
+    <section>
+        <h2>Hover Animations</h2>
+        <p>These animations are triggered on hover.</p>
+        <div class="animation-grid">
+            <myui-button animation='{"hover": {"animation": "pulse", "duration": "slow"}}'>Pulse</myui-button>
+            <myui-button animation='{"hover": {"animation": "bounce"}}'>Bounce</myui-button>
+            <myui-button animation='{"hover": {"animation": "shake"}}'>Shake</myui-button>
+            <myui-button animation='{"hover": {"animation": "tada"}}'>Tada</myui-button>
+        </div>
+    </section>
+
+    <h1>Interactions</h1>
+    <section>
+        <h2>Interaction Presets</h2>
+        <p>These components use interaction presets for effects like shadows and scaling on hover.</p>
+        <div class="component-grid">
+            <myui-card interaction='{"preset": "lift"}' style="width: 200px;">
+                <myui-card-content>Lift on hover</myui-card-content>
+            </myui-card>
+            <myui-card interaction='{"preset": "glow"}' style="width: 200px;">
+                <myui-card-content>Glow on hover</myui-card-content>
+            </myui-card>
+            <myui-button interaction='{"preset": "push"}' style="width: 200px;">
+                Push on click
+            </myui-button>
+        </div>
+    </section>
+
+</body>
+
+</html>

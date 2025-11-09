@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Demos</title>
+    <link rel="stylesheet" href="/src/index.css">
+    <link rel="stylesheet" href="demo-styles.css">
+    <script type="module" src="../main.ts"></script>
+</head>
+
+<body>
+    <h1>Card Components</h1>
+
+    <section>
+        <h2>Basic Card</h2>
+        <myui-card style="max-width: 300px;">
+            <myui-card-header>Card Title</myui-card-header>
+            <myui-card-content>
+                This is the content of the card. It can contain any text or HTML.
+            </myui-card-content>
+            <myui-card-footer>Footer</myui-card-footer>
+        </myui-card>
+    </section>
+
+    <section>
+        <h2>Card with Image and Tags</h2>
+        <myui-card style="max-width: 350px;">
+            <myui-card-image src="../assets/demo.png"></myui-card-image>
+            <myui-card-header>
+                <h3>Amazing Landscape</h3>
+            </myui-card-header>
+            <myui-card-tags tags="Nature,Art,Scenery"></myui-card-tags>
+            <myui-card-content>
+                <p>A beautiful picture of a landscape. The card component makes it easy to display images and related
+                    content.</p>
+            </myui-card-content>
+            <myui-card-footer>
+                <myui-button variant="solid" colorTheme="primary" size="sm">Learn More</myui-button>
+            </myui-card-footer>
+        </myui-card>
+    </section>
+
+    <section>
+        <h2>Horizontal Card</h2>
+        <myui-card layout="horizontal" style="max-width: 500px;">
+            <myui-card-image src="../assets/demo.png" style="width: 150px;"></myui-card-image>
+            <div style="display: flex; flex-direction: column;">
+                <myui-card-header>Horizontal Layout</myui-card-header>
+                <myui-card-content>
+                    The image and content are arranged side-by-side.
+                </myui-card-content>
+                <myui-card-footer>
+                    <myui-button size="sm">Action</myui-button>
+                </myui-card-footer>
+            </div>
+        </myui-card>
+    </section>
+
+</body>
+
+</html>
