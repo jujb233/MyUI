@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Button Demos</title>
-    <link rel="stylesheet" href="/src/index.css">
+    <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="demo-styles.css">
     <script type="module" src="../main.ts"></script>
 </head>
@@ -14,35 +14,32 @@
     <h1>Button Components</h1>
 
     <section>
-        <h2>Basic Buttons</h2>
+        <h2>Default Variants</h2>
         <div class="component-grid">
-            <myui-button>Default</myui-button>
-            <myui-button variant="solid">Solid</myui-button>
-            <myui-button variant="outline">Outline</myui-button>
-            <myui-button variant="ghost">Ghost</myui-button>
-            <myui-button variant="link">Link</myui-button>
+            <myui-button>Primary Solid</myui-button>
+            <myui-button variant='{"role":"secondary","color":"blue"}'>Secondary Soft</myui-button>
+            <myui-button variant='{"role":"text","color":"blue"}'>Text Style</myui-button>
+            <myui-button glass="false" shadow="md">Surface</myui-button>
         </div>
     </section>
 
     <section>
-        <h2>Color Themes</h2>
+        <h2>Color Accents</h2>
         <div class="component-grid">
-            <myui-button colorTheme="primary">Primary</myui-button>
-            <myui-button colorTheme="secondary">Secondary</myui-button>
-            <myui-button colorTheme="success">Success</myui-button>
-            <myui-button colorTheme="danger">Danger</myui-button>
-            <myui-button colorTheme="warning">Warning</myui-button>
+            <myui-button variant='{"role":"primary","color":"emerald"}'>Emerald</myui-button>
+            <myui-button variant='{"role":"primary","color":"amber"}'>Amber</myui-button>
+            <myui-button variant='{"role":"primary","color":"rose"}'>Rose</myui-button>
+            <myui-button variant='{"role":"primary","color":"purple"}'>Purple</myui-button>
+            <myui-button variant='{"role":"primary","color":"gray"}'>Gray</myui-button>
         </div>
     </section>
 
     <section>
         <h2>Sizes</h2>
         <div class="component-grid" style="align-items: center;">
-            <myui-button size="xs">Extra Small</myui-button>
-            <myui-button size="sm">Small</myui-button>
-            <myui-button size="md">Medium</myui-button>
-            <myui-button size="lg">Large</myui-button>
-            <myui-button size="xl">Extra Large</myui-button>
+            <myui-button size="small">Small</myui-button>
+            <myui-button size="medium">Medium</myui-button>
+            <myui-button size="large">Large</myui-button>
         </div>
     </section>
 
@@ -51,23 +48,24 @@
         <div class="component-grid">
             <myui-button>
                 <myui-button-icon icon="🚀"></myui-button-icon>
-                <myui-button-content>Icon Left</myui-button-content>
+                <myui-button-content>Launch</myui-button-content>
             </myui-button>
             <myui-button>
-                <myui-button-content>Icon Right</myui-button-content>
+                <myui-button-content>Celebrate</myui-button-content>
                 <myui-button-icon icon="🎉"></myui-button-icon>
             </myui-button>
-            <myui-button shape="circle" size="lg">
+            <myui-button size="large" glass="false" shadow="lg">
                 <myui-button-icon icon="❤️"></myui-button-icon>
             </myui-button>
         </div>
     </section>
 
     <section>
-        <h2>States</h2>
+        <h2>States &amp; Effects</h2>
         <div class="component-grid">
             <myui-button disabled>Disabled</myui-button>
-            <myui-button loading>Loading</myui-button>
+            <myui-button interaction="minimal">Minimal Interaction</myui-button>
+            <myui-button animation="pulse">Pulse Animation</myui-button>
         </div>
     </section>
 

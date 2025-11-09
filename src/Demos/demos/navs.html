@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nav Demos</title>
-    <link rel="stylesheet" href="/src/index.css">
+    <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="demo-styles.css">
     <script type="module" src="../main.ts"></script>
 </head>
@@ -15,29 +15,33 @@
 
     <section>
         <h2>Basic Nav</h2>
-        <myui-nav>
+        <myui-nav variant='{"role":"primary","color":"blue"}' glass="false" shadow="lg">
             <myui-nav-brand>MyLogo</myui-nav-brand>
             <myui-nav-menu>
-                <myui-button variant="link">Home</myui-button>
-                <myui-button variant="link">Features</myui-button>
-                <myui-button variant="link">About</myui-button>
+                <myui-button variant='{"role":"text","color":"white"}'>Home</myui-button>
+                <myui-button variant='{"role":"text","color":"white"}'>Features</myui-button>
+                <myui-button variant='{"role":"text","color":"white"}'>About</myui-button>
             </myui-nav-menu>
             <myui-nav-content>
-                <myui-button colorTheme="primary">Sign Up</myui-button>
+                <myui-button size="small" glass="true" shadow="md">Sign Up</myui-button>
             </myui-nav-content>
         </myui-nav>
     </section>
 
     <section>
-        <h2>Nav with different alignments</h2>
-        <myui-nav options='{"menuAlign": "center", "contentAlign": "end"}' style="margin-top: 1rem;">
+        <h2>Glass Nav with Actions</h2>
+        <myui-nav interaction="minimal" variant='{"role":"secondary","color":"purple"}' style="margin-top: 1rem;">
             <myui-nav-brand>Centered Menu</myui-nav-brand>
             <myui-nav-menu>
-                <myui-button variant="link">Product</myui-button>
-                <myui-button variant="link">Docs</myui-button>
+                <myui-button variant='{"role":"text","color":"purple"}'>Product</myui-button>
+                <myui-button variant='{"role":"text","color":"purple"}'>Docs</myui-button>
+                <myui-button variant='{"role":"text","color":"purple"}'>Pricing</myui-button>
             </myui-nav-menu>
             <myui-nav-content>
-                <myui-button size="sm">Contact Us</myui-button>
+                <div style="display: flex; gap: 0.75rem;">
+                    <myui-button size="small" glass="false">Log in</myui-button>
+                    <myui-button size="small" variant='{"role":"primary","color":"purple"}'>Get Started</myui-button>
+                </div>
             </myui-nav-content>
         </myui-nav>
     </section>

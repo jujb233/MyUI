@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animation & Interaction Demos</title>
-    <link rel="stylesheet" href="/src/index.css">
+    <link rel="stylesheet" href="../index.css">
     <link rel="stylesheet" href="demo-styles.css">
     <script type="module" src="../main.ts"></script>
 </head>
@@ -14,17 +14,34 @@
     <h1>Interactions</h1>
     <section>
         <h2>Interaction Presets</h2>
-        <p>These components use interaction presets for effects like shadows and scaling on hover.</p>
+        <p>Use preset names to enable curated hover and press effects.</p>
         <div class="component-grid">
-            <myui-card interaction='{"preset": "lift"}' style="width: 200px;">
-                <myui-card-content>Lift on hover</myui-card-content>
+            <myui-card interaction="basic" x-length="18rem">
+                <myui-card-content>Basic preset</myui-card-content>
             </myui-card>
-            <myui-card interaction='{"preset": "glow"}' style="width: 200px;">
-                <myui-card-content>Glow on hover</myui-card-content>
+            <myui-card interaction="rich" x-length="18rem">
+                <myui-card-content>Rich preset</myui-card-content>
             </myui-card>
-            <myui-button interaction='{"preset": "push"}' style="width: 200px;">
-                Push on click
-            </myui-button>
+            <myui-card interaction="minimal" x-length="18rem">
+                <myui-card-content>Minimal preset</myui-card-content>
+            </myui-card>
+        </div>
+    </section>
+
+    <section>
+        <h2>Custom Interaction Policy</h2>
+        <p>Pass a JSON object for fine-grained control over behavior and effects.</p>
+        <div class="component-grid">
+            <myui-button style="width: 200px;"
+                interaction='{"enabled": true, "behavior": {"hover": true, "focus": false, "active": true, "transition": true}, "effects": {"scale": {"hover": 1.04, "active": 0.96}, "opacity": {"hover": 0.92}}}'>Custom
+                interaction</myui-button>
+            <myui-panel x-length="20rem"
+                interaction='{"enabled": true, "behavior": {"hover": true, "active": false, "focus": true}, "effects": {"shadow": {"hover": "0 10px 25px rgba(88, 28, 135, 0.35)", "focus": "0 0 0 3px rgba(168, 85, 247, 0.35)"}}}'>
+                <myui-panel-header>Focus-friendly panel</myui-panel-header>
+                <myui-panel-content>
+                    Custom policies support focus rings and bespoke shadows.
+                </myui-panel-content>
+            </myui-panel>
         </div>
     </section>
 

@@ -21,19 +21,14 @@
   "bugs": {
     "url": "https://github.com/jujb233/MyUI/issues"
   },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/src/index.d.ts",
+  "main": "./dist/my-ui.umd.cjs",
+  "module": "./dist/my-ui.js",
+  "types": "./dist/web-components.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/src/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    },
-    "./web-components": {
-      "types": "./dist/src/web-components.d.ts",
-      "import": "./dist/web-components.js",
-      "require": "./dist/web-components.cjs"
+      "types": "./dist/web-components.d.ts",
+      "import": "./dist/my-ui.js",
+      "require": "./dist/my-ui.umd.cjs"
     }
   },
   "files": [
@@ -43,27 +38,26 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc -p tsconfig.build.json",
-    "dev:demos": "vite --config vite.demo.config.ts",
-    "build:demos": "vite build --config vite.demo.config.ts",
+    "build": "vite build && tsc",
+    "build:demos": "vite build --mode demo",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --outDir demo-dist"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.17",
-    "clsx": "^2.1.1",
-    "solid-element": "^1.9.1",
-    "solid-js": "^1.9.10",
-    "tailwindcss": "^4.1.17",
-    "vite-plugin-solid": "^2.11.10"
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tailwindcss/vite": "^4.1.17",
     "@types/node": "^24.10.0",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
+    "solid-element": "^1.9.1",
+    "solid-js": "^1.9.10",
+    "tailwindcss": "^4.1.17",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.3",
-    "vite": "^7.2.2"
+    "vite": "^7.2.2",
+    "vite-plugin-solid": "^2.11.10"
   }
 }
