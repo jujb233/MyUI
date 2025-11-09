@@ -1,25 +1,14 @@
 {
-    "extends": "./tsconfig.app.json",
+    "extends": "./tsconfig.json",
     "compilerOptions": {
         "noEmit": false,
-        "allowImportingTsExtensions": false,
-        "verbatimModuleSyntax": false,
         "declaration": true,
         "declarationDir": "./dist",
         "emitDeclarationOnly": true,
-        "outDir": "./dist",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "moduleResolution": "node"
+        "outDir": "./dist"
     },
-    "include": [
-        "src/**/*"
-    ],
     "exclude": [
-        "src/main.tsx",
-        "src/App.tsx",
-        "src/Demo.tsx",
-        "src/Demos/**",
-        "index.html"
+        "node_modules",
+        "dist"
     ]
 }

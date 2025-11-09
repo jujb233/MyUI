@@ -130,7 +130,52 @@ pnpm add @jujb233/myui
 
 ## 快速开始
 
-### 1. 引入组件
+本库支持在 SolidJS 等现代框架中使用，也支持作为纯 Web Components 在任何 HTML 环境下使用。
+
+### 方式一：在 SolidJS 项目中使用
+
+这是推荐的开发方式，可以获得完整的 TypeScript 支持和最佳的开发体验。
+
+#### 1. 安装
+
+```bash
+npm install @jujb233/myui
+npm install -D tailwindcss @tailwindcss/vite
+```
+
+#### 2. 配置 Tailwind CSS
+
+为了让组件的样式生效，你需要引入本库的 Tailwind 配置。
+
+修改你的 `tailwind.config.ts` 文件：
+
+```ts
+import type { Config } from 'tailwindcss'
+import myui from '@jujb233/myui/tailwind.config' // 引入 MyUI 配置
+
+export default {
+  content: [
+    './src/**/*.{js,jsx,ts,tsx}',
+    // 如果 MyUI 安装在 node_modules 中，请确保路径正确
+    './node_modules/@jujb233/myui/dist/**/*.{js,ts}',
+  ],
+  presets: [myui], // 作为预设使用
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+} satisfies Config
+```
+
+同时，在你的主样式文件（如 `src/index.css`）中引入 Tailwind 的基础指令：
+
+```css
+@import 'tailwindcss';
+```
+
+#### 3. 使用组件
+
+现在你可以在你的 SolidJS 组件中直接引入和使用 MyUI 组件了。
 
 ```tsx
 import { MyButton } from '@jujb233/myui'
@@ -146,12 +191,149 @@ function App() {
 }
 ```
 
-### 2. 引入样式 (可选)
+### 方式二：作为纯 Web Components 使用
 
-如果你的项目没有使用 Tailwind CSS，可以引入我们的预构建样式：
+无需任何前端框架，你可以直接在 HTML 中使用本库的组件。
 
-```tsx
-import '@jujb233/myui/styles'
+#### 1. 通过 CDN 引入
+
+这是最快体验的方式。在你的 HTML 文件中加入以下代码：
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MyUI Web Components Demo</title>
+  <!-- 
+    要获得完整的视觉效果，你需要引入 Tailwind CSS 或本库的预构建样式。
+    为了快速演示，这里我们直接使用 unpkg 上的预构建 CSS。
+    注意：这并非生产环境的最佳实践。
+  -->
+  <link rel="stylesheet" href="https://unpkg.com/@jujb233/myui/dist/my-ui.css">
+
+  <!-- 引入 Web Components 脚本 -->
+  <script type="module">
+    // 这个脚本会自动注册 <myui-*> 标签
+    import 'https://unpkg.com/@jujb233/myui/dist/my-ui.js';
+  </script>
+</head>
+<body>
+
+  <h3>Web Components 示例</h3>
+
+  <myui-button variant='{"role":"primary","color":"blue"}' onclick="alert('Hello from Web Component!')">
+    点我 (Web Component)
+  </myui-button>
+
+  <myui-card title="Web Component Card" shadow="lg" style="margin-top: 20px; max-width: 300px;">
+    <myui-card-content>
+      这是一个通过纯 HTML 标签创建的卡片。
+    </myui-card-content>
+    <myui-card-footer>
+      卡片底部
+    </myui-card-footer>
+  </myui-card>
+
+</body>
+</html>
+```
+
+> **属性传递**：
+> - 简单属性（字符串、数字）直接写，如 `title="My Card"`。
+> - 复杂属性（对象、数组）需要传递 JSON 字符串，如 `variant='{"role":"primary"}'`。
+
+### 方式二：作为 Web Components 在打包项目中使用 (Vite, etc.)
+
+如果你的项目使用 Vite、Webpack 等工具，可以轻松集成 MyUI 的 Web Components。
+
+**步骤 1：安装 MyUI**
+
+```bash
+npm install @jujb233/myui
+```
+
+**步骤 2：在项目入口文件引入**
+
+打开你的项目主文件（如 `src/main.ts`），引入 Web Components 注册脚本和样式。
+
+```ts
+// src/main.ts
+
+// 1. 引入 Web Components 注册脚本
+// 这将自动查找并注册所有 <myui-*> 标签
+import '@jujb233/myui/web-components';
+
+// 2. 引入 MyUI 的预构建样式
+import '@jujb233/myui/dist/my-ui.css';
+
+// 你原有的应用代码可以保留或修改
+import './style.css'
+
+document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+  <h1>Hello MyUI!</h1>
+  <myui-button variant='{"role": "primary", "color": "blue"}'>Click Me</myui-button>
+`
+```
+
+> **提示**：`@jujb233/myui/web-components` 入口会自动执行注册。如果你需要手动控制注册时机或自定义标签前缀，可以这样做：
+> ```ts
+> import { registerMyUIWebComponents } from '@jujb233/myui/web-components';
+> 
+> // 在合适的时机调用
+> registerMyUIWebComponents('custom-prefix'); // 将注册 <custom-prefix-button> 等
+> ```
+
+**步骤 3：直接在 HTML 中使用**
+
+你可以在 `index.html` 中直接使用组件标签，这是 Web Components 的魅力所在。
+
+```html
+<!-- index.html -->
+<body>
+  <div id="app">
+    <h1>Hello MyUI in HTML!</h1>
+    <myui-card title="My Awesome Card" shadow="lg">
+      <myui-card-content>
+        This card is rendered directly in HTML.
+      </myui-card-content>
+    </myui-card>
+  </div>
+  <!-- 确保你的 JS 入口文件被加载 -->
+  <script type="module" src="/src/main.ts"></script>
+</body>
+```
+
+**步骤 4：配置 TypeScript 类型提示 (可选但推荐)**
+
+为了在 TypeScript 文件中操作自定义元素（如 `document.querySelector('myui-button')`）时获得正确的类型提示，你可以在 `tsconfig.json` 中进行配置。
+
+首先，在 `src` 目录下创建一个类型声明文件，例如 `src/vite-env.d.ts` (Vite 已默认创建)，并添加以下内容：
+
+```ts
+/// <reference types="vite/client" />
+
+// 引入 MyUI 的 Web Components 类型
+import type { MyUIWebComponentTagNames } from '@jujb233/myui/web-components';
+
+declare global {
+  namespace JSX {
+    // 告知 TypeScript JSX 工厂函数如何处理 myui-* 标签
+    interface IntrinsicElements extends MyUIWebComponentTagNames {}
+  }
+}
+```
+
+这样配置后，当你在 TSX 文件或通过 `document.createElement` 创建元素时，TypeScript 就能识别这些标签及其属性了。
+
+### 查看所有组件
+
+- **本地快速预览**：
+  - 克隆本仓库，运行 `npm install`。
+  - 运行 `npm run dev`，浏览器会打开一个包含所有组件示例的页面。
+
+- **在线文档**（TODO）：
+  - 未来会上线一个完整的组件文档网站。
 
 ## 纯 Web Components 使用（无需任何框架）
 
@@ -160,20 +342,16 @@ import '@jujb233/myui/styles'
 ### 我怎么看到使用效果？
 
 - 本仓库快速预览（推荐）：
-  - 运行开发演示：`npm run dev:demos`，浏览器打开控制台显示的地址（如 http://localhost:5173/ ），即可在导航中切换 Buttons/Cards/Navs/Panels/Animations/Interactions 示例。
+  - 运行开发演示：`npm run dev`，浏览器打开控制台显示的地址（如 http://localhost:5173/ ），即可在导航中切换 Buttons/Cards/Navs/Panels/Animations/Interactions 示例。
   - 或构建纯静态演示：`npm run build:demos`，然后用文件管理器双击打开 `demo-dist/index.html` 即可离线预览。
 
 - 在你的项目里快速试用（CDN/静态 HTML）：
   ```html
   <!-- 引入已打包的 Web Components 入口（包含依赖） -->
-  <script type="module">
-    import { registerMyUIWebComponents } from 'https://unpkg.com/@jujb233/myui/dist/web-components.js'
-    registerMyUIWebComponents('myui') // 可自定义前缀，默认 'myui'
-  </script>
+  <script type="module" src="https://unpkg.com/@jujb233/myui/dist/my-ui.js"></script>
 
-  <!-- 提示：为获得完整视觉效果，需搭配本库样式。最快方式是直接参考本仓库的 demo：
-       运行 `npm run build:demos` 后，将 demo-dist/assets/*.css 与页面一同部署并在页面中 <link> 引入；
-       或在你的工程里集成 Tailwind CSS 4 并引入 `src/index.css`（详见本仓库的配置示例）。 -->
+  <!-- 提示：为获得完整视觉效果，需搭配本库样式。 -->
+  <link rel="stylesheet" href="https://unpkg.com/@jujb233/myui/dist/my-ui.css">
 
   <myui-button variant='{"role":"primary","color":"blue"}' onclick="alert(`Hello`)"
     >Hello MyUI</myui-button>
@@ -182,8 +360,11 @@ import '@jujb233/myui/styles'
 ### 在打包环境使用（Node/npm 项目）
 
 ```ts
-import { registerMyUIWebComponents } from '@jujb233/myui/web-components'
-registerMyUIWebComponents() // 生成 <myui-button> 等标签
+// 引入注册脚本，它会查找并注册所有组件
+import '@jujb233/myui'
+
+// 引入样式
+import '@jujb233/myui/dist/my-ui.css'
 ```
 
 然后在 HTML 中直接写标签：
@@ -192,7 +373,7 @@ registerMyUIWebComponents() // 生成 <myui-button> 等标签
 <myui-button variant='{"role":"primary","color":"blue"}'>点我</myui-button>
 ```
 
-> 样式说明：组件样式基于 Tailwind CSS 4 构建。若你的项目未集成 Tailwind，可直接复用本仓库 `demo-dist/assets/*.css` 产物，或参考 `src/index.css` 的写法在你的 Tailwind 配置中引入。
+> 样式说明：组件样式基于 Tailwind CSS 4 构建。若你的项目未集成 Tailwind，可直接复用本仓库 `dist/my-ui.css` 产物，或参考 `tailwind.config.ts` 的写法在你的 Tailwind 配置中引入。
 
 ### 可用标签（默认前缀 myui）
 
@@ -211,7 +392,7 @@ registerMyUIWebComponents() // 生成 <myui-button> 等标签
 document.querySelector('myui-button')?.addEventListener('click', () => console.log('clicked'))
 ```
 
-如果需要避免自动注册（默认在浏览器检测到 window 会立即注册），可以在构建后手动调用：
+如果需要避免自动注册（默认在浏览器检测到 window 会立即注册），可以从特定入口导入注册函数：
 
 ```ts
 import { registerMyUIWebComponents } from '@jujb233/myui/web-components'

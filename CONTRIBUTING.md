@@ -40,13 +40,6 @@ npm install
 npm run dev
 ```
 
-- 确保运行以下命令进行构建和类型检查：
-
-```bash
-npm run build
-npm run build:types
-```
-
 ## 6. 提交更改
 
 提交您的更改：

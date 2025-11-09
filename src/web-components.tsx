@@ -1,5 +1,3 @@
-import './index.css'
-
 /**
  * Web Components 注册入口。
  * 使用 solid-element 将现有 Solid 组件包装为自定义元素，尽量保持原有 Props API。
@@ -154,6 +152,34 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
 
     return defs
 }
+
+/**
+ * 导出 Web Components 的标签名和属性类型，用于 TypeScript 类型提示。
+ * 这使得在 JSX 或 TSX 中使用自定义元素时，可以获得自动补全和类型检查。
+ */
+export type MyUIWebComponentTagNames = {
+    'myui-button': IMyButtonProps & { children?: any };
+    'myui-button-icon': { icon?: string } & SimpleSlotProps;
+    'myui-button-content': SimpleSlotProps;
+    'myui-button-options': SimpleSlotProps;
+    'myui-card': IMyCardProps & { children?: any };
+    'myui-card-options': SimpleSlotProps;
+    'myui-card-content': SimpleSlotProps;
+    'myui-card-footer': SimpleSlotProps;
+    'myui-card-title': SimpleSlotProps;
+    'myui-card-tags': { tags?: string } & SimpleSlotProps;
+    'myui-card-image': { src?: string } & SimpleSlotProps;
+    'myui-nav': IMyNavProps & { children?: any };
+    'myui-nav-title': SimpleSlotProps;
+    'myui-nav-menu': SimpleSlotProps;
+    'myui-nav-options': SimpleSlotProps;
+    'myui-nav-content': SimpleSlotProps;
+    'myui-panel': IMyPanelProps & { children?: any };
+    'myui-panel-title': SimpleSlotProps;
+    'myui-panel-content': SimpleSlotProps;
+    'myui-panel-footer': SimpleSlotProps;
+    'myui-panel-background': { src?: string } & SimpleSlotProps;
+};
 
 // 默认立即注册一次（可选）。如果不希望自动注册，可删除此调用。
 // 在 SSR 或构建时环境没有 window 时会跳过。

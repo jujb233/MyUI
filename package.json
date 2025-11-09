@@ -23,25 +23,37 @@
   },
   "main": "./dist/my-ui.umd.cjs",
   "module": "./dist/my-ui.js",
-  "types": "./dist/web-components.d.ts",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/web-components.d.ts",
+      "types": "./dist/index.d.ts",
       "import": "./dist/my-ui.js",
       "require": "./dist/my-ui.umd.cjs"
-    }
+    },
+    "./web-components": {
+      "types": "./dist/web-components.d.ts",
+      "import": "./dist/my-ui.js"
+    },
+    "./tailwind.config": {
+      "import": "./tailwind.config.ts",
+      "require": "./tailwind.config.ts"
+    },
+    "./dist/my-ui.css": "./dist/style.css"
   },
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "tailwind.config.ts"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc",
-    "build:demos": "vite build --mode demo",
+    "build": "vite build && tsc -p tsconfig.build.json",
     "lint": "eslint .",
-    "preview": "vite preview --outDir demo-dist"
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=4.0.0"
   },
   "dependencies": {
     "clsx": "^2.1.1"
