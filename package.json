@@ -29,6 +29,11 @@
       "types": "./dist/src/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./web-components": {
+      "types": "./dist/src/web-components.d.ts",
+      "import": "./dist/web-components.js",
+      "require": "./dist/web-components.cjs"
     }
   },
   "files": [

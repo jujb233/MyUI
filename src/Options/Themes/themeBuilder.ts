@@ -1,5 +1,5 @@
-// 直接引用具体实现，避免通过 Utils 聚合引入循环依赖
-import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../../Utils"
+// 直接引用具体实现，避免通过 Utils 聚合引入循环依赖与路径解析问题
+import { adjustColorBrightness, alphaFromHex, yiqTextColor } from "../../Utils/styles"
 
 /**
  * 定义主题对象的结构

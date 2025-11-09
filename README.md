@@ -152,6 +152,52 @@ function App() {
 
 ```tsx
 import '@jujb233/myui/styles'
+
+### 3. 使用 Web Components (无需框架绑定)
+
+如果你希望在非 Solid/React/Vue 的环境里直接通过自定义元素使用组件（或在微前端场景），可以加载 web components 入口：
+
+```html
+<script type="module">
+  import { registerMyUIWebComponents } from 'https://unpkg.com/@jujb233/myui/dist/web-components.js'
+  // 自定义前缀（可选），默认 myui -> <myui-button>
+  registerMyUIWebComponents('myui')
+</script>
+
+<myui-button variant='{"role":"primary","color":"blue"}' onclick="alert('WC click!')">WC 按钮</myui-button>
+```
+
+或在打包环境：
+
+```ts
+import { registerMyUIWebComponents } from '@jujb233/myui/web-components'
+registerMyUIWebComponents() // 生成 <myui-button> 等标签
+```
+
+支持的标签（默认前缀 myui）：
+
+| 元素 | 对应 Solid 组件 |
+|------|------------------|
+| `<myui-button>` | `MyButton` |
+| `<myui-card>` | `MyCard` |
+| `<myui-nav>` | `MyNav` |
+| `<myui-panel>` | `MyPanel` |
+
+属性传递：将原组件的 props 使用 kebab-case 属性或 JSON 字符串传入；JSON 字符串会尝试自动解析（如 `variant='{"role":"primary"}'`）。
+
+事件绑定：可直接使用原生事件，如 `onclick`，或通过脚本：
+
+```js
+document.querySelector('myui-button')?.addEventListener('click', () => console.log('clicked'))
+```
+
+如果需要避免自动注册（默认在浏览器检测到 window 会立即注册），可以在构建后自行调用：
+
+```ts
+import { registerMyUIWebComponents } from '@jujb233/myui/web-components'
+// 不调用则不会生成任何自定义元素
+registerMyUIWebComponents('x') // 生成 <x-button> 等
+```
 ```
 
 ## 组件文档

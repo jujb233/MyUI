@@ -11,3 +11,5 @@ export type { IMyNavProps as MyNavProps } from './Components/MyNav';
 export type { IMyPanelProps as MyPanelProps } from './Components/MyPanel';
 
 export * from './Interfaces'
+// Web Components 注册函数导出（可选）
+export { registerMyUIWebComponents } from './web-components'

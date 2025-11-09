@@ -1,15 +1,15 @@
-import type { JSX } from "solid-js";
-import type { SizeName } from "../../Interfaces";
+import type { JSX } from "solid-js"
+import type { SizeName } from "../../Interfaces"
 
 export interface SizeTokens {
-    size: SizeName;
-    paddingX: string; // horizontal padding
-    paddingY: string; // vertical padding
-    fontSizeBase: string; // base/content font size
-    fontSizeTitle: string; // title font size
-    minWidth: string; // button min-width
-    gapY: string; // vertical gap for stacked layouts (card body)
-    borderRadius: string; // for image/footer rounding in cards
+    size: SizeName
+    paddingX: string // horizontal padding
+    paddingY: string // vertical padding
+    fontSizeBase: string // base/content font size
+    fontSizeTitle: string // title font size
+    minWidth: string // button min-width
+    gapY: string // vertical gap for stacked layouts (card body)
+    borderRadius: string // for image/footer rounding in cards
 }
 
 const SIZE_TOKENS_MAP: Record<SizeName, SizeTokens> = {
@@ -43,10 +43,10 @@ const SIZE_TOKENS_MAP: Record<SizeName, SizeTokens> = {
         gapY: '1rem', // space-y-4
         borderRadius: '1rem', // rounded-2xl
     },
-};
+}
 
 export function getSizeTokens(size: SizeName = 'medium'): SizeTokens {
-    return SIZE_TOKENS_MAP[size] || SIZE_TOKENS_MAP.medium;
+    return SIZE_TOKENS_MAP[size] || SIZE_TOKENS_MAP.medium
 }
 
 // Helper: build padding style object
@@ -56,7 +56,7 @@ export function buildPaddingStyle(tokens: SizeTokens): JSX.CSSProperties {
         'padding-right': tokens.paddingX,
         'padding-top': tokens.paddingY,
         'padding-bottom': tokens.paddingY,
-    } as const;
+    } as const
 }
 
 // Helper: common vertical stack style (replacement for Tailwind space-y-*)
@@ -65,27 +65,27 @@ export function buildVerticalStackStyle(tokens: SizeTokens): JSX.CSSProperties {
         'display': 'flex',
         'flex-direction': 'column',
         'row-gap': tokens.gapY,
-    } as const;
+    } as const
 }
 
 // Helper: merge two style objects (shallow)
 export function mergeStyles<A extends JSX.CSSProperties | undefined, B extends JSX.CSSProperties | undefined>(a: A, b: B): JSX.CSSProperties {
-    return { ...(a || {}), ...(b || {}) };
+    return { ...(a || {}), ...(b || {}) }
 }
 
 export const X_LENGTH_PRESETS: Record<SizeName, string> = {
     small: '16rem', // w-64
     medium: '24rem', // w-96
     large: '32rem', // w-128
-};
+}
 
 export const Y_LENGTH_PRESETS: Record<SizeName, string> = {
     small: 'auto',
     medium: 'auto',
     large: 'auto',
-};
+}
 
-type LengthValue = SizeName | number | string;
+type LengthValue = SizeName | number | string
 
 /**
  * Resolves a length value (SizeName, number, or string) into a valid CSS string.
@@ -94,18 +94,18 @@ type LengthValue = SizeName | number | string;
  * @returns A CSS length string (e.g., '16rem', '100px', '50%').
  */
 function getLengthValue(value: LengthValue | undefined, presets: Record<SizeName, string>): string | undefined {
-    if (value === undefined) return undefined;
+    if (value === undefined) return undefined
 
     if (typeof value === 'number') {
-        return `${value}rem`;
+        return `${value}rem`
     }
     if (typeof value === 'string') {
         if (presets[value as SizeName]) {
-            return presets[value as SizeName];
+            return presets[value as SizeName]
         }
-        return value; // Assume it's a valid CSS value like '50%' or '100px'
+        return value // Assume it's a valid CSS value like '50%' or '100px'
     }
-    return undefined;
+    return undefined
 }
 
 /**
@@ -114,15 +114,15 @@ function getLengthValue(value: LengthValue | undefined, presets: Record<SizeName
  * @returns A JSX.CSSProperties object with width and/or height.
  */
 export function buildSizeStyle(props: { xLength?: LengthValue; yLength?: LengthValue }): JSX.CSSProperties {
-    const style: JSX.CSSProperties = {};
-    const width = getLengthValue(props.xLength, X_LENGTH_PRESETS);
-    const height = getLengthValue(props.yLength, Y_LENGTH_PRESETS);
+    const style: JSX.CSSProperties = {}
+    const width = getLengthValue(props.xLength, X_LENGTH_PRESETS)
+    const height = getLengthValue(props.yLength, Y_LENGTH_PRESETS)
 
     if (width !== undefined) {
-        style.width = width;
+        style.width = width
     }
     if (height !== undefined) {
-        style.height = height;
+        style.height = height
     }
-    return style;
+    return style
 }

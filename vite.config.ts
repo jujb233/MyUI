@@ -8,13 +8,21 @@ export default defineConfig({
   plugins: [tailwindcss(), solidjs()],
   build: {
     lib: {
-      entry: resolve(__dirname, "src/index.ts"),
+      // 通过多入口同时产出主库与 web components 入口
+      entry: {
+        index: resolve(__dirname, "src/index.ts"),
+        "web-components": resolve(__dirname, "src/web-components.tsx"),
+      },
       name: "MyUI",
       formats: ["es", "cjs"],
-      fileName: (format) => `index.${format === "es" ? "js" : format}`,
+      fileName: (format) => `[name].${format === "es" ? "js" : format}`,
     },
     rollupOptions: {
-      external: ["solid-js"],
+      external: ["solid-js", "solid-element"],
+      input: {
+        index: resolve(__dirname, "src/index.ts"),
+        "web-components": resolve(__dirname, "src/web-components.tsx"),
+      },
       output: {
         globals: {
           "solid-js": "SolidJS",
