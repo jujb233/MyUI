@@ -1,5 +1,55 @@
 # layout 模块接口文档
 
+该模块定义了布局相关的接口，包括容器类能力、布局方向、位置与尺寸等，便于组件之间复用布局相关的 Props。
+
+## 主要接口（来自 src/Interfaces/layout.ts 与 component.ts）
+
+### Borderable
+```ts
+export interface Borderable { bordered?: boolean }
+```
+
+### Focusable
+```ts
+export interface Focusable { clickFocusable?: boolean; hover?: boolean }
+```
+
+### OrientationProps
+```ts
+export interface OrientationProps { direction?: 'vertical' | 'horizontal' }
+```
+
+### PositionProps
+```ts
+export interface PositionProps {
+  top?: number
+  left?: number
+}
+```
+
+### SizeProps
+```ts
+export interface SizeProps {
+  size?: SizeName
+  xLength?: SizeName | number | string
+  yLength?: SizeName | number | string
+}
+```
+
+### 常用插槽类型（来自 component.ts）
+```ts
+import type { JSX } from 'solid-js'
+
+export interface WithIcon { icon?: JSX.Element }
+export interface WithOptions { options?: JSX.Element }
+export interface WithTitle { title?: JSX.Element }
+export interface WithFooter { footer?: JSX.Element }
+export interface WithImage { backgroundImage?: string; imagePosition?: 'top' | 'bottom' | 'left' | 'right' | 'center' | 'background' }
+```
+
+说明：插槽类型使用 Solid 的 `JSX.Element`，在组件中可接受字符串或 JSX 元素。
+# layout 模块接口文档
+
 该模块定义了布局相关的接口，包括容器、布局方式、插槽等，便于实现灵活的组件布局组合。
 
 ## 所有 API 列表

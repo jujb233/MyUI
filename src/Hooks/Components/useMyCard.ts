@@ -9,7 +9,7 @@ import type {
     SizeName,
     InteractionPolicy
 } from "../../Interfaces"
-import type { AnimationProp } from "../../styles"
+import type { AnimationProp } from "../../Styles"
 import { defaultValues, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
 import {
     mergeDefaults,

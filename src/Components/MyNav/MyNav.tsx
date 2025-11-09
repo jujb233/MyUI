@@ -5,8 +5,8 @@ import NavMenu from "./subcomponents/NavMenu"
 import { useMyNav } from "../../Hooks"
 import type { IMyNavProps, IMyNavContext } from "./types"
 import { ErrorCheck } from "../../Utils"
-import { createSubcomponentContext } from "../../Utils/componentFactory"
 import { type Component, splitProps, Show } from "solid-js"
+import { createSubcomponentContext } from "../../Utils/components"
 
 export const [useNavContext, NavProvider] = createSubcomponentContext<IMyNavContext>('MyNav')
 

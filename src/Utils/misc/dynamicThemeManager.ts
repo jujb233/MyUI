@@ -1,6 +1,5 @@
-import { resolveTheme } from "../Options/Themes/themeResolver"
-import type { ComponentTheme } from "../Options/Themes/themeBuilder"
-import { THEME_CLASS_PREFIX } from "../Options/Configs"
+import { type ComponentTheme, resolveTheme, THEME_CLASS_PREFIX } from "../../Options"
+
 
 // 简单的字符串哈希（以保证 class 名称短且可复用）
 const hashString = (s: string) => {

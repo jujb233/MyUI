@@ -1,4 +1,4 @@
-import type { AnimationConfig } from '../../styles/config/animation';
+import type { AnimationConfig } from '../../Styles/config/animation';
 
 /**
  * 预设的动画效果类型。

@@ -1,4 +1,4 @@
-import { baseColors } from "../../styles/config/base"
+import { baseColors } from "../../Styles/config/base"
 
 /**
  * 强度变体（Intensity Variants）

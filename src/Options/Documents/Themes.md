@@ -1,121 +1,48 @@
-# 主题系统
+# 主题系统（Themes）
 
-`Themes` 目录是 MyUI 库样式系统的核心，它负责动态生成和解析组件的颜色主题。这套系统非常灵活，允许开发者通过简单的属性组合来创建丰富多样的视觉效果。
+主题相关实现位于：`src/Options/Themes`，核心文件包括：
 
-其核心思想是 **将颜色的“强度”与“色调”分离**。
+- `colorThemes.ts`（导出强度常量与 `DEFAULT_BASE_COLOR`）
+- `themeBuilder.ts`（构建 `ComponentTheme` 的函数：`buildTheme`、`buildThemeByIntensity`）
+- `variantThemes.ts`（`VARIANT_ROLE_STYLES`：语义角色到强度的映射）
+- `themeResolver.ts`（`resolveTheme`：将 color/intensity 解析为 `ComponentTheme`）
 
--   **强度 (Intensity)**: 定义了颜色的表现形式，例如是实心填充、柔和背景还是仅文本颜色。
--   **色调 (Color)**: 定义了具体使用哪种颜色，例如蓝色、红色或绿色。
+导出入口：`src/Options/Themes/index.ts`。
 
----
+核心概念：
 
-## 核心文件概览
+- 强度（Intensity）：由 `colorThemes` 定义，取值集合为 `solid` | `soft` | `subtle` | `text`（`IntensityName`）。
+- 色调（Color）：来自 `src/Styles/config/base.ts` 中的 `baseColors`（每项通常具有 `{ from, to }`），用于生成渐变与主题变量。
 
-1.  **`colorThemes.ts`**: 定义了强度的基本类型。
-2.  **`themeBuilder.ts`**: 核心的“主题构造器”，根据输入颜色和强度生成一套完整的 CSS 变量。
-3.  **`variantThemes.ts`**: 将语义化角色（如 `primary`, `secondary`）映射到具体的强度。
-4.  **`themeResolver.ts`**: 最终的“主题解析器”，根据组件的 `color` 和 `intensity` 属性，决定使用哪个主题。
+主题构建器（`themeBuilder`）导出：
 
-导出入口：`src/Options/Themes/index.ts`（可通过 `../Themes` 聚合导入）。
+- `ComponentTheme`（类型）—— 主题对象包含一组 CSS 变量（`--bg`, `--bg-hover`, `--text`, `--border`, `--focus-ring`, 以及 `--glass-*` 变体）。
+- `buildTheme(from, to, text?)` / `buildThemeByIntensity(from, to, variant)` —— 从颜色对生成主题。
 
----
+变体映射（`variantThemes`）：
 
-## 1. 颜色主题 (`colorThemes.ts`)
+- `VARIANT_ROLE_STYLES` 将组件语义角色（`primary`, `secondary`, `success`, `warning`, `danger`, `text` 等）映射为强度变体（如 `primary -> solid`, `secondary -> soft`），方便组件通过 `variant` 使用语义化风格。
 
--   **`INTENSITY`**（常量，导出）: 定义了四种可用的强度变体：
-    -   `solid`: 实心填充，对比度最强。
-    -   `soft`: 柔和的背景色，通常带有半透明效果。
-    -   `subtle`: 更微妙的背景色，对比度较低。
-    -   `text`: 无背景，仅将颜色应用于文本。
--   **`IntensityName`**（类型，导出）: `'solid' | 'soft' | 'subtle' | 'text'`。
--   **`DEFAULT_BASE_COLOR`**（常量，导出）: 当用户未指定颜色时，默认使用的色调（例如 `'blue'`）。
+主题解析器（`resolveTheme`）行为：
 
----
-
-## 2. 主题构造器 (`themeBuilder.ts`)
-
-这是主题系统的引擎。
-
-### `ComponentTheme` 接口
-
-定义了一个主题对象应包含的所有 CSS 自定义属性（CSS Variables），例如：
-
--   `--bg`: 背景色（可以是渐变）
--   `--bg-hover`: 悬停时的背景色
--   `--text`: 文本颜色
--   `--border`: 边框颜色
--   `--focus-ring`: 焦点环颜色
--   以及用于“玻璃态”的 `--glass-*` 变体。
-
-### `buildThemeByIntensity` 函数
-
-这是最重要的函数。它接收 **色调**（通过 `from` 和 `to` 两个颜色值定义渐变）和 **强度** (`variant`)，然后为每种强度生成一套不同的 `ComponentTheme`。
-
-例如，对于同样的蓝色：
-
--   `solid` 强度会生成一个不透明的蓝色渐变背景。
--   `soft` 强度会生成一个半透明的蓝色背景，并将主色调应用于文本。
--   `text` 强度会生成透明背景，仅将蓝色应用于文本。
-
-相关导出：
-
-- `buildTheme(from, to, text?)`
-- `buildThemeByIntensity(from, to, variant)`
-- `ComponentTheme`（类型）
-- `IntensityVariant`（类型：与 `IntensityName` 等价范围）
-
----
-
-## 3. 变体主题 (`variantThemes.ts`)
-
-为了方便使用，我们将常见的组件角色（如“主要”、“次要”）映射到预设的 **强度**。
-
--   **`VARIANT_ROLE_STYLES`**:
-    -   `primary` 角色 -> `solid` 强度
-    -   `secondary` 角色 -> `soft` 强度
-    -   `danger` 角色 -> `solid` 强度
-    -   `text` 角色 -> `text` 强度
-
-这允许开发者通过更具语义的 `variant="primary"` 来代替 `intensity="solid"`。
-
----
-
-## 4. 主题解析器 (`themeResolver.ts`)
-
-这是最终将所有部分组合在一起的工具。
-
-### `resolveTheme(params)` 函数
-
-该函数接收组件的属性（`color` 和 `intensity`），并遵循以下逻辑来返回最终的 `ComponentTheme` 对象：
-
-1.  **直接指定十六进制颜色**:
-    -   如果 `color` 是一个有效的十六进制颜色值（如 `#ff0000`），`resolveTheme` 会调用 `buildThemeByIntensity` 动态生成一个主题。
-    -   **示例**: `color="#eab308"` `intensity="soft"` -> 生成一个柔和的黄色主题。
-
-2.  **使用颜色预设**:
-    -   如果 `color` 是一个预设名称（如 `'red'`），它会从 `PRESET_THEMES` (定义在 `Options/Presets/colorPresets.ts`) 中查找对应的主题。
-    -   **示例**: `color="red"` `intensity="solid"` -> 返回预生成的红色 `solid` 主题。
-
-3.  **仅指定强度**:
-    -   如果只提供了 `intensity`，则使用 `DEFAULT_BASE_COLOR`（蓝色）和指定的强度。
-    -   **示例**: `intensity="subtle"` -> 返回蓝色的 `subtle` 主题。
-
-4.  **无任何参数**:
-    -   默认返回 `DEFAULT_BASE_COLOR` 的 `solid` 强度主题。
-
-这个强大的解析器使得 MyUI 的主题系统既能提供一致的预设选项，又具备高度的灵活性和可定制性。
+1. 如果 `color` 是一个 `baseColors` 中的预设名（例如 `'red'`），返回该预设对应强度的主题（由 `buildThemeByIntensity` 构建）。
+2. 如果 `color` 是合法的十六进制颜色字符串（如 `#06b6d4`），则动态以该颜色为基色构建主题。
+3. 如果仅提供 `intensity`，使用 `DEFAULT_BASE_COLOR`（通常为 `blue`）并返回该强度的主题。
+4. 如果没有参数，回退到 `DEFAULT_BASE_COLOR` 的 `solid` 强度主题。
 
 示例：
 
 ```ts
-import { resolveTheme } from '../Themes'
+import { resolveTheme } from '../../Options/Themes/themeResolver'
 
-// 指定预设颜色 + 强度
+// 预设名 + 强度
 const t1 = resolveTheme({ color: 'red', intensity: 'soft' })
 
-// 使用十六进制色值 + 强度
+// 十六进制颜色 + 强度
 const t2 = resolveTheme({ color: '#06b6d4', intensity: 'solid' })
 
-// 仅强度，使用默认色（blue）
+// 仅强度 -> 使用默认基色
 const t3 = resolveTheme({ intensity: 'text' })
 ```
+
+备注：项目并不会在一个静态对象中预先展开所有 `PRESET_THEMES`，而是在解析时基于 `baseColors` 动态构建，以节省重复数据并保持一致的生成逻辑。

@@ -2,6 +2,71 @@
 
 该模块定义组件的交互与行为相关类型：交互状态、行为开关、视觉效果、交互策略，以及“可点击”能力等。
 
+## 所有 API 列表（来自 src/Interfaces/interaction.ts）
+
+### InteractionType
+```ts
+export type InteractionType = 'hover' | 'focus' | 'active' | 'disabled'
+```
+
+### InteractionBehavior
+```ts
+export interface InteractionBehavior {
+  hover?: boolean
+  focus?: boolean
+  active?: boolean
+  transition?: boolean
+  disabled?: boolean
+}
+```
+
+### InteractionConfig
+```ts
+export interface InteractionConfig {
+  scale?: { hover?: number | string; active?: number | string; disabled?: number | string }
+  opacity?: { hover?: number | string; active?: number | string; disabled?: number | string }
+  background?: { hover?: string; active?: string; disabled?: string }
+  shadow?: { hover?: string; focus?: string; active?: string }
+}
+```
+
+### InteractionPolicy / InteractionProp / InteractionProps
+```ts
+export interface InteractionPolicy {
+  enabled?: boolean
+  behavior?: typeof DEFAULT_INTERACTION_BEHAVIOR
+  effects?: typeof DEFAULT_INTERACTION_EFFECTS
+  classes?: { hover?: string; focus?: string; active?: string; disabled?: string }
+}
+
+export type InteractionPresetKey = 'none' | 'basic' | 'rich' | 'minimal'
+export type InteractionProp = InteractionPolicy | InteractionPresetKey
+
+export interface InteractionProps {
+  interaction?: InteractionProp
+}
+```
+
+### SupportsInteractionPolicy
+```ts
+export interface SupportsInteractionPolicy { getInteractionPolicy(): InteractionPolicy }
+```
+
+### Clickable
+注意：库中使用原生 `MouseEvent` 而非 React 事件。
+```ts
+export interface Clickable {
+  clickable?: boolean
+  onClick?: (event: MouseEvent) => void
+  disabled?: boolean
+}
+```
+
+说明：以上接口的默认值与具体效果可以在 `src/Styles/config/interaction` 和组件的 Hook 中找到。
+# behavior 模块接口文档
+
+该模块定义组件的交互与行为相关类型：交互状态、行为开关、视觉效果、交互策略，以及“可点击”能力等。
+
 ## 所有 API 列表
 
 ### 1. InteractionType

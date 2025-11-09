@@ -1,5 +1,46 @@
 # core 模块接口文档
 
+该模块聚焦于组件的核心能力，如样式、可用颜色/尺寸、变体等，提供基础的类型定义和扩展点。
+
+## 重要类型与接口
+
+### StyleProps
+文件位置：`src/Interfaces/core.ts`
+```ts
+import type { JSX } from "solid-js"
+
+export interface StyleProps {
+  class?: string
+  id?: string
+  style?: JSX.CSSProperties
+}
+```
+
+### Disableable
+```ts
+export interface Disableable {
+  disabled?: boolean
+}
+```
+
+### 基础类型
+```ts
+export type Color = keyof typeof baseColors
+export type SizeName = keyof typeof sizeConfig
+export type ShadowName = keyof typeof shadows
+export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text'
+
+export interface ComponentVariant {
+  role: VariantRole
+  color: Color
+}
+```
+
+说明：Color/SizeName/ShadowName 来源于 `src/Styles/config`，用于统一命名与映射到实际样式。
+
+更多实现细节请参阅 `src/Interfaces/core.ts`。
+# core 模块接口文档
+
 该模块聚焦于组件的核心能力，如事件、状态、样式等，提供基础的类型定义和扩展点。
 
 ## 所有 API 列表

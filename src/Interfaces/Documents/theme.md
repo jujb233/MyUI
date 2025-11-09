@@ -2,6 +2,45 @@
 
 该模块聚焦于主题与动画相关的接口，支持组件的主题定制、动画扩展等能力。
 
+## 主要接口（来自 src/Interfaces/theme.ts）
+
+### ThemeProps
+```ts
+import type { ComponentVariant, ShadowName } from './core'
+import type { AnimationProp } from '../Options'
+
+export interface ThemeProps {
+  variant?: ComponentVariant | undefined
+  glass?: boolean
+  shadow?: ShadowName
+}
+```
+
+说明：ComponentVariant/ShadowName/SizeName 等在 `src/Interfaces/core.ts` 中定义，实际值映射在 `src/Styles/config`。
+
+### AnimationProps
+```ts
+export interface AnimationProps {
+  animation?: AnimationProp
+}
+```
+
+### ThemeContextValue（约定）
+```ts
+export interface ThemeContextValue {
+  variant?: ComponentVariant
+  size: SizeName
+  glass: boolean
+  shadow: ShadowName
+  disabled?: boolean
+}
+```
+
+说明：ThemeContextValue 为组件主题 Context 的最小约定，实际 Context 可扩展组件特有字段。
+# theme 模块接口文档
+
+该模块聚焦于主题与动画相关的接口，支持组件的主题定制、动画扩展等能力。
+
 ## 所有 API 列表
 
 ### 1. AnimationProps

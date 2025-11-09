@@ -1,5 +1,5 @@
-import type { SizeName } from "../Interfaces/core";
 import type { JSX } from "solid-js";
+import type { SizeName } from "../../Interfaces";
 
 export interface SizeTokens {
     size: SizeName;

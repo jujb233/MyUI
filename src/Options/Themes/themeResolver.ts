@@ -1,5 +1,5 @@
 import { DEFAULT_BASE_COLOR, type IntensityName } from "./colorThemes"
-import { baseColors } from "../../styles/config/base"
+import { baseColors } from "../../Styles/config/base"
 import { buildThemeByIntensity, type ComponentTheme } from "./themeBuilder"
 import { adjustColorBrightness, isHexColor } from "../../Utils"
 

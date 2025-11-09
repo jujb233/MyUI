@@ -1,75 +1,36 @@
-# 样式
+# 样式（Styles）
 
-`Styles` 目录包含了用于定义组件视觉表现的各种预设和工具函数，例如尺寸、阴影（层级感）和样式常量。
+样式相关的基础数据与常量散布在 `src/Styles/config` 下，Options 层通过 `src/Options/Styles/index.ts` 暴露给上层使用。
 
-导出入口：`src/Options/Styles/index.ts`（可通过 `../Styles` 聚合导入）。
+核心文件：
 
----
+- 原始颜色与基础变量：`src/Styles/config/base.ts`（导出 `baseColors`, `spacing`, `fontSizes`, `fontWeights`, `borderRadius`, `shadows`, `glassShadows`, `sizeConfig` 等）
+- 样式常量聚合：`src/Options/Styles/index.ts`
 
-## 样式常量 (`styleConstants.ts`)
+主要可用项（摘选并以实际导出名为准）：
 
-该文件定义了在整个库中复用的核心样式值。
+- `baseColors`：颜色预设（每项通常包含 `{ from, to }`），用于主题生成。
+- `shadows`：标准 box-shadow 值集合（键如 `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `inner`, `none`）。
+- `glassShadows`：用于“玻璃态”控件的特殊阴影。
+- `sizeConfig`：small / medium / large 三个尺寸配置（包含 padding、fontSize、minWidth、spacing、titleSize、contentSize、borderRadius、minHeight 等字符串，便于拼接 Tailwind 类）。
 
-### `DEFAULT_STYLES`
+示例：
 
-提供了一些特殊状态下的默认样式：
+```ts
+import { baseColors, shadows, glassShadows, sizeConfig } from '../../Styles/config/base'
 
--   **`disabled`**: 组件禁用时的背景、文字和填充颜色。
--   **`glass`**: “玻璃态”效果下的文字颜色。
+// 取一个阴影
+const s = shadows.md
 
-### `SHADOWS`
+// 取一个尺寸配置
+const small = sizeConfig.small
+```
 
-定义了一组标准的阴影（`box-shadow`）效果，用于创建界面的层级感。
+使用建议：
 
--   **可用级别**: `xs`, `sm`, `md`, `lg`, `xl`, `2xl`, `inner`, `none`。
--   **示例**: `SHADOWS.md` 会返回一个中等强度的阴影样式。
+- 颜色：通过 `baseColors` + `resolveTheme`（主题解析器）组合出组件的 CSS 变量（见 `src/Options/Themes`）。
+- 阴影：直接从 `shadows` / `glassShadows` 取值并用于内联样式或样式构建器（如 `style={{ boxShadow: shadows.md }}`）。
+- 尺寸：`sizeConfig` 中的字符串可直接拼接到组件的 class 列表，或在构建器中按需解析为 Tailwind 类。
 
-### `GLASS_SHADOWS`
+注意：仓库中并未强制用某一模式来解析所有阴影（没有统一的 `resolveElevation` 在 Options 内），可以根据组件需要在 Utils 或组件层做集中解析。
 
-为“玻璃态”组件提供了特殊的阴影效果，以增强其通透感。
-
--   **可用级别**: `md`, `lg`。
-
----
-
-## 尺寸配置 (`sizeConfig.ts`)
-
-为了确保组件在不同场景下具有一致的尺寸表现，我们定义了统一的尺寸配置。
-
-### `SIZE_CONFIG`
-
-这是一个包含 `small`, `medium`, `large` 三种尺寸预设的对象。每种尺寸都详细定义了适用于不同组件的样式属性：
-
--   **通用属性**:
-    -   `padding`: 内边距
-    -   `fontSize`: 字体大小
-    -   `minWidth`: 最小宽度
-    -   `borderRadius`: 边框圆角
--   **特定属性** (例如用于 `MyCard`):
-    -   `spacing`: 内部元素间距
-    -   `titleSize`: 标题字体大小
-    -   `contentSize`: 内容字体大小
-    -   `minHeight`: 最小高度
-
-这使得我们可以通过一个简单的 `size` 属性（如 `size="small"`）来控制组件的整体大小和布局。
-
----
-
-## 层级感 (`elevation.ts`)
-
-该文件通过 `resolveElevation` 函数来动态解析组件应使用的阴影效果。
-
-### `resolveElevation(params)`
-
-这是一个智能解析函数，它根据传入的参数返回最合适的 `box-shadow` 值。
-
--   **参数**:
-    -   `glass?: boolean`: 是否为“玻璃态”。如果为 `true`，将使用 `GLASS_SHADOWS`。
-    -   `shadow?: ShadowName`: 指定一个在 `SHADOWS` 中定义的阴影级别（默认为 `md`）。
-    -   `kind?: 'button' | 'card' | 'panel'`: 组件的类型。在“玻璃态”下，不同类型的组件可能会有不同的阴影效果。
-
--   **逻辑**:
-    1.  如果 `glass` 为 `true`，则根据 `kind` 从 `GLASS_SHADOWS` 中选择合适的阴影。
-    2.  否则，直接从 `SHADOWS` 中返回指定的 `shadow` 值。
-
-这个函数使得阴影的管理更加集中和灵活，能够轻松应对不同组件和状态下的视觉需求。返回值为可直接用于 `style={{ boxShadow: ... }}` 的字符串。

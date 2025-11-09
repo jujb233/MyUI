@@ -1,4 +1,4 @@
-import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../../../styles/config/interaction'
+import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../../../Styles/config/interaction'
 
 export const INTERACTION_BEHAVIOR_DEFAULTS = {
     hover: false,

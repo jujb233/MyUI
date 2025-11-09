@@ -8,7 +8,7 @@ import type {
     SizeProps
 } from "../../Interfaces"
 import { COMMON_CLASSES, defaultValues, SLOTS_STYLE } from "../../Options"
-import type { AnimationProp } from "../../styles"
+import type { AnimationProp } from "../../Styles"
 import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "../../Utils"
 
 export type UseMyPanelProps = PositionProps & SizeProps & {

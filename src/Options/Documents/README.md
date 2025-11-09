@@ -2,8 +2,8 @@
 
 ## 相关子文档
 
-- [Animations](./Animation.md)
-- [Interactions](./Interaction.md)
+- [Animation](./Animation.md)
+- [Interaction](./Interaction.md)
 - [Presets](./Presets.md)
 - [Styles](./Styles.md)
 - [Themes](./Themes.md)

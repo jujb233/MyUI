@@ -1,58 +1,45 @@
 # 动画（Animation）指南
 
-本库为组件提供轻量的动画属性与 Hook，基于 Tailwind CSS 动画类或自定义类实现。
+动画相关的定义位于：
 
-## 动画类型与配置
+- 类型与常量：`src/Styles/config/animation.ts`
+- Options 层的导出聚合：`src/Options/Animations/Animation.ts`
 
-- 定义位置：`src/Options/Animations/Animation.ts`
-- 类型：
-	- `AnimationType`: `fade` | `slide-up` | `slide-down` | `scale-in` | `pulse` | `spin`
-	- `AnimationConfig`: `{ type, duration?, delay?, easing? }`
-	- `AnimationProp`: `AnimationType | AnimationConfig`
-	- 常量：`animationMap`（类型到类名映射）、`easingValueMap`（缓动关键字到 timing-function 值）
+主要导出（可直接导入并在组件中使用）：
 
-> 说明：目前库中未提供内置的 `useAnimation` Hook；请直接使用上述类型与常量在组件中生成需要的类名。
+- `AnimationType`：可用动画名称（由 `animationMap` 的键定义，例如 `fade`、`slide-up`、`scale-in` 等）。
+- `AnimationConfig`：详细配置对象，包含 `type`, `duration?`, `delay?`, `easing?`。
+- `AnimationProp`：`AnimationType | AnimationConfig`。
+- `animationMap`：把动画类型映射为 Tailwind / 自定义类名的对象。
+- `easingValueMap`：把自定义缓动关键字映射为 CSS timing-function 的对象。
 
-## 在组件中使用（示例）
+注意：项目中并没有复杂的内置 Hook 来管理动画；通常的做法是在组件内部或 `ClassName` 构建器里使用上面的常量将配置转为类名或内联样式。
 
-下面是一个小工具函数示例，展示如何将 `AnimationProp` 转为可拼接到 `className` 的类名字符串：
+示例工具（把 `AnimationProp` 转为 class 字符串）：
 
 ```ts
-import type { AnimationProp } from '../Animations';
-import { animationMap, easingValueMap } from '../Animations';
+import type { AnimationProp } from '../../Styles/config/animation'
+import { animationMap, easingValueMap } from '../../Styles/config/animation'
 
 export function toAnimationClasses(animation?: AnimationProp): string | undefined {
-	if (!animation) return undefined;
+	if (!animation) return undefined
+	const cfg = typeof animation === 'string' ? { type: animation } : animation
+	const classes: string[] = []
 
-	const cfg = typeof animation === 'string' ? { type: animation } : animation;
-	const classes: string[] = [];
+	const typeClass = animationMap[cfg.type]
+	if (typeClass) classes.push(typeClass)
 
-	// 1) 类型到类名
-	const typeClass = animationMap[cfg.type];
-	if (typeClass) classes.push(typeClass);
+	if (cfg.duration != null) classes.push(`[animation-duration:${cfg.duration}ms]`)
+	if (cfg.delay != null) classes.push(`[animation-delay:${cfg.delay}ms]`)
+	if (cfg.easing) classes.push(`[animation-timing-function:${easingValueMap[cfg.easing]}]`)
 
-	// 2) 可选参数映射到 CSS 任意属性类
-	if (cfg.duration != null) classes.push(`[animation-duration:${cfg.duration}ms]`);
-	if (cfg.delay != null) classes.push(`[animation-delay:${cfg.delay}ms]`);
-	if (cfg.easing) classes.push(`[animation-timing-function:${easingValueMap[cfg.easing]}]`);
-
-	return classes.join(' ');
+	return classes.join(' ')
 }
 ```
 
-使用示例：
+示例用法：
 
 ```tsx
-// 简单类型
-const a1 = toAnimationClasses('fade');
-
-// 详细配置
-const a2 = toAnimationClasses({
-	type: 'slide-up',
-	duration: 300,
-	delay: 50,
-	easing: 'in-out',
-});
-
-// <div className={a2}> ... </div>
+const cls = toAnimationClasses({ type: 'slide-up', duration: 300, easing: 'in-out' })
+// <div className={cls}>...</div>
 ```
