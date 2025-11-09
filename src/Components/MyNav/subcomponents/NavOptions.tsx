@@ -4,8 +4,8 @@ import type { Component, JSX } from "solid-js"
 
 const NavOptions: Component<{ children?: JSX.Element }> = (props) => {
     const context = useNavContext()
-    const classes = useMyNav(context)
-    return <div class={classes.options}>{props.children}</div>
+    const { slots } = useMyNav(context)
+    return <div class={slots?.options ?? ''}>{props.children}</div>
 }
 
 export default NavOptions

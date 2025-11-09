@@ -4,8 +4,8 @@ import type { Component, JSX } from "solid-js"
 
 const NavMenu: Component<{ children?: JSX.Element }> = (props) => {
     const context = useNavContext()
-    const classes = useMyNav(context)
-    return <ul class={classes.menu}>{props.children}</ul>
+    const { slots } = useMyNav(context)
+    return <ul class={slots?.menu ?? ''}>{props.children}</ul>
 }
 
 export default NavMenu

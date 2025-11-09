@@ -14,7 +14,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
     // splitProps 要求传入的键均在 IMyNavProps 中，已在 types.ts 修复
     const [local, others] = splitProps(props, ["children", "title", "menu", "options"])
 
-    const classes = useMyNav(others)
+    const { rootClass, rootStyle } = useMyNav(others)
 
     const contextValue: IMyNavContext = {
         ...others
@@ -23,7 +23,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
     return (
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Nav component failed to render.</div>}>
             <NavProvider value={contextValue}>
-                <nav class={classes.nav}>
+                <nav class={rootClass} style={rootStyle}>
                     <Show when={local.title}>
                         <NavTitle>{local.title}</NavTitle>
                     </Show>

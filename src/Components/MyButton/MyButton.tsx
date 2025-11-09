@@ -22,9 +22,14 @@ const MyButton: Component<IMyButtonProps> = (props) => {
     // 通过 hook 计算最终 className 与子槽位类
     const { rootClass, rootStyle, slots } = useMyButton(others as any)
 
+    // slots 可能为 undefined，需保证类型安全
     const contextValue: IMyButtonContext = {
         ...others,
-        slots
+        slots: {
+            icon: typeof slots?.icon === 'string' ? slots.icon : '',
+            content: typeof slots?.content === 'string' ? slots.content : '',
+            options: typeof slots?.options === 'string' ? slots.options : ''
+        }
     }
 
     return (

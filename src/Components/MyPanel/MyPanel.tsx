@@ -10,21 +10,30 @@ export const [usePanelContext, PanelProvider] = createSubcomponentContext<IMyPan
 const MyPanel: Component<IMyPanelProps> = (props) => {
     const [local, others] = splitProps(props, ["children", "backgroundImage"])
 
-    const { slots, ...styles } = useMyPanel(props)
+    const { rootClass, rootStyle, slots } = useMyPanel({
+        ...props,
+        backgroundImage: typeof props.backgroundImage === 'string' ? props.backgroundImage : ''
+    })
+
+    // slots 可能为 undefined，需保证类型安全，补全 header/content/footer
+    const safeSlots = {
+        background: slots?.background ?? "",
+        header: slots?.header ?? "",
+        content: slots?.content ?? "",
+        footer: slots?.footer ?? ""
+    }
 
     const contextValue: IMyPanelContext = {
         ...others,
-        slots: {
-            ...slots,
-            background: slots.background || "",
-        },
+        backgroundImage: typeof local.backgroundImage === 'string' ? local.backgroundImage : '',
+        slots: safeSlots
     }
 
     return (
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Panel component failed to render.</div>}>
             <PanelProvider value={contextValue}>
-                <div class={styles.panel} style={styles.panelStyle}>
-                    <PanelBackground backgroundImage={local.backgroundImage} class={slots.background} />
+                <div class={rootClass} style={rootStyle}>
+                    <PanelBackground backgroundImage={local.backgroundImage} class={safeSlots.background} />
                     <div class="relative z-10">
                         {local.children}
                     </div>
