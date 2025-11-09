@@ -1,5 +1,5 @@
 import { type Component, type JSX } from "solid-js"
-import { useButtonContext } from "../MyButton"
+import { useButtonContext } from "../ButtonContext"
 
 // ButtonContent: 按钮的主内容区域，负责文本内容自适应与文本截断
 const ButtonContent: Component<{ children?: JSX.Element }> = (props) => {

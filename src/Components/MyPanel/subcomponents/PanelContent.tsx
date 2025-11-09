@@ -1,4 +1,4 @@
-import { usePanelContext } from "../MyPanel"
+import { usePanelContext } from "../PanelContext"
 import type { Component, JSX } from "solid-js"
 
 const PanelContent: Component<{ children?: JSX.Element }> = (props) => {

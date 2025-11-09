@@ -1,4 +1,4 @@
-import { usePanelContext } from "../MyPanel"
+import { usePanelContext } from "../PanelContext"
 import MyTitle from "../../Parts/myTitle/myTitle"
 import { type Component, type JSX, Show } from "solid-js"
 

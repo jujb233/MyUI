@@ -5,9 +5,7 @@ import ButtonOptions from "./subcomponents/ButtonOptions"
 import type { IMyButtonProps, IMyButtonContext } from "./types"
 import { ErrorCheck } from "../../Utils"
 import { useMyButton } from "../../Hooks"
-import { createSubcomponentContext } from "../../Utils/componentFactory"
-
-export const [useButtonContext, ButtonProvider] = createSubcomponentContext<IMyButtonContext>('MyButton')
+import { ButtonProvider } from "./ButtonContext"
 
 const MyButton: Component<IMyButtonProps> = (props) => {
     const [local, others] = splitProps(props, [

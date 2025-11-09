@@ -2,10 +2,10 @@ import { useMyPanel } from "../../Hooks"
 import type { IMyPanelProps, IMyPanelContext } from "./types"
 import { ErrorCheck } from "../../Utils"
 import { PanelBackground } from "./subcomponents/PanelBackground"
-import { createSubcomponentContext } from "../../Utils/componentFactory"
+// ...existing code...
 import { type Component, splitProps } from "solid-js"
 
-export const [usePanelContext, PanelProvider] = createSubcomponentContext<IMyPanelContext>('MyPanel')
+import { PanelProvider } from "./PanelContext"
 
 const MyPanel: Component<IMyPanelProps> = (props) => {
     const [local, others] = splitProps(props, ["children", "backgroundImage"])
