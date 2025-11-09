@@ -1,3 +1,4 @@
+import '../index.css';
 import '../web-components';
 
 document.addEventListener('DOMContentLoaded', () => {
