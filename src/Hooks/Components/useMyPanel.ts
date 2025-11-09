@@ -1,14 +1,15 @@
-import { type ComponentVariant, type ShadowName } from "../../Interfaces/core"
-import type { InteractionProp } from "../../Interfaces/interaction"
-import type { AnimationProp } from "../../styles/config/animation"
-import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
-import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
-import { createBaseStyle } from "../../Utils/styleFactory"
-import type { PositionProps, SizeProps } from "../../Interfaces"
-import type { JSX } from "solid-js"
-import { getSizeTokens, buildPaddingStyle, buildSizeStyle } from "../../Utils/sizeStyles"
-import { defaultValues } from "../../Options/Configs/default"
-import { mergeDefaults } from "../../Utils/defaultResolver"
+import type { JSX } from "solid-js/jsx-runtime"
+import type {
+    ComponentHookResult,
+    ComponentVariant,
+    InteractionProp,
+    PositionProps,
+    ShadowName,
+    SizeProps
+} from "../../Interfaces"
+import { COMMON_CLASSES, defaultValues, SLOTS_STYLE } from "../../Options"
+import type { AnimationProp } from "../../styles"
+import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "../../Utils"
 
 export type UseMyPanelProps = PositionProps & SizeProps & {
     variant?: ComponentVariant | undefined
@@ -20,8 +21,11 @@ export type UseMyPanelProps = PositionProps & SizeProps & {
     animation?: AnimationProp | undefined
 }
 
-export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }) {
-    const mergedProps = mergeDefaults(defaultValues.UseMyPanelProps as any, props) as UseMyPanelProps & { backgroundImage?: string };
+export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }): ComponentHookResult {
+    const mergedProps = mergeDefaults(
+        defaultValues.UseMyPanelProps as any,
+        props
+    ) as UseMyPanelProps & { backgroundImage?: string }
 
     const {
         variant: variantProp,
@@ -35,7 +39,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         interaction,
         animation,
         backgroundImage,
-    } = mergedProps;
+    } = mergedProps
 
     const role = variantProp?.role || 'primary'
     const color = variantProp?.color || 'blue'
@@ -62,7 +66,12 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         header: `${SLOTS_STYLE.header} ${SLOTS_STYLE.panelHeaderExtra}`.trim(),
         content: `${SLOTS_STYLE.content}`.trim(),
         footer: SLOTS_STYLE.panelFooter,
-    };
+    }
+
+    const normalizedSlots = {
+        ...slots,
+        background: slots.background || "",
+    }
 
     const panelClasses = builder
         .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL)
@@ -71,7 +80,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     const sizeStyle = buildSizeStyle({
         ...(xLength !== undefined ? { xLength } : {}),
         ...(yLength !== undefined ? { yLength } : {}),
-    });
+    })
 
     const panelStyle: JSX.CSSProperties = {
         ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
@@ -87,9 +96,9 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     }
 
     return {
-        panel: panelClasses,
-        panelStyle,
-        slots,
+        rootClass: panelClasses,
+        rootStyle: panelStyle,
+        slots: normalizedSlots,
         slotStyles,
     }
 }

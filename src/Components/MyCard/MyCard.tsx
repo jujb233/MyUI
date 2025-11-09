@@ -11,29 +11,36 @@ const MyCard = (props: IMyCardProps) => {
     const enhancedProps = { ...props, hasImage: (props as any).hasImage ?? !!(props as any).backgroundImage } as any
 
     // 解析样式与插槽
-    const { slots, containerClasses, containerStyle, bodyClasses, imagePosition, ...styles } = useMyCard(enhancedProps as any)
+    const hookResult = useMyCard(enhancedProps as any)
+    const { rootClass, rootStyle, slots, slotStyles, extras } = hookResult
+    const imagePosition = extras?.imagePosition || 'top'
+    const bodyClass = slots?.body || ''
+    const bodyStyle = slotStyles?.body
 
     const contextValue: IMyCardContext = {
         ...props,
-        ...styles,
-        // 将推断后的布局属性写入 context
-        imagePosition,
-        slots,
+        // 保留原有 props
+        ...props,
+        // 注入 hook 补充信息
+        isHorizontal: !!extras?.isHorizontal,
+        imagePosition: imagePosition as any,
+        sizeConfig: extras?.sizeConfig || ({} as any),
+        slots: slots as any,
     }
 
     return (
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Card component failed to render.</div>}>
             <CardProvider value={contextValue}>
                 <div
-                    class={containerClasses}
-                    style={containerStyle}
+                    class={rootClass}
+                    style={rootStyle}
                     onClick={props.onClick}
                     data-role="mycard"
                 >
                     {['left', 'top', 'background', 'center'].includes(imagePosition) && (
                         <CardImage src={(props as any).backgroundImage || ''} />
                     )}
-                    <div class={bodyClasses}>{props.children}</div>
+                    <div class={bodyClass} style={bodyStyle}>{props.children}</div>
                     {['right', 'bottom'].includes(imagePosition) && (
                         <CardImage src={(props as any).backgroundImage || ''} />
                     )}

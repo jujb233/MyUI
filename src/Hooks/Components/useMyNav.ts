@@ -8,6 +8,7 @@ import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles";
 import { defaultValues } from "../../Options/Configs/default";
+import type { ComponentHookResult } from "../../Interfaces/types/ComponentHookResult";
 
 export interface UseMyNavOptions {
     variant?: ComponentVariant | undefined;
@@ -23,7 +24,7 @@ export interface UseMyNavOptions {
     animation?: AnimationProp | undefined;
 }
 
-export function useMyNav(options: UseMyNavOptions) {
+export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
     const {
         variant,
         size = defaultValues.SizeProps.size as SizeName,
@@ -60,11 +61,13 @@ export function useMyNav(options: UseMyNavOptions) {
     const navStyle = buildPaddingStyle(tokens)
 
     return {
-        nav: navClasses,
-        navStyle,
-        brand: SLOTS_STYLE.brand,
-        content: SLOTS_STYLE.content,
-        menu: SLOTS_STYLE.menu,
-        options: SLOTS_STYLE.navActions,
+        rootClass: navClasses,
+        rootStyle: navStyle,
+        slots: {
+            brand: SLOTS_STYLE.brand,
+            content: SLOTS_STYLE.content,
+            menu: SLOTS_STYLE.menu,
+            options: SLOTS_STYLE.navActions,
+        },
     };
 }

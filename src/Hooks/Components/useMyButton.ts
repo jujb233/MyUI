@@ -1,13 +1,15 @@
-import type { InteractionProp } from "../../Interfaces/interaction"
-import type { PositionProps } from "../../Interfaces"
-import type { ComponentVariant, SizeName, ShadowName } from "../../Interfaces/core"
-import type { AnimationProp } from "../../styles/config/animation"
-import { createBaseStyle } from "../../Utils/styleFactory"
-import type { JSX } from "solid-js"
-import { COMMON_CLASSES, TRANSITION_CLASSES } from "../../Options/Configs/classConfig"
-import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
-import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles"
-// mergeDefaults 暂不使用：手动解构默认值以避免精确可选属性类型带来的推断冲突
+import type { JSX } from "solid-js/jsx-runtime"
+import type {
+    PositionProps,
+    ComponentVariant,
+    SizeName,
+    ShadowName,
+    InteractionProp,
+    ComponentHookResult
+} from "../../Interfaces"
+import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE } from "../../Options"
+import type { AnimationProp } from "../../styles"
+import { createBaseStyle, getSizeTokens, buildPaddingStyle } from "../../Utils"
 
 /**
  * 输入 props 类型说明
@@ -34,15 +36,7 @@ export type UseMyButtonProps = PositionProps & {
     animation?: AnimationProp
 }
 
-export type UseMyButtonResult = {
-    rootClass: string
-    rootStyle: JSX.CSSProperties
-    slots: {
-        icon: string
-        content: string
-        options: string
-    }
-}
+export type UseMyButtonResult = ComponentHookResult
 
 /**
  * 根据 props 构建按钮 className
@@ -50,7 +44,7 @@ export type UseMyButtonResult = {
  * 返回值：string — 最终的 className
  * 错误模式：不抛异常；当 props 缺失时使用内置默认值。
  */
-export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
+export function useMyButton(props: UseMyButtonProps): ComponentHookResult {
     // 手动应用默认值（与 defaultValues.UseMyButtonProps 保持一致）
     const {
         variant,
@@ -110,6 +104,6 @@ export function useMyButton(props: UseMyButtonProps): UseMyButtonResult {
         'min-width': tokens.minWidth,
     }
 
-    const result: UseMyButtonResult = { rootClass: buttonClasses, slots: slotClasses, rootStyle }
+    const result: ComponentHookResult = { rootClass: buttonClasses, slots: slotClasses, rootStyle }
     return result
 }

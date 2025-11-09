@@ -1,16 +1,27 @@
-import type { ComponentVariant, ShadowName } from "../../Interfaces/core"
-import { useCardLayout } from "../../Hooks/useCardLayout"
-import type { AnimationProp } from "../../styles/config/animation"
-import { createBaseStyle } from "../../Utils/styleFactory"
 import clsx from "clsx"
-import type { PositionProps, SizeProps } from "../../Interfaces"
-import type { InteractionPolicy } from "../../Interfaces/interaction"
-import type { JSX } from "solid-js"
-import { COMMON_CLASSES } from "../../Options/Configs/classConfig"
-import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
-import { getSizeTokens, buildPaddingStyle, buildVerticalStackStyle, mergeStyles, buildSizeStyle } from "../../Utils/sizeStyles"
-import { defaultValues } from "../../Options/Configs/default"
-import { mergeDefaults } from "../../Utils/defaultResolver";
+import type { JSX } from "solid-js/jsx-runtime"
+import type {
+    PositionProps,
+    SizeProps,
+    ComponentVariant,
+    ShadowName,
+    ComponentHookResult,
+    SizeName,
+    InteractionPolicy
+} from "../../Interfaces"
+import type { AnimationProp } from "../../styles"
+import { defaultValues, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
+import {
+    mergeDefaults,
+    createBaseStyle,
+    buildSizeStyle,
+    getSizeTokens,
+    mergeStyles,
+    buildPaddingStyle,
+    buildVerticalStackStyle
+} from "../../Utils"
+import { useCardLayout } from "../useCardLayout"
+
 
 export interface UseMyCardProps extends PositionProps, SizeProps {
     variant?: ComponentVariant | undefined
@@ -27,7 +38,7 @@ export interface UseMyCardProps extends PositionProps, SizeProps {
     animation?: AnimationProp
 }
 
-export function useMyCard(props: UseMyCardProps) {
+export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: SizeName; sizeConfig?: any; isHorizontal: boolean; imagePosition?: string; clickable?: boolean; bordered?: boolean; hasImage?: boolean; }> {
     const mergedProps = mergeDefaults(defaultValues.UseMyCardProps as any, props) as UseMyCardProps;
 
     const {
@@ -93,7 +104,7 @@ export function useMyCard(props: UseMyCardProps) {
     }
 
     // 将动态尺寸/间距类移至 style，保留结构类
-    const bodyBaseClasses = clsx(
+    const bodyClasses = clsx(
         isHorizontal && "flex-1",
         imagePosition === "background" && "relative z-10"
     )
@@ -123,15 +134,19 @@ export function useMyCard(props: UseMyCardProps) {
     }
 
     return {
-        size,
-        sizeConfig,
-        containerClasses,
-        containerStyle,
-        bodyClasses: bodyBaseClasses,
-        bodyStyle,
-        isHorizontal,
-        imagePosition,
-        slots,
-        slotStyles,
+        rootClass: containerClasses,
+        rootStyle: containerStyle,
+        // 将 body 作为一个槽位暴露，便于外部渲染结构保持一致
+        slots: { body: bodyClasses, ...slots },
+        slotStyles: { body: bodyStyle as JSX.CSSProperties, ...slotStyles },
+        extras: {
+            ...(size !== undefined ? { size: size as SizeName } : {}),
+            sizeConfig,
+            isHorizontal,
+            ...(imagePosition !== undefined ? { imagePosition } : {}),
+            ...(clickable !== undefined ? { clickable } : {}),
+            ...(bordered !== undefined ? { bordered } : {}),
+            ...(hasImage !== undefined ? { hasImage } : {}),
+        }
     }
 }

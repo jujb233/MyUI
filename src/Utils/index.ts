@@ -1,5 +1,6 @@
 export * from './colorUtils'
 export * from './styleBuilder'
+export * from './styleFactory'
 export { default as ErrorCheck } from './ErrorCheck'
 export * from './dynamicThemeManager'
 export * from './sizeStyles'
