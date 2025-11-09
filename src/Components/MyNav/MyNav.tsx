@@ -1,6 +1,6 @@
 import NavContent from "./subcomponents/NavContent"
 import NavOptions from "./subcomponents/NavOptions"
-import NavBrand from "./subcomponents/NavBrand"
+import NavTitle from "./subcomponents/NavTitle"
 import NavMenu from "./subcomponents/NavMenu"
 import { useMyNav } from "../../Hooks"
 import type { IMyNavProps, IMyNavContext } from "./types"
@@ -25,7 +25,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
             <NavProvider value={contextValue}>
                 <nav class={classes.nav}>
                     <Show when={local.title}>
-                        <NavBrand>{local.title}</NavBrand>
+                        <NavTitle>{local.title}</NavTitle>
                     </Show>
                     <NavContent>
                         <Show when={local.menu}>

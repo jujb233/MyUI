@@ -1,5 +1,5 @@
-import type { JSX } from "solid-js";
-import { baseColors, sizeConfig, shadows } from "../styles/config/base";
+import type { JSX } from "solid-js"
+import { baseColors, sizeConfig, shadows } from "../styles/config/base"
 
 /**
  * @description 定义了组件的基本样式和 DOM 属性。
@@ -29,25 +29,25 @@ export interface Disableable {
  * @description 定义了可用的基础颜色类型。
  * @type Color
  */
-export type Color = keyof typeof baseColors;
+export type Color = keyof typeof baseColors
 
 /**
  * @description 定义了可用的尺寸名称。
  * @type SizeName
  */
-export type SizeName = keyof typeof sizeConfig;
+export type SizeName = keyof typeof sizeConfig
 
 /**
  * @description 定义了可用的阴影级别名称。
  * @type ShadowName
  */
-export type ShadowName = keyof typeof shadows;
+export type ShadowName = keyof typeof shadows
 
 /**
  * @description 定义了组件的变体角色，用于表示不同的状态或意图。
  * @type VariantRole
  */
-export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text';
+export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text'
 
 /**
  * @description 定义了组件的变体，结合了角色和颜色。
@@ -56,6 +56,6 @@ export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'dan
  * @property {Color} color - 组件的基础颜色。
  */
 export interface ComponentVariant {
-    role: VariantRole;
-    color: Color;
+    role: VariantRole
+    color: Color
 }

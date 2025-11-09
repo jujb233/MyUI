@@ -3,10 +3,10 @@ import { useNavContext } from "../MyNav"
 import { MyTitle } from "../../Parts"
 import type { Component, JSX } from "solid-js"
 
-const NavBrand: Component<{ children?: JSX.Element }> = (props) => {
+const NavTitle: Component<{ children?: JSX.Element }> = (props) => {
     const context = useNavContext()
     const classes = useMyNav(context)
     return (<MyTitle level={4} class={classes.brand}>{props.children}</MyTitle>)
 }
 
-export default NavBrand
+export default NavTitle

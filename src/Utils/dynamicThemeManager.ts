@@ -58,13 +58,10 @@ export function ensureThemeClass(colorOrPreset: string, intensity: string) {
     const el = ensureStyleEl()
     if (el) {
         el.appendChild(document.createTextNode('\n' + rule))
-        // eslint-disable-next-line no-console
-        console.log(`[ensureThemeClass] Injected CSS rule: ${rule}`)
+
     }
 
     injected.set(key, cls)
-    // eslint-disable-next-line no-console
-    console.log(`[ensureThemeClass] Generated dynamic class: ${cls}`)
     return cls
 }
 

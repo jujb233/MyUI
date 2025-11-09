@@ -2,7 +2,7 @@ import { usePanelContext } from "../MyPanel"
 import MyTitle from "../../Parts/myTitle/myTitle"
 import { type Component, type JSX, Show } from "solid-js"
 
-const PanelHeader: Component<{ title?: JSX.Element }> = (props) => {
+const PanelTitle: Component<{ title?: JSX.Element }> = (props) => {
     const { slots } = usePanelContext()
     return (
         <Show when={props.title}>
@@ -11,4 +11,4 @@ const PanelHeader: Component<{ title?: JSX.Element }> = (props) => {
     )
 }
 
-export default PanelHeader
+export default PanelTitle

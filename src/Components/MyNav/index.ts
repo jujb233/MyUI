@@ -1,6 +1,6 @@
 import MyNavRoot from "./MyNav";
 import NavOptions from "./subcomponents/NavOptions";
-import NavBrand from "./subcomponents/NavBrand";
+import NavTitle from "./subcomponents/NavTitle";
 import NavContent from "./subcomponents/NavContent";
 import NavMenu from "./subcomponents/NavMenu";
 import type { Component } from "solid-js";
@@ -8,14 +8,14 @@ import type { IMyNavProps } from "./types";
 
 type MyNavComponent = Component<IMyNavProps> & {
     Options: typeof NavOptions;
-    Brand: typeof NavBrand;
+    Brand: typeof NavTitle;
     Content: typeof NavContent;
     Menu: typeof NavMenu;
 };
 
 const MyNav: MyNavComponent = Object.assign(MyNavRoot, {
     Options: NavOptions,
-    Brand: NavBrand,
+    Brand: NavTitle,
     Content: NavContent,
     Menu: NavMenu,
 });
