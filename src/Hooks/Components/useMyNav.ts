@@ -8,6 +8,7 @@ import { COMMON_CLASSES } from "../../Options/Configs/classConfig";
 import { SLOTS_STYLE } from "../../Options/Configs/componentSlots";
 import { getSizeTokens, buildPaddingStyle } from "../../Utils/sizeStyles";
 import { defaultValues } from "../../Options/Configs/default";
+import { mergeDefaults } from "../../Utils/defaultResolver";
 import type { ComponentHookResult } from "../../Interfaces/types/ComponentHookResult";
 
 export interface UseMyNavOptions {
@@ -25,15 +26,16 @@ export interface UseMyNavOptions {
 }
 
 export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
+    const merged = mergeDefaults(defaultValues.UseMyNavProps as any, options as any)
     const {
         variant,
-        size = defaultValues.SizeProps.size as SizeName,
-        glass = defaultValues.ThemeProps.glass,
-        shadow = defaultValues.ThemeProps.shadow as ShadowName,
-        className = defaultValues.StyleProps.class,
-        interaction = defaultValues.InteractionPolicy.enabled ? defaultValues.InteractionPolicy.behavior : undefined,
+        size,
+        glass,
+        shadow,
+        class: className,
+        interaction,
         animation,
-    } = options;
+    } = merged as any;
 
     const role = variant?.role || 'primary';
     const color = variant?.color || 'blue';

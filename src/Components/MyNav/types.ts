@@ -1,5 +1,6 @@
 import type { JSX } from "solid-js";
 import type { ThemeProps, AnimationProps, StyleProps, WithTitle, WithOptions, InteractionProp } from "../../Interfaces";
+import type { ComponentHookResult } from "../../Interfaces/types/ComponentHookResult";
 
 export interface IMyNavProps extends ThemeProps, StyleProps, WithTitle, WithOptions, AnimationProps {
     children?: JSX.Element;
@@ -9,5 +10,5 @@ export interface IMyNavProps extends ThemeProps, StyleProps, WithTitle, WithOpti
 }
 
 export interface IMyNavContext extends Omit<IMyNavProps, 'children'> {
-    // Add any nav-specific context properties here if needed
+    slots?: ComponentHookResult['slots'];
 }

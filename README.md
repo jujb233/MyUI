@@ -21,6 +21,78 @@
 
 ### 设计原则
 
+本库的默认值和样式现在采用“属性与样式分层”策略，降低 default.ts 的膨胀风险，提升可维护性与类型安全。
+
+### 分层说明
+
+1. 业务/属性默认值：集中在 `src/Options/Configs/default.ts` 的 `defaultValues` 对象中，仅包含行为或语义属性（如 clickable、hover、direction、disabled 等）。
+2. 样式/结构默认值：集中在以下配置文件中，不再写死到 `default.ts`：
+   - `classConfig.ts`：通用类名、阴影、过渡等。
+   - `componentSlots.ts`：组件槽位的结构类名（header/footer/icon 等）。
+   - `styleConstants.ts`（如存在）：尺寸、颜色等基础常量。
+   - `themeDefaults.ts`：基础主题默认（variant/size/glass/shadow）。
+
+### Hook 使用规范
+
+所有 Hook 使用统一的 `mergeDefaults(defaultValues.XxxProps, props)` 来合并用户输入与默认值，避免在 Hook 内重复硬编码默认值：
+
+```ts
+const merged = mergeDefaults(defaultValues.UseMyButtonProps, props)
+```
+
+随后再将必要的样式相关值传入 `createBaseStyle` 等工厂函数。仅在属性已定义时才传入，兼容 `exactOptionalPropertyTypes`：
+
+```ts
+const { builder } = createBaseStyle({
+  size: merged.size,
+  ...(merged.glass !== undefined ? { glass: merged.glass } : {}),
+  ...(merged.shadow !== undefined ? { shadow: merged.shadow } : {}),
+  ...(merged.variant ? { variant: merged.variant } : {}),
+});
+```
+
+### Nav/Card/Panel 等组件的槽位
+
+组件的槽位类名统一来源于 `SLOTS_STYLE`。Hook 返回的 `slots` 由组件一次性获取并放入 Context，子组件通过 Context 访问，避免重复调用 Hook：
+
+```tsx
+const { rootClass, rootStyle, slots } = useMyNav(others)
+<NavProvider value={{ ...others, slots }}>
+  <nav class={rootClass} style={rootStyle}>...</nav>
+</NavProvider>
+```
+
+### 新增属性或样式的操作步骤
+
+1. 新增属性：更新对应接口 + 在 `default.ts` 的 `defaultValues` 中添加默认值；Hook 自动获得。
+2. 修改样式：只改 `classConfig.ts`、`componentSlots.ts`、`themeDefaults.ts` 等配置；无需修改 Hook。
+3. 新增组件：定义 Props 接口 -> 在 `default.ts` 添加 `UseMyXxxProps` 默认项 -> 编写 Hook 使用 `mergeDefaults` -> 在组件内消费 Hook 结果。
+
+### 破坏性更新与类型安全
+
+`mergeDefaults` 支持深度合并与 null 覆盖，类型由 `defaultValues` 的结构决定；接口变更只需同步更新 `default.ts` 与类型声明，Hook 逻辑保持不变。
+
+### 快速检查
+
+执行构建：
+
+```bash
+npm run build
+```
+
+若出现类型错误，优先检查：
+
+1. 新增属性是否在接口与 `defaultValues` 中同步声明。
+2. 是否在 Hook 中遗漏了可选属性传入前的存在性判断。
+3. 样式相关是否从配置文件引用而非硬编码。
+
+### 后续可优化方向
+
+* 为 `themeDefaults.ts` 添加按组件差异化的可选映射（如 Button 专属玻璃态策略）。
+* 加入单元测试验证 Hook 在缺失 props 时仍返回完整结构。
+* 自动生成文档：根据 `defaultValues` 与接口注释生成 Markdown。
+
+
 #### 1. 感官精致
 - 高级材质效果（玻璃态、微质感）
 - 精妙的光影变化和过渡动画

@@ -1,4 +1,37 @@
-import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../../styles/config/interaction';
+// 聚合拆分后的默认值模块，保持原有对象结构对外不破坏（破坏性更新允许内部重构）
+// themeDefaults 由各分组文件内部使用，这里无需直接引用
+import {
+    HTML_BUTTON_DEFAULTS,
+    STYLE_PROPS_DEFAULTS,
+    DISABLEABLE_DEFAULTS,
+    POSITION_DEFAULTS,
+    SIZE_DEFAULTS,
+    THEME_PROPS_DEFAULTS,
+    THEME_CONTEXT_DEFAULTS,
+    ANIMATION_DEFAULTS,
+} from './defaultGroups/base'
+import {
+    INTERACTION_BEHAVIOR_DEFAULTS,
+    INTERACTION_CONFIG_DEFAULTS,
+    INTERACTION_POLICY_DEFAULTS,
+} from './defaultGroups/interaction'
+import {
+    WITH_ICON_DEFAULTS,
+    WITH_OPTIONS_DEFAULTS,
+    WITH_TITLE_DEFAULTS,
+    WITH_FOOTER_DEFAULTS,
+    WITH_IMAGE_DEFAULTS,
+    CLICKABLE_DEFAULTS,
+    BORDERABLE_DEFAULTS,
+    FOCUSABLE_DEFAULTS,
+    ORIENTATION_DEFAULTS,
+} from './defaultGroups/componentExtras'
+import {
+    USE_MY_BUTTON_DEFAULTS,
+    USE_MY_CARD_DEFAULTS,
+    USE_MY_PANEL_DEFAULTS,
+    USE_MY_NAV_DEFAULTS,
+} from './defaultGroups/componentHooks'
 
 /**
  * @category Options
@@ -7,214 +40,28 @@ import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../..
  * 确保组件库的一致性。
  */
 export const defaultValues = {
-    /**
-     * @description `HtmlButtonType` 的默认属性。
-     * @property {string} buttonType - 按钮元素的默认类型。
-     */
-    HtmlButtonType: {
-        buttonType: 'button',
-    },
-    /**
-     * @description `WithIcon` 的默认属性。
-     * @property {null} icon - 图标的默认值，为 null。
-     */
-    WithIcon: {
-        icon: null,
-    },
-    /**
-     * @description `WithOptions` 的默认属性。
-     * @property {null} options - 选项的默认值，为 null。
-     */
-    WithOptions: {
-        options: null,
-    },
-    /**
-     * @description `WithTitle` 的默认属性。
-     * @property {null} title - 标题的默认值，为 null。
-     */
-    WithTitle: {
-        title: null,
-    },
-    /**
-     * @description `WithFooter` 的默认属性。
-     * @property {null} footer - 页脚的默认值，为 null。
-     */
-    WithFooter: {
-        footer: null,
-    },
-    /**
-     * @description `WithImage` 的默认属性。
-     * @property {string} backgroundImage - 默认背景图片，一个空字符串。
-     * @property {string} imagePosition - 背景图片的默认位置。
-     */
-    WithImage: {
-        backgroundImage: '',
-        imagePosition: 'center',
-    },
-    /**
-     * @description `StyleProps` 的默认属性。
-     * @property {string} class - 默认 CSS 类，一个空字符串。
-     * @property {string} id - 默认元素 ID，一个空字符串。
-     * @property {object} style - 默认内联样式，一个空对象。
-     */
-    StyleProps: {
-        class: '',
-        id: '',
-        style: {},
-    },
-    /**
-     * @description `Disableable` 的默认属性。
-     * @property {boolean} disabled - 默认禁用状态，为 false。
-     */
-    Disableable: {
-        disabled: false,
-    },
-    /**
-     * @description `InteractionBehavior` 的默认属性。
-     * 定义各种用户交互的默认状态。
-     */
-    InteractionBehavior: {
-        hover: false,
-        focus: false,
-        active: false,
-        transition: false,
-        disabled: false,
-    },
-    /**
-     * @description `InteractionConfig` 的默认属性。
-     * 定义交互效果的默认配置。
-     */
-    InteractionConfig: {
-        scale: {},
-        opacity: {},
-        background: {},
-        shadow: {},
-    },
-    /**
-     * @description `InteractionPolicy` 的默认属性。
-     * 定义组件交互的默认策略。
-     */
-    InteractionPolicy: {
-        enabled: true,
-        behavior: DEFAULT_INTERACTION_BEHAVIOR,
-        effects: DEFAULT_INTERACTION_EFFECTS,
-        classes: {},
-    },
-    /**
-     * @description `Clickable` 的默认属性。
-     */
-    Clickable: {
-        clickable: false,
-        onClick: () => { },
-        disabled: false,
-    },
-    /**
-     * @description `Borderable` 的默认属性。
-     */
-    Borderable: {
-        bordered: false,
-    },
-    /**
-     * @description `Focusable` 的默认属性。
-     */
-    Focusable: {
-        clickFocusable: false,
-        hover: false,
-    },
-    /**
-     * @description `OrientationProps` 的默认属性。
-     */
-    OrientationProps: {
-        direction: 'vertical',
-    },
-    /**
-     * @description `PositionProps` 的默认属性。
-     */
-    PositionProps: {
-        top: 0,
-        left: 0,
-    },
-    /**
-     * @description `SizeProps` 的默认属性。
-     */
-    SizeProps: {
-        size: 'medium',
-    },
-    /**
-     * @description `ThemeProps` 的默认属性。
-     */
-    ThemeProps: {
-        variant: undefined,
-        size: 'medium',
-        glass: true,
-        shadow: 'none',
-    },
-    /**
-     * @description `ThemeContextValue` 的默认属性。
-     */
-    ThemeContextValue: {
-        variant: undefined,
-        size: 'medium',
-        glass: true,
-        shadow: 'none',
-        disabled: false,
-    },
-    /**
-     * @description `AnimationProps` 的默认属性。
-     */
-    AnimationProps: {
-        animation: undefined,
-    },
-    /**
-     * @description `UseMyButtonProps` 的默认属性。
-     */
-    UseMyButtonProps: {
-        htmlType: 'button',
-        variant: undefined,
-        size: 'medium',
-        disabled: false,
-        className: '',
-        glass: true,
-        shadow: 'none',
-        interaction: undefined,
-        animation: undefined,
-        top: 0,
-        left: 0,
-    },
-    /**
-     * @description `UseMyCardProps` 的默认属性。
-     */
-    UseMyCardProps: {
-        variant: undefined,
-        size: 'medium',
-        glass: true,
-        clickable: false,
-        className: '',
-        bordered: false,
-        shadow: 'none',
-        imagePosition: 'center',
-        direction: 'vertical',
-        hover: false,
-        hasImage: false,
-        disabled: false,
-        animation: undefined,
-        top: 0,
-        left: 0,
-    },
-    /**
-     * @description `UseMyPanelProps` 的默认属性。
-     */
-    UseMyPanelProps: {
-        variant: undefined,
-        size: 'medium',
-        glass: true,
-        shadow: 'none',
-        className: '',
-        disabled: false,
-        interaction: undefined,
-        animation: undefined,
-        backgroundImage: '',
-        top: 0,
-        left: 0,
-    },
-};
+    HtmlButtonType: HTML_BUTTON_DEFAULTS,
+    WithIcon: WITH_ICON_DEFAULTS,
+    WithOptions: WITH_OPTIONS_DEFAULTS,
+    WithTitle: WITH_TITLE_DEFAULTS,
+    WithFooter: WITH_FOOTER_DEFAULTS,
+    WithImage: WITH_IMAGE_DEFAULTS,
+    StyleProps: STYLE_PROPS_DEFAULTS,
+    Disableable: DISABLEABLE_DEFAULTS,
+    InteractionBehavior: INTERACTION_BEHAVIOR_DEFAULTS,
+    InteractionConfig: INTERACTION_CONFIG_DEFAULTS,
+    InteractionPolicy: INTERACTION_POLICY_DEFAULTS,
+    Clickable: CLICKABLE_DEFAULTS,
+    Borderable: BORDERABLE_DEFAULTS,
+    Focusable: FOCUSABLE_DEFAULTS,
+    OrientationProps: ORIENTATION_DEFAULTS,
+    PositionProps: POSITION_DEFAULTS,
+    SizeProps: SIZE_DEFAULTS,
+    ThemeProps: THEME_PROPS_DEFAULTS,
+    ThemeContextValue: THEME_CONTEXT_DEFAULTS,
+    AnimationProps: ANIMATION_DEFAULTS,
+    UseMyButtonProps: USE_MY_BUTTON_DEFAULTS,
+    UseMyCardProps: USE_MY_CARD_DEFAULTS,
+    UseMyPanelProps: USE_MY_PANEL_DEFAULTS,
+    UseMyNavProps: USE_MY_NAV_DEFAULTS,
+} as const;

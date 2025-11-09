@@ -7,9 +7,9 @@ import type {
     InteractionProp,
     ComponentHookResult
 } from "../../Interfaces"
-import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE } from "../../Options"
+import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, defaultValues } from "../../Options"
 import type { AnimationProp } from "../../styles"
-import { createBaseStyle, getSizeTokens, buildPaddingStyle } from "../../Utils"
+import { createBaseStyle, getSizeTokens, buildPaddingStyle, mergeDefaults } from "../../Utils"
 
 /**
  * 输入 props 类型说明
@@ -45,31 +45,32 @@ export type UseMyButtonResult = ComponentHookResult
  * 错误模式：不抛异常；当 props 缺失时使用内置默认值。
  */
 export function useMyButton(props: UseMyButtonProps): ComponentHookResult {
-    // 手动应用默认值（与 defaultValues.UseMyButtonProps 保持一致）
+    // 使用集中默认值 + 破坏性更新合并（props 可覆盖 defaultValues.UseMyButtonProps）
+    const merged = mergeDefaults(defaultValues.UseMyButtonProps, props as any)
     const {
         variant,
-        size = 'medium',
-        disabled = false,
-        className = '',
-        glass = true,
-        shadow = 'none',
+        size,
+        disabled,
+        className,
+        glass,
+        shadow,
         interaction,
         animation,
-        top = 0,
-        left = 0,
-    } = props
+        top,
+        left,
+    } = merged
 
     // 使用共享工厂创建基础 builder
     // 构造基础样式参数（避免向函数传入显式 undefined 导致 exactOptionalPropertyTypes 报错）
     const baseStyleOptions: Parameters<typeof createBaseStyle>[0] = {
-        size,
-        glass,
-        shadow,
-        className,
-        disabled,
+        size: size as SizeName,
+        ...(glass !== undefined ? { glass } : {}),
+        ...(shadow !== undefined ? { shadow } : {}),
+        ...(className !== undefined ? { className } : {}),
+        ...(disabled !== undefined ? { disabled } : {}),
         ...(animation !== undefined ? { animation } : {}),
         ...(interaction !== undefined ? { interaction } : {}),
-        ...(variant ? { variant } : {}),
+        ...(variant ? { variant: variant as ComponentVariant } : {}),
     }
     const { builder } = createBaseStyle(baseStyleOptions)
 

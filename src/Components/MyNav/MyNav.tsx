@@ -14,10 +14,11 @@ const MyNav: Component<IMyNavProps> = (props) => {
     // splitProps 要求传入的键均在 IMyNavProps 中，已在 types.ts 修复
     const [local, others] = splitProps(props, ["children", "title", "menu", "options"])
 
-    const { rootClass, rootStyle } = useMyNav(others)
+    const { rootClass, rootStyle, slots } = useMyNav(others)
 
     const contextValue: IMyNavContext = {
-        ...others
+        ...others,
+        slots,
     }
 
     return (
