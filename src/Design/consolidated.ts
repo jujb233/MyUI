@@ -160,12 +160,7 @@ export const easingValueMap = {
 export type AnimationType = keyof typeof animationMap;
 export type EasingType = keyof typeof easingValueMap;
 
-export interface AnimationConfig {
-    type: AnimationType;
-    duration?: number;
-    delay?: number;
-    easing?: 'linear' | 'in' | 'out' | 'in-out';
-}
+import type { AnimationConfig } from '@/Interfaces/types'
 
 export type AnimationProp = AnimationType | AnimationConfig;
 
@@ -308,26 +303,21 @@ export const SLOTS_STYLE = {
 } as const
 
 /* ----------------------- Options / Configs (theme defaults) ----------------------- */
-export interface ThemeDefaultConfig {
-    variant: any
-    size: any
-    glass: boolean
-    shadow: ShadowName
-}
+import type { ThemeDefaultConfig, ThemeDefaultKeys } from '@/Interfaces/types'
 
 export const THEME_DEFAULTS: ThemeDefaultConfig = {
     variant: undefined,
     size: 'medium',
     glass: true,
     shadow: 'none',
-} as const
+}
 
-export type ThemeDefaultKeys = keyof typeof THEME_DEFAULTS
 
 export function pickThemeDefaults(keys: ThemeDefaultKeys[]): Partial<ThemeDefaultConfig> {
     const out: Partial<ThemeDefaultConfig> = {}
     for (const k of keys) {
-        ; (out as any)[k] = THEME_DEFAULTS[k]
+        const key = k as keyof ThemeDefaultConfig
+            ; (out as any)[key] = THEME_DEFAULTS[key]
     }
     return out
 }
@@ -593,9 +583,9 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
     const COLOR_PRESET_NAMES = Object.keys(baseColors) as ColorPresetName[]
     const presetThemes: Record<ColorPresetName, Record<IntensityName, ComponentTheme>> = COLOR_PRESET_NAMES.reduce(
         (acc, name) => {
-            const val = (baseColors as any)[name]
+            const val = baseColors[name as ColorPresetName] as { from: string; to: string } | string
             if (!val || typeof val === 'string' || !('from' in val && 'to' in val)) return acc
-            const { from, to } = val
+            const { from, to } = val as { from: string; to: string }
             acc[name] = {
                 solid: buildThemeByIntensity(from, to, 'solid'),
                 soft: buildThemeByIntensity(from, to, 'soft'),
@@ -607,7 +597,7 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
         {} as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>
     )
 
-    let themeColor: ColorPresetName | string | undefined = (color ?? DEFAULT_BASE_COLOR) as any
+    let themeColor: ColorPresetName | string | undefined = (color ?? DEFAULT_BASE_COLOR)
 
     if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
         return presetThemes[themeColor as ColorPresetName][intensity]

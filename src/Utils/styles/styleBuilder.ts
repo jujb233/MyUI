@@ -1,8 +1,7 @@
 import clsx from "clsx"
-import type { InteractionPolicy } from "../../Interfaces"
+import type { AnimationConfig, InteractionPolicy } from "../../Interfaces"
 import {
     AnimationProp,
-    AnimationConfig,
     animationMap,
     easingValueMap,
     INTERACTION_PRESETS,
@@ -42,11 +41,16 @@ class ClassNameBuilder {
     addAnimation(animation?: AnimationProp): ClassNameBuilder {
         if (!animation) return this
         const config: AnimationConfig = typeof animation === 'string' ? { type: animation } : animation
-        if (config.type && animationMap[config.type]) this.cssParts.push(animationMap[config.type])
+        if (config.type) {
+            const key = config.type as keyof typeof animationMap
+            const val = (animationMap as Record<string, string>)[key as string]
+            if (val) this.cssParts.push(val)
+        }
         if (config.duration) this.cssParts.push(`duration-${config.duration}`)
         if (config.delay) this.cssParts.push(`delay-${config.delay}`)
         if (config.easing) {
-            const easing = easingValueMap[config.easing]
+            const easingKey = config.easing as keyof typeof easingValueMap
+            const easing = (easingValueMap as Record<string, string>)[easingKey as string]
             if (easing) this.cssParts.push(`ease-${easing}`)
         }
         return this
@@ -54,7 +58,7 @@ class ClassNameBuilder {
 
     addInteraction(interaction?: InteractionPolicy | keyof typeof INTERACTION_PRESETS): ClassNameBuilder {
         if (!interaction) return this
-        const policy: InteractionPolicy = typeof interaction === 'string' ? (INTERACTION_PRESETS as any)[interaction] ?? {} : interaction
+        const policy: InteractionPolicy = typeof interaction === 'string' ? ((INTERACTION_PRESETS as unknown as Record<string, InteractionPolicy>)[interaction] ?? {}) : interaction
         this.cssParts.push(ClassNameBuilder.buildInteractionClasses(policy))
         return this
     }
