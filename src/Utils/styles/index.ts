@@ -10,4 +10,5 @@ export {
     createUseMyCardDefaults,
     createUseMyPanelDefaults,
     createUseMyNavDefaults,
+    createUseMyInputDefaults,
 } from '../../Options/Configs/defaultGroups/componentHooks';

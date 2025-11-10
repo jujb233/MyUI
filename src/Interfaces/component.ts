@@ -55,3 +55,30 @@ export interface WithImage {
     backgroundImage?: string
     imagePosition?: 'top' | 'bottom' | 'left' | 'right' | 'center' | 'background'
 }
+
+/**
+ * @description 输入框专有属性，用于指定其 `type` attribute。
+ * @interface HtmlInputType
+ * @property {'text' | 'password' | 'email' | 'number' | 'search' | 'tel' | 'url' | 'date' | 'datetime-local' | 'month' | 'week' | 'time' | 'color' | 'checkbox' | 'radio' | 'file' | 'hidden' | 'range'} [inputType] - HTML `type` 属性。
+ */
+export interface HtmlInputType {
+    inputType?:
+    | 'text'
+    | 'password'
+    | 'email'
+    | 'number'
+    | 'search'
+    | 'tel'
+    | 'url'
+    | 'date'
+    | 'datetime-local'
+    | 'month'
+    | 'week'
+    | 'time'
+    | 'color'
+    | 'checkbox'
+    | 'radio'
+    | 'file'
+    | 'hidden'
+    | 'range'
+}

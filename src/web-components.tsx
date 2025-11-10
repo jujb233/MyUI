@@ -17,6 +17,7 @@ import { MyButton } from './Components/MyButton'
 import { MyCard } from './Components/MyCard'
 import { MyNav } from './Components/MyNav'
 import { MyPanel } from './Components/MyPanel'
+import { MyInput } from './Components/MyInput'
 import type { IMyButtonProps } from './Components/MyButton'
 import type { IMyCardProps } from './Components/MyCard'
 import type { IMyNavProps } from './Components/MyNav'
@@ -152,6 +153,22 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
             })
         )
     })
+    // ---------- Input 系列 ----------
+    defineOnce(`${prefix}-input`, () => {
+        customElement<any>(`${prefix}-input`, {}, lightDom((props) => {
+            const p = normalizeProps(props) as any
+            return <MyInput {...p}>{p.children}</MyInput>
+        }))
+    })
+    defineOnce(`${prefix}-input-icon`, () => {
+        customElement<{ icon?: string } & SimpleSlotProps>(`${prefix}-input-icon`, {}, lightDom((props) => {
+            const iconNode = props.children || (props.icon ? props.icon : null)
+            return <MyInput.Icon icon={iconNode as any} />
+        }))
+    })
+    defineOnce(`${prefix}-input-options`, () => {
+        customElement<SimpleSlotProps>(`${prefix}-input-options`, {}, lightDom((props) => <MyInput.Options>{props.children}</MyInput.Options>))
+    })
     defineOnce(`${prefix}-panel-header`, () => {
         // Panel.Header now accepts children, so forward children instead of a `title` prop
         customElement<SimpleSlotProps>(
@@ -215,6 +232,9 @@ export type MyUIWebComponentTagNames = {
     'myui-panel-content': SimpleSlotProps;
     'myui-panel-footer': SimpleSlotProps;
     'myui-panel-background': { src?: string } & SimpleSlotProps;
+    'myui-input': { inputType?: string; value?: string; placeholder?: string; disabled?: boolean; onInput?: any; icon?: any; options?: any } & { children?: any };
+    'myui-input-icon': { icon?: string } & SimpleSlotProps;
+    'myui-input-options': SimpleSlotProps;
 };
 
 // 默认立即注册一次（可选）。如果不希望自动注册，可删除此调用。

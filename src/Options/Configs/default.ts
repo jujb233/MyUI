@@ -31,6 +31,7 @@ import {
     USE_MY_CARD_DEFAULTS,
     USE_MY_PANEL_DEFAULTS,
     USE_MY_NAV_DEFAULTS,
+    USE_MY_INPUT_DEFAULTS,
 } from './defaultGroups/componentHooks'
 
 /**
@@ -64,4 +65,5 @@ export const defaultValues = {
     UseMyCardProps: USE_MY_CARD_DEFAULTS,
     UseMyPanelProps: USE_MY_PANEL_DEFAULTS,
     UseMyNavProps: USE_MY_NAV_DEFAULTS,
+    UseMyInputProps: USE_MY_INPUT_DEFAULTS,
 } as const;

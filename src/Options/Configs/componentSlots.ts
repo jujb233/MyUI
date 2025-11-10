@@ -25,6 +25,10 @@ export const SLOTS_STYLE = {
     buttonContent: "flex-1 truncate",
     buttonOptions: "ml-2 flex items-center",
 
+    // Input 相关槽位
+    inputRoot: "relative flex items-center gap-2",
+    inputIcon: "mr-2 flex items-center",
+    inputOptions: "ml-2 flex items-center",
     // Panel 与 Card 可以共享 header/footer 前缀，若需要再组合 sizeConfig 信息
     panelHeaderExtra: "mb-4", // Panel 额外 header 间距
     panelFooter: "mt-4", // Panel footer 间距

@@ -10,6 +10,7 @@ export * from './Components/MyButton';
 export * from './Components/MyCard';
 export * from './Components/MyNav';
 export * from './Components/MyPanel';
+export * from './Components/MyInput';
 
 // Web Components
 export { registerMyUIWebComponents } from './web-components';
