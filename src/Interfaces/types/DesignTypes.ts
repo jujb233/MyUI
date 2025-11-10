@@ -1,3 +1,4 @@
+import { animationMap, baseColors, easingValueMap, INTENSITY } from "@/Design"
 import type { ShadowName, SizeName, ComponentVariant } from "../core"
 
 /**
@@ -16,9 +17,6 @@ export interface ThemeDefaultConfig {
 
 export type ThemeDefaultKeys = keyof ThemeDefaultConfig
 
-/** 动画相关通用类型 */
-export type EasingType = 'linear' | 'in' | 'out' | 'in-out'
-
 export interface AnimationConfig {
     type: string
     duration?: number
@@ -26,12 +24,19 @@ export interface AnimationConfig {
     easing?: EasingType
 }
 
-export type AnimationProp = string | AnimationConfig
+export type AnimationProp = AnimationType | AnimationConfig
+
+export type AnimationType = keyof typeof animationMap
+export type EasingType = keyof typeof easingValueMap
 
 /** 组件主题（CSS 变量映射） */
 export type ComponentTheme = Record<string, string>
 
-/** 颜色强度枚举类型占位（与 Design 中的 INTENSITY 常量对应） */
-export type IntensityName = 'solid' | 'soft' | 'subtle' | 'text'
+export type ColorPresetName = keyof typeof baseColors
 
-export { }
+export type ThemeResolverParams = {
+    intensity?: IntensityName
+    color?: ColorPresetName | string
+}
+
+export type IntensityName = typeof INTENSITY[number]
