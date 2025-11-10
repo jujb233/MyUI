@@ -38,11 +38,10 @@ const MyButton: Component<IMyButtonProps> = (props) => {
                     type={local.buttonType || "button"}
                     disabled={local.disabled}
                     onClick={(e) => {
-
                         local.onClick && local.onClick(e as MouseEvent)
                     }}
-                    class={rootClass}
-                    style={rootStyle}
+                    class={`${rootClass} ${others.class || ''}`}
+                    style={{ ...rootStyle, ...(others.style || {}) }}
                 >
                     {/* 图标和 actions 的判断逻辑交给子组件内部 */}
                     <ButtonIcon icon={local.icon} />

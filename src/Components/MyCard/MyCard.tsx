@@ -32,8 +32,8 @@ const MyCard = (props: IMyCardProps) => {
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Card component failed to render.</div>}>
             <CardProvider value={contextValue}>
                 <div
-                    class={rootClass}
-                    style={rootStyle}
+                    class={`${rootClass} ${props.class || ''}`}
+                    style={{ ...rootStyle, ...(props.style || {}) }}
                     onClick={props.onClick}
                     data-role="mycard"
                 >

@@ -24,7 +24,7 @@ const MyNav: Component<IMyNavProps> = (props) => {
     return (
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Nav component failed to render.</div>}>
             <NavProvider value={contextValue}>
-                <nav class={rootClass} style={rootStyle}>
+                <nav class={`${rootClass} ${props.class || ''}`} style={{ ...rootStyle, ...(props.style || {}) }}>
                     <Show when={local.title}>
                         <NavTitle>{local.title}</NavTitle>
                     </Show>
