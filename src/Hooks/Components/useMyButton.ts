@@ -7,10 +7,8 @@ import type {
     InteractionProp,
     ComponentHookResult
 } from "../../Interfaces"
-import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, defaultValues } from "../../Options"
-import { createUseMyButtonDefaults } from "../../Utils/styles"
-import type { AnimationProp } from "../../Styles"
 import { createBaseStyle, getSizeTokens, buildPaddingStyle, mergeDefaults } from "../../Utils"
+import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, AnimationProp, createUseMyButtonDefaults } from "@/Design"
 
 /**
  * 输入 props 类型说明

@@ -1,5 +1,5 @@
+import { AnimationProp } from '@/Design'
 import type { ComponentVariant, ShadowName } from './core'
-import type { AnimationProp } from '../Options'
 
 /**
  * @description 定义了所有主题相关组件可选择实现的主题和尺寸属性。

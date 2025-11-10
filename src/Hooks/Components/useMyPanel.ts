@@ -6,11 +6,9 @@ import type {
     PositionProps,
     ShadowName,
     SizeProps
-} from "../../Interfaces"
-import { COMMON_CLASSES, defaultValues, SLOTS_STYLE } from "../../Options"
-import { createUseMyPanelDefaults } from "../../Utils/styles"
-import type { AnimationProp } from "../../Styles"
-import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "../../Utils"
+} from "@/Interfaces"
+import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "@/Utils"
+import { AnimationProp, createUseMyPanelDefaults, SLOTS_STYLE, COMMON_CLASSES } from "@/Design"
 
 export type UseMyPanelProps = PositionProps & SizeProps & {
     variant?: ComponentVariant | undefined

@@ -1,4 +1,5 @@
-import { type ComponentTheme, resolveTheme, THEME_CLASS_PREFIX } from "../../Options"
+import { ComponentTheme, resolveTheme, THEME_CLASS_PREFIX } from "@/Design"
+
 
 
 // 简单的字符串哈希（以保证 class 名称短且可复用）

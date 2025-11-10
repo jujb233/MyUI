@@ -1,13 +1,15 @@
-import type { VariantRole, SizeName, ComponentVariant, ShadowName, InteractionProp } from "../../Interfaces"
 import {
+    sizeConfig,
+    AnimationProp,
     THEME_CLASS_PREFIX,
     GLASS_ELEVATION,
     SHADOW_CLASS_MAP,
-    TEXT_CLASS, BACKGROUND_CLASSES,
+    TEXT_CLASS,
+    BACKGROUND_CLASSES,
     GLASS_BACKDROP_CLASS,
     COMMON_CLASSES
-} from "../../Options"
-import { sizeConfig, type AnimationProp } from "../../Styles"
+} from "@/Design"
+import type { VariantRole, SizeName, ComponentVariant, ShadowName, InteractionProp } from "../../Interfaces"
 import { ensureThemeClass } from "../misc"
 import styleBuilder from "./styleBuilder"
 

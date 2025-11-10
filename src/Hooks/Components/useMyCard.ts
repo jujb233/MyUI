@@ -9,9 +9,6 @@ import type {
     SizeName,
     InteractionPolicy
 } from "../../Interfaces"
-import type { AnimationProp } from "../../Styles"
-import { defaultValues, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
-import { createUseMyCardDefaults } from "../../Utils/styles"
 import {
     mergeDefaults,
     createBaseStyle,
@@ -22,6 +19,7 @@ import {
     buildVerticalStackStyle
 } from "../../Utils"
 import { useCardLayout } from "../useCardLayout"
+import { AnimationProp, createUseMyCardDefaults, COMMON_CLASSES, SLOTS_STYLE } from "@/Design"
 
 
 export interface UseMyCardProps extends PositionProps, SizeProps {

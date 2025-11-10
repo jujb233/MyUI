@@ -1,7 +1,14 @@
 import clsx from "clsx"
 import type { InteractionPolicy } from "../../Interfaces"
-import { INTERACTION_PRESETS, DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from "../../Options"
-import { type AnimationProp, type AnimationConfig, animationMap, easingValueMap } from "../../Styles"
+import {
+    AnimationProp,
+    AnimationConfig,
+    animationMap,
+    easingValueMap,
+    INTERACTION_PRESETS,
+    DEFAULT_INTERACTION_BEHAVIOR,
+    DEFAULT_INTERACTION_EFFECTS
+} from "@/Design"
 
 
 type ClassType = string | false | undefined | null | Array<string | false | undefined | null>

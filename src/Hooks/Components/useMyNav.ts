@@ -1,9 +1,7 @@
 import type { JSX } from "solid-js/jsx-runtime"
-import type { ComponentVariant, SizeName, ShadowName, InteractionProp, ComponentHookResult } from "../../Interfaces"
-import { defaultValues, INTERACTION_PRESETS, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
-import { createUseMyNavDefaults } from "../../Utils/styles"
-import type { AnimationProp } from "../../Styles"
-import { mergeDefaults, createBaseStyle, getSizeTokens, buildPaddingStyle } from "../../Utils"
+import type { ComponentVariant, SizeName, ShadowName, InteractionProp, ComponentHookResult } from "@/Interfaces"
+import { mergeDefaults, createBaseStyle, getSizeTokens, buildPaddingStyle } from "@/Utils"
+import { AnimationProp, COMMON_CLASSES, createUseMyNavDefaults, INTERACTION_PRESETS, SLOTS_STYLE } from "@/Design"
 
 export interface UseMyNavOptions {
     variant?: ComponentVariant | undefined

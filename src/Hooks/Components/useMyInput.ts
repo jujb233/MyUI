@@ -1,7 +1,6 @@
 import type { JSX } from "solid-js"
-import { SLOTS_STYLE } from "../../Options/Configs/componentSlots"
-import type { ComponentHookResult } from "../../Interfaces"
-import { createUseMyInputDefaults } from "../../Utils/styles"
+import { createUseMyInputDefaults, SLOTS_STYLE } from "@/Design"
+import type { ComponentHookResult } from "@/Interfaces"
 
 export type UseMyInputProps = {
     className?: string

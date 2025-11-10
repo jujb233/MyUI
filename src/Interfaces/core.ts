@@ -1,5 +1,6 @@
+import { baseColors, sizeConfig, shadows } from "@/Design"
 import type { JSX } from "solid-js"
-import { baseColors, sizeConfig, shadows } from "../Styles/config/base"
+
 
 /**
  * @description 定义了组件的基本样式和 DOM 属性。

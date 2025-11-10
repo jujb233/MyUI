@@ -1,4 +1,4 @@
-import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from '../Styles/config/interaction';
+import { DEFAULT_INTERACTION_BEHAVIOR, DEFAULT_INTERACTION_EFFECTS } from "@/Design"
 
 /**
  * @description 定义了组件支持的交互状态类型。
