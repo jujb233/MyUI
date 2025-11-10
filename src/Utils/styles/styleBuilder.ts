@@ -1,7 +1,6 @@
 import clsx from "clsx"
-import type { AnimationConfig, InteractionPolicy } from "../../Interfaces"
+import type { AnimationConfig, AnimationProp, InteractionPolicy } from "../../Interfaces"
 import {
-    AnimationProp,
     animationMap,
     easingValueMap,
     INTERACTION_PRESETS,

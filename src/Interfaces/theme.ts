@@ -1,4 +1,4 @@
-import { AnimationProp } from '@/Design'
+import { AnimationProp } from '.'
 import type { ComponentVariant, ShadowName } from './core'
 
 /**

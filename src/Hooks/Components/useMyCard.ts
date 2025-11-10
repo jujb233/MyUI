@@ -7,7 +7,8 @@ import type {
     ShadowName,
     ComponentHookResult,
     SizeName,
-    InteractionPolicy
+    InteractionPolicy,
+    AnimationProp
 } from "../../Interfaces"
 import {
     createBaseStyle,
@@ -18,7 +19,7 @@ import {
     buildVerticalStackStyle
 } from "../../Utils"
 import { useCardLayout } from "../useCardLayout"
-import { AnimationProp, createUseMyCardDefaults, COMMON_CLASSES, SLOTS_STYLE } from "@/Design"
+import {createUseMyCardDefaults, COMMON_CLASSES, SLOTS_STYLE } from "@/Design"
 
 
 export interface UseMyCardProps extends PositionProps, SizeProps {

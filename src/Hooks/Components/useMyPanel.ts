@@ -1,5 +1,6 @@
 import type { JSX } from "solid-js/jsx-runtime"
 import type {
+    AnimationProp,
     ComponentHookResult,
     ComponentVariant,
     InteractionProp,
@@ -8,7 +9,7 @@ import type {
     SizeProps
 } from "@/Interfaces"
 import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "@/Utils"
-import { AnimationProp, createUseMyPanelDefaults, SLOTS_STYLE, COMMON_CLASSES } from "@/Design"
+import { createUseMyPanelDefaults, SLOTS_STYLE, COMMON_CLASSES } from "@/Design"
 
 export type UseMyPanelProps = PositionProps & SizeProps & {
     variant?: ComponentVariant | undefined

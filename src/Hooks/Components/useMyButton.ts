@@ -5,10 +5,16 @@ import type {
     SizeName,
     ShadowName,
     InteractionProp,
-    ComponentHookResult
-} from "../../Interfaces"
-import { createBaseStyle, getSizeTokens, buildPaddingStyle, mergeDefaults } from "../../Utils"
-import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, AnimationProp, createUseMyButtonDefaults } from "@/Design"
+    ComponentHookResult,
+    AnimationProp
+} from "@/Interfaces"
+import { createBaseStyle, getSizeTokens, buildPaddingStyle, mergeDefaults } from "@/Utils"
+import {
+    COMMON_CLASSES,
+    TRANSITION_CLASSES,
+    SLOTS_STYLE,
+    createUseMyButtonDefaults
+} from "@/Design"
 
 /**
  * 输入 props 类型说明
