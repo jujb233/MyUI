@@ -10,7 +10,9 @@
  *
  * 若需要自定义前缀，可调用 `registerMyUIWebComponents('x')` 生成 <x-button> 等标签。
  */
-import { customElement } from 'solid-element'
+import { customElement, noShadowDOM } from 'solid-element'
+import { ensureMyUIStyles, setMyUIStyles } from './global-styles'
+import styles from './web-components.css?inline'
 import { MyButton } from './Components/MyButton'
 import { MyCard } from './Components/MyCard'
 import { MyNav } from './Components/MyNav'
@@ -19,6 +21,15 @@ import type { IMyButtonProps } from './Components/MyButton'
 import type { IMyCardProps } from './Components/MyCard'
 import type { IMyNavProps } from './Components/MyNav'
 import type { IMyPanelProps } from './Components/MyPanel'
+
+setMyUIStyles(() => styles)
+if (typeof document !== 'undefined') ensureMyUIStyles()
+
+// Helper to render components in light DOM so they can inherit global Tailwind styles
+const lightDom = <P,>(factory: (props: P) => any) => (props: P) => {
+    noShadowDOM()
+    return factory(props)
+}
 
 // 子组件类型（仅需要 children，不暴露复杂 props）
 type SimpleSlotProps = { children?: any }
@@ -55,46 +66,46 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
 
     // ---------- Button 系列 ----------
     defineOnce(`${prefix}-button`, () => {
-        customElement<IMyButtonProps>(`${prefix}-button`, {}, (props) => {
+        customElement<IMyButtonProps>(`${prefix}-button`, {}, lightDom((props) => {
             const p = normalizeProps(props) as IMyButtonProps
             return <MyButton {...p}>{p.children}</MyButton>
-        })
+        }))
     })
     defineOnce(`${prefix}-button-icon`, () => {
         // 允许 icon="✅" 或子节点形式
-        customElement<{ icon?: string } & SimpleSlotProps>(`${prefix}-button-icon`, {}, (props) => {
+        customElement<{ icon?: string } & SimpleSlotProps>(`${prefix}-button-icon`, {}, lightDom((props) => {
             const iconNode = props.children || (props.icon ? props.icon : null)
             return <MyButton.Icon icon={iconNode as any} />
-        })
+        }))
     })
     defineOnce(`${prefix}-button-content`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-button-content`, {}, (props) => <MyButton.Content>{props.children}</MyButton.Content>)
+        customElement<SimpleSlotProps>(`${prefix}-button-content`, {}, lightDom((props) => <MyButton.Content>{props.children}</MyButton.Content>))
     })
     defineOnce(`${prefix}-button-options`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-button-options`, {}, (props) => <MyButton.Options>{props.children}</MyButton.Options>)
+        customElement<SimpleSlotProps>(`${prefix}-button-options`, {}, lightDom((props) => <MyButton.Options>{props.children}</MyButton.Options>))
     })
 
     // ---------- Card 系列 ----------
     defineOnce(`${prefix}-card`, () => {
-        customElement<IMyCardProps>(`${prefix}-card`, {}, (props) => {
+        customElement<IMyCardProps>(`${prefix}-card`, {}, lightDom((props) => {
             const p = normalizeProps(props) as IMyCardProps
             return <MyCard {...p}>{p.children}</MyCard>
-        })
+        }))
     })
     defineOnce(`${prefix}-card-options`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-card-options`, {}, (props) => <MyCard.Options>{props.children}</MyCard.Options>)
+        customElement<SimpleSlotProps>(`${prefix}-card-options`, {}, lightDom((props) => <MyCard.Options>{props.children}</MyCard.Options>))
     })
     defineOnce(`${prefix}-card-content`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-card-content`, {}, (props) => <MyCard.Content>{props.children}</MyCard.Content>)
+        customElement<SimpleSlotProps>(`${prefix}-card-content`, {}, lightDom((props) => <MyCard.Content>{props.children}</MyCard.Content>))
     })
     defineOnce(`${prefix}-card-footer`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-card-footer`, {}, (props) => <MyCard.Footer>{props.children}</MyCard.Footer>)
+        customElement<SimpleSlotProps>(`${prefix}-card-footer`, {}, lightDom((props) => <MyCard.Footer>{props.children}</MyCard.Footer>))
     })
     defineOnce(`${prefix}-card-header`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-card-header`, {}, (props) => <MyCard.Header>{props.children}</MyCard.Header>)
+        customElement<SimpleSlotProps>(`${prefix}-card-header`, {}, lightDom((props) => <MyCard.Header>{props.children}</MyCard.Header>))
     })
     defineOnce(`${prefix}-card-tags`, () => {
-        customElement<SimpleSlotProps & { tags?: string }>(`${prefix}-card-tags`, {}, (props) => {
+        customElement<SimpleSlotProps & { tags?: string }>(`${prefix}-card-tags`, {}, lightDom((props) => {
             const raw = (props as any).tags
             let list: any[] = []
             if (typeof raw === 'string') list = raw.split(',').map(s => s.trim()).filter(Boolean)
@@ -104,50 +115,50 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
                 list = childrenArray
             }
             return <MyCard.Tags tags={list as any} />
-        })
+        }))
     })
     defineOnce(`${prefix}-card-image`, () => {
-        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-card-image`, {}, (props) => <MyCard.Image src={(props as any).src || ''} />)
+        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-card-image`, {}, lightDom((props) => <MyCard.Image src={(props as any).src || ''} />))
     })
 
     // ---------- Nav 系列 ----------
     defineOnce(`${prefix}-nav`, () => {
-        customElement<IMyNavProps>(`${prefix}-nav`, {}, (props) => {
+        customElement<IMyNavProps>(`${prefix}-nav`, {}, lightDom((props) => {
             const p = normalizeProps(props) as IMyNavProps
             return <MyNav {...p}>{p.children}</MyNav>
-        })
+        }))
     })
     defineOnce(`${prefix}-nav-brand`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-nav-brand`, {}, (props) => <MyNav.Brand>{props.children}</MyNav.Brand>)
+        customElement<SimpleSlotProps>(`${prefix}-nav-brand`, {}, lightDom((props) => <MyNav.Brand>{props.children}</MyNav.Brand>))
     })
     defineOnce(`${prefix}-nav-menu`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-nav-menu`, {}, (props) => <MyNav.Menu>{props.children}</MyNav.Menu>)
+        customElement<SimpleSlotProps>(`${prefix}-nav-menu`, {}, lightDom((props) => <MyNav.Menu>{props.children}</MyNav.Menu>))
     })
     defineOnce(`${prefix}-nav-options`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-nav-options`, {}, (props) => <MyNav.Options>{props.children}</MyNav.Options>)
+        customElement<SimpleSlotProps>(`${prefix}-nav-options`, {}, lightDom((props) => <MyNav.Options>{props.children}</MyNav.Options>))
     })
     defineOnce(`${prefix}-nav-content`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-nav-content`, {}, (props) => <MyNav.Content>{props.children}</MyNav.Content>)
+        customElement<SimpleSlotProps>(`${prefix}-nav-content`, {}, lightDom((props) => <MyNav.Content>{props.children}</MyNav.Content>))
     })
 
     // ---------- Panel 系列 ----------
     defineOnce(`${prefix}-panel`, () => {
-        customElement<IMyPanelProps>(`${prefix}-panel`, {}, (props) => {
+        customElement<IMyPanelProps>(`${prefix}-panel`, {}, lightDom((props) => {
             const p = normalizeProps(props) as IMyPanelProps
             return <MyPanel {...p}>{p.children}</MyPanel>
-        })
+        }))
     })
     defineOnce(`${prefix}-panel-header`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-header`, {}, (props) => <MyPanel.Header title={props.children as any} />)
+        customElement<SimpleSlotProps>(`${prefix}-panel-header`, {}, lightDom((props) => <MyPanel.Header title={props.children as any} />))
     })
     defineOnce(`${prefix}-panel-content`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-content`, {}, (props) => <MyPanel.Content>{props.children}</MyPanel.Content>)
+        customElement<SimpleSlotProps>(`${prefix}-panel-content`, {}, lightDom((props) => <MyPanel.Content>{props.children}</MyPanel.Content>))
     })
     defineOnce(`${prefix}-panel-footer`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-footer`, {}, (props) => <MyPanel.Footer>{props.children}</MyPanel.Footer>)
+        customElement<SimpleSlotProps>(`${prefix}-panel-footer`, {}, lightDom((props) => <MyPanel.Footer>{props.children}</MyPanel.Footer>))
     })
     defineOnce(`${prefix}-panel-background`, () => {
-        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-panel-background`, {}, (props) => <MyPanel.Background backgroundImage={(props as any).src || ''} />)
+        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-panel-background`, {}, lightDom((props) => <MyPanel.Background backgroundImage={(props as any).src || ''} />))
     })
 
     return defs
@@ -184,6 +195,9 @@ export type MyUIWebComponentTagNames = {
 // 默认立即注册一次（可选）。如果不希望自动注册，可删除此调用。
 // 在 SSR 或构建时环境没有 window 时会跳过。
 if (typeof window !== 'undefined') {
-    try { registerMyUIWebComponents() } catch {/* ignore */ }
+    try {
+        ensureMyUIStyles()
+        registerMyUIWebComponents()
+    } catch {/* ignore */ }
 }
 

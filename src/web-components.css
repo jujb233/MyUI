@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "./Styles/myui/variants.css";
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+@layer base {
+    :root {
+        --radius-lg: 0.5rem;
+        --radius-xl: 0.75rem;
+        --radius-2xl: 1rem;
+    }
+}

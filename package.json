@@ -1,7 +1,7 @@
 {
   "name": "@jujb233/myui",
   "private": false,
-  "version": "0.2.0",
+  "version": "1.0.0-pre4",
   "type": "module",
   "description": "一个使用Taildwind CSS的现代Web UI组件库",
   "keywords": [
@@ -32,13 +32,19 @@
     },
     "./web-components": {
       "types": "./dist/web-components.d.ts",
-      "import": "./dist/my-ui.js"
+      "import": "./dist/web-components.js",
+      "require": "./dist/web-components.umd.cjs"
+    },
+    "./solid": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/my-ui.js",
+      "require": "./dist/my-ui.umd.cjs"
     },
     "./tailwind.config": {
       "import": "./tailwind.config.ts",
       "require": "./tailwind.config.ts"
     },
-    "./dist/my-ui.css": "./dist/style.css"
+    "./style.css": "./dist/style.css"
   },
   "files": [
     "dist",
@@ -48,7 +54,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc -p tsconfig.build.json",
+    "build": "vite build && vite build --config vite.wc.config.ts && tsc -p tsconfig.build.json",
     "lint": "eslint .",
     "preview": "vite preview"
   },
