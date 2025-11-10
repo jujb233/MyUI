@@ -8,6 +8,7 @@ import type {
     ComponentHookResult
 } from "../../Interfaces"
 import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, defaultValues } from "../../Options"
+import { createUseMyButtonDefaults } from "../../Utils/styles"
 import type { AnimationProp } from "../../Styles"
 import { createBaseStyle, getSizeTokens, buildPaddingStyle, mergeDefaults } from "../../Utils"
 
@@ -45,8 +46,8 @@ export type UseMyButtonResult = ComponentHookResult
  * 错误模式：不抛异常；当 props 缺失时使用内置默认值。
  */
 export function useMyButton(props: UseMyButtonProps): ComponentHookResult {
-    // 使用集中默认值 
-    const merged = mergeDefaults(defaultValues.UseMyButtonProps, props as any)
+    // 使用工厂获取合并后的默认值（包含 POSITION_DEFAULTS），并允许 runtime overrides
+    const merged = createUseMyButtonDefaults(props as any)
     const {
         variant,
         size,

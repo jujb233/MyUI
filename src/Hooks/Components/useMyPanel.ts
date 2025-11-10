@@ -8,6 +8,7 @@ import type {
     SizeProps
 } from "../../Interfaces"
 import { COMMON_CLASSES, defaultValues, SLOTS_STYLE } from "../../Options"
+import { createUseMyPanelDefaults } from "../../Utils/styles"
 import type { AnimationProp } from "../../Styles"
 import { buildPaddingStyle, buildSizeStyle, createBaseStyle, getSizeTokens, mergeDefaults } from "../../Utils"
 
@@ -22,10 +23,7 @@ export type UseMyPanelProps = PositionProps & SizeProps & {
 }
 
 export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }): ComponentHookResult {
-    const mergedProps = mergeDefaults(
-        defaultValues.UseMyPanelProps as any,
-        props
-    ) as UseMyPanelProps & { backgroundImage?: string }
+    const mergedProps = createUseMyPanelDefaults(props as any) as UseMyPanelProps & { backgroundImage?: string }
 
     const {
         variant: variantProp,
@@ -87,8 +85,8 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
     })
 
     const panelStyle: JSX.CSSProperties = {
-        ...(props.top !== undefined ? { top: `${Math.max(0, props.top)}rem` } : {}),
-        ...(props.left !== undefined ? { left: `${Math.max(0, props.left)}rem` } : {}),
+        ...(mergedProps.top !== undefined ? { top: `${Math.max(0, mergedProps.top)}rem` } : {}),
+        ...(mergedProps.left !== undefined ? { left: `${Math.max(0, mergedProps.left)}rem` } : {}),
         ...buildPaddingStyle(tokens),
         'font-size': tokens.fontSizeBase,
         ...sizeStyle,

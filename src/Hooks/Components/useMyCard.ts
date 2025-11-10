@@ -11,6 +11,7 @@ import type {
 } from "../../Interfaces"
 import type { AnimationProp } from "../../Styles"
 import { defaultValues, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
+import { createUseMyCardDefaults } from "../../Utils/styles"
 import {
     mergeDefaults,
     createBaseStyle,
@@ -39,7 +40,7 @@ export interface UseMyCardProps extends PositionProps, SizeProps {
 }
 
 export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: SizeName; sizeConfig?: any; isHorizontal: boolean; imagePosition?: string; clickable?: boolean; bordered?: boolean; hasImage?: boolean; }> {
-    const mergedProps = mergeDefaults(defaultValues.UseMyCardProps as any, props) as UseMyCardProps;
+    const mergedProps = createUseMyCardDefaults(props as any) as UseMyCardProps;
 
     const {
         variant: variantProp,

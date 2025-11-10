@@ -1,6 +1,7 @@
 import type { JSX } from "solid-js/jsx-runtime"
 import type { ComponentVariant, SizeName, ShadowName, InteractionProp, ComponentHookResult } from "../../Interfaces"
 import { defaultValues, INTERACTION_PRESETS, COMMON_CLASSES, SLOTS_STYLE } from "../../Options"
+import { createUseMyNavDefaults } from "../../Utils/styles"
 import type { AnimationProp } from "../../Styles"
 import { mergeDefaults, createBaseStyle, getSizeTokens, buildPaddingStyle } from "../../Utils"
 
@@ -19,7 +20,7 @@ export interface UseMyNavOptions {
 }
 
 export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
-    const merged = mergeDefaults(defaultValues.UseMyNavProps as any, options as any)
+    const merged = createUseMyNavDefaults(options as any)
     const {
         variant,
         size,
