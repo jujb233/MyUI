@@ -143,22 +143,47 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
 
     // ---------- Panel 系列 ----------
     defineOnce(`${prefix}-panel`, () => {
-        customElement<IMyPanelProps>(`${prefix}-panel`, {}, lightDom((props) => {
-            const p = normalizeProps(props) as IMyPanelProps
-            return <MyPanel {...p}>{p.children}</MyPanel>
-        }))
+        customElement<IMyPanelProps>(
+            `${prefix}-panel`,
+            {},
+            lightDom((props) => {
+                const p = normalizeProps(props) as IMyPanelProps
+                return <MyPanel {...p}>{p.children}</MyPanel>
+            })
+        )
     })
     defineOnce(`${prefix}-panel-header`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-header`, {}, lightDom((props) => <MyPanel.Header title={props.children as any} />))
+        // Panel.Header now accepts children, so forward children instead of a `title` prop
+        customElement<SimpleSlotProps>(
+            `${prefix}-panel-header`,
+            {},
+            lightDom((props) =>
+                <MyPanel.Header>{props.children}</MyPanel.Header>
+            ))
     })
     defineOnce(`${prefix}-panel-content`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-content`, {}, lightDom((props) => <MyPanel.Content>{props.children}</MyPanel.Content>))
+        customElement<SimpleSlotProps>(
+            `${prefix}-panel-content`,
+            {},
+            lightDom((props) =>
+                <MyPanel.Content>{props.children}</MyPanel.Content>
+            ))
     })
     defineOnce(`${prefix}-panel-footer`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-panel-footer`, {}, lightDom((props) => <MyPanel.Footer>{props.children}</MyPanel.Footer>))
+        customElement<SimpleSlotProps>(
+            `${prefix}-panel-footer`,
+            {},
+            lightDom((props) =>
+                <MyPanel.Footer>{props.children}</MyPanel.Footer>
+            ))
     })
     defineOnce(`${prefix}-panel-background`, () => {
-        customElement<SimpleSlotProps & { src?: string }>(`${prefix}-panel-background`, {}, lightDom((props) => <MyPanel.Background backgroundImage={(props as any).src || ''} />))
+        customElement<SimpleSlotProps & { src?: string }>(
+            `${prefix}-panel-background`,
+            {},
+            lightDom((props) =>
+                <MyPanel.Background backgroundImage={(props as any).src || ''} />
+            ))
     })
 
     return defs
@@ -186,7 +211,7 @@ export type MyUIWebComponentTagNames = {
     'myui-nav-options': SimpleSlotProps;
     'myui-nav-content': SimpleSlotProps;
     'myui-panel': IMyPanelProps & { children?: any };
-    'myui-panel-title': SimpleSlotProps;
+    'myui-panel-header': SimpleSlotProps;
     'myui-panel-content': SimpleSlotProps;
     'myui-panel-footer': SimpleSlotProps;
     'myui-panel-background': { src?: string } & SimpleSlotProps;

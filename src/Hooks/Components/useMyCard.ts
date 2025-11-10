@@ -75,7 +75,7 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
         ? { enabled: true, behavior: { hover: !!hover, focus: false, active: false, disabled: false, transition: true } }
         : undefined
 
-    const { sizeConfig } = createBaseStyle({
+    const { builder, sizeConfig } = createBaseStyle({
         variant: { role, color },
         size,
         glass,
@@ -87,6 +87,7 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
     })
 
     const containerClasses = clsx(
+        builder.build(), // 修复点：加入基础样式
         COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN,
         COMMON_CLASSES.ROUNDED_2XL,
         direction === "horizontal" ? "flex flex-row" : "flex flex-col",
