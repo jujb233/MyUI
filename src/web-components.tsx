@@ -102,7 +102,7 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
         customElement<SimpleSlotProps>(`${prefix}-card-footer`, {}, lightDom((props) => <MyCard.Footer>{props.children}</MyCard.Footer>))
     })
     defineOnce(`${prefix}-card-header`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-card-header`, {}, lightDom((props) => <MyCard.Header>{props.children}</MyCard.Header>))
+        customElement<SimpleSlotProps>(`${prefix}-card-header`, {}, lightDom((props) => <MyCard.Title>{props.children}</MyCard.Title>))
     })
     defineOnce(`${prefix}-card-tags`, () => {
         customElement<SimpleSlotProps & { tags?: string }>(`${prefix}-card-tags`, {}, lightDom((props) => {
@@ -129,7 +129,7 @@ export const registerMyUIWebComponents = (prefix = 'myui') => {
         }))
     })
     defineOnce(`${prefix}-nav-brand`, () => {
-        customElement<SimpleSlotProps>(`${prefix}-nav-brand`, {}, lightDom((props) => <MyNav.Brand>{props.children}</MyNav.Brand>))
+        customElement<SimpleSlotProps>(`${prefix}-nav-brand`, {}, lightDom((props) => <MyNav.Title>{props.children}</MyNav.Title>))
     })
     defineOnce(`${prefix}-nav-menu`, () => {
         customElement<SimpleSlotProps>(`${prefix}-nav-menu`, {}, lightDom((props) => <MyNav.Menu>{props.children}</MyNav.Menu>))

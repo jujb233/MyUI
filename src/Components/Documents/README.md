@@ -9,6 +9,7 @@
 - [MyNav](./MyNav.md)
 - [MyPanel](./MyPanel.md)
 
+
 ## 可用组件
 
 - [MyButton](./MyButton.md)：按钮，支持主题（role+color）/图标/尺寸/阴影。
@@ -24,6 +25,8 @@
 - Core：`StyleProps`、`Disableable`、`Borderable`
 - Behavior：`Clickable`、`InteractionBehavior`、`InteractionPolicy`
 - Layout：`OrientationProps`、`WithIcon`、`WithOptions`、`WithTitle`、`WithFooter`、`WithImage`
+
+> 说明：本组件库已兼容 SolidJS，所有插槽类型均为 `JSX.Element`，事件类型为原生 `MouseEvent`。
 
 本文档已同步当前 TypeScript API，如发现不一致欢迎提交 issue。
 

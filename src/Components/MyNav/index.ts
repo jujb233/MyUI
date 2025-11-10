@@ -8,14 +8,14 @@ import type { IMyNavProps } from "./types";
 
 type MyNavComponent = Component<IMyNavProps> & {
     Options: typeof NavOptions;
-    Brand: typeof NavTitle;
+    Title: typeof NavTitle;
     Content: typeof NavContent;
     Menu: typeof NavMenu;
 };
 
 const MyNav: MyNavComponent = Object.assign(MyNavRoot, {
     Options: NavOptions,
-    Brand: NavTitle,
+    Title: NavTitle,
     Content: NavContent,
     Menu: NavMenu,
 });

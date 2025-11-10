@@ -14,11 +14,11 @@
 | `shadow`             | `ShadowName`                             | ThemeProps       | 阴影等级 |
 | `class`          | `string`                                 | StyleProps       | 自定义类名 |
 | `id`                 | `string`                                 | StyleProps       | 元素 ID |
-| `title`              | `React.ReactNode`                        | WithTitle        | 标题插槽（左侧/中部品牌区域） |
-| `options`            | `React.ReactNode`                        | WithOptions      | 末尾操作区插槽（注意：名称为 `options`） |
+| `title`              | `JSX.Element`                        | WithTitle        | 标题插槽（左侧/中部品牌区域） |
+| `options`            | `JSX.Element`                        | WithOptions      | 末尾操作区插槽（注意：名称为 `options`） |
 | `animation`          | `AnimationProp`                          | AnimationProps   | 动画配置 |
-| `children`           | `React.ReactNode`                        | -                | 自由内容区（通常是品牌/Logo） |
-| `menu`               | `React.ReactNode`                        | -                | 菜单区插槽 |
+| `children`           | `JSX.Element`                        | -                | 自由内容区（通常是品牌/Logo） |
+| `menu`               | `JSX.Element`                        | -                | 菜单区插槽 |
 | `interaction`        | `InteractionProp`                         | -                | 交互策略或预设 key（如 `'rich'`/`'basic'`/`'none'`），等价于传入完整 `InteractionPolicy` 对象或预设 key |
 
 > 破坏性更新：`interactionEnabled` 已移除，请使用 `interaction={{ enabled: true, ... }}` 或预设 key 开启/设置交互。

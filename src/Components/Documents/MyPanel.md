@@ -15,9 +15,9 @@
 | `class`       | `string`                                                 | StyleProps       | 自定义类名 |
 | `id`              | `string`                                                 | StyleProps       | 元素 ID |
 | `disabled`        | `boolean`                                                | Disableable      | 是否禁用（可能影响内部交互） |
-| `title`           | `React.ReactNode`                                        | WithTitle        | 标题插槽（通常显示在头部） |
-| `backgroundImage` | `string`                                                 | WithImage        | 背景图 URL |
-| `imagePosition`   | `'top' \| 'bottom' \| 'left' \| 'right' \| 'center' \| 'background'` | WithImage | 图片位置策略 |
+| `title`           | `JSX.Element`                                           | WithTitle        | 标题插槽（通常显示在头部） |
+| `footer`          | `JSX.Element`                                           | WithFooter       | 页脚插槽 |
+| `children`        | `JSX.Element`                                           | -                | 主要内容区域 |
 | `footer`          | `React.ReactNode`                                        | WithFooter       | 页脚插槽 |
 | `animation`       | `AnimationProp`                                          | AnimationProps   | 动画配置 |
 | `interaction`     | `InteractionPolicy \| 'none' \| 'basic' \| 'rich' \| 'minimal'` | -          | 面板交互策略，支持预设 key 或自定义策略对象 |

@@ -16,9 +16,9 @@
 | `id`           | `string`                                  | StyleProps       | 元素唯一 ID |
 | `disabled`     | `boolean`                                 | Disableable/Clickable | 是否禁用（两处接口均可提供该字段） |
 | `clickable`    | `boolean`                                 | Clickable        | 是否呈现可点击态（配合交互样式） |
-| `onClick`      | `(e: React.MouseEvent<HTMLButtonElement>) => void` | Clickable | 点击回调 |
-| `icon`         | `React.ReactNode`                         | WithIcon         | 前置图标插槽 |
-| `options`      | `React.ReactNode`                         | WithOptions      | 末尾操作区插槽（注意：名称为 `options`，非 `actions`） |
-| `buttonType`   | `'button' \| 'submit' \| 'reset'`         | HtmlButtonType   | 原生 `<button>` 的 `type` 属性 |
 | `animation`    | `AnimationProp`                           | AnimationProps   | 动画配置，支持字符串预设或对象配置 |
-| `children`     | `React.ReactNode`                         | -                | 按钮内容 |
+| `onClick`      | `(e: MouseEvent) => void` | Clickable | 点击回调 |
+| `icon`         | `JSX.Element`                         | WithIcon         | 前置图标插槽 |
+| `options`      | `JSX.Element`                         | WithOptions      | 末尾操作区插槽（注意：名称为 `options`，非 `actions`） |
+| `buttonType`   | `'button' \| 'submit' \| 'reset'`         | HtmlButtonType   | 原生 `<button>` 的 `type` 属性 |
+| `children`     | `JSX.Element`                         | -                | 按钮内容 |

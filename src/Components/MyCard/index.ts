@@ -12,7 +12,7 @@ type MyCardComponent = Component<IMyCardProps> & {
     Options: typeof CardOptions
     Content: typeof CardContent
     Footer: typeof CardFooter
-    Header: typeof CardTitle
+    Title: typeof CardTitle
     Image: typeof CardImage
     Tags: typeof CardTags
 }
@@ -21,7 +21,7 @@ const MyCard: MyCardComponent = Object.assign(MyCardRoot, {
     Options: CardOptions,
     Content: CardContent,
     Footer: CardFooter,
-    Header: CardTitle,
+    Title: CardTitle,
     Image: CardImage,
     Tags: CardTags
 })

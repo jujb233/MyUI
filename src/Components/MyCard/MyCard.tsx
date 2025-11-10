@@ -8,7 +8,10 @@ import { CardImage } from "./subcomponents/CardImage"
 const MyCard = (props: IMyCardProps) => {
     // 当未显式传入 hasImage 时，自动依据 backgroundImage 推断
     // 由于类型定义中尚未正式声明 hasImage/backgroundImage，将其通过 any 透传给内部 Hook
-    const enhancedProps = { ...props, hasImage: (props as any).hasImage ?? !!(props as any).backgroundImage } as any
+    const enhancedProps = {
+        ...props,
+        hasImage: (props as any).hasImage ?? !!(props as any).backgroundImage
+    } as any
 
     // 解析样式与插槽
     const hookResult = useMyCard(enhancedProps as any)
@@ -31,7 +34,7 @@ const MyCard = (props: IMyCardProps) => {
     return (
         <ErrorCheck fallback={<div class="border border-red-500 p-4">Card component failed to render.</div>}>
             <CardProvider value={contextValue}>
-                <div
+                <span
                     class={`${rootClass} ${props.class || ''}`}
                     style={{ ...rootStyle, ...(props.style || {}) }}
                     onClick={props.onClick}
@@ -44,7 +47,7 @@ const MyCard = (props: IMyCardProps) => {
                     {['right', 'bottom'].includes(imagePosition) && (
                         <CardImage src={(props as any).backgroundImage || ''} />
                     )}
-                </div>
+                </span>
             </CardProvider>
         </ErrorCheck>
     )
