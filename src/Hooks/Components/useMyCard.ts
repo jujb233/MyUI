@@ -10,7 +10,6 @@ import type {
     InteractionPolicy
 } from "../../Interfaces"
 import {
-    mergeDefaults,
     createBaseStyle,
     buildSizeStyle,
     getSizeTokens,
@@ -81,7 +80,7 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
         size,
         glass,
         shadow,
-        className,
+        class: className,
         disabled,
         animation,
         interaction: interactionPolicy,

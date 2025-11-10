@@ -9,7 +9,6 @@ export interface UseMyNavOptions {
     glass?: boolean | undefined
     shadow?: ShadowName | undefined
     className?: string | undefined
-    class?: string | undefined
     id?: string | undefined
     style?: JSX.CSSProperties | undefined
     focusRing?: boolean | undefined
@@ -24,7 +23,7 @@ export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
         size,
         glass,
         shadow,
-        class: className,
+        className,
         interaction,
         animation,
     } = merged as any
@@ -37,7 +36,7 @@ export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
         size,
         glass,
         shadow,
-        className,
+        class: className,
         animation,
         interaction: typeof interaction === 'string'
             ? (INTERACTION_PRESETS as Record<string, any>)[interaction] ?? INTERACTION_PRESETS.none

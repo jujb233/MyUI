@@ -17,7 +17,7 @@ import { COMMON_CLASSES, TRANSITION_CLASSES, SLOTS_STYLE, AnimationProp, createU
  * variant - 组件变体（颜色/角色）
  * size - 预设尺寸名称（映射到 sizeConfig）
  * disabled - 是否禁用，会影响生成 class
- * className - 额外自定义 class 会被追加到最终字符串
+ * class - 额外自定义 class 会被追加到最终字符串
  * glass - 是否使用玻璃（glass）风格
  * shadow - 阴影等级名称（映射到 SHADOW_CLASS_MAP）
  * interaction - 交互策略（传给 .addInteraction）
@@ -38,9 +38,9 @@ export type UseMyButtonProps = PositionProps & {
 export type UseMyButtonResult = ComponentHookResult
 
 /**
- * 根据 props 构建按钮 className
+ * 根据 props 构建按钮 class
  *
- * 返回值：string — 最终的 className
+ * 返回值：string — 最终的 class
  * 错误模式：不抛异常；当 props 缺失时使用内置默认值。
  */
 export function useMyButton(props: UseMyButtonProps): ComponentHookResult {
@@ -65,7 +65,7 @@ export function useMyButton(props: UseMyButtonProps): ComponentHookResult {
         size: size as SizeName,
         ...(glass !== undefined ? { glass } : {}),
         ...(shadow !== undefined ? { shadow } : {}),
-        ...(className !== undefined ? { className } : {}),
+        ...(className !== undefined ? { class: className } : {}),
         ...(disabled !== undefined ? { disabled } : {}),
         ...(animation !== undefined ? { animation } : {}),
         ...(interaction !== undefined ? { interaction } : {}),

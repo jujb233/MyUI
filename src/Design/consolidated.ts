@@ -414,7 +414,7 @@ const _USE_MY_NAV_BASE = {
     size: THEME_DEFAULTS.size,
     glass: THEME_DEFAULTS.glass,
     shadow: THEME_DEFAULTS.shadow,
-    class: '',
+    className: '',
     id: '',
     style: {},
     focusRing: false,

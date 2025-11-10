@@ -36,7 +36,7 @@ export function createBaseStyle(options: {
     size?: SizeName
     glass?: boolean
     shadow?: ShadowName
-    className?: string
+    class?: string
     disabled?: boolean
     animation?: AnimationProp | undefined
     interaction?: InteractionProp | undefined
@@ -46,7 +46,7 @@ export function createBaseStyle(options: {
         size,
         glass = false,
         shadow = 'none',
-        className = '',
+        class: className = '',
         disabled = false,
         animation,
         interaction,

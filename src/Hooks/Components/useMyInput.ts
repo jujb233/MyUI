@@ -3,7 +3,7 @@ import { createUseMyInputDefaults, SLOTS_STYLE } from "@/Design"
 import type { ComponentHookResult } from "@/Interfaces"
 
 export type UseMyInputProps = {
-    className?: string
+    class?: string
     disabled?: boolean
     hover?: boolean
     // allow overrides for class fragments

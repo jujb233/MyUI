@@ -47,7 +47,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         size: size || 'medium',
         ...(glass !== undefined ? { glass } : {}),
         ...(shadow !== undefined ? { shadow } : {}),
-        ...(className !== undefined ? { className } : {}),
+        ...(className !== undefined ? { class: className } : {}),
         ...(disabled !== undefined ? { disabled } : {}),
         ...(animation !== undefined ? { animation } : {}),
         ...(interaction !== undefined ? { interaction } : {}),
