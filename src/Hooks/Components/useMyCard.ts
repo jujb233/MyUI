@@ -59,6 +59,8 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
         animation,
         top,
         left,
+        // 新增：来自 defaults 的布局偏好
+        fillByDefault,
     } = mergedProps as any;
 
     const role = variantProp?.role || "primary"
@@ -86,11 +88,16 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
         interaction: interactionPolicy,
     })
 
+    const useFill = fillByDefault ?? false
+
     const containerClasses = clsx(
         builder.build(), // 修复点：加入基础样式
         COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN,
         COMMON_CLASSES.ROUNDED_2XL,
-        direction === "horizontal" ? "flex flex-row" : "flex flex-col",
+        // 根据默认配置决定是否占满宽度；若 fillByDefault 为 true 则使用 block flex（占满），否则使用 inline-flex（按内容收缩）
+        direction === "horizontal"
+            ? (useFill ? "flex flex-row" : "inline-flex flex-row")
+            : (useFill ? "flex flex-col" : "inline-flex flex-col"),
         clickable && COMMON_CLASSES.CURSOR_POINTER,
         bordered && COMMON_CLASSES.BORDER,
         className

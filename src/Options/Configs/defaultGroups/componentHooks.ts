@@ -28,6 +28,8 @@ export const USE_MY_CARD_DEFAULTS = {
     hasImage: false,
     disabled: false,
     animation: undefined,
+    // 是否默认横向占满父容器（卡片通常不占满，默认 false）
+    fillByDefault: false,
     ...POSITION_DEFAULTS,
 } as const
 
@@ -41,6 +43,8 @@ export const USE_MY_PANEL_DEFAULTS = {
     interaction: undefined,
     animation: undefined,
     backgroundImage: '',
+    // Panel 默认应该占满可用宽度
+    fillByDefault: true,
     ...POSITION_DEFAULTS,
 } as const
 
@@ -55,4 +59,6 @@ export const USE_MY_NAV_DEFAULTS = {
     focusRing: false,
     interaction: undefined,
     animation: undefined,
+    // Nav 默认应该占满可用宽度
+    fillByDefault: true,
 } as const

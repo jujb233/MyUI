@@ -45,8 +45,12 @@ export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
             : interaction
     })
 
+    const navFill = (merged as any).fillByDefault ?? true
+
     const navClasses = builder
         .add(COMMON_CLASSES.FLEX_CENTER_JUSTIFY)
+        // 根据默认配置决定是否撑满宽度
+        .add(navFill, 'w-full')
         // 尺寸 padding 改为内联 style，避免动态类
         .add(`${SLOTS_STYLE.navRootSizePrefix}${size}`)
         .build()

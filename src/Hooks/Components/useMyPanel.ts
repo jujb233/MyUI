@@ -39,6 +39,7 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         interaction,
         animation,
         backgroundImage,
+        // 来自 defaults 的布局偏好（通过 any 访问以避免类型约束）
     } = mergedProps
 
     const role = variantProp?.role || 'primary'
@@ -73,8 +74,11 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         background: slots.background || "",
     }
 
+    const panelFill = ((mergedProps as any).fillByDefault ?? true) as boolean
+
     const panelClasses = builder
-        .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL)
+        // Panel 默认应该铺满水平空间，除非配置覆盖
+        .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL, panelFill && 'w-full')
         .build()
 
     const sizeStyle = buildSizeStyle({

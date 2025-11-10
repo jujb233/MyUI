@@ -4,7 +4,7 @@
 export const SLOTS_STYLE = {
     // 结构/层次类
     container: "flex",
-    content: "flex-1", // 主内容区域（card body / nav content / panel content）
+    content: "", // CardContent 不填满父容器，Nav/Panel 由各自内容组件决定是否填满
     header: "flex items-center", // 统一 header 行基础结构
     footer: "mt-auto", // footer 基础定位
     actions: "flex gap-2 mt-4", // 操作按钮集合
