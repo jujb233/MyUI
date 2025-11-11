@@ -1,11 +1,13 @@
 import { colors as Colors } from "./stdColor"
-import { roles as Roles,Intensity } from "./stdRoles"
+import { RolesIntensityMap, Intensity, Role } from "./stdRoles"
 
 
 export namespace std {
     export const colors = Colors
-    export const roles = Roles.VARIANT_ROLE_STYLES
+    
+    export const rolesIntensityMap = RolesIntensityMap
     export const intensity = Intensity
+    export const role = Role
 }
 
 export default std

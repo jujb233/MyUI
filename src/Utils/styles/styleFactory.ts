@@ -11,7 +11,6 @@ import {
 import type { VariantRole, SizeName, ComponentVariant, ShadowName, InteractionProp, AnimationProp } from "../../Interfaces"
 import { ensureThemeClass } from "../misc"
 import styleBuilder from "./styleBuilder"
-import { roles } from "@/Design/Standard/stdRoles"
 import std from "@/Design/Standard"
 
 
@@ -47,7 +46,7 @@ export function createBaseStyle(options: {
     const role: VariantRole = variant?.role ?? 'primary'
     const color = variant?.color ?? 'blue'
     const sizeName: SizeName = size ?? 'medium'
-    const intensity = std.roles[role]
+    const intensity = std.rolesIntensityMap[role]
 
     // 始终通过 ensureThemeClass 注入/获取主题类，避免依赖构建期插件
     const themeColorClass = ensureThemeClass(String(color), intensity)
