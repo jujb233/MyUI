@@ -17,9 +17,9 @@ import {
     mergeStyles,
     buildPaddingStyle,
     buildVerticalStackStyle
-} from "../../Utils"
+} from "@/Utils"
 import { useCardLayout } from "../useCardLayout"
-import {createUseMyCardDefaults, COMMON_CLASSES, SLOTS_STYLE } from "@/Design"
+import { createUseMyCardDefaults, COMMON_CLASSES, SLOTS_STYLE } from "@/Design"
 
 
 export interface UseMyCardProps extends PositionProps, SizeProps {
@@ -102,9 +102,14 @@ export function useMyCard(props: UseMyCardProps): ComponentHookResult<{ size?: S
         className
     )
 
-    const sizeStyle = buildSizeStyle({ xLength, yLength });
-
-    const containerStyle: JSX.CSSProperties | undefined = {
+    // 统一校验 size/xLength/yLength
+    let sizeStyle: JSX.CSSProperties = {}
+    try {
+        sizeStyle = buildSizeStyle({ xLength, yLength })
+    } catch (e) {
+        console.warn(`[MYUI] Card: 尺寸参数错误`, e)
+    }
+    const containerStyle: JSX.CSSProperties = {
         ...(top !== undefined ? { top: `${Math.max(0, top)}rem` } : {}),
         ...(left !== undefined ? { left: `${Math.max(0, left)}rem` } : {}),
         ...sizeStyle,

@@ -49,13 +49,18 @@ export function useMyNav(options: UseMyNavOptions): ComponentHookResult {
         .add(COMMON_CLASSES.FLEX_CENTER_JUSTIFY)
         // 根据默认配置决定是否撑满宽度
         .add(navFill, 'w-full')
-        // 尺寸 padding 改为内联 style，避免动态类
-        .add(`${SLOTS_STYLE.navRootSizePrefix}${size}`)
+        // 如果显式传入 size，则按旧的前缀类拼接（仅在 size 可用时），否则不添加无效的类名
+        .add(!!size, `${SLOTS_STYLE.navRootSizePrefix}${size}`)
         .build()
 
-    // 将 padding 移到 style
+    // 统一校验 size/xLength/yLength（Nav 只支持 size，暂不支持 xLength/yLength）
     const tokens = getSizeTokens(size)
-    const navStyle = buildPaddingStyle(tokens)
+    let navStyle: JSX.CSSProperties = {}
+    try {
+        navStyle = buildPaddingStyle(tokens)
+    } catch (e) {
+        console.warn(`[MYUI] Nav: 尺寸参数错误`, e)
+    }
 
     return {
         rootClass: navClasses,

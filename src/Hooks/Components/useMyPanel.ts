@@ -78,11 +78,13 @@ export function useMyPanel(props: UseMyPanelProps & { backgroundImage?: string }
         .add(COMMON_CLASSES.RELATIVE_OVERFLOW_HIDDEN, COMMON_CLASSES.ROUNDED_2XL, panelFill && 'w-full')
         .build()
 
-    const sizeStyle = buildSizeStyle({
-        ...(xLength !== undefined ? { xLength } : {}),
-        ...(yLength !== undefined ? { yLength } : {}),
-    })
-
+    // 统一校验 size/xLength/yLength
+    let sizeStyle: JSX.CSSProperties = {}
+    try {
+        sizeStyle = buildSizeStyle({ xLength, yLength })
+    } catch (e) {
+        console.warn(`[MYUI] Panel: 尺寸参数错误`, e)
+    }
     const panelStyle: JSX.CSSProperties = {
         ...(mergedProps.top !== undefined ? { top: `${Math.max(0, mergedProps.top)}rem` } : {}),
         ...(mergedProps.left !== undefined ? { left: `${Math.max(0, mergedProps.left)}rem` } : {}),

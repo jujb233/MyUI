@@ -131,4 +131,4 @@ export const sizeConfig = {
         borderRadius: 'rounded-2xl',
         minHeight: 'min-h-48',
     },
-}
+} as const

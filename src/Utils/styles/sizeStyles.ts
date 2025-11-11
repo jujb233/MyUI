@@ -100,11 +100,20 @@ function getLengthValue(value: LengthValue | undefined, presets: Record<SizeName
         return `${value}rem`
     }
     if (typeof value === 'string') {
+        // 检查是否为合法的 CSS 长度字符串
+        if (/^\d+(px|em|rem|%)$/.test(value)) {
+            return value
+        }
+        // 检查是否为预设 sizeName
         if (presets[value as SizeName]) {
             return presets[value as SizeName]
         }
-        return value // Assume it's a valid CSS value like '50%' or '100px'
+        // 错误提示：非法字符串
+        console.warn(`[MYUI] 非法长度字符串: '${value}'，请使用合法 CSS 长度或预设 sizeName。`)
+        return undefined
     }
+    // 错误提示：类型不合法
+    console.warn(`[MYUI] 长度类型错误: '${value}'，请使用 number、string 或预设 sizeName。`)
     return undefined
 }
 
