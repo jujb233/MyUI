@@ -1,4 +1,5 @@
-import { baseColors, sizeConfig, shadows } from "@/Design"
+import { sizeConfig, shadows } from "@/Design"
+import std from "@/Design/Standard"
 import type { JSX } from "solid-js"
 
 
@@ -30,7 +31,7 @@ export interface Disableable {
  * @description 定义了可用的基础颜色类型。
  * @type Color
  */
-export type Color = keyof typeof baseColors
+export type Color = keyof typeof std.colors
 
 /**
  * @description 定义了可用的尺寸名称。

@@ -1,5 +1,6 @@
-import { animationMap, baseColors, easingValueMap, INTENSITY } from "@/Design"
-import type { ShadowName, SizeName, ComponentVariant } from "../core"
+import { animationMap, easingValueMap, INTENSITY } from "@/Design"
+import type { ShadowName, SizeName, ComponentVariant, Color } from "../core"
+import std from "@/Design/Standard"
 
 /**
  * 主题默认配置的类型定义（供 Design 模块与组件使用）
@@ -32,11 +33,9 @@ export type EasingType = keyof typeof easingValueMap
 /** 组件主题（CSS 变量映射） */
 export type ComponentTheme = Record<string, string>
 
-export type ColorPresetName = keyof typeof baseColors
-
 export type ThemeResolverParams = {
     intensity?: IntensityName
-    color?: ColorPresetName | string
+    color?: Color | string
 }
 
 export type IntensityName = typeof INTENSITY[number]

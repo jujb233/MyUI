@@ -1,29 +1,29 @@
-import { ColorPresetName, IntensityName, ThemeResolverParams } from '@/Interfaces'
-import { baseColors } from '../tokens/base'
+import { Color, IntensityName, ThemeResolverParams } from '@/Interfaces'
 import { adjustColorBrightness, isHexColor } from '@/Utils'
+import std from '../Standard'
 
 export const lightTheme = {
-    primary: baseColors.blue.from,
-    secondary: baseColors.gray.from,
-    background: baseColors.white.from,
-    text: baseColors.neutral.to,
-    accent: baseColors.blue.from,
-    muted: baseColors.gray.from,
+    primary: std.colors.blue.from,
+    secondary: std.colors.gray.from,
+    background: std.colors.white.from,
+    text: std.colors.neutral.to,
+    accent: std.colors.blue.from,
+    muted: std.colors.gray.from,
 }
 
 export const darkTheme = {
-    primary: baseColors.blue.from,
-    secondary: baseColors.gray.to,
-    background: baseColors.neutral.to,
-    text: baseColors.white.from,
-    accent: baseColors.blue.from,
-    muted: baseColors.gray.to,
+    primary: std.colors.blue.from,
+    secondary: std.colors.gray.to,
+    background: std.colors.neutral.to,
+    text: std.colors.white.from,
+    accent: std.colors.blue.from,
+    muted: std.colors.gray.to,
 }
 
 export const themes = { light: lightTheme, dark: darkTheme }
 
 export const INTENSITY = ['solid', 'soft', 'subtle', 'text'] as const
-export const DEFAULT_BASE_COLOR: keyof typeof baseColors = 'blue'
+export const DEFAULT_BASE_COLOR: keyof typeof std.colors = 'blue'
 
 export type ComponentTheme = Record<string, string>
 
@@ -83,35 +83,35 @@ function buildThemeByIntensity(from: string, to: string, intensity: IntensityNam
 }
 
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { intensity: intensity = 'solid', color } = params
-    const COLOR_PRESET_NAMES = Object.keys(baseColors) as ColorPresetName[]
-    const presetThemes: Record<ColorPresetName, Record<IntensityName, ComponentTheme>> = COLOR_PRESET_NAMES.reduce(
+    const { intensity: intensity = 'solid', color } = params;
+    const COLOR_PRESET_NAMES = Object.keys(std.colors) as Array<keyof typeof std.colors>;
+    const presetThemes: Record<Color, Record<IntensityName, ComponentTheme>> = COLOR_PRESET_NAMES.reduce(
         (acc, name) => {
-            const val = baseColors[name as ColorPresetName] as { from: string; to: string } | string
-            if (!val || typeof val === 'string' || !('from' in val && 'to' in val)) return acc
-            const { from, to } = val as { from: string; to: string }
-            acc[name] = {
+            const val = std.colors[name];
+            if (!val || typeof val === 'string' || !('from' in val && 'to' in val)) return acc;
+            const { from, to } = val as { from: string; to: string };
+            acc[name as Color] = {
                 solid: buildThemeByIntensity(from, to, 'solid'),
                 soft: buildThemeByIntensity(from, to, 'soft'),
                 subtle: buildThemeByIntensity(from, to, 'subtle'),
                 text: buildThemeByIntensity(from, to, 'text'),
-            }
-            return acc
+            };
+            return acc;
         },
-        {} as Record<ColorPresetName, Record<IntensityName, ComponentTheme>>
-    )
+        {} as Record<Color, Record<IntensityName, ComponentTheme>>
+    );
 
-    let themeColor: ColorPresetName | string | undefined = (color ?? DEFAULT_BASE_COLOR)
+    let themeColor: Color | string | undefined = (color ?? DEFAULT_BASE_COLOR);
 
     if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
-        return presetThemes[themeColor as ColorPresetName][intensity]
+        return presetThemes[themeColor as Color][intensity];
     }
 
     if (typeof themeColor === 'string' && isHexColor(themeColor)) {
-        const from = themeColor
-        const to = adjustColorBrightness(themeColor, -12)
-        return buildThemeByIntensity(from, to, intensity)
+        const from = themeColor;
+        const to = adjustColorBrightness(themeColor, -12);
+        return buildThemeByIntensity(from, to, intensity);
     }
 
-    return presetThemes[DEFAULT_BASE_COLOR][intensity]
+    return presetThemes[DEFAULT_BASE_COLOR][intensity];
 }
