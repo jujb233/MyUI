@@ -1,6 +1,5 @@
-import { animationMap, easingValueMap, INTENSITY } from "@/Design"
+import { animationMap, easingValueMap, std } from "@/Design"
 import type { ShadowName, SizeName, ComponentVariant, Color } from "../core"
-import std from "@/Design/Standard"
 
 /**
  * 主题默认配置的类型定义（供 Design 模块与组件使用）
@@ -38,4 +37,4 @@ export type ThemeResolverParams = {
     color?: Color | string
 }
 
-export type IntensityName = typeof INTENSITY[number]
+export type IntensityName = typeof std.intensity[number]

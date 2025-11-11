@@ -22,8 +22,8 @@ export const darkTheme = {
 
 export const themes = { light: lightTheme, dark: darkTheme }
 
-export const INTENSITY = ['solid', 'soft', 'subtle', 'text'] as const
-export const DEFAULT_BASE_COLOR: keyof typeof std.colors = 'blue'
+
+export const DEFAULT_COLOR: keyof typeof std.colors = 'blue'
 
 export type ComponentTheme = Record<string, string>
 
@@ -83,8 +83,9 @@ function buildThemeByIntensity(from: string, to: string, intensity: IntensityNam
 }
 
 export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
-    const { intensity: intensity = 'solid', color } = params;
-    const COLOR_PRESET_NAMES = Object.keys(std.colors) as Array<keyof typeof std.colors>;
+    const { intensity: intensity = 'solid', color } = params
+    const COLOR_PRESET_NAMES = Object.keys(std.colors) as Array<keyof typeof std.colors>
+    
     const presetThemes: Record<Color, Record<IntensityName, ComponentTheme>> = COLOR_PRESET_NAMES.reduce(
         (acc, name) => {
             const val = std.colors[name];
@@ -95,13 +96,14 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
                 soft: buildThemeByIntensity(from, to, 'soft'),
                 subtle: buildThemeByIntensity(from, to, 'subtle'),
                 text: buildThemeByIntensity(from, to, 'text'),
-            };
-            return acc;
+                link: buildThemeByIntensity(from, to, 'link'),
+            }
+            return acc
         },
         {} as Record<Color, Record<IntensityName, ComponentTheme>>
-    );
+    )
 
-    let themeColor: Color | string | undefined = (color ?? DEFAULT_BASE_COLOR);
+    let themeColor: Color | string | undefined = (color ?? DEFAULT_COLOR);
 
     if (themeColor && typeof themeColor === 'string' && themeColor in presetThemes) {
         return presetThemes[themeColor as Color][intensity];
@@ -113,5 +115,5 @@ export const resolveTheme = (params: ThemeResolverParams): ComponentTheme => {
         return buildThemeByIntensity(from, to, intensity);
     }
 
-    return presetThemes[DEFAULT_BASE_COLOR][intensity];
+    return presetThemes[DEFAULT_COLOR][intensity];
 }

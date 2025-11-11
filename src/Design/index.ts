@@ -4,4 +4,5 @@ export * from './interaction'
 export * from './themes'
 export * from './configs'
 export * from './hooks'
+export * from './Standard'
 

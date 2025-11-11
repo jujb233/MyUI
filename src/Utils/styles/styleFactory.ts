@@ -11,16 +11,9 @@ import {
 import type { VariantRole, SizeName, ComponentVariant, ShadowName, InteractionProp, AnimationProp } from "../../Interfaces"
 import { ensureThemeClass } from "../misc"
 import styleBuilder from "./styleBuilder"
+import { roles } from "@/Design/Standard/stdRoles"
+import std from "@/Design/Standard"
 
-
-const VARIANT_ROLE_STYLES: Record<VariantRole, 'solid' | 'soft' | 'subtle' | 'text'> = {
-    primary: 'solid',
-    secondary: 'soft',
-    success: 'solid',
-    warning: 'solid',
-    danger: 'solid',
-    text: 'text',
-}
 
 interface CreateBaseStyleResult {
     builder: ReturnType<typeof styleBuilder.builder>
@@ -54,7 +47,7 @@ export function createBaseStyle(options: {
     const role: VariantRole = variant?.role ?? 'primary'
     const color = variant?.color ?? 'blue'
     const sizeName: SizeName = size ?? 'medium'
-    const intensity = VARIANT_ROLE_STYLES[role]
+    const intensity = std.roles[role]
 
     // 始终通过 ensureThemeClass 注入/获取主题类，避免依赖构建期插件
     const themeColorClass = ensureThemeClass(String(color), intensity)

@@ -49,7 +49,7 @@ export type ShadowName = keyof typeof shadows
  * @description 定义了组件的变体角色，用于表示不同的状态或意图。
  * @type VariantRole
  */
-export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text'
+export type VariantRole = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'text' | 'link'
 
 /**
  * @description 定义了组件的变体，结合了角色和颜色。
